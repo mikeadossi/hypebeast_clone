@@ -1,0 +1,11 @@
+.content{
+  padding:100px;
+  margin: auto;
+  background-color: limegreen;
+  width: 143px;
+}
+
+textarea{
+  height: 100px;
+  width: 200px;
+}
