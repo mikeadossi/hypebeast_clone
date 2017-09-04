@@ -6,7 +6,6 @@ const queries = require('./database/queries');
 router.get('/', function(req, res) {
   queries.getPosts()
     .then( posts => {
-        console.log('posts data: ',posts);
         res.render('index', { posts: posts });
       })
     .catch( err => {

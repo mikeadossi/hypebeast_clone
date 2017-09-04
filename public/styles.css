@@ -1,3 +1,15 @@
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+button:focus{
+  outline:none;
+}
+
 .content{
   padding:100px;
   margin: auto;
@@ -8,4 +20,137 @@
 textarea{
   height: 100px;
   width: 200px;
+}
+
+.nav, .navBtns{
+  background-color:white;
+  color:black;
+  border:none;
+  padding:10px;
+}
+
+.navBtns{
+  cursor:pointer;
+  margin-right:5px;
+  /*height:51px;*/
+  position: relative;
+  top: -2px;
+  padding-left:7px;
+}
+
+.navBtns:active{
+  color:orange;
+}
+
+.navAccountContainer, .navGlobeContainer{
+  display:inline-block;
+}
+
+.accountDropDown, .globeDropDown{
+  position:absolute;
+  background-color:white;
+  border:1px solid lightgrey;
+  padding: 10px 50px 10px 30px;
+  margin: 10px 0 0 -79px;
+  display:none;
+}
+
+.accountDropDown div:first-child, .globeDropDown div:first-child{
+  padding-bottom:15px;
+}
+
+.globe_img{
+  height: 21px;
+  width: 21px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.navTitle{
+  display: inline-block;
+  width: 70%;
+  text-align: center;
+}
+
+.navBtnContainer{
+  display:inline-block;
+  width:30%;
+  /*text-align:right;*/
+}
+
+.navSelectBtnContainer{
+  display:inline-block;
+}
+
+.avatar{
+  height:25px;
+  width:25px;
+  border-radius:50%;
+  border:1px solid black;
+  background-color:white;
+  cursor:pointer;
+}
+
+.avatar:active{
+  background-color:orange;
+}
+
+.avatar_img{
+  height: 15px;
+  width: 15px;
+  padding-top: 2px;
+  padding-left: 0px;
+}
+
+.navBarAndClose{
+  display:none;
+  width: 6%;
+  text-align: left;
+  cursor:pointer;
+}
+
+.fa-close{
+  display:none;
+}
+
+.mobileMenu{
+  display:none;
+  margin-top:52px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.mobileBtns{
+  padding: 70px 70px 10px 70px;
+  font-size: 50px;
+  cursor:pointer;
+}
+
+.mobileBtns:active{
+  color:orange;
+}
+
+.displayBlock{
+  display:inline-block;
+}
+
+.displayNone{
+  display:none;
+}
+
+@media only screen and (max-width: 700px){
+  .navBarAndClose{
+    display:inline-block;
+  }
+  .navBtnContainer{
+    display:none;
+  }
+  .navTitle{
+    width: 94%;
+  }
 }
