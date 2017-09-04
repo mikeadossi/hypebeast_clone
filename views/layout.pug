@@ -6,29 +6,89 @@ html
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
     link(rel='stylesheet', href='styles.css')
   body
-    .nav 
-      .navBarAndClose
-        i.fa.fa-bars.fa-2x(aria-hidden="true")
-        i.fa.fa-close.fa-2x(aria-hidden="true")
-      .navTitle HYPEBEAST
-      .navBtnContainer
-        .navSelectBtnContainer
-          .navAccountContainer
-            button.avatar
-              img.avatar_img(src="images/avatars/png/fox.png")
-            button.navBtns.account Account 
-              .accountDropDown
-                div Login
-                div Register
-          .navGlobeContainer
-            img.globe_img(src="images/globe.png")
-            button.navBtns.language English
-              .globeDropDown
-                div English
-                div 繁體中文
-      .mobileMenu
-        .mobileBtns.mobileLogIn log in
-        .mobileBtns.mobileSignUp sign up 
+    .nav
+      .header-top-section
+        .socialMediaContainer
+          img.socialMediaImages(src="images/socialMediaIcons/facebook.png")
+          img.socialMediaImages(src="images/socialMediaIcons/twitter.png")
+          img.socialMediaImages(src="images/socialMediaIcons/instagram.png")
+          img.socialMediaImages(src="images/socialMediaIcons/snapchat.png")
+          img.socialMediaImages(src="images/socialMediaIcons/youtube.png")
+          img.socialMediaImages(src="images/socialMediaIcons/feedly.png")
+          img.socialMediaImages(src="images/socialMediaIcons/flipboard.png")
+          img.socialMediaImages(src="images/socialMediaIcons/envelope.png")
+        .navBarAndClose
+          div.hamburger
+            img(src="images/hamburger.png")
+        .navTitle HYPEBEAST <!--メンズファッシン -->
+        div.close
+          img(src="images/close.png")
+        div.magnifierMobile
+          img(src="images/search.png")
+          
+        .navBtnContainer
+          .navSelectBtnContainer
+            .navAccountContainer
+              button.avatar
+                img.avatar_img(src="images/avatars/png/fox.png")
+              button.navBtns.account Account 
+                .accountDropDown
+                  div Login
+                  div Register
+            .navGlobeContainer
+              img.globe_img(src="images/globe.png")
+              button.navBtns.language English
+                .globeDropDown
+                  div English
+                  div 繁體中文
+        .mobileMenu
+          .mobile-header-top-section
+            .mobileNavTitle HYPEBEAST
+            div.close
+              img(src="images/close.png")
+          .mobileSearchBar
+            input.searchInputBox(placeholder="What are you looking for?")
+            div.magnifierSearchMenu
+              img(src="images/search.png")
+          ul.firstUl
+            li Fashion
+            li Footwear
+            li Automotive
+            li Arts
+            li Sports
+            li Food
+            li Tech
+            li Travel
+            li Design
+            li Music
+            li Entertainment
+            li Editorial
+          ul.secondUl
+            li Account
+              img.dropIcon(src="images/dropIcon.png")
+            li Language
+              img.dropIcon(src="images/dropIcon.png")
+          ul.thirdUl
+            li Videos
+            li Magazine
+            li Forums
+            li More
+              img.dropIcon(src="images/dropIcon.png")
+          div.copyright 2017 All IP owned by Hypebeast Limited. 
+      .main-nav
+        ul
+          li.fashionNavLink FASHION
+          li.footwearNavLink FOOTWEAR
+          li.musicNavLink MUSIC
+          li.artsNavLink ARTS
+          li.designNavLink DESIGN
+          li.editorialsNavLink EDITORIALS
+          li.allSectionsNavLink ALL SECTIONS
+          li.videosNavLink VIDEOS
+          li.radioNavLink RADIOS
+          li.storeNavLink STORE
+        div.magnifier
+          img(src="images/search.png")
     
     block content
     script(src='https://code.jquery.com/jquery-2.2.1.js')

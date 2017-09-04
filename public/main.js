@@ -1,14 +1,17 @@
 
-$('.fa-bars').on('click', () => {
-  $('.fa-bars').css('display','none');
-  $('.fa-close').css('display','inline-block');
+$('.hamburger').on('click', () => {
+  $('.hamburger').css('display','none');
+  $('.close').css('display','inline-block');
   $('.mobileMenu').css('display','block');
+  $('.magnifierMobile').css('display','none');
+
 });
 
-$('.fa-close').on('click', () => {
-  $('.fa-bars').css('display','inline-block');
-  $('.fa-close').css('display','none');
+$('.close').on('click', () => {
+  $('.hamburger').css('display','inline-block');
+  $('.close').css('display','none');
   $('.mobileMenu').css('display','none');
+  $('.magnifierMobile').css('display','inline-block');
 })
 
 $('.navAccountContainer').hover(
@@ -24,16 +27,5 @@ $('.navGlobeContainer').hover(
     $('.globeDropDown').css('display','block');
   }, () => {
     $('.globeDropDown').css('display','none');
-  }
-)
-
-$(window).resize(
-  () => {
-    if($(window).width() >= 700){
-      $('.fa-close').css('display','none');
-      $('.mobileMenu').css('display','none');
-      $('.fa-bars').css('display','inline-block');
-      console.log('-> ',$(window).width());
-    }
   }
 )

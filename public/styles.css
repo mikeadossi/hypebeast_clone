@@ -13,7 +13,6 @@ button:focus{
 .content{
   padding:100px;
   margin: auto;
-  background-color: limegreen;
   width: 143px;
 }
 
@@ -22,20 +21,34 @@ textarea{
   width: 200px;
 }
 
-.nav, .navBtns{
+.socialMediaContainer{
+  width: 21%;
+  display: inline-block;
+}
+
+.socialMediaImages{
+  padding: 0 3px 0 5px;
+  height: 21px;
+  cursor:pointer;
+}
+
+.header-top-section, .navBtns{
   background-color:white;
   color:black;
   border:none;
-  padding:10px;
+}
+
+.header-top-section{
+  padding: 10px 10px 0 10px;
 }
 
 .navBtns{
   cursor:pointer;
   margin-right:5px;
-  /*height:51px;*/
   position: relative;
-  top: -2px;
-  padding-left:7px;
+  top: -4px;
+  padding: 10px 10px 10px 7px;
+  font-size: 0.8em;
 }
 
 .navBtns:active{
@@ -60,22 +73,26 @@ textarea{
 }
 
 .globe_img{
-  height: 21px;
-  width: 21px;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
   border: 1px solid black;
+  cursor:pointer;
 }
 
 .navTitle{
   display: inline-block;
-  width: 70%;
+  width: 50%;
   text-align: center;
+  font-family: sans-serif;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .navBtnContainer{
   display:inline-block;
-  width:30%;
-  /*text-align:right;*/
+  width:29%;
+  text-align:right;
 }
 
 .navSelectBtnContainer{
@@ -109,7 +126,11 @@ textarea{
   cursor:pointer;
 }
 
-.fa-close{
+.close{
+  display: inline-block;
+  float: right;
+  margin-right: 25px;
+  margin-top: 6px;
   display:none;
 }
 
@@ -120,19 +141,147 @@ textarea{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 10;
-  background-color: rgba(0,0,0,0.8);
+  background-color: #F2F2F2;
+  color:black;
 }
 
-.mobileBtns{
-  padding: 70px 70px 10px 70px;
-  font-size: 50px;
+.mobileMenu ul{
+  list-style-type: none;
+  padding-left:15px;
+}
+
+.mobileMenu ul li{
+  padding:10px 10px 10px 0;
+  font-family:sans-serif;
+  font-size:0.85em;
+}
+
+.mobile-header-top-section{
+  background-color: black;
+  color: white;
+  border: none;
+  width: 100%;
+  text-align: center;
+  padding: 10px 7px 5px 7px;
+  margin-top: -52px;
+}
+
+.mobileNavTitle{
+  display: inline-block;
+  width: 82%;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.firstUl li, .thirdUl li{
   cursor:pointer;
 }
 
-.mobileBtns:active{
-  color:orange;
+.firstUl li:hover, .thirdUl li:hover{
+  color:steelblue;
+}
+
+.thirdUl li:nth-child(4n):hover{
+  cursor:unset;
+}
+
+.thirdUl li:nth-child(4n):hover{
+  color:black;
+}
+
+.mobileSearchBar{
+  height:50px;
+  background-color:white;
+}
+
+.magnifierSearchMenu img{
+  display: inline-block;
+  height: 29px;
+  margin-top: -40px;
+  position: absolute;
+  margin-left: 15px;
+}
+
+.firstUl{
+  border-bottom:1px solid lightgrey;
+  padding-bottom: 14px;
+}
+
+.secondUl{
+  border-bottom:1px solid lightgrey;
+  padding-bottom: 14px;
+}
+
+.dropIcon{
+  height: 23px;
+  float: right;
+}
+
+.mobileSearchBar ul:nth-child(2n){
+  border-bottom:1px solid red;
+}
+
+.copyright{
+  font-size: 0.8em;
+  margin-left: 13px;
+  padding-bottom: 20px;
+}
+
+.searchInputBox{
+  margin-top: -1px;
+  width: 100%;
+  border: none;
+  height: 46px;
+  text-indent: 55px;
+}
+
+.main-nav ul{
+  list-style-type: none;
+  margin-bottom: 0;
+  padding-left:0;
+}
+
+.main-nav ul li{
+  display: inline-block;
+  padding: 10px 28px 10px 28px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: sans-serif;
+  border-bottom: 3px solid white;
+  font-size: 0.8em;
+}
+
+.main-nav ul li:first-child{
+  padding: 10px 23px 10px 27px;
+}
+
+.main-nav ul li:hover{
+  border-bottom: 3px solid black;
+}
+
+.magnifier{
+  display:inline-block;
+  font-size:1.2em;
+  width: 6%;
+  text-align: right;
+  cursor:pointer;
+}
+
+.magnifier img{
+  height:25px;
+}
+
+.magnifierMobile{
+  display:none;
+  cursor:pointer;
+}
+
+.nav{
+  border-bottom: 0.5px solid gainsboro;
+  margin: 16px 35px 0 35px;
 }
 
 .displayBlock{
@@ -143,7 +292,16 @@ textarea{
   display:none;
 }
 
-@media only screen and (max-width: 700px){
+.close{
+  cursor:pointer;
+}
+
+.hamburger img, .close img{
+  height:20px;
+}
+
+
+@media only screen and (max-width: 759px){
   .navBarAndClose{
     display:inline-block;
   }
@@ -151,6 +309,111 @@ textarea{
     display:none;
   }
   .navTitle{
-    width: 94%;
+    width: 86%;
+    font-size: 1.5em;
+  }
+  .socialMediaContainer{
+    display:none;
+  }
+  .allSectionsNavLink{
+    display:none !important;
+  }
+  .main-nav ul li:first-child {
+    padding: 10px 10px 10px 5px;
+  }
+  .main-nav ul li {
+    padding: 10px 14px 10px 14px;
+  }
+  .main-nav ul {
+    margin: 10px 0px 7px 10px;
+    min-width: 758px;
+  }
+  .main-nav ul li:hover{
+    border-bottom: 3px solid white;
+    color:grey;
+  }
+  .nav{
+    margin:0;
+  }
+  .header-top-section{
+    padding-bottom:5px;
+    border-bottom:1px solid gainsboro;
+  }
+  .magnifier{
+    display:none;
+  }
+  .magnifierMobile{
+    display:none;
+    height:25px;
+    display: inline-block;
+    width: 8%;
+    text-align: right;
+  }
+  .magnifierMobile img{
+    height:25px;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 989px){
+  body{
+    /*background-color: skyblue;*/
+  }
+  .navTitle{
+    width:40%;
+  }
+  .socialMediaContainer{
+    width:31%;
+  }
+  .socialMediaImages{
+    padding: 0 1px 0 3px;
+  }
+  .footwearNavLink
+  , .musicNavLink
+  , .artsNavLink
+  , .designNavLink
+  , .editorialsNavLink
+  , .videosNavLink
+  , .radioNavLink{
+    display:none !important;
+  }
+  .magnifier{
+    float:right;
+    margin-top: -33px;
+  }
+  .magnifierMobile{
+    display:none;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    /*background-color:red;*/
+  }
+  .socialMediaImages{
+    padding: 0 1px 0 2px;
+  }
+  .nav{
+    max-width: 935px;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .artsNavLink
+  , .designNavLink
+  , .editorialsNavLink{
+    display:none !important;
+  }
+  .magnifier{
+    float:right;
+    margin-top: -33px;
+  }
+  .magnifierMobile{
+    display:none;
+  }
+}
+
+@media (min-width: 1231px) {
+  .magnifier{
+    float:right;
+    margin-top: -33px;
   }
 }
