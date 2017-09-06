@@ -11,9 +11,115 @@ button:focus{
 }
 
 .content{
-  padding:100px;
-  margin: auto;
-  width: 143px;
+  margin:4%;
+}
+
+.blog_images{
+  width:100%;
+}
+
+.blog_text{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:17px;
+  line-height:29px;
+}
+
+.blog_text a{
+  text-decoration: none;
+  color:steelblue;
+}
+
+.blog_text a:hover{
+  color:#37559D;
+}
+
+.blog_text{
+  font-size:1.2em;
+  color:#333332;
+}
+
+.returnToTop{
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
+  cursor:pointer;
+}
+
+.returnToTop img{
+  height:50px;
+  width:50px;
+}
+
+.title h2{
+  margin: 10px 0 10px 0;
+}
+
+.article_info{
+  float:right;
+  width: 52%;
+  height:250px;
+}
+
+.article_container .post_image{
+  height:250px;
+}
+
+.article_container{
+  /*background-color:indianred;*/
+  /*min-width: 992px;*/
+  width:76%;
+  cursor:pointer;
+}
+
+.article_container .category{
+  color:steelblue;
+}
+
+.article_container .author{
+  color:grey;
+}
+
+.author, .subtitle, .hypeRating{
+  padding: 10px 10px 20px 0;
+}
+
+.hypeRating{
+  position: relative;
+  padding-top: 10px;
+}
+
+.hypeRating img{
+  height:20px;
+  float:left;
+}
+
+.hypeRating img:nth-child(3n){
+  /*height:20px;
+  float:left;*/
+  padding-top:3px;
+}
+
+.hypeRating span{
+  float: left;
+  padding-top: 6px;
+  color:grey;
+  /*font-size:0.8em;*/
+}
+
+.hypeRating span:nth-child(2n){
+  /*color:red;*/
+  padding-right: 6px;
+  font-size:0.8em;
+}
+
+.hypeRating span:nth-child(4n){
+  height: 16px;
+  padding-right: 3px;
+}
+
+.article_border{
+  border-bottom: 1px solid #EEEEEE;
+  margin: 26px 0 26px 0;
 }
 
 textarea{
@@ -275,8 +381,8 @@ textarea{
 }
 
 .magnifierMobile{
-  display:none;
   cursor:pointer;
+  display:none;
 }
 
 .nav{
@@ -343,7 +449,7 @@ textarea{
     display:none;
   }
   .magnifierMobile{
-    display:none;
+    /*display:none;*/
     height:25px;
     display: inline-block;
     width: 8%;
@@ -381,7 +487,7 @@ textarea{
     margin-top: -33px;
   }
   .magnifierMobile{
-    display:none;
+    display:none !important;
   }
 }
 
@@ -407,7 +513,7 @@ textarea{
     margin-top: -33px;
   }
   .magnifierMobile{
-    display:none;
+    display:none !important;
   }
 }
 

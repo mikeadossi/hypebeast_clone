@@ -7,6 +7,19 @@ block content
     form(method="get" action="/comment")
       button read...
     
-    
-    div.hello !{ posts[0].post_content } <!-- string interpolation used to display db object (result row, result set) -->
+      - for(let i = 0; i < posts.length; i++){
+          .article_container
+            span !{ posts[i].post_image }
+            .article_info
+              .category !{ posts[i].category } 
+              .title !{ posts[i].post_title } 
+              .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
+              .subtitle !{ posts[i].post_subtitle } 
+              .hypeRating 
+                img(src="images/hype_flame.png") 
+                span !{ posts[i].post_hype_count } Hypes
+                img(src="images/comment_balloon.png") 
+                span !{ posts[i].post_comment_count }
+          .article_border
+      -  }
       
