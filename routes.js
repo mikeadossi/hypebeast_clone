@@ -7,12 +7,25 @@ const async = require('async');
 router.get('/', function(req, res) {
 
   Promise.all([queries.getPosts(), queries.getTopTenByHypeCount()]).then(results => {
-    
+
     res.render('index', {
       posts: results[0],
       topTen: results[1]
     })
   }).catch(err => next(err))
 })
+
+router.get('/post/:id', function(req, res) {
+  var id = req.params.id;
+  console.log('called!!!');
+  queries.getPost(id)
+    .then( post => {
+      res.render('post', { post: post })
+    })
+    .catch( err => {
+      console.log('err: ', err);
+    })
+})
+
 
 module.exports = router;

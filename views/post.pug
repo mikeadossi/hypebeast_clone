@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .post_content
+    .post_title !{ post[0].post_title }
+    .post_subtitle !{ post[0].post_subtitle }
+    .post_author !{ post[0].post_author }
+    .post_comment_count !{ post[0].post_comment_count }
+    .post_text !{ post[0].post_content }
+  
+  .post_comment_section
+    .post_comment_header
+    .post_conversation
+    
+    
+    
+    
+    //- form(method="get" action="/comment")
+    //-   button read...
+    
+    //- div.hello !{ posts[0].post_content } <!-- string interpolation used to display db object (result row, result set) -->
+    

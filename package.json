@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "drop:db": "dropdb comment_system_db",
     "create:db": "createdb comment_system_db;",
     "seed:db": "psql comment_system_db < database/schema.sql"

@@ -65,11 +65,15 @@ button:focus{
   height:250px;
 }
 
+.article_info a{
+  color:black;
+  text-decoration:none;
+}
+
 .article_container{
   /*background-color:indianred;*/
   /*min-width: 992px;*/
   width:76%;
-  cursor:pointer;
 }
 
 .article_container .category{
@@ -419,15 +423,26 @@ textarea{
 
 .top_ten_header{
   border-bottom:1px solid #F0F0F0;
+  margin-bottom: 15px;
 }
 
 .top_ten_header h2{
   margin-bottom: 13px;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .top_ten_header title{
   float: right;
   margin-top: 29px;
+}
+
+.top_ten_header h2 span{
+  float: right;
+  font-size: 0.5em;
+  color: grey;
+  margin-top: 12px;
+  font-weight:100;
 }
 
 .top_ten_story{
@@ -476,6 +491,11 @@ textarea{
   margin-top: 0;
 }
 
+.title:hover{
+  cursor:pointer;
+  color:grey;
+}
+
 .top_ten_image{
   display: inline-block;
   width: 21.8%;
@@ -486,6 +506,10 @@ textarea{
 .top_ten_image img{
   height:74px;
  }
+
+.top_stories{
+  padding-bottom:100px;
+}
 
 
 @media only screen and (max-width: 759px){

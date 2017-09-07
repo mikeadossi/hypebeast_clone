@@ -2,7 +2,6 @@ extends layout
 
 block content
   .content
-
     //- form(method="get" action="/comment") 
     //- button read... 
     
@@ -12,24 +11,24 @@ block content
       .top_ten_container
         .top_ten_header
           h2 Top 10 Stories
-          span Continuously updated
-          - for(let y = 0; y < topTen.length; y++){
-            .top_ten_story
-              .top_ten_number 
-                div= y+1
-              .top_ten_image !{ topTen[y].post_image } 
-              .top_ten_title
-                .top_ten_description !{ topTen[y].post_title } 
-                img(src="images/hype_flame.png")
-                span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
-          - }
+            span Continuously updated
+        - for(let y = 0; y < topTen.length; y++){
+          .top_ten_story
+            .top_ten_number 
+              div= y+1
+            .top_ten_image !{ topTen[y].post_image } 
+            .top_ten_title
+              .top_ten_description !{ topTen[y].post_title } 
+              img(src="images/hype_flame.png")
+              span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
+        - }
 
     - for(let i = 0; i < posts.length; i++){
       .article_container
         span !{ posts[i].post_image }
         .article_info
           .category !{ posts[i].category } 
-          .title !{ posts[i].post_title } 
+          a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
           .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
           .subtitle !{ posts[i].post_subtitle } 
           .hypeRating 

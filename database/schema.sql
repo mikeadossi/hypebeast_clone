@@ -90,7 +90,7 @@ VALUES (
   '1 comment',
   'In a hands-on workshop about shooting and editing.',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>New York-based shooter <a href="https://www.instagram.com/kosten/">Kosten</a> and Philly local <a href="https://www.instagram.com/darrenburton_/?hl=en">Darren Burton</a> will host a photography workshop at famed sneaker boutique <a href="https://hypebeast.com/tags/ubiq">UBIQ</a> in Philadelphia this Saturday, September 9. In partnership with <a href="https://hypebeast.com/tags/clarks-originals">Clarks Originals</a>, the sneaker purveyor will give 50 lucky aspiring photographers a chance to work with the pros learning about each of their signature styles. Starting out inside UBIQ x Clarks’ pop-up space, Kosten and Burton will take attendees through the process of location scouting, shooting a subject and editing snaps, before leaving the shop on a photowalk — honing their skills and helping to kickstart their own exploration in the realm of photography.</p><p>For a chance to get into the workshop, and learn how to shoot and edit like a pro, RSVP to the link <a href="https://ubiqworkshop.splashthat.com/">here</a>. Successful RSVPs will be contacted via email in the days preceding the event. If chosen, please remember to bring your camera to the workshop.</p></div>',
-  '<div><span>PHOTOGRAPHER<span><span> KOSTEN<span></div>'
+  '<div><span>PHOTOGRAPHER</span><span> KOSTEN</span></div>'
 ),
 (
   'Virgil Abloh x Nike’s “The Ten” Commands the Spotlight of This Week’s Sneaker Drops',
@@ -103,7 +103,7 @@ VALUES (
   '1 Comment',
   'Let the sneaker Gods be with you.',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Once upon a time, Nike, adidas and other sneaker brands would bless us with releases of coveted sneakers once or twice a month. Nowadays, it’s not uncommon for different footwear labels to drop multiple pairs of heat in just one weekend. Making it easier for you to choose whether to cop or drop, we continue our weekly roundup of the silhouettes that will be sought after this week. Check out the list below and chime in on the styles you’ll be picking up.</p></div>',
-  '<div><span>IMAGE CREDIT<span><span> NIKE<span></div>'
+  '<div><span>IMAGE CREDIT</span><span> NIKE</span></div>'
 ),
 (
   'This Leaked Video Offers a First Look at a Working Apple iPhone 8',
@@ -116,38 +116,126 @@ VALUES (
   '1 Comment',
   'Is this the real deal?',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="iphone_8.jpg" /><p>With Apple’s iPhone 8 keynote just eight days, we recently received a first look at a working version of the tech company’s upcoming flagship device. After months of leaks and dummy phones, we already have a pretty good idea of what the iPhone 8 is going to look like, but until today there hasn’t been any info regarding how the phone will function.</p><p>In the leaked video, we get a relatively clear look at the new bezel-less screen which looks to feature an impressive 18:9 aspect ratio. But the most interesting part of the video is a look at how Apple is building its iOS around the polarizing notch cutout which houses the speaker, front-facing camera and sensors. The video reveals the cellular, WiFi and battery status indicators will be moving to the right of the notch while the in dash time will move to the left. Take a first look at a working Apple iPhone 8 here or below and let us know what you think.</p><p>Also, take a look at the some of the designs and features of the Apple iPhone 8 that were confirmed in the latest model leak.</p></div>',
-  '<div><span>IMAGE CREDIT<span><span> PIERRICK PICHAUREAUX/@LE.PICH<span></div>'
+  '<div><span>IMAGE CREDIT</span><span> PIERRICK PICHAUREAUX/@LE.PICH</span></div>'
+),
+(
+  'Nate Diaz Slams Conor McGregor & the UFC Over Mayweather Loss',
+  '<div><h2 class="post_title">Nate Diaz Slams Conor McGregor & the UFC Over Mayweather Loss</h2></div>',
+  '<img class="post_image" src="images/blogImages/nate_diaz_mcgregor.jpg" />',
+  'Mallory Chin',
+  'Sports',
+  '54 minutes ago',
+  '1008',
+  '1 Comment',
+  'Will this lead to a third meeting in the Octagon?',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Though the big fight between Conor McGregor and Floyd Mayweather has come and gone, attention on superfighter McGregor remains largely active. Though many MMA fighters — and fans alike — highly-praised McGregor for stepping into the boxing ring to fight one of today’s best boxers, McGregor’s rivalry Nate Diaz had very different sentiments on his mind.</p><p>Taking to his personal Instagram, Diaz took shots at both McGregor and the UFC for the bout.</p><p></p><p>“He punched himself out the same way he lost in the UFC. No learning going on. #Overpromotion bullshit, get off the nuts this the shit I’m talking about, Bruce Lee would’ve never lost like that. #RealNinjaShit”</p><p>Diaz’s jab most likely also stems from the fact that McGregor — whose stamina has been of question — couldn’t keep up with Mayweather, resulting in the referee calling a stop to the fight in Round 10. With all this animosity still left in the air between the pair, will we be seeing McGregor and Diaz heading back into the Octagon for a third time?</p><p>Head over to our Floyd Mayweather vs. Conor McGregor fight life feed to relive one of the most-talked about sporting events in history.</p></div>',
+  '<div><span>PHOTOGRAPHER<span/><span> ESTHER LIN</span></div>'
+),
+(
+  'A New Michael Jackson Album Has Been Announced',
+  '<div><h2 class="post_title">A New Michael Jackson Album Has Been Announced</h2></div>',
+  '<img class="post_image" src="images/blogImages/king_of_pop.jpg" />',
+  'Patrick Montes',
+  'Music',
+  '54 minutes ago',
+  '11143',
+  '11 Comment',
+  'Listen to its lead single here.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>The <a href="https://hypebeast.com/tags/michael-jackson">Michael Jackson</a> estate and Epic/Sony Records have revealed plans for the first Michael Jackson studio album, Scream, since 2014′s posthumous Xscape LP. Billed as the “perfect collection of 13 all-time electrifying dance classics and fan favorites,” Scream serves as a lean career retrospective of some of the King of Pop’s greatest recorded moments.
+
+</p><p>Along with the previously-released records featured on Scream, the full-length will also produce an all-new Michael Jackson composition known as “Blood On The Dance Floor x Dangerous (The White Panda Mash-Up).” That effort is a “five-song mash-up” that serves as MJ’s first new material since the 2014 Xscape campaign.</p><p>Fans can expect Michael Jackson’s Scream to arrive on September 29, while the album’s lone new offering, “Blood On The Dance Floor x Dangerous (The White Panda Mash-Up),” can be streamed above.</p><p>Last month, Michael Jackson’s legendary Thriller album once again made history, securing <a href="https://hypebeast.com/2017/8/michael-jackson-thriller-300-weeks-billboard-200-chart">300 weeks on the Billboard 200 chart</a>.</p></div>',
+  '<div><span>IMAGE CREDIT<span/><span> MICHAEL JACKSON ESCAPE/EPIC RECORDS<span/></div>'
+),
+(
+  'The xx Make Justin Timberlake’s ‘My Love’ Their Own in Live Cover for BBC Radio 1',
+  '<div><h2 class="post_title">The xx Make Justin Timberlake’s ‘My Love’ Their Own in Live Cover for BBC Radio 1</h2></div>',
+  '<img class="post_image" src="images/blogImages/the_xx.jpg" />',
+  'Isaac Rouse',
+  'Music',
+  '54 minutes ago',
+  '2573',
+  '3 Comment',
+  'Nobody attempted T.I.’s verse.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Indie collective The xx made a recent visit to BBC Radio 1‘s Live Lounge to perform its rendition of the 2006 smash hit “My Love” by Justin Timberlake. The three-piece band kept Timberlake’s verses and chorus intact but opted out of attempting T.I.‘s verse.</p><p>In its place, Oliver Sim sang a few bars of “LoveStoned,” another song from Timberlake’s classic FutureSex/LoveSounds album. Jamie xx also assembled his own rendition of Timbaland during the process. The group also played a live-in-studio version of “Dangerous,” a song from its 2017 album I See You. Watch both performances below and leave your thoughts in the comments.</p></div>',
+  '<div><span>IMAGE CREDIT</span><span> MARCUS LIN FOR NOW/LIVE</span></div>'
+),
+(
+  'This Building Provides a Celestial Space for Self-Reflection',
+  '<div><h2 class="post_title">This Building Provides a Celestial Space for Self-Reflection</h2></div>',
+  '<img class="post_image" src="images/blogImages/pause_building_design.jpg" />',
+  'Bigoa Machar',
+  'Design',
+  '54 minutes ago',
+  '800',
+  '1 Comment',
+  '“Pause” brings a unique star gazing experience to Iran.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Iran-based space “Pause” is the latest project by Amir Hossein Ashari and is designed to showcase the stars in a unique way. Constructed with large sheets of metal, the exhibit sees bricks organized in a spiral pattern. Guests are encouraged to stand in the middle of the spiral and look directly above them through the hole cut through the top of the box. Aiming straight at the sky, the hole offers viewers an unobstructed look at the stars above them.
+
+</p><p>With the bricks acting as a barrier between the outside world and the view of the stars, “Pause” is designed to eliminate any outside distractions and encourage users to focus solely on their view through the top window. By doing this, Ashari hopes that those who enter “Pause” can take some time to relax, meditate, and realign themselves. Take a look at a few pictures above and for more breathtaking design, read up on the upcoming tour for Tokujin Yoshioka’s Prismatic Glass Tea House.</p></div>',
+  '<div><span>IMAGE CREDIT</span><span> AMIR HOSSEIN ASHARI</span></div>'
+),
+(
+  'HODINKEE Is Launching Its Own Magazine',
+  '<div><h2 class="post_title">HODINKEE Is Launching Its Own Magazine</h2></div>',
+  '<img class="post_image" src="images/blogImages/hodinkee_book.jpg" />',
+  'Jack Stanley',
+  'Fashion',
+  '54 minutes ago',
+  '800',
+  '1 Comment',
+  'Making the move from digital to print.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Having made its name as a digital platform, New York watch publication HODINKEE has now announced that it is making the move into print with a new biannual magazine. The publication is aimed to be more of a coffee table book than a throwaway magazine, and the design is similar to the website’s minimalist aesthetic. Explaining the magazine, managing editor, Stephen Pulvirent, told Business of Fashion that it won’t be strictly watch-only, but rather “this is a more general interest men’s lifestyle magazine that is inspired by a type of person who we know to be interested in watches.”</p><p>The HODINKEE magazine will not be available on typical newsstands, but the publication will instead be sold through the website and through hospitality partners including Soho House. There’s no news yet on when the first issue will drop, so keep checking back for more information.</p><p>In other watch news, TAG Heuer has recently announced a new exhibition that will take place in 10 different countries simultaneously.</p></div>',
+  '<div><span>IMAGE CREDIT</span><span> HODINKEE</span></div>'
+),
+(
+  'Martin Shkreli Is Selling the One-Of-A-Kind Wu-Tang Clan Album on eBay',
+  '<div><h2 class="post_title">Martin Shkreli Is Selling the One-Of-A-Kind Wu-Tang Clan Album on eBay</h2></div>',
+  '<img class="post_image" src="images/blogImages/shkreli_sells_wutang_cd.jpg" />',
+  'Isaac Rouse',
+  'Music',
+  '54 minutes ago',
+  '800',
+  '1 Comment',
+  'Martin Shkreli’s villainy continues.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p><a href="https://hypebeast.com/2016/1/martin-shkreli-threatens-ghostface-killah">Real-life supervillain</a> and pharmaceutical executive <a href="https://hypebeast.com/tags/martin-shkreli">Martin Shkreli</a> is selling the “one of a kind” Wu-Tang Clan album <a href="https://hypebeast.com/tags/once-upon-a-time-in-shaolin">Once Upon a Time in Shaolin</a> on eBay. The album is currently bidding at $75.3k USD which originally sold for $2 million USD since it is the only copy in existence.</p><p>The auction will finish September 15, and in the item’s description ”the most hated man in the world” says his reason for selling it is to see if the world values music nearly as much as he does. It also comes with a disclaimer saying he may cancel the sale at any time or may even break it in frustration.</p><p>Half the proceeds will be donated to medical research with Shkreli noting he doesn’t need to sell the album to raise money since his company has “record amounts of cash on hand.” Shkreli and Wu-Tang have had bad blood since he acquired the album, with member Ghostface Killah calling the former a “shithead” and the latter threatening to erase Ghostface Killah’s contributions on the album. <a href="http://www.ebay.com/itm/132319745117">Check out the listing</a> and leave your thoughts in the comments below.</p></div>',
+  '<div><span>IMAGE CREDIT</span><span> THE BILLIONS</span></div>'
 )
 -- (
---   '','<div><h2 class="post_title"></h2></div>',
+--   '',
+--   '<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',
 --   '54 minutes ago',
 --   '800',
 --   '1 Comment',
+--   '',
 --   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p></p><p></p></div>',
---   ''
+--   '<div><span><span><span> <span></div>'
 -- ),
 -- (
---   '','<div><h2 class="post_title"></h2></div>',
+--   '',
+--   '<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',
 --   '54 minutes ago',
 --   '800',
 --   '1 Comment',
+--   '',
 --   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p></p><p></p></div>',
---   ''
+--   '<div><span><span><span> <span></div>'
 -- ),
 -- (
---   '','<div><h2 class="post_title"></h2></div>',
+--   '',
+--   '<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',
 --   '54 minutes ago',
 --   '800',
 --   '1 Comment',
+--   '',
 --   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p></p><p></p></div>',
---   ''
+--   '<div><span><span><span> <span></div>'
 -- ),

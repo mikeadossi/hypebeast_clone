@@ -11,6 +11,11 @@ let queries = {
 
   getTopTenByHypeCount: function(){
     return db.any("SELECT * FROM posts ORDER BY post_hype_count DESC LIMIT 10")
+  },
+
+  getPost: function(id){
+    console.log('id ------> ', id)
+    return db.any("SELECT * FROM posts WHERE id = $1", id)
   }
 
 }
