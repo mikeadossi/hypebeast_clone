@@ -7,6 +7,10 @@ let queries = {
 
   getPosts: function(){
     return db.any("SELECT * FROM posts") // returns a promise, because pgp
+  },
+
+  getTopTenByHypeCount: function(){
+    return db.any("SELECT * FROM posts ORDER BY post_hype_count DESC LIMIT 10")
   }
 
 }

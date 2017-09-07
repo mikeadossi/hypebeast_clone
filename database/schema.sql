@@ -11,12 +11,13 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
+  post_title_string VARCHAR(100),
   post_title TEXT,
   post_image TEXT,
   post_author TEXT,
   category VARCHAR,
   post_time_of TEXT,
-  post_hype_count TEXT,
+  post_hype_count INTEGER,
   post_comment_count VARCHAR(20),
   post_subtitle TEXT,
   post_content TEXT,
@@ -24,8 +25,9 @@ CREATE TABLE posts (
 );
 
 
-INSERT INTO posts (post_title, post_image, post_author, category, post_time_of, post_hype_count, post_comment_count, post_subtitle, post_content, image_credit)
+INSERT INTO posts (post_title_string, post_title, post_image, post_author, category, post_time_of, post_hype_count, post_comment_count, post_subtitle, post_content, image_credit)
 VALUES (
+  'NikeLab 21M Set to Host “EXTRA CREDIT” for “TEN ICONS” by Virgil Abloh',
   '<div><h2 class="post_title">NikeLab 21M Set to Host “EXTRA CREDIT” for “TEN ICONS” by Virgil Abloh</h2></div>',
   '<img class="post_image" src="images/blogImages/virgil_abloh_sneakers.jpg" />',
   'Matt Peng',
@@ -39,6 +41,7 @@ VALUES (
 'Nike'
 ),
 (
+  'Hanes Is Giving You a Chance to Meet Michael Jordan',
   '<div><h2 class="post_title">Hanes Is Giving You a Chance to Meet Michael Jordan</h2></div>',
   '<img class="post_image" src="images/blogImages/michael_jordan.jpg" />',
   'Bigoa Machar',
@@ -51,6 +54,7 @@ VALUES (
   'Associated Press'
 ),
 (
+  'Opening Ceremony Celebrates 15-Years Strong With Limited-Edition Varsity Jacket',
   '<div><h2 class="post_title">Opening Ceremony Celebrates 15-Years Strong With Limited-Edition Varsity Jacket</h2></div>',
   '<img class="post_image" src="images/blogImages/opening_ceremony_manakin.jpg" />',
   'Austin Boykins',
@@ -63,6 +67,7 @@ VALUES (
   'OPENING CEREMONY'
 ),
 (
+  'Our Legacy Looks Back at Its 12-Year History in New Book',
   '<div><h2 class="post_title">Our Legacy Looks Back at Its 12-Year History in New Book</h2></div>',
   '<img class="post_image" src="images/blogImages/our_legacy_book.jpg" />',
   'Jack Stanley',
@@ -75,6 +80,7 @@ VALUES (
   ''
 ),
 (
+  'Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ in Philadelphia',
   '<div><h2 class="post_title">Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ in Philadelphia</h2></div>',
   '<img class="post_image" src="images/blogImages/sharpen_your_photography.jpg" />',
   'Clarks Originals',
@@ -87,6 +93,7 @@ VALUES (
   '<div><span>PHOTOGRAPHER<span><span> KOSTEN<span></div>'
 ),
 (
+  'Virgil Abloh x Nike’s “The Ten” Commands the Spotlight of This Week’s Sneaker Drops',
   '<div><h2 class="post_title">Virgil Abloh x Nike’s “The Ten” Commands the Spotlight of This Week’s Sneaker Drops</h2></div>',
   '<img class="post_image" src="images/blogImages/virgil_10_commands.jpg" />',
   'Austin Boykins',
@@ -97,9 +104,22 @@ VALUES (
   'Let the sneaker Gods be with you.',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p>Once upon a time, Nike, adidas and other sneaker brands would bless us with releases of coveted sneakers once or twice a month. Nowadays, it’s not uncommon for different footwear labels to drop multiple pairs of heat in just one weekend. Making it easier for you to choose whether to cop or drop, we continue our weekly roundup of the silhouettes that will be sought after this week. Check out the list below and chime in on the styles you’ll be picking up.</p></div>',
   '<div><span>IMAGE CREDIT<span><span> NIKE<span></div>'
+),
+(
+  'This Leaked Video Offers a First Look at a Working Apple iPhone 8',
+  '<div><h2 class="post_title">This Leaked Video Offers a First Look at a Working Apple iPhone 8</h2></div>',
+  '<img class="post_image" src="images/blogImages/iphone_8.jpg" />',
+  'Nicolaus Li',
+  'Tech',
+  '54 minutes ago',
+  '80',
+  '1 Comment',
+  'Is this the real deal?',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="iphone_8.jpg" /><p>With Apple’s iPhone 8 keynote just eight days, we recently received a first look at a working version of the tech company’s upcoming flagship device. After months of leaks and dummy phones, we already have a pretty good idea of what the iPhone 8 is going to look like, but until today there hasn’t been any info regarding how the phone will function.</p><p>In the leaked video, we get a relatively clear look at the new bezel-less screen which looks to feature an impressive 18:9 aspect ratio. But the most interesting part of the video is a look at how Apple is building its iOS around the polarizing notch cutout which houses the speaker, front-facing camera and sensors. The video reveals the cellular, WiFi and battery status indicators will be moving to the right of the notch while the in dash time will move to the left. Take a first look at a working Apple iPhone 8 here or below and let us know what you think.</p><p>Also, take a look at the some of the designs and features of the Apple iPhone 8 that were confirmed in the latest model leak.</p></div>',
+  '<div><span>IMAGE CREDIT<span><span> PIERRICK PICHAUREAUX/@LE.PICH<span></div>'
 )
 -- (
---   '<div><h2 class="post_title"></h2></div>',
+--   '','<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',
@@ -110,7 +130,7 @@ VALUES (
 --   ''
 -- ),
 -- (
---   '<div><h2 class="post_title"></h2></div>',
+--   '','<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',
@@ -121,18 +141,7 @@ VALUES (
 --   ''
 -- ),
 -- (
---   '<div><h2 class="post_title"></h2></div>',
---   '<img class="post_image" src="images/blogImages/" />',
---   '',
---   '',
---   '54 minutes ago',
---   '800',
---   '1 Comment',
---   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p></p><p></p></div>',
---   ''
--- ),
--- (
---   '<div><h2 class="post_title"></h2></div>',
+--   '','<div><h2 class="post_title"></h2></div>',
 --   '<img class="post_image" src="images/blogImages/" />',
 --   '',
 --   '',

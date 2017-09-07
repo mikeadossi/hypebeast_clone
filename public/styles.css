@@ -11,7 +11,8 @@ button:focus{
 }
 
 .content{
-  margin:4%;
+  /*margin:4%;*/
+  margin: 16px 55px 0 51px;
 }
 
 .blog_images{
@@ -387,7 +388,8 @@ textarea{
 
 .nav{
   border-bottom: 0.5px solid gainsboro;
-  margin: 16px 35px 0 35px;
+  /*margin: 16px 35px 0 35px;*/
+  margin: 16px 55px 0 51px;
 }
 
 .displayBlock{
@@ -405,6 +407,85 @@ textarea{
 .hamburger img, .close img{
   height:20px;
 }
+
+.index_banner_image{
+  margin-top:-17px;
+}
+
+.top_ten_container{
+  border:1px solid #F0F0F0;
+  padding: 10px 34px 5px 34px;
+}
+
+.top_ten_header{
+  border-bottom:1px solid #F0F0F0;
+}
+
+.top_ten_header h2{
+  margin-bottom: 13px;
+}
+
+.top_ten_header title{
+  float: right;
+  margin-top: 29px;
+}
+
+.top_ten_story{
+  border:1px solid red;
+  max-width:50%;
+}
+
+.top_ten_title{
+  display: inline-block;
+  width: 60%;
+  font-size: 0.8em;
+  position: relative;
+}
+
+.top_ten_title img{
+  height:22px;
+}
+
+.top_ten_number{
+  display: inline-block;
+}
+
+.top_ten_number div{
+  position: relative;
+  top: -50px;
+  color:grey;
+}
+
+.top_ten_hype{
+  position: relative;
+  top: -5px;
+  color:grey;
+}
+
+.top_ten_description img{
+  height:22px;
+  display:inline-block;
+}
+
+.top_ten_description div .post_title{
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.top_ten_title post_title{
+  margin-top: 0;
+}
+
+.top_ten_image{
+  display: inline-block;
+  width: 21.8%;
+  padding-right: 20px;
+  padding-left: 28px;
+}
+
+.top_ten_image img{
+  height:74px;
+ }
 
 
 @media only screen and (max-width: 759px){
