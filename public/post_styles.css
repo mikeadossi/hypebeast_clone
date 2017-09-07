@@ -1,0 +1,27 @@
+.post_comment_section{
+  border-bottom:1px solid gainsboro;
+  border-top:1px solid gainsboro;
+}
+
+.post_conversation{
+  padding: 20px 0 20px 0;
+}
+
+.post_postbox{
+  text-align:center;
+}
+
+.post_avatar{
+  height:20px;
+  width:20px;
+  background-color: lightgrey;
+  display:inline-block;
+  position: relative;
+  top: -86px;
+  margin-right:10px;
+}
+
+.post_textarea{
+  width:80%;
+  display:inline-block;
+}

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .login_content
+    h2 login to HYPEBEAST
+    p Connect to HYPEBEAST with your Facebook account
+    button.facebook_login Login with Facebook
+    button.google_login Login with Google
+    p Sign up with yout email address
+    form(action="" method="get")
+      div
+        label email
+      div
+        input
+      div
+        lebael password
+      div
+        input
+      p By signing up, you agree to our Terms of Use and Privacy Policy
+      input.log_in(type="submit" value="Log In")
+      
+      a Forgot password?
