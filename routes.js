@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cookieParser = require('cookie-parser');
 const queries = require('./database/queries');
-const async = require('async');
+const passport = require('passport');
 
 router.get('/', function(req, res) {
 
@@ -27,13 +27,38 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
+router.get('/register', function(req, res) {
+  res.render('register')
+})
+
+router.post('/register', function(req, res) {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try{
+    queries.createUser(email, password).then(() => {
+      res.status(200).redirect('/login')
+    })
+  }catch(e){
+    console.log(e);
+  }
+})
+
 router.get('/login', function(req, res) {
   res.render('login')
 })
 
-router.get('/register', function(req, res) {
-  res.render('register')
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
+
+router.get('/logout', function(req, res) {
+  // res.clearCookie('myCookie');
+  res.status(200).redirect('/');
 })
+
 
 
 module.exports = router;

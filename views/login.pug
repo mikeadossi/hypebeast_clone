@@ -7,15 +7,15 @@ block content
     button.facebook_login Login with Facebook
     button.google_login Login with Google
     p Sign up with yout email address
-    form(action="" method="get")
+    form(action="login" method="post")
       div
         label email
       div
-        input
+        input.log_in_input(name="username" type="text")
       div
-        lebael password
+        label password
       div
-        input
+        input.log_in_input(name="password" type="password")
       p By signing up, you agree to our Terms of Use and Privacy Policy
       input.log_in(type="submit" value="Log In")
       
