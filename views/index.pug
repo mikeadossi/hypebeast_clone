@@ -2,10 +2,10 @@ extends layout
 
 block content
   .content
+    //- img(src="images/blogImages/banner_12_product.png").index_banner_image
     //- form(method="get" action="/comment") 
     //- button read... 
     
-    //- img(src="images/blogImages/banner_12_product.png").index_banner_image
     .top_stories
       
       .top_ten_container
@@ -38,3 +38,7 @@ block content
             span !{ posts[i].post_comment_count }
       .article_border
     -  }
+  
+  div.more_button More
+    span
+      i.fa.fa-chevron-down

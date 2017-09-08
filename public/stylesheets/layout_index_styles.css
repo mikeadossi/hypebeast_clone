@@ -4,6 +4,7 @@ html, body{
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+  font-family: "Source Sans Pro HB","Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft Yahei";
 }
 
 button:focus{
@@ -20,7 +21,6 @@ button:focus{
 }
 
 .blog_text{
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size:17px;
   line-height:29px;
 }
@@ -72,7 +72,7 @@ button:focus{
 
 .article_container{
   /*background-color:indianred;*/
-  /*min-width: 992px;*/
+  min-width: 838px;
   width:76%;
 }
 
@@ -183,6 +183,18 @@ textarea{
   padding-bottom:15px;
 }
 
+.accountDropDown a:hover, .globeDropDown div:hover{
+  color:grey;
+}
+
+.accountDropDown a{
+  color:black;
+  display:block;
+  text-decoration:none;
+  text-align:left;
+  padding:10px;
+}
+
 .globe_img{
   height: 18px;
   width: 18px;
@@ -195,9 +207,10 @@ textarea{
   display: inline-block;
   width: 50%;
   text-align: center;
-  font-family: sans-serif;
   font-size: 2em;
   font-weight: bold;
+  text-decoration:none;
+  color:black;
 }
 
 .navBtnContainer{
@@ -413,7 +426,10 @@ textarea{
 }
 
 .index_banner_image{
-  margin-top:-17px;
+  margin-top: -17px;
+  /*margin: 0 24px 0 51px;*/
+  width: 91.5%;
+  max-width: 1170px;
 }
 
 .top_ten_container{
@@ -439,14 +455,14 @@ textarea{
 
 .top_ten_header h2 span{
   float: right;
-  font-size: 0.5em;
+  font-size: 0.45em;
   color: grey;
   margin-top: 12px;
-  font-weight:100;
+  font-weight: 400;
 }
 
 .top_ten_story{
-  border:1px solid red;
+  border:1px solid steelblue;
   max-width:50%;
 }
 
@@ -511,6 +527,30 @@ textarea{
   padding-bottom:100px;
 }
 
+.more_button{
+  border: 1px solid lightgrey;
+  padding: 12px;
+  margin: auto;
+  min-width: 838px;
+  width: 91%;
+  text-align: center;
+  color: grey;
+  margin-top: -27px;
+  margin-bottom: 60px;
+}
+
+.more_button:hover{
+  cursor:pointer;
+  background-color:#C3C3C3;
+  color:white;
+}
+
+.fa-chevron{
+  font-size: 10px;
+  padding: 5px;
+  position: relative;
+  top: -3px;
+}
 
 @media only screen and (max-width: 759px){
   .navBarAndClose{
@@ -563,6 +603,12 @@ textarea{
   .magnifierMobile img{
     height:25px;
   }
+  /*.index_banner_image{
+    width:100%;
+  }
+  body{
+    background-color: pink;
+  }*/
 }
 
 @media (min-width: 760px) and (max-width: 989px){

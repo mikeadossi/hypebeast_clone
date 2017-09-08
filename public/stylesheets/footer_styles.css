@@ -1,0 +1,169 @@
+.footer_content{
+  background-color:black;
+  padding:10px;
+  color:white;
+  text-align:center;
+  display:flex;
+  padding: 25px 30px 0 6%;
+  font-size:0.8em;
+}
+
+.footer_container{
+  /*margin:60px;*/
+  text-align:left;
+}
+
+.footer_regions_container{
+  margin-right:12%;
+}
+
+.footer_more_container{
+  margin-right:6%;
+}
+
+.footer_subscribe_container{
+  margin-right:13%;
+  /*min-width:206px;*/
+  max-width: 354px;
+  /*background-color: green;*/
+}
+
+.footer_container button:hover{
+  cursor:pointer;
+  background-color:#989898;
+}
+
+.footer_container button{
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 11px 11px 8px 11px;
+}
+
+.footer_subscribe_input{
+  background-color: black;
+  padding: 10px 0px 7px 10px;
+  border: 1px solid grey;
+  color:white;
+}
+
+.footer_subscribe_container li:first-child{
+  /*color:red;*/
+  padding-top:12px;
+}
+
+.footer_headers{
+  /*background-color: green;*/
+  color: #AAAAAA;
+  list-style: none;
+  /*text-align: left;*/
+  padding-left: 0;
+  display:inline-block;
+}
+
+.footer_headers li:hover{
+  cursor:pointer;
+  color:gainsboro;
+}
+
+.footer_headers li{
+  color:white;
+  text-decoration: none;
+  padding:2px;
+  text-align:left;
+  padding-top: 3px;
+}
+
+.square{
+  height:10px;
+  width:10px;
+  /*background-color:green;*/
+  color:white;
+  margin-right:5px;
+  padding: 8px !important;
+}
+
+.fa-facebook{
+  background-color:#39579A;
+}
+
+.fa-twitter{
+  background-color:#50ABF1;
+}
+
+.fa-instagram{
+  background-color:#E32A65;
+}
+
+.fa-snapchat-ghost{
+  background-color:#FFFE00;
+}
+
+.fa-youtube{
+  background-color:#CF1D13;
+}
+
+.fa-google-plus{
+  background-color:#CE352C;
+}
+
+.fa-tumblr{
+  background-color:#999999;
+}
+
+.fa-rss{
+  background-color:#FA9400;
+}
+
+.snapchat-ghost{
+  height: 29px;
+  /* padding-top: 10px; */
+  position: relative;
+  top: 10px;
+  padding-right: 5px;
+}
+
+.store_icons{
+  height:40px;
+}
+
+.footer_text_links{
+  background-color: black;
+  font-size:0.8em;
+  padding: 70px 0px 40px 6%;
+}
+
+.footer_text_links a:hover{
+  color:gainsboro;
+}
+
+.footer_text_links a{
+  display:inline-block;
+  text-decoration: none;
+  color:white;
+  margin-right:15px;
+}
+
+.footer_copyright{
+  float: right;
+  margin-top: -17px;
+  line-height: 7px;
+  text-align: right;
+  color:#AAAAAA;
+}
+
+.hypebeast_limited{
+  margin-right:0px !important;
+}
+
+#footer_receive_news{
+  color:#DDDDDD;
+}
+
+#footer_receive_news:hover{
+  color:#DDDDDD;
+  cursor:unset;
+}
+
+
+.

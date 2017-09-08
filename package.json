@@ -1,5 +1,5 @@
 {
-  "name": "comment_system",
+  "name": "hypebeast_clone",
   "version": "1.0.0",
   "description": "",
   "main": "routes.js",
@@ -13,6 +13,7 @@
     "express-session": "^1.15.5",
     "nodemon": "*",
     "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "pg-promise": "^6.5.1",
     "pug": "^2.0.0-rc.3"

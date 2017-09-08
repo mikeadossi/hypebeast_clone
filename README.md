@@ -1,6 +1,6 @@
-# comment system
+# Hypebeast Clone
 
-A simple comment system implementation complete with a db and several other features
+A clone of the Hypebeast website built using on Node, Postgresql and the Pug template engine.
 
 Avatar images credited to [FreePik](https://www.flaticon.com/authors/freepik)
 

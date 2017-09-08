@@ -1,0 +1,108 @@
+.login_content{
+  text-align: left;
+  margin: auto;
+  background-color: #F6F6F6;
+  width: 400px;
+  margin-top: 30px;
+  margin-bottom:130px;
+  padding: 35px 90px 35px 90px;
+}
+
+.login_content p{
+  padding: 10px 0 10px 0;
+}
+
+.log_in_btn{
+  text-align:center;
+}
+
+.social_media_login{
+  padding-bottom:30px;
+  border-bottom:0.5px solid #EEEEEE;
+}
+
+.social_media_login a{
+  display:block;
+}
+
+.label{
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.log_in_input{
+  width:94%;
+  padding:10px;
+  margin-bottom:15px;
+  font-size:0.8em;
+}
+
+.log_in_input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #99999F;
+}
+.log_in_input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #99999F;
+   opacity:  1;
+}
+.log_in_input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #99999F;
+   opacity:  1;
+}
+.log_in_input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #99999F;
+}
+.log_in_input::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #99999F;
+}
+
+#facebook_login, #google_login, #log_in, #sign_up{
+  width:100%;
+  padding:10px 0 10px 0;
+  color:white;
+  cursor:pointer;
+  font-size: 0.8em;
+}
+
+#facebook_login{
+  margin-bottom:7px;
+}
+
+#facebook_login:hover, #log_in:hover, #sign_up:hover{
+  background-color:#236CA7;
+}
+
+#google_login:hover{
+  background-color:#CA3B1D;
+}
+
+#facebook_login, #log_in, #sign_up{
+  border:1px solid #2D86D0;
+  background-color:#2D86D0;
+}
+
+#google_login{
+  border:1px solid #CA3B1D;
+  background-color:#DF4B32;
+}
+
+#log_in, #sign_up{
+  margin-bottom:15px;
+}
+
+.disclaimer{
+  font-size:0.8em;
+}
+
+.special_link:hover{
+  color:#236CA7;
+}
+
+.special_link{
+  text-decoration:none;
+  color:#2E78C1;
+  cursor:pointer;
+}
+
+#facebook-login, #facebook-register{
+  background-color: unset;
+}

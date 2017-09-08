@@ -4,8 +4,11 @@ html
     title= 'comment system'
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css", integrity="sha256-HxaKz5E/eBbvhGMNwhWRPrAR9i/lG1JeT4mD6hCQ7s4=", crossorigin="anonymous")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
-    link(rel='stylesheet', href='/layout_index_styles.css')
-    link(rel='stylesheet', href='/post_styles.css')
+    link(rel='stylesheet', href='/stylesheets/layout_index_styles.css')
+    link(rel='stylesheet', href='/stylesheets/post_styles.css')
+    link(rel='stylesheet', href='/stylesheets/login_styles.css')
+    link(rel='stylesheet', href='/stylesheets/footer_styles.css')
+    link(rel='icon', href='/images/favicon.png')
   body
     .nav
       .header-top-section
@@ -21,7 +24,7 @@ html
         .navBarAndClose
           div.hamburger
             img(src="images/hamburger.png")
-        .navTitle HYPEBEAST  <!-- メンズファッシン -->
+        a.navTitle(href="/") HYPEBEAST  <!-- メンズファッシン -->
         div.close
           img(src="images/close.png")
         div.magnifierMobile
@@ -96,5 +99,7 @@ html
         img(src="https://d2gkwoflhw8cr8.cloudfront.net/bundles/hypebeasteditorial/images/back-to-top_2x.png?1504605512")
     
     block content
+    
+    include footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
     script(src='/main.js')

@@ -10,6 +10,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const queries = require('./database/queries.js');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth').Strategy;
 
 const app = express();
 
@@ -36,17 +37,40 @@ const strategy = (new LocalStrategy(
   })
 );
 
-passport.use(strategy);
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  queries.findById(id)
-    .then(user => done(null,user))
-    .catch(error => done(error, null))
-});
+// const googleStrategy = (new GoogleStrategy({
+//     clientID: config.google.clientID,
+//     clientSecret: config.google.clientSecret,
+//     callbackURL: config.google.callbackURL
+//   },
+//
+//   function(accessToken, refreshToken, profile, done) {
+//     // we get back a profile object offering us informatin about the user.
+//     var searchAndUpdate = {
+//       name: profile.displayName,
+//       someID: profile.id
+//     };
+//
+//     queries.findOneAndUpdate(searchAndUpdate)
+//       .then(user => {
+//         console.log('AUTHORIZING STRATEGY...',user);
+//
+//         done(null, user)
+//       });
+//   }
+//
+// ));
+//
+// passport.use(strategy);
+//
+// passport.serializeUser(function(user, done) {
+//   done(null, user.id);
+// });
+//
+// passport.deserializeUser(function(id, done) {
+//   queries.findById(id)
+//     .then(user => done(null,user))
+//     .catch(error => done(error, null))
+// });
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

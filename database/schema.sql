@@ -2,11 +2,14 @@
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS google_users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR,
-  password VARCHAR
+  password VARCHAR,
+  google_users_id INTEGER,
+  FOREIGN KEY (google_users_id) REFERENCES google_users(id)
 );
 
 CREATE TABLE posts (
@@ -22,6 +25,13 @@ CREATE TABLE posts (
   post_subtitle TEXT,
   post_content TEXT,
   image_credit VARCHAR
+);
+
+CREATE TABLE google_users (
+  id SERIAL PRIMARY KEY,
+  token VARCHAR,
+  email VARCHAR,
+  username VARCHAR
 );
 
 

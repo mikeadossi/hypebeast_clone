@@ -4,19 +4,29 @@ block content
   .login_content
     h2 Join HYPEBEAST now
     p Share your ideas, get instant updates and enjoy exclusive deals at our store.
-    button.facebook_login Login with Facebook
-    button.google_login Login with Google
+    .social_media_login
+      a#facebook_login.log_in_btn
+        i.fa.fa-fw.fa-facebook#facebook-register
+        span Login with Facebook
+      a#google_login.log_in_btn
+        i.fa.fa-fw.fa-google
+        span Login with Google
     p Sign up with yout email address
     form(action="register" method="post")
+      div.label
+        label Email/Username
       div
-        label email
+        input.log_in_input(name="username" type="text" placeholder="Email")
+      div.label
+        label Password
       div
-        input.register_input(name="email" type="text")
-      div
-        lebael password
-      div
-        input.register_input(name="password" type="password")
-      p By signing up, you agree to our Terms of Use and Privacy Policy
-      input.log_in(type="submit" value="Sign Up")
+        input.log_in_input(name="password" type="password" placeholder="Password")
+      p.disclaimer By signing up, you agree to our 
+        span 
+          a(class="special_link") Terms of Use 
+        span and 
+        span
+          a(class="special_link") Privacy Policy.
+      input#sign_up(type="submit" value="Sign Up")
       
-      a Forgot password?
+      div Have an Account? <a class="special_link" href="/login">Login</a>.

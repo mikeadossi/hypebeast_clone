@@ -59,6 +59,16 @@ router.get('/logout', function(req, res) {
   res.status(200).redirect('/');
 })
 
+router.get('/auth/google', passport.authenticate('google'));
+
+router.get('/auth/google/callback',
+  passport.authenticate('google'),
+  function(req, res) {
+    res.redirect('/');
+    res.json(req.user);
+  }
+);
+
 
 
 module.exports = router;
