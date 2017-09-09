@@ -1,6 +1,6 @@
 # Hypebeast Clone
 
-A clone of the Hypebeast website built using on Node, Postgresql and the Pug template engine.
+A clone of the Hypebeast website built on Node, Postgresql and the Pug template engine.
 
 Avatar images credited to [FreePik](https://www.flaticon.com/authors/freepik)
 

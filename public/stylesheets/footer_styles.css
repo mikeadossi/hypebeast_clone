@@ -45,6 +45,7 @@
   padding: 10px 0px 7px 10px;
   border: 1px solid grey;
   color:white;
+  width: 50%;
 }
 
 .footer_subscribe_container li:first-child{
