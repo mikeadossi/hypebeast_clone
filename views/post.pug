@@ -1,19 +1,47 @@
 extends layout
 
 block content
-  .post_content
-    .post_title !{ post[0].post_title }
-    .post_subtitle !{ post[0].post_subtitle }
-    .post_author !{ post[0].post_author }
-    .post_comment_count !{ post[0].post_comment_count }
-    .post_text !{ post[0].post_content }
-  
-  .post_comment_section
-    .post_comment_header
-    .post_conversation
-      .post_postbox
-        .post_avatar 
-        textarea.post_textarea(placeholder="Start the discussion...")
+  .post_container
+    .content 
+      .sticky_container.post_page_sticky_container
+        img(src="/images/ad_headphones_blue.png")
+        .hypebeast_jobs
+          .jobs_top_container
+            .jobs_header HYPEBEAST JOBS
+            .jobs_link See more ➔
+          .jobs_container
+            .jobs_title Buyer (Womenswear)
+            .jobs_location Hong Kong Full-time
+          .jobs_container
+            .jobs_title Editor (Womenswear)
+            .jobs_location Korea Full-time (Freelance)
+          .jobs_container
+            .jobs_title Editor
+            .jobs_location Hong Kong Full-time
+          .jobs_container
+            .jobs_title Editor
+            .jobs_location New York Full-time
+          .jobs_container
+            .jobs_title Video Editor / Videographer
+            .jobs_location New York Full-time
+          .jobs_button See More Job Openings
+          
+    .post_content
+      .post_title !{ post[0].post_title }
+      .post_subtitle !{ post[0].post_subtitle }
+      .post_author By !{ post[0].post_author }
+        span  / !{ post[0].post_time_of }
+        span  / !{ post[0].category }
+      .post_comment_count !{ post[0].post_comment_count }
+      .post_text !{ post[0].post_content }
+    
+      .post_comment_section
+        .post_comment_header
+        .post_conversation
+          .post_postbox
+            .post_avatar 
+            textarea.post_textarea(placeholder="Start the discussion...")
+          
     
     
     

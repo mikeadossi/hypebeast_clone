@@ -20,6 +20,7 @@ button:focus{
   width:965px;
   margin-bottom: -3px;
   margin-top: -2px;
+  cursor:pointer;
 }
 
 .banner_container{
@@ -30,37 +31,20 @@ button:focus{
   margin-top: 16px;
 }
 
+.wide_ad_container{
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 40px 0;
+}
+
 .wide_ad{
-  width: 1000px;
+  width: 90%;
   cursor:pointer;
 }
 
 .content{
   /*margin:4%;*/
   margin: 16px 55px 0 51px;
-}
-
-.blog_images{
-  width:100%;
-}
-
-.blog_text{
-  font-size:17px;
-  line-height:29px;
-}
-
-.blog_text a{
-  text-decoration: none;
-  color:steelblue;
-}
-
-.blog_text a:hover{
-  color:#37559D;
-}
-
-.blog_text{
-  font-size:1.2em;
-  color:#333332;
 }
 
 .returnToTop{
@@ -96,7 +80,7 @@ button:focus{
 
 .article_container{
   /*background-color:indianred;*/
-  min-width: 838px;
+  max-width: 815px;
   width:76%;
 }
 
@@ -532,7 +516,7 @@ textarea{
 .search_nav_glass{
   margin-top: -55px;
   margin-left: 0px;
-  position: absolute;
+  float: left;
   height: 35px;
   padding-left: 15px;
   background-color: #EEEEEE;
@@ -785,7 +769,7 @@ textarea{
 }
 
 .sticky_ad_two{
-  margin-top:1300px;
+  margin-top:20px;
 }
 
 .newsletter_widget{
@@ -887,6 +871,12 @@ textarea{
 @media only screen and (max-width: 759px){
   body{
     /*background-color: pink;*/
+  }
+  .search_nav_container{
+    display:none;
+    position: fixed;
+    top: 0px;
+    left: 0;
   }
   .nav_dropdown{
     display:none !important;
@@ -1181,6 +1171,9 @@ textarea{
   .content{
     margin: 16px 39px 0 39px;
   }
+  .sticky_ad_two{
+    /*margin-top: 1300px;*/
+  }
 }
 
 @media (min-width: 1231px) {
@@ -1204,16 +1197,12 @@ textarea{
   .article_container .post_image{
     height: 230px;
   }
-  /*.footwear_dropdown{
-    margin-left:107px;
+  .search_nav_close{
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin-top: 26px;
+    height: 28px;
+    padding-right: 10px;
   }
-  .music_dropdown{
-    margin-left:238px;
-  }
-  .arts_dropdown{
-    margin-left: 335px;
-  }
-  .all_sections_dropdown{
-    margin-left: 664px;
-  }*/
 }

@@ -71,7 +71,7 @@ block content
         p.newsletter_text Receive the latest in Footwear, Fashion, Music and Creativity in our Newsletters.
         input.newsletter_input(placeholder="Enter your email address")
         button.newsletter_button Sign Up
-      img.sticky_ad_two(src="/images/ad_tall_headphones.png")
+      //- img.sticky_ad_two(src="/images/ad_tall_headphones.png")
         
     .article_container
       .feed_header
@@ -94,7 +94,10 @@ block content
         .article_border
     -  }
     
-    img.wide_ad(src="images/ad_wide_hypebae.png")
+    .wide_ad_container
+      img.wide_ad(src="images/ad_wide_hypebae.png")
+      .sticky_container
+        img.sticky_ad_two(src="/images/ad_tall_headphones.png")
       
     - for(let i = 6; i < posts.length; i++){
       .article_container

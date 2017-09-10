@@ -20,6 +20,11 @@ $('.magnifier').on('click', () => {
   $('.search_nav_container').css('display','block');
 })
 
+$('.magnifier_glass').on('click', () => {
+  $('.search_nav_container').css('display','block');
+})
+
+
 $('.search_nav_close').on('click', () => {
   $('.search_nav_container').css('display','none');
 })
