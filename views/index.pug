@@ -43,12 +43,60 @@ block content
     .feed_popular.feed_button Popular
     
   .content 
+    .sticky_container
+      img(src="/images/ad_headphones_black.png")
+      .hypebeast_jobs
+        .jobs_top_container
+          .jobs_header HYPEBEAST JOBS
+          .jobs_link See more ➔
+        .jobs_container
+          .jobs_title Buyer (Womenswear)
+          .jobs_location Hong Kong Full-time
+        .jobs_container
+          .jobs_title Editor (Womenswear)
+          .jobs_location Korea Full-time (Freelance)
+        .jobs_container
+          .jobs_title Editor
+          .jobs_location Hong Kong Full-time
+        .jobs_container
+          .jobs_title Editor
+          .jobs_location New York Full-time
+        .jobs_container
+          .jobs_title Video Editor / Videographer
+          .jobs_location New York Full-time
+        .jobs_button See More Job Openings
+      .newsletter_widget
+        p.newsletter_heading HYPEBEAST
+        p.newsletter_subtitle SIGN UP FOR OUR NEWSLETTERS
+        p.newsletter_text Receive the latest in Footwear, Fashion, Music and Creativity in our Newsletters.
+        input.newsletter_input(placeholder="Enter your email address")
+        button.newsletter_button Sign Up
+      img.sticky_ad_two(src="/images/ad_tall_headphones.png")
+        
     .article_container
       .feed_header
         .feed_latest.feed_button Latest
         .feed_rising.feed_button Rising
         .feed_popular.feed_button Popular
-    - for(let i = 0; i < posts.length; i++){
+    - for(let i = 0; i < 6; i++){
+      .article_container
+        span !{ posts[i].post_image }
+        .article_info
+          .category !{ posts[i].category } 
+          a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
+          .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
+          .subtitle !{ posts[i].post_subtitle } 
+          .hypeRating 
+            img(src="images/hype_flame.png") 
+            span !{ posts[i].post_hype_count } Hypes
+            img(src="images/comment_balloon.png") 
+            span !{ posts[i].post_comment_count }
+        .article_border
+    -  }
+    
+    img.wide_ad(src="images/ad_wide_hypebae.png")
+      
+    - for(let i = 6; i < posts.length; i++){
       .article_container
         span !{ posts[i].post_image }
         .article_info
@@ -67,7 +115,9 @@ block content
       div.more_button_mobile More
         span
           i.fa.fa-chevron-down
-  
+
   div.more_button More
     span
       i.fa.fa-chevron-down
+        
+        

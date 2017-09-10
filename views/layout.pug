@@ -10,6 +10,10 @@ html
     link(rel='stylesheet', href='/stylesheets/footer_styles.css')
     link(rel='icon', href='/images/favicon.png')
   body
+    
+    
+    .banner_ad_section
+      img(src="/images/vans_banner_ad.png")
     .nav
       .header-top-section
         .socialMediaContainer
@@ -83,15 +87,101 @@ html
       .main-nav
         ul
           li.fashionNavLink FASHION
+            .fashion_dropdown.nav_dropdown
+              .dropdown_link Supreme
+              .dropdown_link BAPE
+              .dropdown_link Palace
+              .dropdown_link Gosha Robchinskiy
+              .dropdown_link Pigaile
+              .dropdown_link OFF-WHITE
+              .dropdown_link Stone Island
+              .dropdown_link UNDERCOVER
           li.footwearNavLink FOOTWEAR
+            .footwear_dropdown.nav_dropdown
+              .dropdown_link Adidas
+              .dropdown_link Nike
+              .dropdown_link Jordan Brand
+              .dropdown_link YEEZY
+              .dropdown_link New Balance
+              .dropdown_link Vans
+              .dropdown_link ASICS
+              .dropdown_link UNDERCOVER
+              .dropdown_link visvim
+              .dropdown_link PUMA
+              .dropdown_link Reebok
           li.musicNavLink MUSIC
+            .music_dropdown.nav_dropdown
+              .dropdown_link Kanye West
+              .dropdown_link Drake
+              .dropdown_link ASAP Rocky
+              .dropdown_link Frank Ocean
+              .dropdown_link Travis Scott
+              .dropdown_link Kid Cudi
+              .dropdown_link Kendrick Lamar
+              .dropdown_link Gucci Mane
+              .dropdown_link The Weeknd
+              .dropdown_link Daft Punk
           li.artsNavLink ARTS
+            .arts_dropdown.nav_dropdown
+              .dropdown_link KAWS
+              .dropdown_link Banksy
+              .dropdown_link Shepard Fairey
+              .dropdown_link Takashi Murakami
+              .dropdown_link Daniel Arsham
+              .dropdown_link Ai Weiwei
+              .dropdown_link Jeff Koons
+              .dropdown_link Cleon Peterson
+              .dropdown_link Hajime Sorayama
+              .dropdown_link Ron English
           li.designNavLink DESIGN
           li.editorialsNavLink EDITORIALS
           li.allSectionsNavLink ALL SECTIONS
+            .all_sections_dropdown.nav_dropdown
+              .all_sections_left_container
+                .dropdown_link FORUMS
+                .mobile_all_sections 
+                  .dropdown_link MUSIC
+                  .dropdown_link ARTS
+                .dropdown_link DESIGN
+                .dropdown_link EDITORIALS
+                .dropdown_link TECH
+                .dropdown_link ENTERTAINMENT
+                .dropdown_link AUTOMOTIVE
+                .dropdown_link FOOD
+                .dropdown_link TRAVEL
+                .dropdown_link GUIDES
+                .dropdown_link SPORTS
+              .all_sections_right_container 
+                .dropdown_right_content 
+                  .dropdown_header HB100 | 2016
+                  .dropdown_text HYPEBEAST 100: The innovators from all realms of creativity in the spotlight.
+                .dropdown_right_content 
+                  .dropdown_header HYPEBEAST MAGAZINE
+                  .dropdown_magazine_container
+                    .dropdown_text With in-depth interviews, focused features and fashion-forward editorials, our print publication features long-form coverage of the topics valued to readers.
+                    img(src="images/hypebeast_magazine_small.png")
+                .dropdown_right_content 
+                  .dropdown_header HYPEBAE
+                  .dropdown_text Explore and be inspired by the latest womens fashions and trends.
+          
           li.videosNavLink VIDEOS
           li.radioNavLink RADIOS
           li.storeNavLink STORE
+          .search_nav_container
+            input.search_nav_input(placeholder="What are you looking for?")
+            img.search_nav_glass(src="images/search_grey.png")
+            img.search_nav_close(src="images/close_grey.png")
+            .search_border
+            .trending_searches 
+              div.trending_header Trending Searches
+              div.trending_topic BAPE
+              div.trending_topic Supreme
+              div.trending_topic kith
+              div.trending_topic lonzo ball
+              div.trending_topic off white
+                
+              
+          
         div.magnifier
           img(src="images/search.png")
             
