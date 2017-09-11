@@ -64,16 +64,16 @@ let queries = {
   // the function below helps with our passport OAUTH apis. If the user is not already in our database we sign them up.
   findOneAndUpdate: function(searchAndUpdate){
     // we search for user in our db
-    console.log('searchAndUpdate.name: ',searchAndUpdate.name);
+    // console.log('searchAndUpdate.name: ',searchAndUpdate.name);
     return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
       .then( user => {
-        console.log("I'M IN FINDONEUPDATE!");
-        console.log('\n FOUND A USER ======>> ',user,'\n');
+        // console.log("I'M IN FINDONEUPDATE!");
+        // console.log('\n FOUND A USER ======>> ',user,'\n');
         if(!user){
           // if user is not found in the users table we add them to our github table
           return db.oneOrNone("INSERT INTO google_users (username,id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
         } else {
-          console.log('user found!');
+          // console.log('user found!');
           return user;
           // done(null, user)
         }

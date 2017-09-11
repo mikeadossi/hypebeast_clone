@@ -32,7 +32,7 @@ router.get('/register', function(req, res) {
 })
 
 router.post('/register', function(req, res) {
-  const email = req.body.email;
+  const email = req.body.username;
   const password = req.body.password;
 
   try{
@@ -56,18 +56,28 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', function(req, res) {
   // res.clearCookie('myCookie');
+  console.log('logged out!');
   res.status(200).redirect('/');
 })
 
-router.get('/auth/google', passport.authenticate('google'));
+router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
 
 router.get('/auth/google/callback',
-  passport.authenticate('google'),
+  passport.authenticate('google', { failureRedirect: '/error' }),
   function(req, res) {
+    console.log('inside auth/google/callback');
     res.redirect('/');
     res.json(req.user);
   }
 );
+
+router.get('/auth/error', function(req, res){
+  res.render('error');
+});
+
+router.get('/error', function(req, res) {
+  res.render('error');
+});
 
 
 
