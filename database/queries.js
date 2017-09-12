@@ -6,10 +6,8 @@ const saltRounds = 10;
 
 const comparePassword = function(password, dbPassword){
   if(!dbPassword) reject('No user of that name exists!')
-  console.log('password ====> ',password);
   return bcrypt.compare(password, dbPassword)
     .then(function(res) {
-      console.log('compared!');
       return resolve(res)
     })
 };
@@ -25,7 +23,6 @@ let queries = {
   },
 
   getPost: function(id){
-    console.log('id ------> ', id)
     return db.any("SELECT * FROM posts WHERE id = $1", id)
   },
 
@@ -47,7 +44,6 @@ let queries = {
   },
 
   find: function(email, password){
-    console.log('inside find query!');
     return db.oneOrNone("SELECT * FROM users WHERE users.email = $1", [email])
       .then(user => {
         return comparePassword(password, user.password) ? user : false
@@ -63,17 +59,12 @@ let queries = {
 
   // the function below helps with our passport OAUTH apis. If the user is not already in our database we sign them up.
   findOneAndUpdate: function(searchAndUpdate){
-    // we search for user in our db
-    // console.log('searchAndUpdate.name: ',searchAndUpdate.name);
     return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
       .then( user => {
-        // console.log("I'M IN FINDONEUPDATE!");
-        // console.log('\n FOUND A USER ======>> ',user,'\n');
         if(!user){
           // if user is not found in the users table we add them to our github table
-          return db.oneOrNone("INSERT INTO google_users (username,id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+          return db.oneOrNone("INSERT INTO google_users (username, profile_id, image) VALUES ($1, $2, $3) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID, searchAndUpdate.image]);
         } else {
-          // console.log('user found!');
           return user;
           // done(null, user)
         }
@@ -81,7 +72,8 @@ let queries = {
         if(err){
           return err;
         }
-      });
+      }
+    );
   }
 
 }

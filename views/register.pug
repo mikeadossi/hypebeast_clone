@@ -5,12 +5,14 @@ block content
     h2 Join HYPEBEAST now
     p Share your ideas, get instant updates and enjoy exclusive deals at our store.
     .social_media_login
-      a#facebook_login.log_in_btn
-        i.fa.fa-fw.fa-facebook#facebook-register
-        span Login with Facebook
-      a#google_login.log_in_btn
-        i.fa.fa-fw.fa-google
-        span Login with Google
+      form(method='get' action='')
+        button#facebook_login.log_in_btn(type='submit') 
+          i.fa.fa-fw.fa-facebook#facebook-login
+          span Login with Facebook
+      form(method='get' action='/auth/google/')
+        button#google_login.log_in_btn(type='submit') 
+          i.fa.fa-fw.fa-google 
+          span Login with Google
     p Sign up with yout email address
     form(action="register" method="post")
       div.label

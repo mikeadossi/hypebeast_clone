@@ -56,16 +56,16 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', function(req, res) {
   // res.clearCookie('myCookie');
+  req.logout();
   console.log('logged out!');
   res.status(200).redirect('/');
 })
 
-router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/error' }),
+  passport.authenticate('google', { prompt: 'select_account', failureRedirect: '/error' }),
   function(req, res) {
-    console.log('inside auth/google/callback');
     res.redirect('/');
     res.json(req.user);
   }

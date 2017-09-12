@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const queries = require('./database/queries.js');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const sgMail = require('@sendgrid/mail');
 
 const app = express();
 
@@ -45,10 +46,10 @@ const googleStrategy = (new GoogleStrategy({
 
   function(accessToken, refreshToken, profile, done) {
     // we get back a profile object offering us informatin about the user.
-    console.log('inside function!!!');
     var searchAndUpdate = {
       name: profile.displayName,
-      someID: profile.id
+      someID: profile.id,
+      image: profile._json.image.url
     };
 
     queries.findOneAndUpdate(searchAndUpdate)
@@ -69,6 +70,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
+  // console.log('deserialize ID: ',id,' <=============');
   queries.findById(id)
     .then(user => done(null,user))
     .catch(error => done(error, null))
@@ -97,6 +99,18 @@ app.use('/', routes);
 //   err.status = 404
 //   next(err)
 // });
+
+/* Handle sendgrid email feature */
+sgMail.setApiKey(config.sendgridApiKey);
+
+const msg = {
+  to: 'test@example.com',
+  from: 'test@example.com',
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
 
 
 module.exports = app;

@@ -21,8 +21,8 @@ CREATE TABLE posts (
 
 CREATE TABLE google_users (
   id SERIAL PRIMARY KEY,
-  token VARCHAR,
-  email VARCHAR,
+  profile_id NUMERIC,
+  image VARCHAR,
   username VARCHAR
 );
 
