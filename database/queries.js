@@ -58,15 +58,31 @@ let queries = {
   },
 
   // the function below helps with our passport OAUTH apis. If the user is not already in our database we sign them up.
-  findOneAndUpdate: function(searchAndUpdate){
+  findOneAndUpdateGh: function(searchAndUpdate){
     return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
       .then( user => {
         if(!user){
           // if user is not found in the users table we add them to our github table
-          return db.oneOrNone("INSERT INTO google_users (username, profile_id, image) VALUES ($1, $2, $3) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID, searchAndUpdate.image]);
+          return db.oneOrNone("INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
         } else {
           return user;
           // done(null, user)
+        }
+      }).catch(function(err, user){
+        if(err){
+          return err;
+        }
+      }
+    );
+  },
+
+  findOneAndUpdateFb: function(searchAndUpdate){
+    return db.oneOrNone("SELECT * FROM facebook_users WHERE username = $1", [searchAndUpdate.name])
+      .then( user => {
+        if(!user){
+          return db.oneOrNone("INSERT INTO facebook_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+        } else {
+          return user;
         }
       }).catch(function(err, user){
         if(err){

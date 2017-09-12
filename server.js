@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const queries = require('./database/queries.js');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const sgMail = require('@sendgrid/mail');
 
 const app = express();
@@ -22,15 +23,12 @@ app.use(flash());
 
 const strategy = (new LocalStrategy(
   function(username, password, done) {
-    console.log('strategy!');
     try{
       queries.find(username, password)
         .then(result => {
           if(!result) {
-            console.log('login failed!');
             return done(null, false, {message: 'Incorrect username or password'});
           } else {
-            console.log('logged in');
             return done(null, result);
           }
         })
@@ -39,23 +37,40 @@ const strategy = (new LocalStrategy(
 );
 
 const googleStrategy = (new GoogleStrategy({
-    clientID: config.google.consumerKey,
-    clientSecret: config.google.consumerSecret,
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
 
   function(accessToken, refreshToken, profile, done) {
-    // we get back a profile object offering us informatin about the user.
+    // we get back a profile object offering us information about the user.
     var searchAndUpdate = {
       name: profile.displayName,
-      someID: profile.id,
-      image: profile._json.image.url
+      someID: profile.id
     };
 
-    queries.findOneAndUpdate(searchAndUpdate)
+    queries.findOneAndUpdateGh(searchAndUpdate)
       .then(user => {
-        console.log('AUTHORIZING STRATEGY...',user);
+        done(null, user)
+      });
+  }
 
+));
+
+const facebookStrategy = (new FacebookStrategy({
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.callbackURL
+  },
+
+  function(accessToken, refreshToken, profile, done) {
+    var searchAndUpdate = {
+      name: profile.displayName,
+      someID: profile.id
+    };
+
+    queries.findOneAndUpdateFb(searchAndUpdate)
+      .then(user => {
         done(null, user)
       });
   }
@@ -64,13 +79,13 @@ const googleStrategy = (new GoogleStrategy({
 
 passport.use(strategy);
 passport.use(googleStrategy);
+passport.use(facebookStrategy);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  // console.log('deserialize ID: ',id,' <=============');
   queries.findById(id)
     .then(user => done(null,user))
     .catch(error => done(error, null))
@@ -99,18 +114,6 @@ app.use('/', routes);
 //   err.status = 404
 //   next(err)
 // });
-
-/* Handle sendgrid email feature */
-sgMail.setApiKey(config.sendgridApiKey);
-
-const msg = {
-  to: 'test@example.com',
-  from: 'test@example.com',
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
 
 
 module.exports = app;
