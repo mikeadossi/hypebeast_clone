@@ -1,9 +1,3 @@
-/* everart.io */
-/* artsy.net, frieze.com */
-/* sample contract freelance */
-/* Look up cyptocurrency IOTA */
-/* Behance */
-
 html, body{
   width: 100%;
   height: auto;
@@ -31,11 +25,10 @@ button:focus{
 }
 
 .banner_container{
-  /*margin:4%;*/
-  /*margin: 16px 55px 0 51px;*/
-  max-width: 935px;
+  max-width: 1172px;
   margin: auto;
   margin-top: 16px;
+  text-align:center;
 }
 
 .wide_ad_container{
@@ -50,7 +43,6 @@ button:focus{
 }
 
 .content{
-  /*margin:4%;*/
   margin: 16px 55px 0 51px;
 }
 
@@ -86,7 +78,6 @@ button:focus{
 }
 
 .article_container{
-  /*background-color:indianred;*/
   max-width: 815px;
   width:76%;
 }
@@ -114,8 +105,6 @@ button:focus{
 }
 
 .hypeRating img:nth-child(3n){
-  /*height:20px;
-  float:left;*/
   padding-top:3px;
 }
 
@@ -123,7 +112,6 @@ button:focus{
   float: left;
   padding-top: 6px;
   color:grey;
-  /*font-size:0.8em;*/
 }
 
 .hypeRating span:nth-child(2n){
@@ -596,18 +584,19 @@ textarea{
 .index_banner_image{
   margin-top: -17px;
   width:100%;
+  margin:auto;
+  max-width:1172px;
 }
 
 .top_stories{
   padding-bottom:20px;
+  margin:auto;
 }
 
 .top_ten_container{
   display:block;
   border:1px solid #F0F0F0;
   padding: 10px 34px 40px 34px;
-  max-width: 1080px;
-  margin:auto;
 }
 
 .top_ten_header{
@@ -636,11 +625,18 @@ textarea{
 
 .top_ten_left, .top_ten_right{
   display:inline-block;
-  width:48%;
+  width:50%;
 }
 
 .top_ten_left{
-  padding-right: 40px;
+  background-color:orange;
+}
+
+.top_ten_left .top_ten_story{
+  background-color:purple;
+}
+.top_ten_right .top_ten_story{
+  background-color:orange;
 }
 
 .top_ten_title{
@@ -651,28 +647,22 @@ textarea{
 }
 
 .top_ten_details img{
-  height:22px
+  height:16px;
+  padding-right:4px;
 }
 
 .top_ten_details{
   position: absolute;
   margin-left: 151px;
-  margin-top: -24px;
+  margin-top: -19px;
   font-size:13px;
 }
-
-/*.top_ten_title img{
-  height:22px;
-}*/
 
 .top_ten_number{
   display: inline-block;
 }
 
 .top_ten_number div{
-  /*position: relative;
-  top: -50px;
-  color:grey;*/
   position: absolute;
   margin-top: -53px;
   color: grey;
@@ -680,8 +670,12 @@ textarea{
 
 .top_ten_hype{
   position: relative;
-  top: -5px;
+  top: -2px;
   color:grey;
+}
+
+.top_ten_secret{
+  display:none;
 }
 
 .top_ten_description img{
@@ -700,7 +694,27 @@ textarea{
   line-height: 1.4;
   padding-bottom: 10px;
   position: absolute;
-  top: -67px;
+  top: -64px;
+}
+
+.top_ten_story_mobile{
+  margin-bottom:20px;
+}
+
+.mobile_hype_img{
+  height:17px;
+}
+
+.top_ten_description_mobile .post_title{
+  background-color: green;
+}
+.top_stories{
+  background-color: blue;
+}
+.top_ten_description_mobile{
+  top:-37px;
+  line-height:1;
+  font-size:16px;
 }
 
 .top_ten_title post_title{
@@ -714,15 +728,9 @@ textarea{
 
 .top_ten_image{
   display: inline-block;
-  width: 21.8%;
-  padding-right: 8px;
+  width:101px;
   padding-left: 33px;
 }
-
-/*.top_ten_right div:last-child{
-  padding-left:16px;
-  background-color:green;
-}*/
 
 .top_ten_image img{
   height:74px;
@@ -796,11 +804,9 @@ textarea{
 }
 
 .sticky_container{
-  /*background-color: purple;*/
   width: 303px;
   height: 1000px;
   float: right;
-  /*margin-right: 37px;*/
 }
 
 .sticky_container img{
@@ -910,9 +916,29 @@ textarea{
   margin-top:-1px;
 }
 
+@media only screen and (max-width: 523px){
+  .top_ten_title{
+    top: -20px;
+    left: 93px;
+    line-height: 1;
+  }
+  .top_ten_description_mobile{
+    width:86%;
+  }
+}
+
 @media only screen and (max-width: 759px){
   body{
-    /*background-color: pink;*/
+    background-color: pink;
+  }
+  .top_ten_description{
+    width: 87%;
+    max-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .search_nav_container{
     display:none;
@@ -943,18 +969,15 @@ textarea{
     max-width:unset;
   }
   .top_ten_title{
-    width: 63%;
+    width: 75%;
     margin-left: 25px;
   }
   .top_ten_image{
-    width:12%;
+    width:75px;
     padding-left: 20px;
   }
   .top_ten_image img{
     height:55px;
-  }
-  .top_ten_number div{
-    top: -25px;
   }
   .post_title{
     font-size: 1.1em;
@@ -1045,7 +1068,6 @@ textarea{
     display:none;
   }
   .magnifierMobile{
-    /*display:none;*/
     height:25px;
     display: inline-block;
     width: 8%;
@@ -1071,7 +1093,22 @@ textarea{
 
 @media (min-width: 760px) and (max-width: 989px){
   body{
-    /*background-color: skyblue;*/
+    background-color: skyblue;
+  }
+  .top_ten_details{
+    margin-left:148px;
+  }
+  .top_ten_description{
+    width: 107%;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .top_ten_number div{
+    left: unset;
   }
   .all_sections_right_container{
     padding-bottom: 100px;
@@ -1089,7 +1126,6 @@ textarea{
     height: 265px;
   }
   .article_container{
-    /*background-color: indianred;*/
     width: 55%;
     min-width: unset;
   }
@@ -1097,7 +1133,6 @@ textarea{
     margin-bottom: 25px;
   }
   .nav, .banner_container, .content{
-    /*margin: 16px 100px 0 100px;*/
     margin:auto;
     width:723px;
   }
@@ -1127,19 +1162,18 @@ textarea{
     display: inline-block;
     font-size: 0.8em;
      width: 185px;
-    /* position: relative; */
   }
   .top_ten_description .post_title{
     font-size: 1.2em;
   }
   .top_ten_number div{
-    left: 14px;
+    /*left: 14px;*/
   }
   .top_ten_container{
     padding: 0px 10px 5px 10px;
   }
   .top_ten_image{
-    padding-right: 35px;
+    padding-right: 8px;
     padding-left: 35px;
   }
   .top_ten_image img{
@@ -1177,7 +1211,36 @@ textarea{
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    /*background-color:red;*/
+    background-color:indianred;
+  }
+  .banner_container{
+    margin-top:-1px;
+  }
+  .top_ten_description{
+    width: 87%;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-left: 28px;
+  }
+  .top_ten_details{
+    margin-left: 158px;
+  }
+  .top_ten_image{
+    padding-left:25px;
+  }
+  .index_banner_image{
+    width:935px;
+  }
+  .top_stories{
+    width:935px;
+    margin:auto;
+  }
+  .top_ten_container{
+    max-width:983px;
   }
   .article_container{
     min-width:unset;
@@ -1211,24 +1274,47 @@ textarea{
     display:none;
   }
   .content{
-    margin: 16px 39px 0 39px;
-  }
-  .sticky_ad_two{
-    /*margin-top: 1300px;*/
+    max-width: 936px;
+    margin: auto;
   }
 }
 
 @media (min-width: 1231px) {
   body{
-    /*background-color:limegreen;*/
+    background-color:limegreen;
+  }
+  .nav{
+    width: 1171px;
+    margin: auto;
+  }
+  .banner_container{
+    margin-top:-1px;
+  }
+  .content_posts{
+    width:1171px;
+  }
+  .top_ten_details{
+    margin-left: 167px;
+  }
+  .top_ten_image{
+    padding-right:28px;
+  }
+  .content{
+    margin: auto;
+    margin-top: 16px;
+  }
+  .index_banner_image{
+    width:1171px;
+  }
+  .top_stories{
+    width:1171px;
+  }
+  .top_ten_description{
+    width:unset !important;
   }
   .magnifier{
     float:right;
     margin-top: -33px;
-  }
-  .banner_container{
-    margin: 16px 55px 0 51px;
-    max-width:unset;
   }
   .more_button_mobile{
     display:none;

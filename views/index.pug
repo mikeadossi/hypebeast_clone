@@ -13,13 +13,13 @@ block content
             span Continuously updated 
         .top_ten_left
           - for(let y = 0; y < 5; y++){
-            div(class="here"+y) :)
             .top_ten_story
               .top_ten_number 
                 div= y+1
               .top_ten_image !{ topTen[y].post_image } 
               .top_ten_title
-                .top_ten_description !{ postTitles[y] }
+                .top_ten_secret !{ postTitles[y] }**
+                div(class="top_ten_description top_ten_description"+y) 
               .top_ten_details
                 img(src="images/hype_flame.png")
                 span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
@@ -31,7 +31,8 @@ block content
                 div= y+1
               .top_ten_image !{ topTen[y].post_image } 
               .top_ten_title
-                .top_ten_description !{ postTitles[y] } 
+                .top_ten_secret !{ postTitles[y] }** 
+                div(class="top_ten_description top_ten_description"+y) 
               .top_ten_details
                 img.right_images(src="images/hype_flame.png")
                 span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
@@ -42,13 +43,14 @@ block content
           h2 Top 10 Stories
             span Continuously updated
         - for(let y = 0; y < topTen.length; y++){
-          .top_ten_story
+          .top_ten_story_mobile
             .top_ten_number 
               div= y+1
             .top_ten_image !{ topTen[y].post_image } 
-            .top_ten_title
-              .top_ten_description !{ topTen[y].post_title } 
-              img(src="images/hype_flame.png")
+            .top_ten_title.top_ten_title_mobile
+              .top_ten_secret !{ postTitles[y] }**
+              div(class="top_ten_description top_ten_description_mobile top_ten_description"+y)
+              img.mobile_hype_img(src="images/hype_flame.png")
               span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
         - }
         
@@ -57,7 +59,7 @@ block content
     .feed_rising.feed_button Rising
     .feed_popular.feed_button Popular
     
-  .content 
+  .content.content_posts 
     .sticky_container
       img.sticky_ad_one(src="/images/ad_headphones_black.png")
       .hypebeast_jobs

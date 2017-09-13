@@ -1,43 +1,11 @@
-let ace = $('.post_title_string').text()
-console.log('ace: ',ace);
-let windowsize = $(window).width();
-console.log('windowsize: ',windowsize);
-console.log('type of ace: ',typeof ace);
-var arr = ace.split(",")
-console.log('arr: ',arr);
-let dynamic;
+let top_ten_secret = $('.top_ten_secret').text();
+var arr = top_ten_secret.split("**");
+let title;
 
-$(window).resize(function() {
-    // if (document.documentElement.clientWidth >= 1024) {
-
-      for(let i = 0; i <= 10; i++){
-        // create a dynamic way of catching different classes (do both here and in the loop )
-        // var title = arr[i];
-        if($(window).width() >= 900){
-          title = '900'
-          $(".here"+i).html(title);
-        } else if($(window).width() >= 762){
-          title = '762'
-          $(".here"+i).html(title);
-        } else if ($(window).width() >= 400){
-          title = '400'
-          $(".here"+i).html(title);
-        }
-
-        // $(".here"+i).html(title);
-      }
-
-    // }
-}).resize()
-
-
-
-// if(windowsize > 760){
-//   $(".here").text('ace');
-// }
-// pink - 400
-// skyblue - 762
-// red- 990
+for(let i = 0; i <= 10; i++){
+    title = arr[i];
+    $(".top_ten_description"+i).html(title);
+  }
 
 $('.hamburger').on('click', () => {
   $('.hamburger').css('display','none');
