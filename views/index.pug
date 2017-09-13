@@ -10,17 +10,32 @@ block content
       .top_ten_container
         .top_ten_header
           h2 Top 10 Stories
-            span Continuously updated
-        - for(let y = 0; y < topTen.length; y++){
-          .top_ten_story
-            .top_ten_number 
-              div= y+1
-            .top_ten_image !{ topTen[y].post_image } 
-            .top_ten_title
-              .top_ten_description !{ topTen[y].post_title } 
-              img(src="images/hype_flame.png")
-              span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
-        - }
+            span Continuously updated 
+        .top_ten_left
+          - for(let y = 0; y < 5; y++){
+            div(class="here"+y) :)
+            .top_ten_story
+              .top_ten_number 
+                div= y+1
+              .top_ten_image !{ topTen[y].post_image } 
+              .top_ten_title
+                .top_ten_description !{ postTitles[y] }
+              .top_ten_details
+                img(src="images/hype_flame.png")
+                span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
+          - }
+        .top_ten_right
+          - for(let y = 5; y < topTen.length; y++){
+            .top_ten_story
+              .top_ten_number 
+                div= y+1
+              .top_ten_image !{ topTen[y].post_image } 
+              .top_ten_title
+                .top_ten_description !{ postTitles[y] } 
+              .top_ten_details
+                img.right_images(src="images/hype_flame.png")
+                span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
+          - }
         
       .top_ten_mobile_container
         .top_ten_header
@@ -44,7 +59,7 @@ block content
     
   .content 
     .sticky_container
-      img(src="/images/ad_headphones_black.png")
+      img.sticky_ad_one(src="/images/ad_headphones_black.png")
       .hypebeast_jobs
         .jobs_top_container
           .jobs_header HYPEBEAST JOBS

@@ -1,6 +1,13 @@
+/* everart.io */
+/* artsy.net, frieze.com */
+/* sample contract freelance */
+/* Look up cyptocurrency IOTA */
+/* Behance */
+
 html, body{
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
@@ -48,7 +55,7 @@ button:focus{
 }
 
 .returnToTop{
-  position: absolute;
+  position: fixed;
   bottom: 25px;
   right: 30px;
   cursor:pointer;
@@ -567,7 +574,6 @@ textarea{
 
 .nav{
   border-bottom: 0.5px solid gainsboro;
-  /*margin: 16px 35px 0 35px;*/
   margin: 16px 55px 0 51px;
 }
 
@@ -592,9 +598,16 @@ textarea{
   width:100%;
 }
 
+.top_stories{
+  padding-bottom:20px;
+}
+
 .top_ten_container{
+  display:block;
   border:1px solid #F0F0F0;
-  padding: 10px 34px 5px 34px;
+  padding: 10px 34px 40px 34px;
+  max-width: 1080px;
+  margin:auto;
 }
 
 .top_ten_header{
@@ -621,30 +634,48 @@ textarea{
   font-weight: 400;
 }
 
-.top_ten_story{
-  border:1px solid steelblue;
-  max-width:50%;
+.top_ten_left, .top_ten_right{
+  display:inline-block;
+  width:48%;
+}
+
+.top_ten_left{
+  padding-right: 40px;
 }
 
 .top_ten_title{
   display: inline-block;
-  width: 60%;
+  width: 68%;
   font-size: 0.8em;
   position: relative;
 }
 
-.top_ten_title img{
-  height:22px;
+.top_ten_details img{
+  height:22px
 }
+
+.top_ten_details{
+  position: absolute;
+  margin-left: 151px;
+  margin-top: -24px;
+  font-size:13px;
+}
+
+/*.top_ten_title img{
+  height:22px;
+}*/
 
 .top_ten_number{
   display: inline-block;
 }
 
 .top_ten_number div{
-  position: relative;
+  /*position: relative;
   top: -50px;
-  color:grey;
+  color:grey;*/
+  position: absolute;
+  margin-top: -53px;
+  color: grey;
 }
 
 .top_ten_hype{
@@ -663,6 +694,15 @@ textarea{
   margin-bottom: 8px;
 }
 
+.top_ten_description{
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 1.4;
+  padding-bottom: 10px;
+  position: absolute;
+  top: -67px;
+}
+
 .top_ten_title post_title{
   margin-top: 0;
 }
@@ -675,9 +715,14 @@ textarea{
 .top_ten_image{
   display: inline-block;
   width: 21.8%;
-  padding-right: 20px;
-  padding-left: 28px;
+  padding-right: 8px;
+  padding-left: 33px;
 }
+
+/*.top_ten_right div:last-child{
+  padding-left:16px;
+  background-color:green;
+}*/
 
 .top_ten_image img{
   height:74px;
@@ -715,10 +760,6 @@ textarea{
   padding: 5px;
   position: relative;
   top: -3px;
-}
-
-.top_ten_container{
-  display:block;
 }
 
 .top_ten_mobile_container{
@@ -763,7 +804,8 @@ textarea{
 }
 
 .sticky_container img{
-  width: 100%;
+  /*width: 100%;*/
+  width: 303px;
   padding-bottom:20px;
   cursor:pointer;
 }

@@ -1,7 +1,7 @@
 {
   "name": "hypebeast_clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "A clone of the Hypebeast website built on Node, Postgresql and the Pug template engine.",
   "main": "routes.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -26,6 +26,6 @@
     "create:db": "createdb comment_system_db;",
     "seed:db": "psql comment_system_db < database/schema.sql"
   },
-  "author": "",
+  "author": "Mike Adossi",
   "license": "MIT"
 }

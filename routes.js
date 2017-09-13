@@ -8,9 +8,22 @@ router.get('/', function(req, res) {
 
   Promise.all([queries.getPosts(), queries.getTopTenByHypeCount()]).then(results => {
 
+    const post_titles = [];
+    let title;
+    for(let i = 0; i < results[1].length; i++){
+      title = results[1][i].post_title_string;
+        title_length = title.split("").length;
+        if(title_length <= 88){
+          post_titles.push(title);
+        } else {
+          post_titles.push(title.substring(0,88) + '...')
+        }
+    }
+
     res.render('index', {
       posts: results[0],
-      topTen: results[1]
+      topTen: results[1],
+      postTitles: post_titles
     })
   }).catch(err => next(err))
 })
