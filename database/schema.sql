@@ -1,6 +1,7 @@
 \c comment_system_db
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS all_users;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS google_users;
 DROP TABLE IF EXISTS facebook_users;
@@ -35,7 +36,12 @@ CREATE TABLE facebook_users (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR,
-  password VARCHAR,
+  password VARCHAR
+);
+
+CREATE TABLE all_users (
+  id SERIAL PRIMARY KEY,
+  avatar TEXT,
   google_users_id INTEGER,
   facebook_users_id INTEGER,
   FOREIGN KEY (google_users_id) REFERENCES google_users(id),

@@ -1,0 +1,122 @@
+#hbx_top_banner{
+  width:100%;
+  cursor:pointer;
+  padding-bottom: 15px;
+}
+.hbx_middle_images, .hbx_lower_images{
+  display: inline-block;
+  padding: 10px;
+  width:31.33%;
+  float:left;
+}
+.middle_images, .lower_images{
+  text-align:center;
+}
+.lower_images{
+  float: left;
+  /*padding-bottom: 20px;*/
+  /*background-color: blue;*/
+  padding: 0 10px 20px 35px;
+}
+.hbx_mid_image, .hbx_low_image{
+  width:100%;
+  cursor:pointer;
+}
+.middle_image_subtitle, .lower_image_subtitle{
+  position:relative;
+}
+.image_title{
+  font-weight: 700;
+  font-size: 23px;
+  margin-bottom: -9px;
+}
+.mid_banner_container{
+  float: left;
+}
+.mid_banner_left, .mid_banner_right{
+  display:inline-block;
+  width:50%;
+}
+.hbx_mid_banner{
+  width:100%;
+  cursor:pointer;
+}
+#lower_section_heading{
+  text-align: center;
+  line-height: 0.6;
+  /* padding-top: 20px; */
+  float: left;
+  padding-bottom: 15px;
+  /*background-color: red;*/
+  width: 100%;
+}
+.image_subtitle, .lower_subtitle{
+  color:#A39999;
+}
+.lower_subtitle{
+  font-size:13px;
+}
+.image_title{
+  font-size:20px;
+}
+.hbx_lower_images{
+  float:left;
+}
+.middle_images{
+  padding-bottom: 380px;
+}
+
+
+@media only screen and (max-width: 769px){
+  body{
+    background-color: pink;
+  }
+  .hbx_middle_images,  .hbx_lower_images{
+    width:94%;
+  }
+  .tres_bien{
+    position:unset;
+  }
+  .hbx_lower_images, .hbx_middle_images, .hbx_lower_images{
+    float:unset;
+  }
+  .middle_images{
+    padding-bottom: unset;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 989px){
+  body{
+    background-color: skyblue;
+  }
+  .hbx_middle_images, .hbx_lower_images{
+    width:30.33%;
+  }
+  .lower_images{
+    /*padding: 0 0px 350px 20px;*/
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    background-color:indianred;
+  }
+  .hbx_middle_images, .hbx_lower_images{
+    width:30.33%;
+  }
+  .lower_images{
+    /*padding: 0 10px 350px 35px;*/
+  }
+}
+
+@media (min-width: 1231px) {
+  body{
+    background-color:limegreen;
+  }
+  .hbx_middle_images, .hbx_lower_images{
+    width:31.33%;
+  }
+  .lower_images{
+    /*padding: 0 10px 430px 35px;*/
+  }
+}

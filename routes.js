@@ -41,7 +41,18 @@ router.get('/post/:id', function(req, res) {
 })
 
 router.get('/store', function(req, res) {
-  res.render('hbx');
+  res.render('hbx_index');
+})
+
+router.get('/brands', function(req, res) {
+  var id = req.params.id;
+  queries.getPost(id)
+    .then( brand => {
+      res.render('brand', { brand: brand })
+    })
+    .catch( err => {
+      console.log('err: ', err);
+    })
 })
 
 router.get('/register', function(req, res) {

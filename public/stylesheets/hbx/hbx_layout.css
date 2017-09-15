@@ -88,6 +88,11 @@ ul{
   display: inline-block;
 }
 
+.nav_menswear{
+  text-decoration:underline;
+  color:black !important;
+}
+
 .hbx_nav_link:hover{
   cursor:pointer;
   color:black;
