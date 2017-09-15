@@ -40,6 +40,10 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
+router.get('/store', function(req, res) {
+  res.render('hbx');
+})
+
 router.get('/register', function(req, res) {
   res.render('register')
 })

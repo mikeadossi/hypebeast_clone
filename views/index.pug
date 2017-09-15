@@ -2,7 +2,7 @@ extends layout
 
 block content
   .banner_container
-    img(src="images/blogImages/banner_12_product.png").index_banner_image
+    img(src="images/hypebeast_images/blogImages/banner_12_product.png").index_banner_image
     
   .content
     .top_stories
@@ -21,7 +21,7 @@ block content
                 .top_ten_secret !{ postTitles[y] }**
                 div(class="top_ten_description top_ten_description"+y) 
               .top_ten_details
-                img(src="images/hype_flame.png")
+                img(src="images/hypebeast_images/general/hype_flame.png")
                 span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
           - }
         .top_ten_right
@@ -34,7 +34,7 @@ block content
                 .top_ten_secret !{ postTitles[y] }** 
                 div(class="top_ten_description top_ten_description"+y) 
               .top_ten_details
-                img.right_images(src="images/hype_flame.png")
+                img.right_images(src="images/hypebeast_images/general/hype_flame.png")
                 span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
           - }
         
@@ -50,7 +50,7 @@ block content
             .top_ten_title.top_ten_title_mobile
               .top_ten_secret !{ postTitles[y] }**
               div(class="top_ten_description top_ten_description_mobile top_ten_description"+y)
-              img.mobile_hype_img(src="images/hype_flame.png")
+              img.mobile_hype_img(src="images/hypebeast_images/general/hype_flame.png")
               span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
         - }
         
@@ -61,7 +61,7 @@ block content
     
   .content.content_posts 
     .sticky_container
-      img.sticky_ad_one(src="/images/ad_headphones_black.png")
+      img.sticky_ad_one(src="/images/hypebeast_images/general/ad_headphones_black.png")
       .hypebeast_jobs
         .jobs_top_container
           .jobs_header HYPEBEAST JOBS
@@ -88,7 +88,7 @@ block content
         p.newsletter_text Receive the latest in Footwear, Fashion, Music and Creativity in our Newsletters.
         input.newsletter_input(placeholder="Enter your email address")
         button.newsletter_button Sign Up
-      //- img.sticky_ad_two(src="/images/ad_tall_headphones.png")
+      //- img.sticky_ad_two(src="/images/hypebeast_images/general/ad_tall_headphones.png")
         
     .article_container
       .feed_header
@@ -104,17 +104,17 @@ block content
           .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
           .subtitle !{ posts[i].post_subtitle } 
           .hypeRating 
-            img(src="images/hype_flame.png") 
+            img(src="images/hypebeast_images/general/hype_flame.png") 
             span !{ posts[i].post_hype_count } Hypes
-            img(src="images/comment_balloon.png") 
+            img(src="images/hypebeast_images/general/comment_balloon.png") 
             span !{ posts[i].post_comment_count }
         .article_border
     -  }
     
     .wide_ad_container
-      img.wide_ad(src="images/ad_wide_hypebae.png")
+      img.wide_ad(src="images/hypebeast_images/general/ad_wide_hypebae.png")
       .sticky_container
-        img.sticky_ad_two(src="/images/ad_tall_headphones.png")
+        img.sticky_ad_two(src="/images/hypebeast_images/general/ad_tall_headphones.png")
       
     - for(let i = 6; i < posts.length; i++){
       .article_container
@@ -125,9 +125,9 @@ block content
           .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
           .subtitle !{ posts[i].post_subtitle } 
           .hypeRating 
-            img(src="images/hype_flame.png") 
+            img(src="images/hypebeast_images/general/hype_flame.png") 
             span !{ posts[i].post_hype_count } Hypes
-            img(src="images/comment_balloon.png") 
+            img(src="images/hypebeast_images/general/comment_balloon.png") 
             span !{ posts[i].post_comment_count }
         .article_border
     -  }

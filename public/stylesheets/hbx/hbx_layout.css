@@ -1,0 +1,196 @@
+.hbx_nav{
+  background-color:white;
+  padding: 10px 5px 10px 25px;
+}
+
+.hbx_title{
+  height:43px;
+  cursor:pointer;
+}
+
+ul{
+  list-style: none;
+}
+
+/*.right_nav_items, .left_nav_items{}*/
+
+.right_nav_items{
+  position: absolute;
+  right: 0;
+  top: 7px;
+  width: 430px;
+  /*background-color: green;*/
+}
+
+.hbx_links_container{
+  margin-top: 13px;
+  position: absolute;
+  padding-left: 0;
+}
+
+.cart, .language{
+  padding-left:20px;
+}
+
+.cart span{
+  border: 1px solid #F0F0F0;
+  padding: 15px 22px 15px 35px;
+}
+
+.shopping_bag_handle{
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  border: 2px solid black;
+  position: absolute;
+  top: 16px;
+  left: 198px;
+  background-color: white;
+}
+
+.shopping_bag{
+  background-color: black;
+  height: 15px;
+  width: 18px;
+  position: absolute;
+  margin-left: 11px;
+  top: 21px;
+  color:white;
+  text-align: center;
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.shopping_bag_container{
+  cursor:pointer;
+}
+
+.language{
+  right:0;
+  margin-top:13px;
+  padding-right:53px;
+}
+
+.language span{
+  margin-top: 7px;
+  position: absolute;
+  padding-left: 50px;
+}
+
+.hbx_flag{
+  height:28px;
+  padding-right:4px;
+  position: absolute;
+  top: 13px;
+}
+
+.nav_elements{
+  display: inline-block;
+}
+
+.hbx_nav_link:hover{
+  cursor:pointer;
+  color:black;
+}
+
+.hbx_nav_link{
+  padding: 0 5px 0 22px;
+  font-size:12px;
+  color:grey;
+}
+
+.hbx_search{
+  height: 25px;
+  position: absolute;
+  top: 13px;
+  cursor:pointer;
+}
+
+.hamburger_mobile{
+  display:none;
+  cursor:pointer;
+}
+
+
+@media only screen and (max-width: 769px){
+  body{
+    background-color: pink;
+  }
+  .nav_help,
+  .language,
+  .nav_journal,
+  .hbx_links_container,
+  .nav_login,
+  .cart span{
+    display:none;
+  }
+  .shopping_bag_handle, .shopping_bag{
+    display:block;
+  }
+  .shopping_bag_handle{
+    left:74px;
+  }
+  .right_nav_items{
+    width:105px;
+  }
+  .hbx_search{
+    top:17px;
+    right:50px;
+  }
+  .hbx_nav{
+    padding: 12px 5px 6px 25px;
+  }
+  .right_nav_items{
+    top:2px;
+  }
+  .left_nav_items{
+    text-align:center;
+  }
+  .hbx_title{
+    height:36px;
+  }
+  .hamburger_mobile{
+    display: block;
+    height: 20px;
+    top: 19px;
+    left: 13px;
+    position: absolute;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 989px){
+  body{
+    background-color: skyblue;
+  }
+  .nav_help, .language, .nav_journal{
+    display:none;
+  }
+  .right_nav_items{
+    width: 266px;
+  }
+  .shopping_bag_handle{
+    left:141px;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    background-color:indianred;
+  }
+}
+
+@media (min-width: 1231px) {
+  body{
+    background-color:limegreen;
+  }
+}
+
+/*https://www.youtube.com/user/cs50tv
+https://www.youtube.com/results?search_query=monegraph
+https://github.com/yesladyphe0nix
+https://www.youtube.com/user/cs50tv
+https://monegraph.com/ = look into them
+https://su.org/
+https://monegraph.com/
+https://niio.com
+look up jobs = craigslist, IOTA, */

@@ -1,0 +1,250 @@
+.hbx_footer_content{
+  background-color:#F8F8F8;
+  text-align:center;
+  font-size:0.8em;
+  padding: 30px 10px 30px 32px;
+}
+
+.hbx_footer_social_container{
+  padding-bottom:20px;
+}
+
+.hbx_footer_social_media{
+  padding-left:13px;
+}
+
+.hbx_footer_social_media i{
+  padding-right:13px;
+}
+
+.follow_us{
+  padding-bottom: 10px;
+  font-weight:600;
+}
+
+.hbx_subscribe_download_container{
+  padding-top:10px;
+}
+
+.hbx_download_container{
+  /*background-color:green;*/
+  text-align:left;
+  position: relative;
+  top: -12px;
+  left: 22px;
+}
+
+.hbx_subscribe_container{
+  position: relative;
+  right: 19px;
+}
+
+.hbx_subscribe_input_container{
+  /*width: 59%;*/
+  /*margin: auto;*/
+  padding-bottom: 6px;
+}
+
+.hbx_app_logo{
+  height: 20px;
+  float: left;
+  padding: 9px 4px 9px 4px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid grey;
+  margin-right:10px;
+}
+
+.hbx_subscribe_container{
+  /*background-color:orange;*/
+  text-align:center;
+  width: 310px;
+}
+
+.hbx_download_container{
+  width: 280px;
+  /*background-color: green;*/
+}
+
+.hbx_download_container, .hbx_subscribe_container{
+  display:inline-block;
+  /*width:33%;*/
+}
+
+.hbx_message, .hbx_subtitle{
+  position:relative;
+}
+
+.hbx_message{
+  top: 3px;
+  font-weight: 600;
+}
+
+.hbx_subtitle{
+  top: 4px;
+}
+
+.hbx_message_container{
+  padding-left:10px;
+  margin-top: 3px;
+}
+
+.subscribe_text{
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.hbx_subscribe_input_container{
+  border-bottom:1px solid black;
+}
+
+.subscribe_input:focus{
+  outline: none !important;
+}
+
+.subscribe_input::placeholder{
+  color:#999999;
+}
+
+.subscribe_subtitle, .hbx_subtitle{
+  color:#999999;
+}
+
+.subscribe_input{
+  background-color:transparent;
+  border:none;
+  font-size:15px;
+  width: 250px;
+  margin-left: -9px;
+  color:#999999;
+  /*border-bottom:1px solid black;*/
+}
+
+.subscribe_subtitle{
+  padding-top: 7px;
+}
+
+hr{
+  width: 100%;
+  margin-left: -13px;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #E0E0E0;
+  margin-top: 24px;
+  margin-bottom: 15px;
+}
+
+.footer_container li, .footer_ship_to{
+  color:#999999;
+  display:inline-block;
+  padding-right:18px;
+  font-size: 11px;
+}
+
+.footer_container li:hover{
+  cursor:pointer;
+  color:black;
+}
+
+.footer_ship_to{
+  color:black !important;
+  padding-right:10px !important;
+  cursor:unset !important;
+}
+
+.footer_usa_flag{
+  height:21px;
+  position:relative;
+  top:6px;
+  padding: 0 5px 0 5px;
+}
+
+.norton_logo{
+  height: 30px;
+  position: relative;
+  top: 11px;
+}
+
+.footer_copyright{
+  color:#999999;
+  padding-top: 20px;
+}
+
+.copyright_brand_name:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.arrow_down{
+  height: 9px;
+  width: 6px;
+  position: relative;
+  left: -15px;
+  top: 1px;
+  /*background-color: red;*/
+}
+
+.right_side_footer{
+  display:inline-block;
+}
+
+@media only screen and (max-width: 769px){
+  body{
+    background-color: pink;
+  }
+  .hbx_download_container{
+    display:block;
+  }
+  .hbx_download_container{
+    width:283px;
+    display:block;
+    /*margin-top: 35px;*/
+    margin:auto;
+    /*background-color: green;*/
+    top:unset;
+    left:unset;
+    padding-top:24px;
+    padding-bottom:25px;
+  }
+  .hbx_subscribe_container{
+    right:0px;
+  }
+  hr{
+    display:none;
+  }
+  .footer_links, .right_side_footer{
+    display:none !important;
+  }
+  .footer_copyright{
+    padding-top:unset;
+    line-height: 1.4;
+  }
+  .terms, .privacy_policy{
+    display:none;
+  }
+  .arrow_down{
+    display:none;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 989px){
+  body{
+    /*background-color: skyblue;*/
+  }
+  .right_side_footer{
+    display:block;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    /*background-color:indianred;*/
+  }
+}
+
+@media (min-width: 1231px) {
+  body{
+    /*background-color:limegreen;*/
+  }
+}

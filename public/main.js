@@ -3,9 +3,9 @@ var arr = top_ten_secret.split("**");
 let title;
 
 for(let i = 0; i <= 10; i++){
-    title = arr[i];
-    $(".top_ten_description"+i).html(title);
-  }
+  title = arr[i];
+  $(".top_ten_description"+i).html(title);
+}
 
 $('.hamburger').on('click', () => {
   $('.hamburger').css('display','none');

@@ -4,47 +4,47 @@ html
     title= 'Hypebeast Clone'
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css", integrity="sha256-HxaKz5E/eBbvhGMNwhWRPrAR9i/lG1JeT4mD6hCQ7s4=", crossorigin="anonymous")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
-    link(rel='stylesheet', href='/stylesheets/layout_index_styles.css')
-    link(rel='stylesheet', href='/stylesheets/post_styles.css')
-    link(rel='stylesheet', href='/stylesheets/login_styles.css')
-    link(rel='stylesheet', href='/stylesheets/footer_styles.css')
-    link(rel='icon', href='/images/favicon.png')
+    link(rel='stylesheet', href='/stylesheets/hypebeast/layout_index_styles.css')
+    link(rel='stylesheet', href='/stylesheets/hypebeast/post_styles.css')
+    link(rel='stylesheet', href='/stylesheets/hypebeast/login_styles.css')
+    link(rel='stylesheet', href='/stylesheets/hypebeast/footer_styles.css')
+    link(rel='icon', href='/images/hypebeast_images/general/favicon.png')
   body
     
     .banner_ad_section
-      img(src="/images/vans_banner_ad.png")
+      img(src="/images/hypebeast_images/general/vans_banner_ad.png")
     .nav
       .header-top-section
         .socialMediaContainer
-          img.socialMediaImages(src="/images/socialMediaIcons/facebook.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/twitter.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/instagram.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/snapchat.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/youtube.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/feedly.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/flipboard.png")
-          img.socialMediaImages(src="/images/socialMediaIcons/envelope.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/facebook.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/twitter.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/instagram.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/snapchat.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/youtube.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/feedly.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/flipboard.png")
+          img.socialMediaImages(src="/images/hypebeast_images/socialMediaIcons/envelope.png")
         .navBarAndClose
           div.hamburger
-            img(src="/images/hamburger.png")
+            img(src="/images/hypebeast_images/general/hamburger.png")
         a.navTitle(href="/") HYPEBEAST  <!-- メンズファッシン -->
         div.close
-          img(src="/images/close.png")
+          img(src="/images/hypebeast_images/general/close.png")
         div.magnifierMobile
-          img.magnifier_glass(src="/images/search.png")
+          img.magnifier_glass(src="/images/hypebeast_images/general/search.png")
           
         .navBtnContainer
           .navSelectBtnContainer
             .navAccountContainer
               button.avatar
-                img.avatar_img(src="/images/avatars/png/fox.png")
+                img.avatar_img(src="/images/hypebeast_images/avatars/png/fox.png")
               button.navBtns.account Account 
                 .accountDropDown
                   a(href="/login") Login
                   a(href="/logout") Logout
                   a(href="/register") Register
             .navGlobeContainer
-              img.globe_img(src="/images/globe.png")
+              img.globe_img(src="/images/hypebeast_images/general/globe.png")
               button.navBtns.language English
                 .globeDropDown
                   div English
@@ -53,11 +53,11 @@ html
           .mobile-header-top-section
             .mobileNavTitle HYPEBEAST
             div.close
-              img(src="/images/close.png")
+              img(src="/images/hypebeast_images/general/close.png")
           .mobileSearchBar
             input.searchInputBox(placeholder="What are you looking for?")
             div.magnifierSearchMenu
-              img(src="/images/search.png")
+              img(src="/images/hypebeast_images/general/search.png")
           ul.firstUl
             li Fashion
             li Footwear
@@ -73,15 +73,15 @@ html
             li Editorial
           ul.secondUl
             li Account
-              img.dropIcon(src="/images/dropIcon.png")
+              img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
             li Language
-              img.dropIcon(src="/images/dropIcon.png")
+              img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
           ul.thirdUl
             li Videos
             li Magazine
             li Forums
             li More
-              img.dropIcon(src="/images/dropIcon.png")
+              img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
           div.copyright 2017 All IP owned by Hypebeast Limited. 
       .main-nav
         ul
@@ -158,18 +158,18 @@ html
                   .dropdown_header HYPEBEAST MAGAZINE
                   .dropdown_magazine_container
                     .dropdown_text With in-depth interviews, focused features and fashion-forward editorials, our print publication features long-form coverage of the topics valued to readers.
-                    img(src="/images/hypebeast_magazine_small.png")
+                    img(src="/images/hypebeast_images/general/hypebeast_magazine_small.png")
                 .dropdown_right_content 
                   .dropdown_header HYPEBAE
                   .dropdown_text Explore and be inspired by the latest womens fashions and trends.
           
           li.videosNavLink VIDEOS
           li.radioNavLink RADIOS
-          li.storeNavLink STORE
+          a.storeNavLink(href="/store") STORE
           .search_nav_container
             input.search_nav_input(placeholder="What are you looking for?")
-            img.search_nav_glass(src="/images/search_grey.png")
-            img.search_nav_close(src="/images/close_grey.png")
+            img.search_nav_glass(src="/images/hypebeast_images/general/search_grey.png")
+            img.search_nav_close(src="/images/hypebeast_images/general/close_grey.png")
             .search_border
             .trending_searches 
               div.trending_header Trending Searches
@@ -182,7 +182,7 @@ html
               
           
         div.magnifier
-          img(src="/images/search.png")
+          img(src="/images/hypebeast_images/general/search.png")
             
       .returnToTop
         img(src="https://d2gkwoflhw8cr8.cloudfront.net/bundles/hypebeasteditorial/images/back-to-top_2x.png?1504605512")
