@@ -34,9 +34,67 @@ html
         ul.language.nav_elements
           img.hbx_flag(src="images/hbx_images/general/usa_flag.png")
           span.hbx_nav_link USD
+    .hbx_search_mobile 
+      input.hbx_search_input_mobile(placeholder="Search")
+      button.hbx_search_button_mobile Search
+    .hbx_mobile_menu_background
+      .hbx_scrollable_container
+        .hbx_mobile_menu_options
+          .mobile_links_container
+            .mens_mobile_link MENS 
+            .womens_mobile_link WOMENS
+          ul.hbx_mobile_menu_content.hbx_primary_mobile_links
+            li New Arrivals 
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+            hr
+            li Brands
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+            hr
+            li Clothing
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+            hr
+            li Accessories
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+            hr
+            li Shoes
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+            hr
+            li Sales
+              img.hbx_drop_icon(src="images/hbx_images/general/dropIcon.png")
+          ul.hbx_mobile_menu_content.hbx_sub_mobile_links
+            li Archives
+            hr
+            li Journal
+            hr
+            li Log In
+            hr
+            li Help
+              img.hbx_grey_drop_icon(src="images/hbx_images/general/dropIcon_grey.png")
+            hr
+            li About HBX
+              img.hbx_grey_drop_icon(src="images/hbx_images/general/dropIcon_grey.png")
+            hr
+          .country_and_usd
+            .country
+              img(src="images/hbx_images/general/usa_flag_grey.png")
+              p UNITED STATES
+              img.arrow_down_mobile(src="images/hbx_images/general/arrow_down.png")
+            .usd_container 
+              p USD
+              img.arrow_down_mobile(src="images/hbx_images/general/arrow_down.png")
+          ul.hbx_language
+            li English
+            li 简体中文
+            li 繁體中文
+          .hbx_mobile_menu_social_media
+            i.fa.fa-lg.fa-facebook
+            i.fa.fa-lg.fa-instagram
+            i.fa.fa-lg.fa-twitter
+              
+        
     
     block content
     
     include hbx_footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
-    script(src='/main.js')
+    script(src='/scripts/hbx_main.js')

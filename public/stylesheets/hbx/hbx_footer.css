@@ -176,15 +176,6 @@ hr{
   cursor:pointer;
 }
 
-.arrow_down{
-  height: 9px;
-  width: 6px;
-  position: relative;
-  left: -15px;
-  top: 1px;
-  /*background-color: red;*/
-}
-
 .right_side_footer{
   display:inline-block;
 }
@@ -219,6 +210,7 @@ hr{
   .footer_copyright{
     padding-top:unset;
     line-height: 1.4;
+    padding-left:0;
   }
   .terms, .privacy_policy{
     display:none;
