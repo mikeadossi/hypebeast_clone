@@ -55,6 +55,10 @@ router.get('/brands', function(req, res) {
     })
 })
 
+router.get('/register/success', function(req, res) {
+  res.render('successful_register');
+})
+
 router.get('/account', function(req, res) {
   res.render('account');
 })
@@ -77,7 +81,7 @@ router.post('/register', function(req, res) {
 
   try{
     queries.createUser(email, password).then(() => {
-      res.status(200).redirect('/login')
+      res.status(200).redirect('/successful_register')
     })
   }catch(e){
     console.log(e);

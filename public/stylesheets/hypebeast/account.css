@@ -4,6 +4,10 @@
   flex-wrap:wrap;
 }
 
+.edit_profile_header{
+  color:#333333;
+}
+
 .settings_nav, .settings_controls{
   display:inline-block;
   padding-top:30px;
