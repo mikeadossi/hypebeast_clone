@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .content
+    .your_settings_content
+      .settings_nav
+        .settings_nav_heading Account Settings
+        a.settings_nav_link.profile_link(href="/account") Profile
+        a.settings_nav_link.profile_password(href="/account/password") Password
+      .settings_controls
+        .settings_close_account
+          .edit_profile_header Close Account
+          p Once account is closed, you won't be able to login again, and all your forum posts will be marked as "Inactive".
+          .form(method="post" action="")
+            .form_group
+              div.label
+                label.profile_label Current Password
+              div
+                input.profile_input.profile_close_account_input(name="" type="")
+            input#close_account(type="submit" value="Close Account")

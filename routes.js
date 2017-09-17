@@ -55,8 +55,16 @@ router.get('/brands', function(req, res) {
     })
 })
 
-router.get('/your_settings', function(req, res) {
-  res.render('your_settings');
+router.get('/account', function(req, res) {
+  res.render('account');
+})
+
+router.get('/account/password', function(req, res) {
+  res.render('change_password');
+})
+
+router.get('/account/close-account', function(req, res) {
+  res.render('close_account');
 })
 
 router.get('/register', function(req, res) {
