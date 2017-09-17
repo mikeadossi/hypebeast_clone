@@ -185,7 +185,7 @@ hr{
 
 @media only screen and (max-width: 769px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .hbx_download_container{
     display:block;

@@ -1,0 +1,70 @@
+.your_settings_content{
+  height:100vh;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.settings_nav, .settings_controls{
+  display:inline-block;
+  padding-top:30px;
+}
+
+.settings_nav_link:hover{
+  color:#2D86D0;
+  cursor:pointer;
+}
+
+.settings_nav_link{
+  font-size:15px;
+}
+
+.settings_nav{
+  width:200px;
+}
+
+.settings_nav div{
+  padding-bottom:20px;
+}
+
+.edit_profile_header{
+  font-weight: 500;
+  font-size: 22px;
+  padding-bottom:30px;
+}
+
+.form_group{
+  padding-bottom:20px;
+}
+
+.profile_label{
+  font-size:13px;
+}
+
+.profile_input{
+  width:330px;
+  padding:6px;
+}
+
+.settings_nav_link{
+  color:#555555;
+}
+
+#update_profile, #save_password_changes{
+  background-color: #2D86D0;
+  border: none;
+  padding: 9px 13px 9px 13px;
+  color: white;
+  font-size: 14px;
+  margin-right:10px;
+  cursor:pointer;
+}
+
+.close_account{
+  text-decoration: none;
+  color: #2D86D0;
+  font-size:14px;
+}
+
+.settings_edit_password{
+  display:none;
+}

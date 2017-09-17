@@ -69,7 +69,7 @@
 
 @media only screen and (max-width: 769px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .hbx_middle_images,  .hbx_lower_images{
     width:94%;
@@ -87,7 +87,7 @@
 
 @media (min-width: 770px) and (max-width: 989px){
   body{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
   }
   .hbx_middle_images, .hbx_lower_images{
     width:30.33%;
@@ -99,7 +99,7 @@
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    background-color:indianred;
+    /*background-color:indianred;*/
   }
   .hbx_middle_images, .hbx_lower_images{
     width:30.33%;
@@ -111,7 +111,7 @@
 
 @media (min-width: 1231px) {
   body{
-    background-color:limegreen;
+    /*background-color:limegreen;*/
   }
   .hbx_middle_images, .hbx_lower_images{
     width:31.33%;

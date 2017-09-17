@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  .content
+    .your_settings_content
+      .settings_nav
+        .settings_nav_heading Account Settings
+        .settings_nav_link.profile_link Profile
+        .settings_nav_link.profile_password Password
+      .settings_controls
+        .settings_edit_profile
+          .edit_profile_header Edit Profile
+          .form(method="post" action="")
+            .form_group
+              div.label
+                label.profile_label Username
+              div
+                input.profile_input.profile_username_input(name="" type="")
+            .form_group
+              div.label
+                label.profile_label Email
+              div
+                input.profile_input.profile_email_input(name="" type="")
+            input#update_profile(type="submit" value="Update Profile")
+            span 
+              a.close_account(href="") Close Account
+        .settings_edit_password
+          .edit_profile_header Edit Password
+          .form(method="post" action="")
+            .form_group
+              div.label
+                label.profile_label Current Password
+              div
+                input.profile_input.profile_curr_password_input(name="" type="")
+            .form_group
+              div.label
+                label.profile_label New Password
+              div
+                input.profile_input.profile_password_input(name="" type="")
+            .form_group
+              div.label
+                label.profile_label Verify Password
+              div
+                input.profile_input.profile_verify_password_input(name="" type="")
+            input#save_password_changes(type="submit" value="Save Changes")
+  

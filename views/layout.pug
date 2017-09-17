@@ -8,11 +8,14 @@ html
     link(rel='stylesheet', href='/stylesheets/hypebeast/post_styles.css')
     link(rel='stylesheet', href='/stylesheets/hypebeast/login_styles.css')
     link(rel='stylesheet', href='/stylesheets/hypebeast/footer_styles.css')
+    link(rel='stylesheet', href='/stylesheets/hypebeast/your_settings.css')
     link(rel='icon', href='/images/hypebeast_images/general/favicon.png')
   body
     
+    
     .banner_ad_section
       img(src="/images/hypebeast_images/general/vans_banner_ad.png")
+    
     .nav
       .header-top-section
         .socialMediaContainer
@@ -32,7 +35,7 @@ html
           img(src="/images/hypebeast_images/general/close.png")
         div.magnifierMobile
           img.magnifier_glass(src="/images/hypebeast_images/general/search.png")
-          
+      
         .navBtnContainer
           .navSelectBtnContainer
             .navAccountContainer
@@ -43,6 +46,9 @@ html
                   a(href="/login") Login
                   a(href="/logout") Logout
                   a(href="/register") Register
+                .accountDropDownLoggedIn
+                  a.settings_link(href="/your_settings") Your Settings
+                  a(href="/logout") Logout
             .navGlobeContainer
               img.globe_img(src="/images/hypebeast_images/general/globe.png")
               button.navBtns.language English
@@ -165,7 +171,7 @@ html
           
           li.videosNavLink VIDEOS
           li.radioNavLink RADIOS
-          a.storeNavLink(href="/store") STORE
+          a.storeNavLink(href="/store" target="_blank") STORE
           .search_nav_container
             input.search_nav_input(placeholder="What are you looking for?")
             img.search_nav_glass(src="/images/hypebeast_images/general/search_grey.png")
@@ -183,7 +189,7 @@ html
           
         div.magnifier
           img(src="/images/hypebeast_images/general/search.png")
-            
+      .login_successful Login successful!    
       .returnToTop
         img(src="https://d2gkwoflhw8cr8.cloudfront.net/bundles/hypebeasteditorial/images/back-to-top_2x.png?1504605512")
     

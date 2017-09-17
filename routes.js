@@ -55,6 +55,10 @@ router.get('/brands', function(req, res) {
     })
 })
 
+router.get('/your_settings', function(req, res) {
+  res.render('your_settings');
+})
+
 router.get('/register', function(req, res) {
   res.render('register')
 })

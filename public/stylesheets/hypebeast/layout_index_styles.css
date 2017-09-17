@@ -31,6 +31,18 @@ button:focus{
   text-align:center;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
+.login_successful{
+  display:none;
+  background-color: #DFF0D7;
+  padding: 15px 0 15px 20px;
+  margin: 0 0 20px 0;
+  border: 1px solid #D6EAC5;
+  color: #3A773A;
+  font-size: 13px;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 .wide_ad_container{
   width: 100%;
   text-align: center;
@@ -173,7 +185,7 @@ textarea{
   display:inline-block;
 }
 
-.accountDropDown, .globeDropDown{
+.accountDropDown, .globeDropDown, .accountDropDownLoggedIn{
   position:absolute;
   z-index: 10;
   background-color:white;
@@ -183,20 +195,24 @@ textarea{
   display:none;
 }
 
-.accountDropDown div:first-child, .globeDropDown div:first-child{
+.accountDropDown div:first-child, .globeDropDown div:first-child, .accountDropDownLoggedIn div:first-child{
   padding-bottom:15px;
 }
 
-.accountDropDown a:hover, .globeDropDown div:hover{
+.accountDropDown a:hover, .globeDropDown div:hover, .accountDropDownLoggedIn a:hover{
   color:grey;
 }
 
-.accountDropDown a{
+.accountDropDown a, .accountDropDownLoggedIn a{
   color:black;
   display:block;
   text-decoration:none;
   text-align:left;
   padding:10px;
+}
+
+.accountDropDownLoggedIn .settings_link{
+  width: 76px;
 }
 
 .globe_img{
@@ -1098,7 +1114,7 @@ textarea{
 
 @media (min-width: 760px) and (max-width: 989px){
   body{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
   }
   .top_ten_details{
     margin-left:148px;
@@ -1216,7 +1232,7 @@ textarea{
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    background-color:indianred;
+    /*background-color:indianred;*/
   }
   .blog_text_content{
     /*text-align:center;*/
@@ -1289,7 +1305,7 @@ textarea{
 
 @media (min-width: 1231px) {
   body{
-    background-color:limegreen;
+    /*background-color:limegreen;*/
   }
   .nav{
     width: 1171px;
