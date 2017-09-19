@@ -2,7 +2,8 @@ extends layout
 
 block content
   .banner_container
-    img(src="images/hypebeast_images/blogImages/banner_12_product.png").index_banner_image
+    a(href="/post/"+posts[1].id)
+      img(src="images/hypebeast_images/blogImages/banner_over_jumpman.png").index_banner_image
     
   .content
     .top_stories
@@ -16,7 +17,9 @@ block content
             .top_ten_story
               .top_ten_number 
                 div= y+1
+            a(href="/post/"+topTen[y].id)
               .top_ten_image !{ topTen[y].post_image } 
+            a(href="/post/"+topTen[y].id)
               .top_ten_title
                 .top_ten_secret !{ postTitles[y] }**
                 div(class="top_ten_description top_ten_description"+y) 
@@ -29,7 +32,9 @@ block content
             .top_ten_story
               .top_ten_number 
                 div= y+1
+            a(href="/post/"+topTen[y].id)
               .top_ten_image !{ topTen[y].post_image } 
+            a(href="/post/"+topTen[y].id)
               .top_ten_title
                 .top_ten_secret !{ postTitles[y] }** 
                 div(class="top_ten_description top_ten_description"+y) 
@@ -96,19 +101,21 @@ block content
         .feed_rising.feed_button Rising
         .feed_popular.feed_button Popular
     - for(let i = 0; i < 6; i++){
+      - console.log('posts[1] => ',posts[1])
       .article_container
-        span !{ posts[i].post_image }
-        .article_info
-          .category !{ posts[i].category } 
-          a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
-          .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
-          .subtitle !{ posts[i].post_subtitle } 
-          .hypeRating 
-            img(src="images/hypebeast_images/general/hype_flame.png") 
-            span !{ posts[i].post_hype_count } Hypes
-            img(src="images/hypebeast_images/general/comment_balloon.png") 
-            span !{ posts[i].post_comment_count }
-        .article_border
+        a(href="/post/"+posts[i].id)
+          span !{ posts[i].post_image }
+          .article_info
+            .category !{ posts[i].category } 
+            a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
+            .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
+            .subtitle !{ posts[i].post_subtitle } 
+            .hypeRating 
+              img(src="images/hypebeast_images/general/hype_flame.png") 
+              span !{ posts[i].post_hype_count } Hypes
+              img(src="images/hypebeast_images/general/comment_balloon.png") 
+              span !{ posts[i].post_comment_count }
+          .article_border
     -  }
     
     .wide_ad_container
@@ -118,18 +125,19 @@ block content
       
     - for(let i = 6; i < posts.length; i++){
       .article_container
-        span !{ posts[i].post_image }
-        .article_info
-          .category !{ posts[i].category } 
-          a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
-          .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
-          .subtitle !{ posts[i].post_subtitle } 
-          .hypeRating 
-            img(src="images/hypebeast_images/general/hype_flame.png") 
-            span !{ posts[i].post_hype_count } Hypes
-            img(src="images/hypebeast_images/general/comment_balloon.png") 
-            span !{ posts[i].post_comment_count }
-        .article_border
+        a(href="/post/"+posts[i].id)
+          span !{ posts[i].post_image }
+          .article_info
+            .category !{ posts[i].category } 
+            a.title(href="/post/"+posts[i].id) !{ posts[i].post_title } 
+            .author By !{ posts[i].post_author } / !{ posts[i].post_time_of }
+            .subtitle !{ posts[i].post_subtitle } 
+            .hypeRating 
+              img(src="images/hypebeast_images/general/hype_flame.png") 
+              span !{ posts[i].post_hype_count } Hypes
+              img(src="images/hypebeast_images/general/comment_balloon.png") 
+              span !{ posts[i].post_comment_count }
+          .article_border
     -  }
     .article_container
       div.more_button_mobile More

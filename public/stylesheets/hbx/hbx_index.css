@@ -1,7 +1,9 @@
 #hbx_top_banner{
   width:100%;
-  cursor:pointer;
   padding-bottom: 15px;
+}
+a{
+  text-decoration:none;
 }
 .hbx_middle_images, .hbx_lower_images{
   display: inline-block;
@@ -29,6 +31,7 @@
   font-weight: 700;
   font-size: 23px;
   margin-bottom: -9px;
+  color:black;
 }
 .mid_banner_container{
   float: left;

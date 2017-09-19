@@ -62,18 +62,19 @@ VALUES (
 '<div><span>IMAGE CREDIT</span><span> TESLA</span></div>'
 ),
 (
-  'NikeLab 21M Set to Host “EXTRA CREDIT” for “TEN ICONS” by Virgil Abloh',
-  '<div><h2 class="post_title">NikeLab 21M Set to Host “EXTRA CREDIT” for “TEN ICONS” by Virgil Abloh</h2></div>',
-  '<img class="post_image" src="/images/hypebeast_images/blogImages/virgil_abloh_sneakers.jpg" />',
+  'adidas Just Jumped Over the Jumpman, Is Now #2 Sneaker Brand in U.S.',
+  '<div><h2 class="post_title">adidas Just Jumped Over the Jumpman, Is Now #2 Sneaker Brand in U.S.</h2></div>',
+  '<img class="post_image" src="/images/hypebeast_images/blogImages/over_jumpman_post_img.jpg" />',
   'Matt Peng',
   'Footwear',
   '10 minutes ago',
-  '967',
-  '1 Comment',
-  'A custom sneaker Experience',
-  '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/virgil_abloh_sneakers.jpg" /><p >With <a href="https://hypebeast.com/tags/virgil-abloh">Virgil Abloh</a>‘s “<a href="https://hypebeast.com/2017/8/virgil-abloh-nike-off-campus-nyc-event-list">OFF CAMPUS</a>” alongside <a href="https://hypebeast.com/tags/nike">Nike</a> set to start tomorrow at 23 Wall Street, NikeLab 21M in SoHo dropped word of a sneaker customization experience taking place during the same time frame. Dubbed “EXTRA CREDIT,” those lucky enough to grab a spot already on Nike+ — capacity has been filled — will have the chance to purchase clean all-white Air Force 1s, Air Max 90s and Air Prestos and leave them for a specific time frame up to 48 hours. When you pick them up, “they will no longer be plain white,” is what the event summary says.</p>
-<p >Running from September 6-8 just like “OFF CAMPUS,” this activation by Nike is a pleasant surprise. You can check out the image from the Swoosh above and <a href="https://hypebeast.com/2017/9/virgil-abloh-nike-ten-icons-reconstructed-release-info">learn how to pick up the Nike “TEN ICONS RECONSTRUCTED” by Virgil Abloh</a>.</p></div>',
-'<div><span>IMAGE CREDIT</span><span> NIKE</span></div>'
+  '20980',
+  '28 Comments',
+  '‘Ye called it.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/over_jumpman_post_img.jpg" /><p>We’ve reported on the impressive growth of German sneaker company adidas multiple times already this year, but not even the $5 billion USD in sales forecast comes close to the news unveiled today by NDP Group’s Matt Powell. Announced within a series of footwear-related tweets, Powell not only announced further sales growth for the Three Stripes but also confirmed that adidas has overtaken Jordan as the #2 brand in the United States for sports footwear, an achievement he never thought he would see in his lifetime.</p>
+<p>Arguably Kanye West’s biggest critic and an avid believer that the “Kanye Effect” doesn’t play a large role in adidas’s growth, Powell highlights the Tubular Shadow and Superstar as August’s top sellers for adi. We’ll have to wait until the holiday season for the YEEZY BOOST 350 V2 “Beluga 2.0″ to see whether or not everything holds true but for now, we can play The Life of Pablo‘s “Facts (Charlie Heat Version)” and say “Yeezy, Yeezy, Yeezy just jumped over Jumpman.”</p><img class="img_position_left" src="/images/hypebeast_images/blogImages/over_jumpman_twitter.png" /></div>',
+'<div><span>IMAGE CREDIT</span><span> STEVE RUSSELL/GETTY (LEAD IMAGE)
+</span></div>'
 ),
 (
   'Hanes Is Giving You a Chance to Meet Michael Jordan',
@@ -177,7 +178,6 @@ VALUES (
   '11 Comment',
   'Listen to its lead single here.',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/king_of_pop.jpg" /><p>The <a href="https://hypebeast.com/tags/michael-jackson">Michael Jackson</a> estate and Epic/Sony Records have revealed plans for the first Michael Jackson studio album, Scream, since 2014′s posthumous Xscape LP. Billed as the “perfect collection of 13 all-time electrifying dance classics and fan favorites,” Scream serves as a lean career retrospective of some of the King of Pop’s greatest recorded moments.
-
 </p><p>Along with the previously-released records featured on Scream, the full-length will also produce an all-new Michael Jackson composition known as “Blood On The Dance Floor x Dangerous (The White Panda Mash-Up).” That effort is a “five-song mash-up” that serves as MJ’s first new material since the 2014 Xscape campaign.</p><p>Fans can expect Michael Jackson’s Scream to arrive on September 29, while the album’s lone new offering, “Blood On The Dance Floor x Dangerous (The White Panda Mash-Up),” can be streamed above.</p><p>Last month, Michael Jackson’s legendary Thriller album once again made history, securing <a href="https://hypebeast.com/2017/8/michael-jackson-thriller-300-weeks-billboard-200-chart">300 weeks on the Billboard 200 chart</a>.</p></div>',
   '<div><span>IMAGE CREDIT<span/><span> MICHAEL JACKSON ESCAPE/EPIC RECORDS<span/></div>'
 ),
@@ -205,7 +205,6 @@ VALUES (
   '1 Comment',
   '“Pause” brings a unique star gazing experience to Iran.',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/pause_building_design.jpg" /><p>Iran-based space “Pause” is the latest project by Amir Hossein Ashari and is designed to showcase the stars in a unique way. Constructed with large sheets of metal, the exhibit sees bricks organized in a spiral pattern. Guests are encouraged to stand in the middle of the spiral and look directly above them through the hole cut through the top of the box. Aiming straight at the sky, the hole offers viewers an unobstructed look at the stars above them.
-
 </p><p>With the bricks acting as a barrier between the outside world and the view of the stars, “Pause” is designed to eliminate any outside distractions and encourage users to focus solely on their view through the top window. By doing this, Ashari hopes that those who enter “Pause” can take some time to relax, meditate, and realign themselves. Take a look at a few pictures above and for more breathtaking design, read up on the upcoming tour for Tokujin Yoshioka’s Prismatic Glass Tea House.</p></div>',
   '<div><span>IMAGE CREDIT</span><span> AMIR HOSSEIN ASHARI</span></div>'
 ),
