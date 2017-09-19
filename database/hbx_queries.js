@@ -16,6 +16,14 @@ let queries = {
 
   getStoreContent: function(id){
     return db.any("SELECT * FROM brands WHERE id = $1", id) // returns a promise, because pgp
+  },
+
+  getProductContent: function(id){
+    return db.any("SELECT * FROM products WHERE id = $1", id)
+  },
+
+  getSpecificProduct: function(id){
+    return db.any("SELECT * FROM products WHERE id = $1", id)
   }
 
   // getTopTenByHypeCount: function(){

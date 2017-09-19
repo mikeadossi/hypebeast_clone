@@ -65,6 +65,11 @@
   line-height: 1.5em;
 }
 
+.hbx_flexed_content{
+  /*display:flex;*/
+  flex-direction: row;
+}
+
 /* hbx sidebar */
 
 .hbx_sidebar_header{
@@ -77,9 +82,10 @@
 }
 
 .hbx_sidebar_nav{
-  /*background-color: maroon;*/
+  background-color: maroon;
   width: 21%;
   padding: 30px;
+  display: inline-block;
 }
 
 .hbx_sidebar_link_container{
@@ -120,7 +126,7 @@
 
 .hbx_category_scroll_container{
   overflow-y: scroll;
-  height:255px;
+  height:246px;
 }
 
 .hbx_sidebar_header{
@@ -147,9 +153,66 @@
   cursor:pointer;
 }
 
+.hbx_sorting_button_container {
+  display:flex;
+}
+
+.hbx_sorting_button {
+  border:1px solid grey;
+  padding: 13px 0 13px 10px;
+  width:185px;
+  margin-left: auto;
+  margin-right: 35px;
+  font-size: 12px;
+}
+
+.sorting_arrow{
+  float: right;
+  top: 3px;
+}
+
 .see_all_brands{
   color:black !important;
 }
+
+/* hbx product container */
+
+.hbx_product_container{
+  background-color: orange;
+  width: 69%;
+  display: inline-block;
+  position: absolute;
+  padding-left: 5px;
+}
+
+.product_display{
+  display:flex;
+  flex-wrap:wrap
+}
+
+/*.product_image{
+  flex-direction: row;
+}*/
+
+.product_image{
+  padding-bottom:40px;
+}
+
+.product_image img{
+  width: 253px;
+  height: 328px;
+  padding: 5px;
+}
+
+.product_name{
+  padding-bottom:10px;
+}
+
+.product_name, .product_price{
+  text-align: center;
+  font-size:13px;
+}
+
 
 @media only screen and (max-width: 769px){
   body{

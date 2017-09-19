@@ -141,9 +141,31 @@ router.get('/error', function(req, res) {
 
 router.get('/browse_store/:id', function(req, res) {
   let id = req.params.id;
-  hbx_queries.getStoreContent(id)
-    .then( brand => {
-      res.render('hbx_store', { brand: brand })
+  Promise.all([hbx_queries.getStoreContent(id), hbx_queries.getProductContent(id)])
+    .then( results => {
+      let brand = results[0];
+      let product = results[1];
+      let product_images_arr = product[0].product_images.replace(/[']+/g, '');
+      product_images_arr = product_images_arr.split(",");
+      // console.log('product ===============> ',product);
+      // console.log('product[0].product_name ===============> ',product[0].product_name);
+
+      res.render('hbx_store', {
+        brand: brand,
+        product: product,
+        product_images_arr: product_images_arr
+      })
+    })
+    .catch( err => {
+      console.log('err: ', err);
+    })
+})
+
+router.get('/product/:id', function(req, res) {
+  let id = req.params.id;
+  hbx_queries.getSpecificProduct(id)
+    .then( product => {
+      res.render('hbx_product', { product: product })
     })
     .catch( err => {
       console.log('err: ', err);
