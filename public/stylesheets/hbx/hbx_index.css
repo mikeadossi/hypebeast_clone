@@ -4,6 +4,7 @@
 }
 a{
   text-decoration:none;
+  color:black;
 }
 .hbx_middle_images, .hbx_lower_images{
   display: inline-block;

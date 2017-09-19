@@ -1,0 +1,179 @@
+/* hbx store top section */
+
+.hbx_store_content{
+  padding-bottom:100vh;
+  /*background-color:beige;*/
+}
+
+.hbx_store_header_container{
+  display:flex;
+}
+
+.hbx_header_left_links{
+  padding-left:30px;
+}
+
+.hbx_header_left_links li a{
+  color:#888888;
+  font-size:14px;
+}
+
+.inline_brand_name{
+  color:black;
+}
+
+.hbx_header_left_links li a:hover{
+  color:black;
+}
+
+.hbx_header_left_links li, .inline_brand_name{
+  display:inline;
+}
+
+.hbx_arrow_right{
+  position: relative;
+  top: 1px;
+  padding: 0 3px 0 3px;
+  height: 12px;
+}
+
+.hbx_center_brand_name{
+  width: 33.33%;
+  text-align: center;
+  margin: auto;
+  font-size: 21px;
+}
+
+.hbx_right_brand_name:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.hbx_right_brand_name{
+  color:#888888;
+  font-size: 14px;
+  position: relative;
+  top: 19px;
+  padding-right:30px;
+}
+
+.hbx_store_brand_description{
+  width: 869px;
+  text-align: center;
+  margin: auto;
+  font-size: 13.5px;
+  line-height: 1.5em;
+}
+
+/* hbx sidebar */
+
+.hbx_sidebar_header{
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.hbx_sidebar_nav ul{
+  padding-left: 0;
+}
+
+.hbx_sidebar_nav{
+  /*background-color: maroon;*/
+  width: 21%;
+  padding: 30px;
+}
+
+.hbx_sidebar_link_container{
+  border-top: 1px solid #888888;
+  padding-top: 15px;
+  padding-bottom:20px;
+}
+
+.hbx_sidebar_link_container li:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.hbx_sidebar_link_container li{
+  color:#888888;
+  padding-bottom:7px;
+  font-size:14px;
+}
+
+.hbx_menswear_links li{
+  font-size:12px;
+}
+
+.uppercase_brand_name{
+  text-transform: uppercase;
+  padding-right:4px;
+}
+
+.sidebar_label:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.sidebar_label{
+  font-size:12px;
+  padding-left:5px;
+}
+
+.hbx_category_scroll_container{
+  overflow-y: scroll;
+  height:255px;
+}
+
+.hbx_sidebar_header{
+  padding-bottom:5px;
+}
+
+.hbx_sidebar_clear_all:hover{
+  color:darkgrey;
+  cursor:pointer;
+}
+
+.hbx_sidebar_clear_all{
+  color: black;
+  border: 1px solid grey;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 29px;
+  margin-top: 10px;
+}
+
+.see_all_brands:hover{
+  color:#888888 !important;
+  cursor:pointer;
+}
+
+.see_all_brands{
+  color:black !important;
+}
+
+@media only screen and (max-width: 769px){
+  body{
+    background-color: pink;
+  }
+  .hbx_sidebar_nav{
+    display:none;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 989px){
+  body{
+    background-color: skyblue;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    background-color:indianred;
+  }
+}
+
+@media (min-width: 1231px) {
+  body{
+    background-color:limegreen;
+  }
+}

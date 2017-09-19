@@ -1,0 +1,124 @@
+extends hbx_layout
+
+block content
+  
+  .hbx_store_content
+    .hbx_store_header_container
+      ul.hbx_header_left_links
+        li 
+          a(href="#") Home 
+        li
+          img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
+        li 
+          a(href="#") Brands
+        li
+          img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
+        li 
+          a(href="#") 
+            .inline_brand_name !{ brand[0].brand_name }
+      .hbx_center_brand_name !{ brand[0].brand_name }
+      .hbx_right_brand_name !{ brand[0].brand_name } in journal
+        img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
+    .hbx_store_brand_description !{ brand[0].brand_description }
+    
+    .hbx_sidebar_nav
+      .hbx_sidebar_link_container.hbx_menswear_links
+        .hbx_sidebar_header Men
+        ul
+          li NEW ARRIVALS
+          li BACK IN STOCK
+          li SALE
+          li // 
+            span.uppercase_brand_name !{ brand[0].brand_name }
+            span IN SALE
+      .hbx_sidebar_link_container.hbx_category_links
+        .hbx_sidebar_header Category
+        .hbx_category_scroll_container
+          ul
+            li
+              input(type="checkbox" id="sidebar_filter_category_accessories" value="accessories")
+              label.sidebar_label(for="sidebar_filter_category_accessories") ACCESSORIES
+            li
+              input(type="checkbox" id="sidebar_filter_category_bags" value="bags")
+              label.sidebar_label(for="sidebar_filter_category_bags") BAGS
+            li
+              input(type="checkbox" id="sidebar_filter_category_clothing" value="clothing")
+              label.sidebar_label(for="sidebar_filter_category_clothing") CLOTHING
+            li
+              input(type="checkbox" id="sidebar_filter_category_electronic_goods" value="electronic_goods")
+              label.sidebar_label(for="sidebar_filter_category_electronic_goods") ELECTRONICS CASES
+            li
+              input(type="checkbox" id="sidebar_filter_category_gadgets" value="gadgets")
+              label.sidebar_label(for="sidebar_filter_category_gadgets") GADGETS
+            li
+              input(type="checkbox" id="sidebar_filter_category_lifestyle" value="lifestyle")
+              label.sidebar_label(for="sidebar_filter_category_lifestyle") HOME & LIFESTYLE
+            li
+              input(type="checkbox" id="sidebar_filter_category_homeware" value="homeware")
+              label.sidebar_label(for="sidebar_filter_category_homeware") HOMEWARE
+            li
+              input(type="checkbox" id="sidebar_filter_category_jackets" value="jackets")
+              label.sidebar_label(for="sidebar_filter_category_jackets") JACKETS
+            li
+              input(type="checkbox" id="sidebar_filter_category_jeans" value="jeans")
+              label.sidebar_label(for="sidebar_filter_category_jeans") JEANS
+            li
+              input(type="checkbox" id="sidebar_filter_category_misc_tech" value="misc_tech")
+              label.sidebar_label(for="sidebar_filter_category_misc_tech") MISC TECH
+            li
+              input(type="checkbox" id="sidebar_filter_category_pants" value="pants")
+              label.sidebar_label(for="sidebar_filter_category_pants") PANTS
+            li
+              input(type="checkbox" id="sidebar_filter_category_sandals" value="sandals")
+              label.sidebar_label(for="sidebar_filter_category_sandals") SANDALS
+            li
+              input(type="checkbox" id="sidebar_filter_category_shirts" value="shirts")
+              label.sidebar_label(for="sidebar_filter_category_shirts") SHIRTS
+            li
+              input(type="checkbox" id="sidebar_filter_category_shoes" value="shoes")
+              label.sidebar_label(for="sidebar_filter_category_shoes") SHOES
+            li
+              input(type="checkbox" id="sidebar_filter_category_small_goods" value="small_goods")
+              label.sidebar_label(for="sidebar_filter_category_small_goods") SMALL GOODS
+            li
+              input(type="checkbox" id="sidebar_filter_category_ss_t_shirts" value="ss_t_shirts")
+              label.sidebar_label(for="sidebar_filter_category_ss_t_shirts") SS T-SHIRTS
+            li
+              input(type="checkbox" id="sidebar_filter_category_t_shirts" value="t_shirts")
+              label.sidebar_label(for="sidebar_filter_category_t_shirts") T-SHIRTS
+            li
+              input(type="checkbox" id="sidebar_filter_category_totes" value="totes")
+              label.sidebar_label(for="sidebar_filter_category_totes") TOTES
+            li
+              input(type="checkbox" id="sidebar_filter_category_toys" value="toys")
+              label.sidebar_label(for="sidebar_filter_category_toys") TOYS
+            li
+              input(type="checkbox" id="sidebar_filter_category_underwear" value="underwear")
+              label.sidebar_label(for="sidebar_filter_category_underwear") UNDERWEAR
+      .hbx_sidebar_link_container.hbx_size_links
+        .hbx_sidebar_header Size
+        ul CLOTHING
+      .hbx_sidebar_link_container.hbx_color_links
+        .hbx_sidebar_header Color
+        //- ul
+        //-   li
+        //-   li
+        //-   li
+      .hbx_sidebar_link_container.hbx_price_links
+        .hbx_sidebar_header Price
+        //- ul
+        //-   li
+        //-   li
+        //-   li
+      .hbx_sidebar_link_container
+        .hbx_sidebar_clear_all CLEAR ALL
+      .hbx_sidebar_link_container.hbx_featured_links
+        .hbx_sidebar_header Featured Brands
+        ul
+          li 11 By Boris Bidjan Saberi
+          li Adidas Originals
+          li Denim By Vanquish & Fragment
+          li Mastermind
+          li Très Bien
+          li Undercover
+          li.see_all_brands SEE ALL BRANDS

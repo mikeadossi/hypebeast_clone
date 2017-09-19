@@ -51,12 +51,14 @@ block content
           .top_ten_story_mobile
             .top_ten_number 
               div= y+1
-            .top_ten_image !{ topTen[y].post_image } 
-            .top_ten_title.top_ten_title_mobile
-              .top_ten_secret !{ postTitles[y] }**
-              div(class="top_ten_description top_ten_description_mobile top_ten_description"+y)
-              img.mobile_hype_img(src="images/hypebeast_images/general/hype_flame.png")
-              span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
+            a(href="/post/"+topTen[y].id)
+              .top_ten_image !{ topTen[y].post_image } 
+            a(href="/post/"+topTen[y].id)
+              .top_ten_title.top_ten_title_mobile
+                .top_ten_secret !{ postTitles[y] }**
+                div(class="top_ten_description top_ten_description_mobile top_ten_description"+y)
+                img.mobile_hype_img(src="images/hypebeast_images/general/hype_flame.png")
+                span.top_ten_hype !{ topTen[y].post_hype_count } Hypes
         - }
         
   .feed_header_mobile

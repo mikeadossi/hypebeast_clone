@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const cookieParser = require('cookie-parser');
 const queries = require('./database/queries');
+const hbx_queries = require('./database/hbx_queries');
 const passport = require('passport');
+
+/**************************** Hypebeast (below) *******************************/
 
 router.get('/', function(req, res) {
 
@@ -29,7 +32,7 @@ router.get('/', function(req, res) {
 })
 
 router.get('/post/:id', function(req, res) {
-  var id = req.params.id;
+  let id = req.params.id;
   console.log('called!!!');
   queries.getPost(id)
     .then( post => {
@@ -40,19 +43,20 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
+// router.get('/hbx_store/:id', function(req, res) {
+//   let id = req.params.id;
+//   console.log('called!!!');
+//   queries.getPost(id)
+//     .then( brand => {
+//       res.render('hbx_brand', { brand: brand })
+//     })
+//     .catch( err => {
+//       console.log('err: ', err);
+//     })
+// })
+
 router.get('/store', function(req, res) {
   res.render('hbx_index');
-})
-
-router.get('/brands', function(req, res) {
-  var id = req.params.id;
-  queries.getPost(id)
-    .then( brand => {
-      res.render('brand', { brand: brand })
-    })
-    .catch( err => {
-      console.log('err: ', err);
-    })
 })
 
 router.get('/register/success', function(req, res) {
@@ -131,6 +135,20 @@ router.get('/auth/error', function(req, res){
 router.get('/error', function(req, res) {
   res.render('error');
 });
+
+
+/****************************** HBX (below) ***********************************/
+
+router.get('/browse_store/:id', function(req, res) {
+  let id = req.params.id;
+  hbx_queries.getStoreContent(id)
+    .then( brand => {
+      res.render('hbx_store', { brand: brand })
+    })
+    .catch( err => {
+      console.log('err: ', err);
+    })
+})
 
 
 
