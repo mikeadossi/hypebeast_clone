@@ -1,10 +1,10 @@
 \c comment_system_db
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS all_users;
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS google_users;
 DROP TABLE IF EXISTS facebook_users;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS all_users;
 
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
@@ -42,10 +42,8 @@ CREATE TABLE users (
 CREATE TABLE all_users (
   id SERIAL PRIMARY KEY,
   avatar TEXT,
-  google_users_id INTEGER,
-  facebook_users_id INTEGER,
-  FOREIGN KEY (google_users_id) REFERENCES google_users(id),
-  FOREIGN KEY (facebook_users_id) REFERENCES facebook_users(id)
+  google_users_id INTEGER REFERENCES google_users(id),
+  facebook_users_id INTEGER REFERENCES facebook_users(id)
 );
 
 INSERT INTO posts (post_title_string, post_title, post_image, post_author, category, post_time_of, post_hype_count, post_comment_count, post_subtitle, post_content, image_credit)
