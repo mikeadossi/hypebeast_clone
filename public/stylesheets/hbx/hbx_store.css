@@ -198,7 +198,14 @@
   padding-bottom:40px;
 }
 
-.product_image img{
+.main_img img{
+  width: 253px;
+  height: 328px;
+  padding: 5px;
+}
+
+.hide_initially_img img{
+  display:none;
   width: 253px;
   height: 328px;
   padding: 5px;

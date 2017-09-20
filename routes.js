@@ -145,15 +145,21 @@ router.get('/browse_store/:id', function(req, res) {
     .then( results => {
       let brand = results[0];
       let product = results[1];
-      let product_images_arr = product[0].product_images.replace(/[']+/g, '');
-      product_images_arr = product_images_arr.split(",");
-      // console.log('product ===============> ',product);
-      // console.log('product[0].product_name ===============> ',product[0].product_name);
+
+      let product_images;
+      let store_prod_images = [];
+
+      for(let i = 0; i < product.length; i++){
+        product_images = product[i].product_images.replace(/[']+/g, '');
+        product_images = product_images.split(",");
+        store_prod_images.push(product_images[0]);
+        store_prod_images.push(product_images[1]);
+      }
 
       res.render('hbx_store', {
         brand: brand,
         product: product,
-        product_images_arr: product_images_arr
+        store_prod_images: store_prod_images
       })
     })
     .catch( err => {
