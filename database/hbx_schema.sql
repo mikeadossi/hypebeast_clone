@@ -87,7 +87,7 @@ CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   product_price INTEGER,
   product_count INTEGER,
-  product_name VARCHAR(30),
+  product_name VARCHAR,
   product_images TEXT,
   product_details TEXT,
   category_id INTEGER REFERENCES categories(id),
@@ -131,7 +131,9 @@ VALUES (
 ( 'green' ),
 ( 'grey' ),
 ( 'red' ),
-( 'white' );
+( 'white' ),
+( 'purple' ),
+( 'brown' );
 
 INSERT INTO categories (category_type)
 VALUES (
@@ -163,6 +165,30 @@ VALUES (
 ),
 (
   't-shirts'
+),
+(
+  'pants'
+),
+(
+  'hoodies'
+),
+(
+  'sweatshirt'
+),
+(
+  'jeans'
+),
+(
+  'toys'
+),
+(
+  'homeware'
+),
+(
+  'sandals'
+),
+(
+  'underwear'
 );
 
 INSERT INTO products (product_price, product_count, product_name, product_images, product_details, brand_id, product_color_id, category_id)
@@ -180,7 +206,7 @@ VALUES (
   '155',
   '20',
   'Tubular Rise',
-  '["<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_front.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_profile.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_side.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_top.jpg" />"]',
+  '<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_front.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_profile.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_side.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_rise_top.jpg" />',
   '<div class="product_details"><p>The Tubular has been on the front end of forward-thinking design since its inception in the ''90s. Always ahead of its time, today''s newest addition follows in the original''s footsteps. These men''s shoes feature an adidas Primeknit upper knit with space-dyed fibers for a subtle neon look. A suede midfoot cage overlay and an elastic heel strap provide added support as the EVA outsole gives extra cushioning.</p><ul><li>adidas Primeknit upper.</li><li>Space-dyed neon fibers in the upper.</li><li>Suede midfoot cage overlay.</li><li>Comfortable textile bootee lining; Midcut.</li><li>Heel elastic for a natural heel counter.</li><li>Soft EVA outsole with contoured stability plug for extra cushioning.</li><li>Textile and leather upper | Textile lining | Rubber outsole.</li></ul></div>',
   '3',
   '1',
@@ -190,7 +216,7 @@ VALUES (
   '130',
   '20',
   'Tubular Doom Sock Primeknit',
-  '["<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_front.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_profile.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_side.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_top.jpg" />"]',
+  '<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_front.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_profile.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_side.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/tubular_doom_top.jpg" />',
   '<div class="product_details"><p>The Tubular Doom Sock Primeknit combines adidas basketball and running heritage together. It arrives in a low-cut version that fits like a sock. Features a flexible, adaptive adidas Primeknit upper. And finished with the distinctive look and feel of the Tubular outsole.</p><ul><li>Breathable and flexible adidas Primeknit upper.</li><li>Comfortable textile lining.</li><li>Sock-like construction.</li><li>Refined heel support piece.</li><li>Tubular Doom outsole.</li></ul></div>',
   '3',
   '1',
@@ -200,22 +226,306 @@ VALUES (
   '115',
   '20',
   'Climacool 02/17',
-  '["<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_front.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_profile.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_side.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_top.jpg" />"]',
+  '<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_front.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_profile.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_side.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/climacool_white_top.jpg" />',
   '<div class="product_details"><p>A blast of nostalgia from the early 2000s, the Climacool training shoe is back as a street style crossover. These men''s shoes update and deconstruct the retro style for 2017. The bootee upper is made in climacool® mesh for a snug, breathable fit. The EVA midsole wraps up onto the upper for a fresh look. TPU plug details call back to the design of the original Climacool II.</p><ul><li>Climacool® provides 360-degree cooling for the entire foot.</li><li>Breathable mesh upper.</li><li>Mesh lining.</li><li>EVA midsole with TPU stability plugs.</li><li>Textile and synthetic upper | Textile lining | Rubber outsole.</li></ul></div>',
   '3',
   '7',
   '8'
+),
+(
+  '35',
+  '20',
+  'Original Trefoil S/S T-Shirt',
+  '<img src="/images/hbx_images/adidas_originals/t_shirts/adidas_clover_grey_tee_front.jpg" />,<img src="/images/hbx_images/adidas_originals/t_shirts/adidas_clover_grey_tee_side.jpg" />,<img src="/images/hbx_images/adidas_originals/t_shirts/adidas_clover_grey_tee_full.jpg" />',
+  '<div class="product_details"><p>This adidas Originals Trefoil Tee puts the Trefoil logo front and center in a bold contrast color to show off adidas pride. The men''s t-shirt has an all-cotton build for a classic fit and feel.</p><ul><li>Crewneck</li><li>Large contrast Trefoil logo on the front</li><li>Regular fit</li></ul></div>',
+  '3',
+  '5',
+  '9'
+),
+(
+  '66',
+  '20',
+  'Tennoji Shorts',
+  '<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts.jpg" />,<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts_side.jpg" />,<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts_rear.jpg" />,<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts_full.jpg" />,<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts_product_front.jpg" />,<img src="/images/hbx_images/adidas_originals/shorts/tennoji_blue_shorts_product_rear.jpg" />',
+  '<div class="product_details"><p>Inspired by archival streetwear pieces from the ''70s, these men''s shorts have a slim fit and a sleek feel. Iconic 3-Stripes run down the legs, and a linear Trefoil logo sits below the pocket.</p><ul><li>Side zip pockets</li><li>Drawcord on elastic waist</li><li>Engineered, knit 3-Stripes on sides</li></ul></div>',
+  '3',
+  '3',
+  '8'
+),
+(
+  '75',
+  '20',
+  'Superstar Track Jacket',
+  '<img src="/images/hbx_images/adidas_originals/sneakers/adidas_grey_superstar_jacket_front.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/adidas_grey_superstar_jacket_side.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/adidas_grey_superstar_jacket_rear.jpg" />,<img src="/images/hbx_images/adidas_originals/sneakers/adidas_grey_superstar_jacket_full.jpg" />',
+  '<div class="product_details"><p>A street-style staple, this men''s Superstar track jacket has all the details of the ''70s original. The sporty interlock fabric features 3-Stripes down the sleeves, a Trefoil logo on the chest and the signature ribbed collar. This product is part of the adidas sustainable product program: Products are made in more sustainable ways to make the world a better place; Every fiber counts: Organic cotton saves water, conserves energy and reduces the use of chemicals.</p><ul>Slim fit.<li>Zip up.</li><li>Ribbed collar, cuffs and hem.</li><li>Side pockets.</li><li>Piping details.</li><li>Embroidered Trefoil logo on left chest.</li><li>87% Recycled Polyester | 13% Organic Cotton Interlock.</li></ul></div>',
+  '3',
+  '5',
+  '2'
+),
+(
+  '410',
+  '20',
+  '3/4 Sleeves Loose Fit Sweatshirt',
+  '<img src="/images/hbx_images/eleven_bidjan/sweatshirts/three_fourth_sleeve_loose_front.jpg" />,<img src="/images/hbx_images/eleven_bidjan/sweatshirts/three_fourth_sleeve_loose_side.jpg" />,<img src="/images/hbx_images/eleven_bidjan/sweatshirts/three_fourth_sleeve_loose_rear.jpg" />,<img src="/images/hbx_images/eleven_bidjan/sweatshirts/three_fourth_sleeve_loose_full.jpg" />',
+  '<div class="product_details"><ul><li>Loose fit.</li><li>Crew neck.</li><li>Raglan sleeve, underarm gusset.
+</li><li>Printed graphic on back.</li><li>Embroidery and embroidered patch on sleeves.</li></ul></div>',
+  '1',
+  '2',
+  '13'
+),
+(
+  '670',
+  '20',
+  'Drapery Jacket',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/drapery_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/drapery_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/drapery_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/drapery_full.jpg" />',
+  '<div class="product_details"><ul><li>Stand up collar.</li><li>Zip up.</li><li>Contrasting brand strip on sleeves.</li></ul></div>',
+  '1',
+  '2',
+  '10'
+),
+(
+  '550',
+  '20',
+  'Logo & Type Pants',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_full.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_product_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_product_rear.jpg" />, <img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/logo_type_product_feet.jpg" />',
+  '<div class="product_details"><ul><li>Drawstring waist.</li><li>Zipped pockets.</li><li>Contrasting brand stripes on sides.</li></ul></div>',
+  '1',
+  '2',
+  '11'
+),
+(
+  '120',
+  '20',
+  '11 Logo Zipper Wallet',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/eleven_wallet.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/eleven_wallet_rear.jpg" />',
+  '<div class="product_details"><ul><li>Two pocket wallet.</li><li>Reflective 11 Logo on the outside.</li><li>60% Polyester | 40% Nylon.</li></ul></div>',
+  '1',
+  '2',
+  '1'
+),
+(
+  '380',
+  '20',
+  '3/4 Sleeves Loose Fit T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/t_shirts/three_fourths_tee_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/t_shirts/three_fourths_tee_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/t_shirts/three_fourths_tee_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/t_shirts/three_fourths_tee_full.jpg" />',
+  '<div class="product_details"><p>This long sleeve tee by celebrated designer Boris Bidjan Saberi is cut with a long profile of the body, featuring a one seam back pattern.</p><ul><li>3/4 length sleeve.</li><li>Mockneck Collar.</li><li>"11 by Boris Bidjan Saberi" script on back.</li><li>Made in Portugal.</li><li>100% Cotton.</li></ul></div>',
+  '1',
+  '2',
+  '10'
+),
+(
+  '530',
+  '20',
+  'Flame Hoodie',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/flame_hoody_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/flame_hoody_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/flame_hoody_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/flame_hoody_full.jpg" />',
+  '<div class="product_details"><p>Made in Portugal, this meticulously crafted hoodie features an 11 logo branded face scarf and is emblazoned with a flame graphic to the back.</p><ul><li>Hood with drawstring.</li><li>Front kangaroo pocket.</li><li>Signature flame graphics.</li><li>97% Cotton | 3% Elastane.</li><li>Made in Portugal.</li></ul></div>',
+  '1',
+  '2',
+  '12'
+),
+(
+  '380',
+  '20',
+  'Urban Dayback',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_full.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_brand_tag.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/accessories/daypack_innards.jpg" />',
+  '<div class="product_details"><p>Masterfully crafted in Germany, this backpack from 11 by Boris Bidjan Saberi features heat sealed zip closures and an inflatable back panel.</p><ul><li>Two side pockets.</li><li>Heat sealed details.</li><li>Double adjustable shoulder straps.</li><li>Made in Germany.</li><li>100% Polyamide.</li></ul></div>',
+  '1',
+  '2',
+  '1'
+),
+(
+  '90',
+  '20',
+  'New Era 39thirty Collaboration Cap',
+  '<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/eleven_new_era_front.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/eleven_new_era_side.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/eleven_new_era_side_2.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/eleven_new_era_rear.jpg" />,<img src="/images/hbx_images/hbx_images/eleven_bidjan/jackets/eleven_new_era_brim.jpg" />',
+  '<div class="product_details"><ul><li>Embroidered "11" on front.</li><li>6 panel.</li><li>Reflective sticker on front.</li></ul></div>',
+  '1',
+  '2',
+  '2'
+),
+(
+  '180',
+  '20',
+  'Work Trousers',
+  '<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_front.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_side.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_rear.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_full.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_product_front.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/pants/work_trousers_product_rear.jpg" />',
+  '<div class="product_details"><ul><li>Straight legs.</li><li>Zip fly.</li><li>Button and hook closure.</li><li>Belt loops.</li><li>Two slanted front pockets, two jetted back pockets.</li><li>100% Cotton.</li></ul></div>',
+  '1',
+  '2',
+  '11'
+),
+(
+  '395',
+  '20',
+  'Hooded Blouson Jacket',
+  '<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_front.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_side.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_rear.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_full.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_front_zipped.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/jackets/blouson_jacket_innards.jpg" />',
+  '<div class="product_details"><ul><li>Zipper fastenings.</li><li>2 pockets.</li><li>Velcro to cuffs.</li><li>96% Cotton | 4% Polyurethane.
+</li></ul></div>',
+  '2',
+  '4',
+  '5'
+),
+(
+  '170',
+  '20',
+  'Panel Sweatshirt',
+  '<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/panel_front.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/panel_side.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/panel_rear.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/panel_full.jpg" />',
+  '<div class="product_details"><ul><li>Reversed loopback.</li><li>Rib crew-neck, cuff and hem.</li><li>Reversed panel across the chest.</li><li>100% Cotton.</li></ul></div>',
+  '2',
+  '8',
+  '13'
+),
+(
+  '145',
+  '20',
+  'Army Sweatshirt',
+  '<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/army_front.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/army_side.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/army_rear.jpg" />,<img src="/images/hbx_images/hbx_images/tres_bien/sweatshirts/army_full.jpg" />',
+  '<div class="product_details"><ul><li>Long sleeves.</li><li>Rib crewneck.</li><li>Single chest pocket.</li><li>Straight hem with slit side vents.</li><li>100% Cotton.</li></ul></div>',
+  '2',
+  '9',
+  '13'
+),
+(
+  '1350',
+  '20',
+  'Circle Logo Sweatshirt',
+  '<img src="/images/hbx_images/hbx_images/mastermind/sweatshirts/circle_beige_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/sweatshirts/circle_beige_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/sweatshirts/circle_beige_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/sweatshirts/circle_beige_full.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/sweatshirts/circle_beige_wrist_zipper.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>Beige.</li><li>Long sleeve, relaxed fit.</li><li>Top stitching detail.</li><li>Ribbed crew neck, cuffs and hem.</li><li>Printed Mastermind graphic on front and back.</li><li>Hidden embroidered metallic silver skull with Riri zip detail on cuffs.</li><li>Side panels.</li><li>Welt pockets with Mastermind Riri zips on front.</li><li>Faux leather Mastermind "Prologue Volume 1" strap.</li><li>Mastermind labels on side hem.</li><li>100% Cotton, fleece inner.</li><li>Made in Japan.</li><li>Also available in Black.</li></ul></div>',
+  '5',
+  '1',
+  '10'
+),
+(
+  '800',
+  '20',
+  'Distressed Oversized Circle Logo S/S T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/mastermind/ss_t_shirts/ss_shirt_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/ss_t_shirts/ss_shirt_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/ss_t_shirts/ss_shirt_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/ss_t_shirts/ss_shirt_full.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>Beige.</li><li>Short sleeve, oversized fit.</li><li>Distressed look.</li><li>Top stitching detail</li><li>Ribbed crew neck</li><li>Printed Mastermind graphic on front and back.</li><li>Side slits with Mastermind skull invisible binding.</li><li>Faux leather Mastermind "Prologue Volume 1" strap.</li><li>Mastermind label on front and back hem.</li><li>100% Cotton.</li><li>Made in Japan.</li><li>Available in Black.</li></ul></div>',
+  '5',
+  '1',
+  '10'
+),
+(
+  '1500',
+  '20',
+  'Box Logo Hoodie',
+  '<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_full.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_logo.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/hoodies/white_box_wrist_zipper.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>White.</li><li>Long sleeve, relaxed fit.</li><li>Hooded, adjustable drawstrings with Mastermind logo metal tip.</li><li>Top stitching detail.</li><li>Ribbed cuffs and hem.</li><li>Hidden embroidered skull in metallic silver with Mastermind Riri zip detail.</li><li>Printed Mastermind box graphics on front and back.</li><li>Side panels.</li><li>Welt pockets with Mastermind Riri zips on front.</li><li>Faux leather Mastermind "Prologue Volume 1" strap.</li><li>Mastermind labels on side hem.</li><li>100% Cotton.</li><li>Made in Japan.</li><li>Also available in Black.</li></ul></div>',
+  '5',
+  '7',
+  '12'
+),
+(
+  '600',
+  '20',
+  'Oversized Turtle Neck Box Logo L/S T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_full.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>White.</li><li>Long sleeve, oversized fit.</li><li>Top stitching detail.</li><li>Turtle neck.</li><li>Printed Mastermind graphics on front and back.</li><li>Side slits with Mastermind invisible binding.</li><li>Faux leather Mastermind "Prologue Volume 1" strap.</li><li>Mastermind label on front and back hem.</li><li>100% Cotton.</li><li>Made in Japan.</li><li>Also available in Black.</li></ul></div>',
+  '5',
+  '7',
+  '10'
+),
+(
+  '600',
+  '20',
+  'Turtle Neck Circle Logo L/S T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_grey_full.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_grey_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_grey_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/t_shirts/turtle_grey_full.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>Charcoal.</li><li>Long sleeve, regular fit.</li><li>Top stitching detail.</li><li>Ribbed turtle neck and cuffs.</li><li>Printed Mastermind graphic on front and back.</li><li>Side slits with Mastermind skull invisible binding.</li><li>Faux leather Mastermind "Prologue Volume 1" strap.</li></li>Mastermind label on front and back hem.</li><li>100% Cotton.</li><li>Made in Japan.</li><li>Also available in Black.</li></ul></div>',
+  '5',
+  '5',
+  '13'
+),
+(
+  '1380',
+  '20',
+  'Distressed Skull Embroidery Slim Fit Jeans',
+  '<img src="/images/hbx_images/hbx_images/mastermind/jeans/skull_jeans_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/jeans/skull_jeans_side.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/jeans/skull_jeans_rear.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/jeans/skull_jeans_product_front.jpg" />,<img src="/images/hbx_images/hbx_images/mastermind/jeans/skull_jeans_product_rear.jpg" />',
+  '<div class="product_details"><p>Mastermind Japan''s FW17 collection has statement outerwear set as the prime focus, along with textured hoodies, traditional biker jacket, and collegiate-style varsity jacket, each bearing the brand’s signature skull and crossbones logo. Also on offer are graphic tops, trousers and a two-piece suiting option — stylistically balancing out the casual-heavy range.</p><ul><li>Indigo.</li><li>Slim fit.</li><li>Distressed look.</li><li>Top stitch finishing.</li><li>Mastermind Riri zip fly.</li><li>Mastermind selfridge.</li><li>Belt loops with small Mastermind D-rings and faux leather Mastermind "Prologue Volume 1" strap.</li><li>Custom Mastermind buttons.</li><li>Embroidered skull in white on pocket.</li><li>Double waisted.</li><li>Front and back pockets, Mastermind label.</li><li>Leather Mastermind label.</li><li>Embroidered skull in silver on back leg cuff.</li><li>98% Cotton | 2% Polyurethane.</li><li>Made in Japan.</li><li>Also available in Black.</li></ul></div>',
+  '5',
+  '3',
+  '14'
+),
+(
+  '130',
+  '10',
+  'Medicom Toy x Undercover Gilapple Light Green',
+  '<img src="/images/hbx_images/hbx_images/undercover/toys/medicom_green_front.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/toys/medicom_green_rear.jpg" />',
+  '<div class="product_details"><p>Undercover teams up with Medicom Toy to produce this version of the Gilapple led light! Based on the 2009 GILAPPLE animated video.</p><ul><li>Runs on 3 AAA batteries.</li><li>10cm x 9cm | 4" x 3.5".</li></ul></div>',
+  '6',
+  '4',
+  '15'
+),
+(
+  '130',
+  '10',
+  'Medicom Toy x Undercover Gilapple Light Red',
+  '<img src="/images/hbx_images/hbx_images/undercover/toys/medicom_red_front.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/toys/medicom_red_rear.jpg" />',
+  '<div class="product_details"><p>Undercover teams up with Medicom Toy to produce this version of the Gilapple led light! Based on the 2009 GILAPPLE animated video.</p><ul><li>Runs on 3 AAA batteries.</li><li>10cm x 9cm | 4" x 3.5".</li></ul></div>',
+  '6',
+  '6',
+  '15'
+),
+(
+  '150',
+  '20',
+  '"U" S/S T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/undercover/ss_t_shirts/ss_grey_shirt_front.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/ss_t_shirts/ss_grey_shirt_side.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/ss_t_shirts/ss_grey_shirt_full.jpg" />',
+  '<div class="product_details"><p>Graphic Print tees from Undercover are a favourite every season. As a part of its FW17 collection, the 100% cotton T-Shirt features original artwork along the chest from Undercover''s award-winning graphic designers.</p><ul><li>Slim fitted</li><li>Screen printed front</li><li>Made in Japan</li><li>100% Cotton</li></ul></div>',
+  '6',
+  '2',
+  '9'
+),
+(
+  '620',
+  '20',
+  '"U" S/S T-Shirt',
+  '<img src="/images/hbx_images/hbx_images/undercover/jackets/deconstructed_jacket_front.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/jackets/deconstructed_jacket_side.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/jackets/deconstructed_jacket_rear.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/jackets/deconstructed_jacket_full.jpg" />,<img src="/images/hbx_images/hbx_images/undercover/jackets/deconstructed_jacket_front_buttoned.jpg" />',
+  '<div class="product_details"><p>From world renowned designer Jun Takahashi, this deconstructed jacket features distressed fabric detailing and removable sleeves for a unique silhouette.</p><ul><li>Oversize</li><li>Distressed detailing</li><li>Removable sleeves</li><li>Made in Japan</li><li>100% Cotton</li></ul></div>',
+  '6',
+  '3',
+  '5'
+),
+(
+  '70',
+  '20',
+  'Shower Sandals',
+  '<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/shower_sandals_side.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/sandals/shower_sandals_front.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/sandals/shower_sandals_top.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/sandals/shower_sandals_full.jpg" />',
+  '<div class="product_details"><p>Lightweight slip on sandals by Denim by Vanquish & Fragment are branded by their logo in a contrasting pink and perfect for water resistance wear by the pool.</p><ul><li>Slip on style</li><li>Branding on front</li></ul></div>',
+  '4',
+  '2',
+  '17'
+),
+(
+  '40',
+  '20',
+  'Mug',
+  '<img src="/images/hbx_images/hbx_images/vanquish_fragment/homeware/mug_side.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/homeware/mug_side_2.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/homeware/mug_front.jpg" />',
+  '<div class="product_details"><ul><li>Black.</li><li>With handle.</li><li>Printed "Think Denim by".</li><li>Ceramic.</li><li>Also available in White.</li></ul></div>',
+  '4',
+  '2',
+  '16'
+),
+(
+  '375',
+  '20',
+  'Remake Regular Straight Denim Jeans',
+  '<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_front.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_side.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_rear.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_full.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_product_front.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/jeans/denim_blue_product_rear.jpg" />',
+  '<div class="product_details"><p>Lightweight slip on sandals by Denim by Vanquish & Fragment are branded by their logo in a contrasting pink and perfect for water resistance wear by the pool.</p><ul><li>Regular fit.</li><li>Straight cut.</li><li>Side zip pockets.</li><li>Back pockets.</li><li>Printed lightning graphic on back.</li><li>Label on back waist.</li><li>100% Cotton.</li></ul></div>',
+  '4',
+  '3',
+  '14'
+),
+(
+  '45',
+  '20',
+  'Underpants',
+  '<img src="/images/hbx_images/hbx_images/vanquish_fragment/underwear/underpants_front.jpg" />,<img src="/images/hbx_images/hbx_images/vanquish_fragment/underwear/underpants_rear.jpg" />',
+  '<div class="product_details"><p>Lightweight slip on sandals by Denim by Vanquish & Fragment are branded by their logo in a contrasting pink and perfect for water resistance wear by the pool.</p><ul><li>Grey.</li><li>Elastic waist.</li><li>Button.</li><li>Lightning logo on hem.</li><li>100% Cotton.</li><li>Label on back waist.</li><li>Also available in Black.</li></ul></div>',
+  '4',
+  '5',
+  '18'
 );
--- (
---   '',
---   '20',
---   '',
---   '["<img src="/images/hbx_images/adidas_originals/sneakers/.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/.jpg" />","<img src="/images/hbx_images/adidas_originals/sneakers/.jpg" />"]',
---   '<div class="product_details"><p></p><ul><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>',
---   '',
---   '',
---   '8'
--- );
+
+
 
 
 INSERT INTO sizes (size)

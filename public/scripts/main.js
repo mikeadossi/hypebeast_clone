@@ -122,6 +122,8 @@ $('.returnToTop').on('click', () => {
   }
 );
 
+$('.returnToTop').css('display','none');
+
 $(document).scroll(function() {
   const top = $(this).scrollTop();
   if (top > 800) {
@@ -138,13 +140,13 @@ $(document).scroll(function() {
 
 
 // $(window).scroll(function(e){
-//   console.log();
-//   if ($(window).scrollTop() >= 1939){
-//     $('.sticky_ad_one').css({'position':'fixed', 'top':'20px'});
+//   const top = $(this).scrollTop();
+//   if (top > 1510){
+//     $('.sticky_ad_one').css({'position':'fixed', 'top':'10px'});
 //   }
-//   if ($(window).scrollTop() >= 3000 || $(window).scrollTop() < 1939 )
+//   if (top > 2000 )
 //   {
-//     $('.sticky_ad_one').css({'position':'absolute'});
+//     $('.sticky_ad_one').css({'position':'unset'});
 //   }
 //
 // });
