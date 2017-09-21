@@ -67,30 +67,33 @@ block content
           .hbx_sidebar_header Featured Brands
           ul
             li 
-              a(href="/browse_store/"+1) 11 By Boris Bidjan Saberi
+              a(href="/brands/11-by-boris-bidjan-saberi") 11 By Boris Bidjan Saberi
             li 
-              a(href="/browse_store/"+3) Adidas Originals
+              a(href="/brands/adidas-originals") Adidas Originals
             li 
-              a(href="/browse_store/"+4) Denim By Vanquish & Fragment
+              a(href="/brands/denim-by-vanquish-fragment") Denim By Vanquish & Fragment
             li 
-              a(href="/browse_store/"+5) Mastermind
+              a(href="/brands/mastermind") Mastermind
             li 
-              a(href="/browse_store/"+2) Très Bien
+              a(href="/brands/tres-bien") Très Bien
             li 
-              a(href="/browse_store/"+6) Undercover
+              a(href="/brands/Undercover") Undercover
             li.see_all_brands SEE ALL BRANDS
       
       
       .hbx_product_container
-        - let x = 0
+        - let x = 0;
+        //- - let brand_id = brand[0].id;
         - for(let i = 0; i < store_prod_images.length; i++){
           .product_display
             .product_image
               if(i == 0 || i % 2 == 0 )
-                a.main_img(href="#") !{ store_prod_images[i] }
+                - var prod_route = product[x].product_name_route
+                a.main_img(href="/brands/"+brand[0].id+"/"+prod_route) !{ store_prod_images[i] }
                 .product_name !{ product[x].product_name }
                 .product_price USD !{ product[x].product_price }
                 - x++;
+                - brand_id++;
               else 
                 a.hide_initially_img(href="#") !{ store_prod_images[i] }
         - }

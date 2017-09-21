@@ -139,13 +139,13 @@ router.get('/error', function(req, res) {
 
 /****************************** HBX (below) ***********************************/
 
-router.get('/browse_store/:id', function(req, res) {
-  let id = req.params.id;
-  Promise.all([hbx_queries.getStoreContent(id), hbx_queries.getProductContent(id)])
+router.get('/brands/:key', function(req, res) {
+  let key = req.params.key;
+  Promise.all([hbx_queries.getStoreContent(key), hbx_queries.getProductContent(key)])
     .then( results => {
       let brand = results[0];
       let product = results[1];
-
+      console.log('brand[0].id - - - - --  - -- - - -> ',brand[0].id);
       let product_images;
       let store_prod_images = [];
 
