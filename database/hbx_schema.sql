@@ -551,8 +551,8 @@ VALUES (
 (
   '620',
   '20',
-  '"U" S/S T-Shirt',
-  'u-s-s-t-shirt',
+  'Deconstructed Jacket',
+  'deconstructed-jacket',
   '<img src="/images/hbx_images/undercover/jackets/deconstructed_jacket_front.jpg" />,<img src="/images/hbx_images/undercover/jackets/deconstructed_jacket_side.jpg" />,<img src="/images/hbx_images/undercover/jackets/deconstructed_jacket_rear.jpg" />,<img src="/images/hbx_images/undercover/jackets/deconstructed_jacket_full.jpg" />,<img src="/images/hbx_images/undercover/jackets/deconstructed_jacket_front_buttoned.jpg" />',
   '<div class="product_details"><p>From world renowned designer Jun Takahashi, this deconstructed jacket features distressed fabric detailing and removable sleeves for a unique silhouette.</p><ul><li>Oversize</li><li>Distressed detailing</li><li>Removable sleeves</li><li>Made in Japan</li><li>100% Cotton</li></ul></div>',
   '6',

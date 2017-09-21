@@ -6,16 +6,20 @@ const saltRounds = 10;
 
 let queries = {
 
-  getBrandDetails: function(key){
-    return db.any("SELECT * FROM brands WHERE brand_name_link = $1", key);
+  getBrandDetails: function(brand){
+    return db.any("SELECT * FROM brands WHERE brand_name_link = $1", brand);
   },
 
-  getInventory: function(key){
-    return db.any("SELECT * FROM products WHERE brand_name = $1", key);
+  getInventory: function(brand){
+    return db.any("SELECT * FROM products WHERE brand_name = $1", brand);
   },
 
-  getProductContent(brand,product){
+  getProductContent: function(brand,product){
     return db.any("SELECT * FROM products WHERE brand_name = $1 AND product_name_route = $2",[brand,product]);
+  },
+
+  getBrandCategories: function(brand){
+    return db.any("SELECT category_type FROM categories JOIN products on products.category_id = categories.id WHERE brand_name = $1", brand);
   }
 
 }

@@ -41,11 +41,12 @@ block content
         .hbx_sidebar_link_container.hbx_category_links
           .hbx_sidebar_header Category
           .hbx_category_scroll_container
-            ul
-              li
-                input(type="checkbox" id="sidebar_filter_category_homeware" value="homeware")
-                label.sidebar_label(for="sidebar_filter_category_homeware") HOMEWARE
-                //-- code above needs to be a for loop displaying every stocked category for each brand.
+            - for(let i = 0; i < categories_arr.length; i++){
+              ul
+                li
+                  input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i])
+                  label.sidebar_label(for="sidebar_filter_category_homeware") !{categories_arr[i]}
+            - }
         .hbx_sidebar_link_container.hbx_size_links
           .hbx_sidebar_header Size
           ul CLOTHING
@@ -73,7 +74,7 @@ block content
             li 
               a(href="/brands/denim-by-vanquish-fragment") Denim By Vanquish & Fragment
             li 
-              a(href="/brands/mastermind") Mastermind
+              a(href="/brands/mastermind-world") Mastermind World
             li 
               a(href="/brands/tres-bien") Très Bien
             li 

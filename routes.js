@@ -139,12 +139,22 @@ router.get('/error', function(req, res) {
 
 /****************************** HBX (below) ***********************************/
 
-router.get('/brands/:key', function(req, res) {
-  let key = req.params.key;
-  Promise.all([hbx_queries.getBrandDetails(key), hbx_queries.getInventory(key)])
+router.get('/brands/:brand', function(req, res) {
+  let brand = req.params.brand;
+  Promise.all([hbx_queries.getBrandDetails(brand), hbx_queries.getInventory(brand), hbx_queries.getBrandCategories(brand)])
     .then( results => {
       let brand = results[0];
       let product = results[1];
+      let categories = results[2];
+
+      let categories_arr = [];
+      for(let i = 0; i < categories.length; i++){
+        categories_arr.push(categories[i].category_type);
+      }
+
+      // below we get all unique items in the categories_arr.
+      categories_arr = categories_arr.filter(function(item,pos){ return categories_arr.indexOf(item) == pos });
+
       let product_images;
       let store_prod_images = [];
 
@@ -158,7 +168,8 @@ router.get('/brands/:key', function(req, res) {
       res.render('hbx_store', {
         brand: brand,
         product: product,
-        store_prod_images: store_prod_images
+        store_prod_images: store_prod_images,
+        categories_arr: categories_arr
       })
     })
     .catch( err => {
