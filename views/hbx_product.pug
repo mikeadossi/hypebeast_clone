@@ -3,4 +3,8 @@ extends hbx_layout
 block content
   
   .hbx_store_content
-    
+    .product_image !{ product_content[0].product_images }
+    .product_brand BRAND: !{ brand_name_string }
+    .product_name NAME: !{ product_content[0].product_name }
+    .product_price PRICE: $!{ product_content[0].product_price }.00
+    .product_details DETAILS: !{ product_content[0].product_details }

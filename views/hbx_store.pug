@@ -83,13 +83,11 @@ block content
       
       .hbx_product_container
         - let x = 0;
-        //- - let brand_id = brand[0].id;
         - for(let i = 0; i < store_prod_images.length; i++){
           .product_display
             .product_image
               if(i == 0 || i % 2 == 0 )
-                - var prod_route = product[x].product_name_route
-                a.main_img(href="/brands/"+brand[0].id+"/"+prod_route) !{ store_prod_images[i] }
+                a.main_img(href="/brands/"+brand[0].brand_name_link+"/"+product[x].product_name_route) !{ store_prod_images[i] }
                 .product_name !{ product[x].product_name }
                 .product_price USD !{ product[x].product_price }
                 - x++;

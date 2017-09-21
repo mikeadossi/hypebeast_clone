@@ -141,11 +141,10 @@ router.get('/error', function(req, res) {
 
 router.get('/brands/:key', function(req, res) {
   let key = req.params.key;
-  Promise.all([hbx_queries.getStoreContent(key), hbx_queries.getProductContent(key)])
+  Promise.all([hbx_queries.getBrandDetails(key), hbx_queries.getInventory(key)])
     .then( results => {
       let brand = results[0];
       let product = results[1];
-      console.log('brand[0].id - - - - --  - -- - - -> ',brand[0].id);
       let product_images;
       let store_prod_images = [];
 
@@ -167,11 +166,24 @@ router.get('/brands/:key', function(req, res) {
     })
 })
 
-router.get('/product/:id', function(req, res) {
-  let id = req.params.id;
-  hbx_queries.getSpecificProduct(id)
-    .then( product => {
-      res.render('hbx_product', { product: product })
+router.get('/brands/:brand/:product', function(req, res) {
+  let brand = req.params.brand;
+  let product = req.params.product;
+  hbx_queries.getProductContent(brand,product)
+    .then( results => {
+      let brandNameObj = {
+        '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
+        'tres-bien': 'Tres Bien',
+        'adidas-originals': 'Adidas Originals',
+        'denim-by-vanquish-fragment': 'Denim by Vanquish & Fragment',
+        'mastermind-world': 'Mastermind World',
+        'undercover': 'Undercover'
+      }
+
+      res.render('hbx_product', {
+        product_content: results,
+        brand_name_string: brandNameObj[brand]
+      })
     })
     .catch( err => {
       console.log('err: ', err);
