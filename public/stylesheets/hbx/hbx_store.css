@@ -175,6 +175,10 @@
   color:black !important;
 }
 
+.form-control:focus{
+  outline:0;
+}
+
 .form-control{
   border: none;
   width: 178px;
