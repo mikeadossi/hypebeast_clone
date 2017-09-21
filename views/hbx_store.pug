@@ -22,10 +22,13 @@ block content
     .hbx_store_brand_description !{ brand[0].brand_description }
     
     .hbx_sorting_button_container
-      .hbx_sorting_button 
-        div NEWEST FIRST
-          span 
-            img.sorting_arrow.arrow_down(src="/images/hbx_images/general/arrow_down.png")
+      .hbx_sorting_button
+        select.form-control 
+          option NEWEST FIRST
+            span 
+              img.sorting_arrow.arrow_down(src="/images/hbx_images/general/arrow_down.png")
+          option(value='desc') PRICE: HIGH TO LOW
+          option(value='asc') PRICE: LOW TO HIGH
     
     .hbx_flexed_content
       .hbx_sidebar_nav

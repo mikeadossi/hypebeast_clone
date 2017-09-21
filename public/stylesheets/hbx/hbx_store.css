@@ -159,11 +159,11 @@
 
 .hbx_sorting_button {
   border:1px solid grey;
-  padding: 13px 0 13px 10px;
-  width:185px;
+  margin-bottom: 15px;
   margin-left: auto;
   margin-right: 35px;
   font-size: 12px;
+  background-color:white;
 }
 
 .sorting_arrow{
@@ -173,6 +173,13 @@
 
 .see_all_brands{
   color:black !important;
+}
+
+.form-control{
+  border: none;
+  width: 178px;
+  height: 46px;
+  cursor:pointer;
 }
 
 /* hbx product container */
