@@ -141,19 +141,27 @@ router.get('/error', function(req, res) {
 
 router.get('/brands/:brand', function(req, res) {
   let brand = req.params.brand;
-  Promise.all([hbx_queries.getBrandDetails(brand), hbx_queries.getInventory(brand), hbx_queries.getBrandCategories(brand)])
+  Promise.all([hbx_queries.getBrandDetails(brand), hbx_queries.getInventory(brand), hbx_queries.getBrandCategories(brand), hbx_queries.getBrandProductColors(brand)])
     .then( results => {
       let brand = results[0];
       let product = results[1];
       let categories = results[2];
+      let colors = results[3];
 
       let categories_arr = [];
       for(let i = 0; i < categories.length; i++){
         categories_arr.push(categories[i].category_type);
       }
 
-      // below we get all unique items in the categories_arr.
+      let colors_arr = [];
+      for(let i = 0; i < colors.length; i++){
+        colors_arr.push(colors[i].color);
+      }
+
+      // below we get all unique items in the categories_arr and colors_arr.
       categories_arr = categories_arr.filter(function(item,pos){ return categories_arr.indexOf(item) == pos });
+
+      colors_arr = colors_arr.filter(function(item,pos){ return colors_arr.indexOf(item) == pos });
 
       let product_images;
       let store_prod_images = [];
@@ -169,7 +177,8 @@ router.get('/brands/:brand', function(req, res) {
         brand: brand,
         product: product,
         store_prod_images: store_prod_images,
-        categories_arr: categories_arr
+        categories_arr: categories_arr,
+        colors_arr: colors_arr
       })
     })
     .catch( err => {

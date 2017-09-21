@@ -20,6 +20,10 @@ let queries = {
 
   getBrandCategories: function(brand){
     return db.any("SELECT category_type FROM categories JOIN products on products.category_id = categories.id WHERE brand_name = $1", brand);
+  },
+
+  getBrandProductColors: function(brand){
+    return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE brand_name = $1", brand);
   }
 
 }

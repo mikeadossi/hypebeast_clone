@@ -52,10 +52,13 @@ block content
           ul CLOTHING
         .hbx_sidebar_link_container.hbx_color_links
           .hbx_sidebar_header Color
-          //- ul
-          //-   li
-          //-   li
-          //-   li
+          .hbx_category_scroll_container
+            - for(let i = 0; i < colors_arr.length; i++){
+              ul
+                li
+                  input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i])
+                  label.sidebar_label(for="sidebar_filter_category_homeware") !{colors_arr[i]}
+            - }
         .hbx_sidebar_link_container.hbx_price_links
           .hbx_sidebar_header Price
           //- ul
