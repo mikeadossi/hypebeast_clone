@@ -24,6 +24,125 @@ let queries = {
 
   getBrandProductColors: function(brand){
     return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE brand_name = $1", brand);
+  },
+
+  getBrandPriceRange: function(brand){
+
+    return brandPrices = db.any(
+      "SELECT product_price FROM products WHERE brand_name = $1",
+      brand)
+      .then(brandPrices => {
+
+        const brandPricesArr = [];
+
+        for(let i = 0; i < brandPrices.length; i++){
+          brandPricesArr.push(brandPrices[i].product_price);
+        }
+
+        const brandPriceRange = brandPricesArr.sort(function(a,b){ return a - b });
+
+        const getSpacing = (arr) => {
+          let difference = arr[arr.length-1] - arr[0];
+          let spacing;
+          let numOfLines;
+
+          if(arr.length < 4){
+            spacing = Math.ceil(difference/2);
+            numOfLines = 1;
+          } else if(arr.length < 8){
+            spacing = Math.ceil(difference/3);
+            numOfLines = 2;
+          } else if(arr.length >= 8){
+            spacing = Math.ceil(difference/4);
+            numOfLines = 3;
+          }
+
+          return createRanges(arr, spacing, numOfLines);
+        };
+
+        const createRanges = (arr, spacing, numOfLines) => {
+          let ranges = [];
+
+          // below we account for prouct pricing edge cases.
+          let arr_tail = arr[arr.length-1];
+
+          if(arr[0] >= 10 && arr_tail <= 50){
+            ranges = [ 1, 50 ];
+            return ranges;
+          }  if(arr[0] >= 10 && arr_tail <= 100){
+            ranges = [ 1, 100 ];
+            return ranges;
+          } else if(arr[0] < 10 && arr_tail <= 50){
+            ranges = [ 1, 50 ];
+            return ranges;
+          } else if(arr[0] < 10 && arr_tail <= 100){
+            ranges = [ 1, 100 ];
+            return ranges;
+          }
+
+          let curr = arr[0]; // curr will serve as the last element in our ranges array, which we'll use to increment to create our range values.
+
+          ranges.push(curr); // our first element is created in the ranges array.
+          spacing += 10;
+
+          let next; // this holds the integer to be added to our ranges array.
+          next = curr + spacing;
+
+          let modulo; // will track our modulus difference between 50 and eventually 100.
+
+          // below we ensure our results are rounded to hundredeths.
+          if(next % 50 > 0){
+            modulo = next % 50;
+            next -= modulo;
+            next += 50;
+          } else if(next % 100 > 0) {
+            modulo = next % 100;
+            next -= modulo;
+            next += 100;
+          }
+
+          curr = next;
+          ranges.push(curr);
+          curr += 1;
+          ranges.push(curr);
+
+          for(let i = 0; i < numOfLines; i++){
+            next = curr + spacing;
+            modulo = next % 100;
+            if(modulo > 0){
+              next -= modulo;
+              next += 100;
+            }
+            curr = next;
+            ranges.push(curr);
+            curr += 1;
+            ranges.push(curr);
+
+            if(curr > arr[arr.length-1]){
+              ranges = ranges.slice(0,ranges.length-1);
+                if(ranges[0] % 10 === 0){
+                  ranges[0] = ranges[0] - 9;
+                }
+              return ranges;
+            }
+          }
+
+          ranges = ranges.slice(0,ranges.length-1);
+          if(ranges[0] % 10 === 0){
+            ranges[0] = ranges[0] - 9;
+          }
+          return ranges;
+
+        };
+
+        return getSpacing(brandPriceRange);
+
+      })
+      .catch(err => {
+        console.log('error: ',err);
+        return next(err);
+      });
+
   }
 
 }

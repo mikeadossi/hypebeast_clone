@@ -108,17 +108,26 @@ router.get('/logout', function(req, res) {
   res.status(200).redirect('/');
 })
 
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] })
+);
 
 router.get('/auth/google/callback',
-  passport.authenticate('google', { prompt: 'select_account', failureRedirect: '/error' }),
+  passport.authenticate('google', {
+    prompt: 'select_account',
+    failureRedirect: '/error'
+  }),
   function(req, res) {
     res.redirect('/');
     res.json(req.user);
   }
 );
 
-router.get('/auth/facebook', passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends', 'manage_pages'] } ));
+router.get('/auth/facebook',
+  passport.authenticate('facebook', {
+    authType: 'rerequest',
+    scope: ['user_friends', 'manage_pages']
+  } ));
 
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/error' }),
@@ -141,12 +150,19 @@ router.get('/error', function(req, res) {
 
 router.get('/brands/:brand', function(req, res) {
   let brand = req.params.brand;
-  Promise.all([hbx_queries.getBrandDetails(brand), hbx_queries.getInventory(brand), hbx_queries.getBrandCategories(brand), hbx_queries.getBrandProductColors(brand)])
+  Promise.all([
+    hbx_queries.getBrandDetails(brand),
+    hbx_queries.getInventory(brand),
+    hbx_queries.getBrandCategories(brand),
+    hbx_queries.getBrandProductColors(brand),
+    hbx_queries.getBrandPriceRange(brand)
+  ])
     .then( results => {
       let brand = results[0];
       let product = results[1];
       let categories = results[2];
       let colors = results[3];
+      let ranges = results[4];
 
       let categories_arr = [];
       for(let i = 0; i < categories.length; i++){
@@ -159,9 +175,15 @@ router.get('/brands/:brand', function(req, res) {
       }
 
       // below we get all unique items in the categories_arr and colors_arr.
-      categories_arr = categories_arr.filter(function(item,pos){ return categories_arr.indexOf(item) == pos });
+      categories_arr = categories_arr.filter(
+        function(item,pos){
+          return categories_arr.indexOf(item) == pos
+        });
 
-      colors_arr = colors_arr.filter(function(item,pos){ return colors_arr.indexOf(item) == pos });
+      colors_arr = colors_arr.filter(
+        function(item,pos){
+          return colors_arr.indexOf(item) == pos
+        });
 
       let product_images;
       let store_prod_images = [];
@@ -173,12 +195,16 @@ router.get('/brands/:brand', function(req, res) {
         store_prod_images.push(product_images[1]);
       }
 
+      console.log('ranges ======> ',ranges);
+
+
       res.render('hbx_store', {
         brand: brand,
         product: product,
         store_prod_images: store_prod_images,
         categories_arr: categories_arr,
-        colors_arr: colors_arr
+        colors_arr: colors_arr,
+        price_range_arr: ranges
       })
     })
     .catch( err => {
