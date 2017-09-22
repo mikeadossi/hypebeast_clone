@@ -155,7 +155,8 @@ router.get('/brands/:brand', function(req, res) {
     hbx_queries.getInventory(brand),
     hbx_queries.getBrandCategories(brand),
     hbx_queries.getBrandProductColors(brand),
-    hbx_queries.getBrandPriceRange(brand)
+    hbx_queries.getBrandPriceRange(brand),
+    hbx_queries.getProductCount(brand)
   ])
     .then( results => {
       let brand = results[0];
@@ -163,6 +164,7 @@ router.get('/brands/:brand', function(req, res) {
       let categories = results[2];
       let colors = results[3];
       let ranges = results[4];
+      let product_count = results[5];
 
       let categories_arr = [];
       for(let i = 0; i < categories.length; i++){
@@ -173,7 +175,7 @@ router.get('/brands/:brand', function(req, res) {
       for(let i = 0; i < colors.length; i++){
         colors_arr.push(colors[i].color);
       }
-
+      // console.log('product_count[0]: ',product_count[0]);
       // below we get all unique items in the categories_arr and colors_arr.
       categories_arr = categories_arr.filter(
         function(item,pos){
@@ -195,8 +197,15 @@ router.get('/brands/:brand', function(req, res) {
         store_prod_images.push(product_images[1]);
       }
 
-      console.log('ranges ======> ',ranges);
+      let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
+      let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
+      let product_count_arr = [];
+      for(let i = 0; i < 18; i++){
+        if(product_count[0][brand_names[i]]){
+          product_count_arr.push( size_arr[i] );
+        }
+      }
 
       res.render('hbx_store', {
         brand: brand,
@@ -204,7 +213,8 @@ router.get('/brands/:brand', function(req, res) {
         store_prod_images: store_prod_images,
         categories_arr: categories_arr,
         colors_arr: colors_arr,
-        price_range_arr: ranges
+        price_range_arr: ranges,
+        product_count_arr: product_count_arr
       })
     })
     .catch( err => {

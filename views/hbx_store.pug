@@ -51,6 +51,9 @@ block content
         .hbx_sidebar_link_container.hbx_size_links
           .hbx_sidebar_header Size
           ul CLOTHING
+            - for(let i = 0; i < product_count_arr.length; i++){
+                li.size_div !{product_count_arr[i]}
+            - }
         .hbx_sidebar_link_container.hbx_color_links
           .hbx_sidebar_header Color
           .hbx_category_scroll_container
@@ -79,7 +82,7 @@ block content
             li 
               a(href="/brands/tres-bien") Très Bien
             li 
-              a(href="/brands/Undercover") Undercover
+              a(href="/brands/undercover") Undercover
             li.see_all_brands SEE ALL BRANDS
       
       
