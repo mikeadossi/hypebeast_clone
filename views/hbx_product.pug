@@ -2,8 +2,19 @@ extends hbx_layout
 
 block content
   
-  .hbx_store_content
-    .product_image !{ product_content[0].product_images }
+  .hbx_product_content
+    .product_container
+      .product_preview_container
+        - for(let i = 0; i < product_images_arr.length; i++){
+            .product_preview_img !{ product_images_arr[i] }
+        - }
+      .product_on_display_container
+        - for(let j = 0; j < product_images_arr.length; j++){
+            .product_on_display !{ product_images_arr[j] }
+        - }
+        
+        
+        
     .product_brand BRAND: !{ brand_name_string }
     .product_name NAME: !{ product_content[0].product_name }
     .product_price PRICE: $!{ product_content[0].product_price }.00
