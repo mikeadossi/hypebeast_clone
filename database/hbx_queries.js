@@ -26,6 +26,10 @@ let queries = {
     return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE brand_name = $1", brand);
   },
 
+  getProductColors: function(product){
+    return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE product_name_route = $1", product);
+  },
+
   getBrandPriceRange: function(brand){
 
     return brandPrices = db.any(

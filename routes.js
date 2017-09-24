@@ -246,16 +246,19 @@ router.get('/brands/:brand', function(req, res) {
 router.get('/brands/:brand/:product', function(req, res) {
   let brand = req.params.brand;
   let product = req.params.product;
-  console.log('product: ',product);
+
   Promise.all([
     hbx_queries.getProductContent(brand,product),
-    hbx_queries.getProductSizes(product)
+    hbx_queries.getProductSizes(product),
+    hbx_queries.getProductColors(product)
   ])
     .then( results => {
       let product_content = results[0];
       let product_sizes = results[1];
+      let product_colors = results[2];
 
-      console.log('product_sizes: ',product_sizes);
+      // get product_sizes_arr
+
       let brandNameObj = {
         '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
         'tres-bien': 'Tres Bien',
@@ -270,8 +273,6 @@ router.get('/brands/:brand/:product', function(req, res) {
       let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
       let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
-      console.log('-----------> ',product_sizes);
-
       let product_sizes_arr = [];
       for(let i = 0; i < 18; i++){
         if(product_sizes[0][brand_names[i]]){
@@ -279,12 +280,16 @@ router.get('/brands/:brand/:product', function(req, res) {
         }
       }
 
+      // get product_colors_arr
+      const product_colors_arr = Object.values(product_colors[0]);
+
 
       res.render('hbx_product', {
         product_content: product_content,
         product_images_arr: product_images_arr,
         brand_name_string: brandNameObj[brand],
-        product_sizes_arr: product_sizes_arr
+        product_sizes_arr: product_sizes_arr,
+        product_colors_arr: product_colors_arr
       })
     })
     .catch( err => {

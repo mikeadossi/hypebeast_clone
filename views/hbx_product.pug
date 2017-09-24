@@ -3,6 +3,12 @@ extends hbx_layout
 block content
   
   .hbx_product_content
+    .hbx_store_header_container
+      ul.hbx_header_left_links.hbx_product_header_links
+        li 
+          a(href="#") Home 
+        li
+          img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
     .product_container
       .product_preview_container
         - for(let i = 0; i < product_images_arr.length; i++){
@@ -14,15 +20,86 @@ block content
         - }
       .product_details_container
         .product_brand !{ brand_name_string }
-        .product_name !{ product_content[0].product_name }
-        .product_price USD !{ product_content[0].product_price }.00
-        ul.product_size_container
-          li.product_title SIZE
-          li.find_your_size FIND YOUR SIZE
-        .sizes_container
-          - for(let s = 0; s < product_sizes_arr.length; s++){
-              .product_sizes !{ product_sizes_arr[s] }
-          - }
+        .product_name.product_name_left !{ product_content[0].product_name }
+        .product_price.product_price_left USD !{ product_content[0].product_price }.00
+        .select_color_container
+          .product_title COLOR
+          .select_color_inner
+            select.form-control 
+              -for(let i = 0; i < product_colors_arr.length; i++){
+                option(value=product_colors_arr[i]) !{product_colors_arr[i]}
+              - }
+        .product_size_container
+          span.product_title SIZE
+          span.find_your_size FIND YOUR SIZE
+          .sizes_container
+            - for(let s = 0; s < product_sizes_arr.length; s++){
+                .product_sizes !{ product_sizes_arr[s] }
+            - }
+        .product_purchase_container
+          .product_title QUANTITY
+          .product_item_count_select_container
+            .item_count_minus -
+            .item_count_amt 1
+            .item_count_plus +
+        .product_add_to_cart_button
+          .select_size PLEASE SELECT A SIZE
+        
+        .product_disclaimer_1
+          img.disclaimer_images(src="/images/hbx_images/general/30_days.png")
+          .disclaimer_p 30 Days Return
+        .wishlist_container
+          img.disclaimer_notice_images(src="/images/hbx_images/general/wishlist_star.png")
+          .disclaimer_notice_p Add to wishlist
+        .product_disclaimer_2
+          img.disclaimer_images(src="/images/hbx_images/general/taxes_duties.png")
+          .disclaimer_p Tax & Duties Included.
+        .product_disclaimer_3
+          img.disclaimer_notice_images(src="/images/hbx_images/general/notice.png")
+          .disclaimer_notice_p This item is excluded from promotions.
+        .product_disclaimer_4
+          img.disclaimer_notice_images(src="/images/hbx_images/general/notice.png")
+          .disclaimer_notice_p This item is not limited to QTY 2 per customer. 
+        .product_social_media_links
+          .product_title Share
+          img(src="/images/hbx_images/general/share_social_media.png")
             
         
-  .product_details !{ product_content[0].product_details }
+  .product_footer_details 
+    h2.product_details_header Product Details
+    .product_details_content_containers
+      .product_details_left_container
+        .product_details_section_header DESCRIPTION
+        .footer_details !{ product_content[0].product_details }
+      .product_details_right_container
+        .product_details_section_header SIZING
+        .footer_details
+          .product_details.product_right_details
+            ul
+              li High quality product
+              li Designed exclusively for our HBX patrons
+              li Model wears size that fits
+              li Our Models measure: Height 183cm, Chest 35.5”/90cm, Waist 30”/76cm, Hip 33”/84cm
+        .product_sizing_button 
+          img.sizing_ruler_img(src="/images/hbx_images/general/sizing_ruler.png")
+          span SIZE GUIDE
+        .product_shipping_info
+          .product_details_section_header SHIPPING & RETURNS
+          .shipping_info_p For more information about returns please
+            span 
+              a.find_your_size(href="#") click here
+            span .
+        .product_footer_details_contact
+          ul
+            li Have questions?
+            li 
+              img.contact_images(src="/images/hbx_images/general/speech_bubble.png")
+              span Live Chat
+            li
+              img.contact_images(src="/images/hbx_images/general/mailing_envelope.png") 
+              span Email Us
+            li 
+              img.contact_images(src="/images/hbx_images/general/phone.png")
+              span Call Us
+          
+          

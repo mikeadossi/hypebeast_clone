@@ -198,22 +198,11 @@
 }
 
 .product_display{
-  display:flex;
-  flex-wrap:wrap
+  display:inline-block;
 }
-
-/*.product_image{
-  flex-direction: row;
-}*/
 
 .product_image{
   padding-bottom:40px;
-}
-
-.main_img img{
-  width: 253px;
-  height: 328px;
-  padding: 5px;
 }
 
 .hide_initially_img img{
@@ -227,18 +216,16 @@
   padding-bottom:10px;
 }
 
-.product_name{
-  font-size:28px;
+.product_name, .product_price{
+  font-size:14px;
   padding-top:6px;
-}
-
-.product_price{
-  padding-top:10px;
-  font-size:16px;
+  text-align:center;
 }
 
 .product_image img{
-  height:300px;
+  width: 253px;
+  height: 328px;
+  padding: 5px;
 }
 
 
