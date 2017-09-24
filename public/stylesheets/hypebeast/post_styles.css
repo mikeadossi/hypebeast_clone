@@ -82,7 +82,7 @@
 
 @media only screen and (max-width: 759px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .post_content{
     width: 90%;
@@ -94,7 +94,7 @@
 
 @media (min-width: 760px) and (max-width: 989px){
   body{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
   }
   .blog_text_content{
     text-align:center;
@@ -131,7 +131,7 @@
 
 @media (min-width: 1231px) {
   body{
-    background-color:limegreen;
+    /*background-color:limegreen;*/
   }
   .post_content{
     margin:unset;

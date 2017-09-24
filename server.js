@@ -99,7 +99,7 @@ app.use(cookieParser());
 app.use(session({
   secret: config.secret,
   resave: true,
-  saveUnitialized: false
+  saveUnitialized: true
 }))
 
 app.use(bodyParser.json());
@@ -108,12 +108,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-// app.use(function(req, res, next) {
-//   // console.log('err =============>>>> ',err);
-//   const err = new Error('Not Found')
-//   err.status = 404
-//   next(err)
-// });
+app.use(function(req, res, next) {
+  // console.log('err =============>>>> ',err);
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
+});
 
 
 module.exports = app;

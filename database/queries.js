@@ -38,7 +38,8 @@ let queries = {
         })
         .catch(err => {
           console.log('error: ',err);
-          return next(err);
+          // return next(err);
+          // return err;
         })
     })
   },

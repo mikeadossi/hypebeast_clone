@@ -61,7 +61,7 @@ for(let i = 0; i < num_of_images; i++){
     product_preview_img = $(".product_preview_img")[i];
     if(e.target.parentElement === product_preview_img){
       console.log('e.target.parentElement -> ',e.target.parentElement);
-      percent = i*100
+      percent = i*99
       $(".product_on_display").css("right",percent+"%");
       $(".product_on_display").css("transition","1s");
     }

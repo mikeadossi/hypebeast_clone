@@ -12,10 +12,17 @@ block content
         - for(let j = 0; j < product_images_arr.length; j++){
             .product_on_display !{ product_images_arr[j] }
         - }
+      .product_details_container
+        .product_brand !{ brand_name_string }
+        .product_name !{ product_content[0].product_name }
+        .product_price USD !{ product_content[0].product_price }.00
+        ul.product_size_container
+          li.product_title SIZE
+          li.find_your_size FIND YOUR SIZE
+        .sizes_container
+          - for(let s = 0; s < product_sizes_arr.length; s++){
+              .product_sizes !{ product_sizes_arr[s] }
+          - }
+            
         
-        
-        
-    .product_brand BRAND: !{ brand_name_string }
-    .product_name NAME: !{ product_content[0].product_name }
-    .product_price PRICE: $!{ product_content[0].product_price }.00
-    .product_details DETAILS: !{ product_content[0].product_details }
+  .product_details !{ product_content[0].product_details }

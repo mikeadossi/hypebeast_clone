@@ -770,7 +770,7 @@ VALUES (
   '80',
   'Hooded Blouson Jacket',
   'hooded-blouson-jacket',
-  '<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_front.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_side.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_rear.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_full.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_front_zipped.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_innards.jpg" />',
+  '<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_front.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_side.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_rear.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_full.jpg" />,<img src="/images/hbx_images/tres_bien/jackets/blouson_jacket_innards.jpg" />',
   '<div class="product_details"><ul><li>Zipper fastenings.</li><li>2 pockets.</li><li>Velcro to cuffs.</li><li>96% Cotton | 4% Polyurethane.
 </li></ul></div>',
   '2',

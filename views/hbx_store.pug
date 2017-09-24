@@ -24,9 +24,9 @@ block content
     .hbx_sorting_button_container
       .hbx_sorting_button
         select.form-control 
-          option NEWEST FIRST
-          option(value='desc') PRICE: HIGH TO LOW
-          option(value='asc') PRICE: LOW TO HIGH
+          option(value='newest_first') NEWEST FIRST
+          option(value='high_to_low') PRICE: HIGH TO LOW
+          option(value='low_to_high') PRICE: LOW TO HIGH
     
     .hbx_flexed_content
       .hbx_sidebar_nav
@@ -51,8 +51,9 @@ block content
         .hbx_sidebar_link_container.hbx_size_links
           .hbx_sidebar_header Size
           ul CLOTHING
-            - for(let i = 0; i < product_count_arr.length; i++){
-                li.size_div !{product_count_arr[i]}
+            li
+            - for(let i = 0; i < product_sizes_arr.length; i++){
+                li.size_div !{product_sizes_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_color_links
           .hbx_sidebar_header Color
@@ -65,7 +66,7 @@ block content
             - }
         .hbx_sidebar_link_container.hbx_price_links
           .hbx_sidebar_header Price
-            .hello PRICE: !{ price_range_arr }
+            .prize_range !{ price_range_arr }
         .hbx_sidebar_link_container
           .hbx_sidebar_clear_all CLEAR ALL
         .hbx_sidebar_link_container.hbx_featured_links

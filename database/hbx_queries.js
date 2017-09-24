@@ -140,14 +140,23 @@ let queries = {
       })
       .catch(err => {
         console.log('error: ',err);
-        return next(err);
+        // return next(err);
+        // return err;
       });
   },
 
   getProductCount: function(brand){
     return db.any("SELECT small_count,medium_count,large_count,xlarge_count,US_8_count,US_8_5_count,US_9_count,US_9_count,US_9_5_count,US_10_count,US_10_5_count,US_11_count,US_11_5_count,US_12_count,US_12_5_count,pants_28_count,pants_30_count,pants_32_count,pants_34_count,pants_36_count from products WHERE brand_name = $1", brand)
-  }
+  },
 
+  getProductSizes: function(product){
+    return db.any("SELECT small_count,medium_count,large_count,xlarge_count,US_8_count,US_8_5_count,US_9_count,US_9_count,US_9_5_count,US_10_count,US_10_5_count,US_11_count,US_11_5_count,US_12_count,US_12_5_count,pants_28_count,pants_30_count,pants_32_count,pants_34_count,pants_36_count from products WHERE product_name_route = $1", product)
+  },
+
+  getSortedInventoryDirection: function(brand, direction){
+    console.log("----------------> executing sql query for ", direction)
+    return db.any("SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
+  }
 }
 
 module.exports = queries;

@@ -5,9 +5,9 @@ const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('passport');
 
-/**************************** Hypebeast (below) *******************************/
+/************************** Hypebeast (below) *******************************/
 
-router.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
 
   Promise.all([queries.getPosts(), queries.getTopTenByHypeCount()]).then(results => {
 
@@ -43,17 +43,17 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
-// router.get('/hbx_store/:id', function(req, res) {
-//   let id = req.params.id;
-//   console.log('called!!!');
-//   queries.getPost(id)
-//     .then( brand => {
-//       res.render('hbx_brand', { brand: brand })
-//     })
-//     .catch( err => {
-//       console.log('err: ', err);
-//     })
-// })
+router.get('/hbx_store/:id', function(req, res) {
+  let id = req.params.id;
+  console.log('called!!!');
+  queries.getPost(id)
+    .then( brand => {
+      res.render('hbx_brand', { brand: brand })
+    })
+    .catch( err => {
+      console.log('err: ', err);
+    })
+})
 
 router.get('/store', function(req, res) {
   res.render('hbx_index');
@@ -146,7 +146,7 @@ router.get('/error', function(req, res) {
 });
 
 
-/****************************** HBX (below) ***********************************/
+/**************************** HBX (below) ***********************************/
 
 router.get('/brands/:brand', function(req, res) {
   let brand = req.params.brand;
@@ -159,12 +159,13 @@ router.get('/brands/:brand', function(req, res) {
     hbx_queries.getProductCount(brand)
   ])
     .then( results => {
+
       let brand = results[0];
       let product = results[1];
       let categories = results[2];
       let colors = results[3];
       let ranges = results[4];
-      let product_count = results[5];
+      let product_sizes = results[5];
 
       let categories_arr = [];
       for(let i = 0; i < categories.length; i++){
@@ -175,7 +176,7 @@ router.get('/brands/:brand', function(req, res) {
       for(let i = 0; i < colors.length; i++){
         colors_arr.push(colors[i].color);
       }
-      // console.log('product_count[0]: ',product_count[0]);
+
       // below we get all unique items in the categories_arr and colors_arr.
       categories_arr = categories_arr.filter(
         function(item,pos){
@@ -200,12 +201,31 @@ router.get('/brands/:brand', function(req, res) {
       let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
       let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
-      let product_count_arr = [];
-      for(let i = 0; i < 18; i++){
-        if(product_count[0][brand_names[i]]){
-          product_count_arr.push( size_arr[i] );
+      let product_sizes_arr = [];
+      console.log('product_sizes[0] -----> ',product_sizes[0]);
+      let p = 0; for(key in product_sizes){p++}
+      var numOfProds = p;
+      for(let j = 0; j < numOfProds; j++){
+        for(let i = 0; i < 19; i++){
+          if(product_sizes[j][brand_names[i]] && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
+            console.log('size_arr['+i+'] -> ',size_arr[i]);
+            product_sizes_arr.push( size_arr[i] );
+          }
         }
       }
+
+      console.log('product_sizes_arr: ',product_sizes_arr);
+      console.log('product_sizes: ',product_sizes);
+
+      // let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
+      // let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
+      //
+      // let product_count_arr = [];
+      // for(let i = 0; i < 18; i++){
+      //   if(product_count[0][brand_names[i]]){
+      //     product_count_arr.push( size_arr[i] );
+      //   }
+      // }
 
       res.render('hbx_store', {
         brand: brand,
@@ -214,7 +234,7 @@ router.get('/brands/:brand', function(req, res) {
         categories_arr: categories_arr,
         colors_arr: colors_arr,
         price_range_arr: ranges,
-        product_count_arr: product_count_arr
+        product_sizes_arr: product_sizes_arr
       })
     })
     .catch( err => {
@@ -222,11 +242,20 @@ router.get('/brands/:brand', function(req, res) {
     })
 })
 
+
 router.get('/brands/:brand/:product', function(req, res) {
   let brand = req.params.brand;
   let product = req.params.product;
-  hbx_queries.getProductContent(brand,product)
+  console.log('product: ',product);
+  Promise.all([
+    hbx_queries.getProductContent(brand,product),
+    hbx_queries.getProductSizes(product)
+  ])
     .then( results => {
+      let product_content = results[0];
+      let product_sizes = results[1];
+
+      console.log('product_sizes: ',product_sizes);
       let brandNameObj = {
         '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
         'tres-bien': 'Tres Bien',
@@ -236,9 +265,26 @@ router.get('/brands/:brand/:product', function(req, res) {
         'undercover': 'Undercover'
       }
 
+      let product_images_arr = product_content[0].product_images.split(',')
+
+      let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
+      let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
+
+      console.log('-----------> ',product_sizes);
+
+      let product_sizes_arr = [];
+      for(let i = 0; i < 18; i++){
+        if(product_sizes[0][brand_names[i]]){
+          product_sizes_arr.push( size_arr[i] );
+        }
+      }
+
+
       res.render('hbx_product', {
-        product_content: results,
-        brand_name_string: brandNameObj[brand]
+        product_content: product_content,
+        product_images_arr: product_images_arr,
+        brand_name_string: brandNameObj[brand],
+        product_sizes_arr: product_sizes_arr
       })
     })
     .catch( err => {

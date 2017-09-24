@@ -650,14 +650,14 @@ textarea{
 }
 
 .top_ten_left{
-  background-color:orange;
+  /*background-color:orange;*/
 }
 
 .top_ten_left .top_ten_story{
-  background-color:purple;
+  /*background-color:purple;*/
 }
 .top_ten_right .top_ten_story{
-  background-color:orange;
+  /*background-color:orange;*/
 }
 
 .top_ten_title{
@@ -730,7 +730,7 @@ textarea{
   background-color: green;
 }
 .top_stories{
-  background-color: blue;
+  /*background-color: blue;*/
 }
 .top_ten_description_mobile{
   top:-37px;
@@ -950,7 +950,7 @@ textarea{
 
 @media only screen and (max-width: 759px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .top_ten_description{
     width: 87%;
@@ -1313,7 +1313,7 @@ textarea{
   }
   .post_container{
     width: 1171px;
-    background-color: red;
+    /*background-color: red;*/
     margin: auto;
   }
   .post_content{
