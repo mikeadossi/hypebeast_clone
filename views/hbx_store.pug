@@ -50,7 +50,8 @@ block content
             - }
         .hbx_sidebar_link_container.hbx_size_links
           .hbx_sidebar_header Size
-          ul CLOTHING
+          ul 
+            .sidebar_sub_header CLOTHING
             li
             - for(let i = 0; i < product_sizes_arr.length; i++){
                 li.size_div !{product_sizes_arr[i]}
@@ -65,26 +66,33 @@ block content
                   label.sidebar_label(for="sidebar_filter_category_homeware") !{colors_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_price_links
-          .hbx_sidebar_header Price
-            .prize_range !{ price_range_arr }
+          .hbx_sidebar_header 
+            .prize_range
+              div.hbx_sidebar_header Price
+              - for(let i = 0; i < price_range_arr.length - 1; i += 2){
+                  ul
+                    li
+                      input(type="checkbox" id="sidebar_filter_"+price_range_arr[i] value=price_range_arr[i]+" - "+price_range_arr[i+1] )
+                      label.sidebar_label(for="sidebar_filter_"+price_range_arr[i]) USD !{price_range_arr[i]}.00 - USD !{price_range_arr[i+1]}.00
+              - }
         .hbx_sidebar_link_container
           .hbx_sidebar_clear_all CLEAR ALL
         .hbx_sidebar_link_container.hbx_featured_links
           .hbx_sidebar_header Featured Brands
           ul
             li 
-              a(href="/brands/11-by-boris-bidjan-saberi") 11 By Boris Bidjan Saberi
+              a.featured_brands(href="/brands/11-by-boris-bidjan-saberi") 11 By Boris Bidjan Saberi
             li 
-              a(href="/brands/adidas-originals") Adidas Originals
+              a.featured_brands(href="/brands/adidas-originals") Adidas Originals
             li 
-              a(href="/brands/denim-by-vanquish-fragment") Denim By Vanquish & Fragment
+              a.featured_brands(href="/brands/denim-by-vanquish-fragment") Denim By Vanquish & Fragment
             li 
-              a(href="/brands/mastermind-world") Mastermind World
+              a.featured_brands(href="/brands/mastermind-world") Mastermind World
             li 
-              a(href="/brands/tres-bien") Très Bien
+              a.featured_brands(href="/brands/tres-bien") Très Bien
             li 
-              a(href="/brands/undercover") Undercover
-            li.see_all_brands SEE ALL BRANDS
+              a.featured_brands(href="/brands/undercover") Undercover
+            li#see_all_brands SEE ALL BRANDS
       
       
       .hbx_product_container

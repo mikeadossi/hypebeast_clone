@@ -202,20 +202,20 @@ router.get('/brands/:brand', function(req, res) {
       let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
       let product_sizes_arr = [];
-      console.log('product_sizes[0] -----> ',product_sizes[0]);
+      // console.log('product_sizes[0] -----> ',product_sizes[0]);
       let p = 0; for(key in product_sizes){p++}
       var numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
           if(product_sizes[j][brand_names[i]] && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
-            console.log('size_arr['+i+'] -> ',size_arr[i]);
+            // console.log('size_arr['+i+'] -> ',size_arr[i]);
             product_sizes_arr.push( size_arr[i] );
           }
         }
       }
 
-      console.log('product_sizes_arr: ',product_sizes_arr);
-      console.log('product_sizes: ',product_sizes);
+      // console.log('product_sizes_arr: ',product_sizes_arr);
+      // console.log('product_sizes: ',product_sizes);
 
       // let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
       // let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
