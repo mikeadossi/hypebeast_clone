@@ -285,15 +285,27 @@ router.get('/brands/:brand/:product', function(req, res) {
       // get product_colors_arr
       const product_colors_arr = Object.values(product_colors[0]);
 
+
+
+
+
+
+
+
+
       // get related products by sorting through all products
         // start by storing in an array all the first images from every product in the db
       const related_products_arr = [];
+      const product_name = product_content[0].product_name_route;
       let collect_products;
+
       for(key in related_products){
         collect_products = Object.values(related_products[key]);
         collect_products = collect_products[0].split(',')
         collect_products = collect_products[0];
-        related_products_arr.push(collect_products);
+        if( !(collect_products.includes(product_name)) ){
+          related_products_arr.push(collect_products);
+        }
       }
 
       let all_brands_arr = ['adidas'];
