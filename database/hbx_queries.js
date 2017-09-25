@@ -160,6 +160,10 @@ let queries = {
   getSortedInventoryDirection: function(brand, direction){
     console.log("----------------> executing sql query for ", direction)
     return db.any("SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
+  },
+
+  getRelatedProducts: function(product){
+    return db.any("SELECT product_images FROM products",product)
   }
 }
 

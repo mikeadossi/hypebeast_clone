@@ -250,12 +250,14 @@ router.get('/brands/:brand/:product', function(req, res) {
   Promise.all([
     hbx_queries.getProductContent(brand,product),
     hbx_queries.getProductSizes(product),
-    hbx_queries.getProductColors(product)
+    hbx_queries.getProductColors(product),
+    hbx_queries.getRelatedProducts(product)
   ])
     .then( results => {
       let product_content = results[0];
       let product_sizes = results[1];
       let product_colors = results[2];
+      let related_products = results[3];
 
       // get product_sizes_arr
 
@@ -283,13 +285,49 @@ router.get('/brands/:brand/:product', function(req, res) {
       // get product_colors_arr
       const product_colors_arr = Object.values(product_colors[0]);
 
+      // get related products by sorting through all products
+        // start by storing in an array all the first images from every product in the db
+      const related_products_arr = [];
+      let collect_products;
+      for(key in related_products){
+        collect_products = Object.values(related_products[key]);
+        collect_products = collect_products[0].split(',')
+        collect_products = collect_products[0];
+        related_products_arr.push(collect_products);
+      }
+
+      let all_brands_arr = ['adidas'];
+      let this_brand_images_arr = [];
+      let brand_name_string = product_content[0].brand_name;
+      let category_id = product_content[0].category_id;
+
+      for(let q = 0; q < related_products_arr.length; q++){
+        if(related_products_arr[q].includes(brand_name_string, category_id)){
+          this_brand_images_arr.push(related_products_arr[q]);
+          related_products_arr.splice(q,1,'');
+        }
+      }
+      for(let i = 0; i < related_products_arr.length; i++){
+        if(related_products_arr[i].includes(brand_name_string)){
+          this_brand_images_arr.push(related_products_arr[i]);
+          related_products_arr.splice(i,1,'');
+        }
+      }
+      for(let j = 0; j < related_products_arr.length; j++){
+        if(related_products_arr[j] !== ''){
+          this_brand_images_arr.push(related_products_arr[j]);
+          related_products_arr.splice(j,1,'');
+        }
+      }
+
 
       res.render('hbx_product', {
         product_content: product_content,
         product_images_arr: product_images_arr,
         brand_name_string: brandNameObj[brand],
         product_sizes_arr: product_sizes_arr,
-        product_colors_arr: product_colors_arr
+        product_colors_arr: product_colors_arr,
+        this_brand_images_arr: this_brand_images_arr
       })
     })
     .catch( err => {

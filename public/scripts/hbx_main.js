@@ -69,50 +69,19 @@ for(let i = 0; i < num_of_images; i++){
 }
 
 // code for related products carousel
-
-// let related_products = $(".related_products");
-// let dotButtons = $(".dot_buttons");
-// let num_of_slides = $(".dot_buttons").length;
-// let percentage;
-// let control_button;
-//
-// // for(let i = 0; i < num_of_slides; i++){
-// for(let i = 0; i < 3; i++){
-//   dotButtons[0].addEventListener("click", function(e) {
-//     // product_preview_img = $(".product_preview_img")[i];
-//     control_button = $(".dot_buttons")[i];
-//     if(e.target.parentElement === control_button){
-//       percentage = i*90
-//       $(".related_products img").css("right",percentage+"%");
-//       $(".related_products img").css("transition","1s");
-//     }
-//   })
-// }
 let product_slide;
 let percentage;
 
 let dotButtons = $(".dot_buttons span");
 let dotButton2 = $(".dot_buttons span")[1];
-console.log('dotButtons: ',dotButtons);
+
 for(let i = 0; i < 3; i++){
   dotButtons[i].addEventListener("click", function(e){
-    // product_slide = $(".dot_buttons span")[0];
-    // if(e.target.parentElemnt === product_slide){
-    console.log('e.target.parentElemnt: ',e.target.parentElemnt);
-    console.log('e.target: ',e.target);
     percentage = i * 100
     $(".related_product_slides").css("right",percentage+"%");
     $(".related_product_slides").css("transition","1s");
-
-    // console.log('product_slide: ',product_slide);
-    // }
   })
 }
-
-
-// dotButtons[1].addEventListener("click", function(){
-//   console.log('u');
-// })
 
 
 
