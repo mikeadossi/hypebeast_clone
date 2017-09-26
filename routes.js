@@ -314,13 +314,13 @@ router.get('/brands/:brand/:product', function(req, res) {
       let category_id = product_content[0].category_id;
 
       for(let q = 0; q < related_products_arr.length; q++){
-        if(related_products_arr[q].includes(brand_name_string, category_id)){
+        if(related_products_arr[q].includes(brand_name_string, category_id) && related_products_arr[q] !== ''){
           this_brand_images_arr.push(related_products_arr[q]);
           related_products_arr.splice(q,1,'');
         }
       }
       for(let i = 0; i < related_products_arr.length; i++){
-        if(related_products_arr[i].includes(brand_name_string)){
+        if(related_products_arr[i].includes(brand_name_string) && related_products_arr[i] !== ''){
           this_brand_images_arr.push(related_products_arr[i]);
           related_products_arr.splice(i,1,'');
         }
