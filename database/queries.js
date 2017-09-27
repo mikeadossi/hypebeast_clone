@@ -70,7 +70,6 @@ let queries = {
   findOneAndUpdateGh: function(searchAndUpdate){
     return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
       .then( user => {
-        console.log('user (queries,73) -> ',user);
         if(!user){
           // if user is not found in the users table we add them to our github table
           const result = db.oneOrNone("INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);

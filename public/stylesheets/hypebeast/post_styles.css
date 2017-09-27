@@ -8,7 +8,7 @@
 }
 
 .post_postbox{
-  text-align:center;
+  width:100%;
 }
 
 .post_content .post_title{
@@ -22,18 +22,67 @@
 }
 
 .post_avatar{
-  height:20px;
-  width:20px;
+  height: 56px;
+  width: 60px;
   background-color: lightgrey;
-  display:inline-block;
+  display: inline-block;
   position: relative;
-  top: -86px;
-  margin-right:10px;
+  top: -77px;
+  margin-right: 10px;
+  border-radius: 2px;
+}
+
+.post_textarea:focus{
+  outline:0;
+}
+
+.post_textarea_content{
+  display: inline;
+}
+
+.post_avatar{
+  display:inline-block;
+}
+
+.post_as_user{
+  background-color: #7E8A92;
+  color: white;
+  font-size: 12px;
+  padding: 8px;
+  border-bottom-right-radius: 5px;
+  width: 100px;
+  margin-left: auto;
+  border:2px solid #748089;
+  cursor:pointer;
+}
+
+.post_actions{
+  /*display:inline;*/
+  background-color: #F7F9FA;
+  border: 2px solid #DFE3E7;
+  width: 82.6%;
+  position: relative;
+  margin-top: -11px;
+  margin-left: 116px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.post_as_user:hover{
+  background-color:#68767E;
+  border:2px solid #606A6F;
 }
 
 .post_textarea{
-  width:80%;
-  display:inline-block;
+  display: inline;
+  width: 80%;
+  border: 2px solid #DFE3E7;
+  padding: 10px;
+  border-radius: 5px;
+  color: #7C8D98;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 2px solid white;
 }
 
 .post_content{
@@ -51,6 +100,99 @@
   height:unset;
 }
 
+.posts_comments_main_container{
+  margin-top:20px;
+}
+
+.post_comments_container{
+  display:flex;
+  margin-top:3px;
+}
+
+.post_comment{
+  padding: 5px;
+  border: 2px solid grey;
+  width:90%;
+}
+
+.commenter_avatar_image{
+  height: 47px;
+  position: relative;
+  top: 4px;
+  left: 7px;
+}
+
+.commenter_username{
+  position:relative;
+  top:-4px;
+  color:steelblue;
+}
+
+.comment_text{
+  color:#303434;
+}
+
+.comment_time{
+  margin-left:5px;
+  color:grey;
+  font-size:13px;
+}
+
+.reply_seperator, .reply_dot_seperator{
+  color:grey;
+}
+
+.reply_dot_seperator{
+  position:relative;
+  top: -3px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.reply_button:hover, .share_reply_button:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.reply_button, .share_reply_button{
+  color:grey;
+  text-decoration: none;
+  font-size:13px;
+}
+
+.commenter_input_container{
+  margin-bottom:3px;
+}
+
+.comment_reply_container .fa:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.comment_reply_container .fa{
+  margin-right:5px;
+  margin-left:5px;
+  color:grey;
+}
+
+.reply_button{
+  font-size:13px;
+}
+
+.commenter_input_container input{
+  width:99%;
+  background-color:transparent;
+  border:none;
+}
+
+.commenter_avatar{
+  background-color: steelblue;
+  height: 55px;
+  width: 53px;
+  margin-right: 10px;
+  border-radius: 7px;
+}
+
 .blog_text_content p{
   font-size:17px;
   line-height:29px;
@@ -60,10 +202,6 @@
 
 .blog_images{
   width:100%;
-}
-
-.blog_text_content img{
-  /*max-width: 825px;*/
 }
 
 .blog_text_content  a{
@@ -82,19 +220,26 @@
 
 @media only screen and (max-width: 759px){
   body{
-    /*background-color: pink;*/
+    background-color: pink;
   }
   .post_content{
-    width: 90%;
+    width: 100%;
     margin: auto;
     display: block;
     padding-left: 0;
+  }
+  .post_textarea{
+    width:72%;
+  }
+  .post_actions{
+    width: 75%;
+    margin-left: 70px;
   }
 }
 
 @media (min-width: 760px) and (max-width: 989px){
   body{
-    /*background-color: skyblue;*/
+    background-color: skyblue;
   }
   .blog_text_content{
     text-align:center;
@@ -108,11 +253,18 @@
     display: block;
     padding-left: 0;
   }
+  .post_actions{
+    width: 635px;
+    margin-left: 70px;
+  }
+  .post_textarea{
+    width:615px;
+  }
 }
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    /*background-color:indianred;*/
+    background-color:indianred;
   }
   .blog_text_content{
     text-align:center;
@@ -127,13 +279,27 @@
     display: block;
     padding-left: 0;
   }
+  .post_actions{
+    width: 821px;
+    margin-left: 69px;
+  }
+  .post_textarea{
+    width:800px;
+  }
 }
 
 @media (min-width: 1231px) {
   body{
-    /*background-color:limegreen;*/
+    background-color:limegreen;
   }
   .post_content{
     margin:unset;
+  }
+  .post_actions{
+    width: 720px;
+    margin-left: 70px;
+  }
+  .post_textarea{
+    width:700px;
   }
 }

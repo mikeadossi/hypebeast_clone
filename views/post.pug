@@ -40,8 +40,37 @@ block content
         .post_conversation
           .post_postbox
             .post_avatar 
-            textarea.post_textarea(placeholder="Start the discussion...")
-          
+              img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
+            .post_textarea_content
+              textarea.post_textarea(placeholder="Join the discussion...")
+              .post_actions
+                - if(user){
+                    .post_as_user post as !{user.username}
+                - } else {
+                    .post_as_user
+                - }
+          .posts_comments_main_container
+            .post_comments_container
+              .commenter_avatar
+                img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
+              .post_comment 
+                .commenter_content
+                  .commenter_username Louis
+                    span.reply_dot_seperator .
+                    span.comment_time an hour ago
+                  .commenter_input_container
+                    input.comment_text(value="hey")
+                  .comment_reply_container
+                    span.fa.fa-angle-up
+                    span.reply_seperator |
+                    span.fa.fa-angle-down
+                    span.reply_dot_seperator .
+                    span
+                      a(href="#").reply_button Reply
+                    span.reply_dot_seperator .
+                    span.share_reply_button Share
+                .post_replies_main_container
+                  
     
     
     

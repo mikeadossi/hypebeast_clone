@@ -22,9 +22,6 @@ router.get('/', function(req, res, next) {
           post_titles.push(title.substring(0,88) + '...')
         }
     }
-    // console.log('res =>  ',res);
-    // const email = req.body.username;
-    console.log('(routes,27) req.user => ',req.user);
 
     res.render('index', {
       posts: results[0],
@@ -40,7 +37,7 @@ router.get('/post/:id', function(req, res) {
   console.log('called!!!');
   queries.getPost(id)
     .then( post => {
-      res.render('post', { post: post })
+      res.render('post', { post: post, user: req.user })
     })
     .catch( err => {
       console.log('err: ', err);
@@ -64,18 +61,14 @@ router.get('/store', function(req, res) {
 })
 
 router.get('/register/success', function(req, res) {
-  let email = req;
-  console.log('=>',email);
-  res.render('successful_register', {
-    username: email
-  });
+  res.render('successful_register');
 })
 
 router.get('/loggedIn', function(req, res) {
   const email = req.user.username
   if(req.user) {
         res.render('index', {
-          username: email
+          user: req.user
         })
         .catch( err => {
           console.log('err: ', err);
@@ -86,11 +79,19 @@ router.get('/loggedIn', function(req, res) {
 })
 
 router.get('/account', function(req, res) {
-  res.render('account');
+  if(req.user){
+    res.render('account', {user: req.user});
+  } else {
+    res.render('error')
+  }
 })
 
 router.get('/account/password', function(req, res) {
-  res.render('change_password');
+  if(req.user){
+    res.render('change_password', {user: req.user});
+  } else {
+    res.render('error');
+  }
 })
 
 router.get('/account/close-account', function(req, res) {
@@ -140,7 +141,6 @@ router.get('/auth/google/callback',
     failureRedirect: '/error'
   }),
   function(req, res) {
-    console.log('req.user (routes,143) -> ',req.user);
     res.redirect('/');
     // res.json(req.user);
   }

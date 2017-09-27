@@ -40,25 +40,21 @@ html
           .navSelectBtnContainer
             .navAccountContainer
               - if(user){
-                .username_div #{user.username}
+                .username_div !{user.username}
               - }
               button.avatar
                 img.avatar_img(src="/images/hypebeast_images/avatars/png/fox.png")
               button.navBtns.account Account 
-                .accountDropDown
-                  a(href="/login") Login
-                  a(href="/logout") Logout
-                  a(href="/register") Register
-                //- - if(req.user){
-                //-   .accountDropDownLoggedIn
-                //-     a.settings_link(href="/account") Your Settings
-                //-     a(href="/logout") Logout
-                //- - } else {
-                //-   .accountDropDown
-                //-     a(href="/login") Login
-                //-     a(href="/logout") Logout
-                //-     a(href="/register") Register
-                //- - }
+                - if(user){
+                  .accountDropDown
+                    a.settings_link(href="/account") Your Settings
+                    a(href="/logout") Logout
+                - } else {
+                  .accountDropDown
+                    a(href="/login") Login
+                    a(href="/logout") Logout
+                    a(href="/register") Register
+                - }
             .navGlobeContainer
               img.globe_img(src="/images/hypebeast_images/general/globe.png")
               button.navBtns.language English
@@ -199,7 +195,9 @@ html
           
         div.magnifier
           img(src="/images/hypebeast_images/general/search.png")
-      .login_successful Login successful!    
+      - if(user){
+          .login_successful Login successful! 
+      - }
       .returnToTop
         img(src="https://d2gkwoflhw8cr8.cloudfront.net/bundles/hypebeasteditorial/images/back-to-top_2x.png?1504605512")
     

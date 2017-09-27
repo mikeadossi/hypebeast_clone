@@ -35,7 +35,6 @@ const googleStrategy = (new GoogleStrategy({
 
     queries.findOneAndUpdateGh(searchAndUpdate)
       .then(user => {
-        console.log('user (passport,38) -> ',user);
         return done(null, user) // serializes it at done
       });
   }
@@ -67,12 +66,10 @@ passport.use(googleStrategy);
 passport.use(facebookStrategy);
 
 passport.serializeUser(function(user, done) {
-  console.log('user (passport,70) -> ',user);
   done(null, user.id); // sends to deserialize
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('id DESRIALIZED (passport,75) ------> ',id);
   queries.findByIdGoogle(id)
     .then(user => done(null,user[0])) // sends to entire application
     .catch(error => done(error, null))
