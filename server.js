@@ -12,7 +12,6 @@ const queries = require('./database/queries.js');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const sgMail = require('@sendgrid/mail');
 
 const app = express();
 
@@ -108,11 +107,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-app.use(function(req, res, next) {
-  // console.log('err =============>>>> ',err);
+app.use(function(req, res) {
   const err = new Error('Not Found')
   err.status = 404
-  next(err)
+  // next(err)
 });
 
 

@@ -6,6 +6,7 @@ Avatar images credited to [FreePik](https://www.flaticon.com/authors/freepik)
 
 ## Setup
 
+First ensure that Postgresql is installed and running on your machine.
 Clone down the repo and navigate to the root directory of the project, when inside run the following commands:
 
 ```

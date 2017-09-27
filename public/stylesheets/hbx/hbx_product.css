@@ -392,7 +392,7 @@
 
 @media only screen and (max-width: 769px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .product_preview_img img{
     height:100%;
@@ -402,7 +402,7 @@
 
 @media (min-width: 770px) and (max-width: 989px){
   body{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
   }
   .product_preview_img img{
     height:72px;
@@ -411,7 +411,7 @@
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    background-color:indianred;
+    /*background-color:indianred;*/
   }
   .product_preview_img img{
     height:72px;
@@ -420,7 +420,7 @@
 
 @media (min-width: 1231px) {
   body{
-    background-color:limegreen;
+    /*background-color:limegreen;*/
   }
   .product_preview_img img{
     height:92px;

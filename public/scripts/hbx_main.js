@@ -57,10 +57,9 @@ let num_of_images = $(".product_preview_img").length;
 let percent;
 
 for(let i = 0; i < num_of_images; i++){
-  product_preview_container.addEventListener("click", function(e) {
+  product_preview_container.addEventListener("click", (e) => {
     product_preview_img = $(".product_preview_img")[i];
     if(e.target.parentElement === product_preview_img){
-      console.log('e.target.parentElement -> ',e.target.parentElement);
       percent = i*100
       $(".product_on_display").css("right",percent+"%");
       $(".product_on_display").css("transition","1s");
@@ -76,13 +75,26 @@ let dotButtons = $(".dot_buttons span");
 let dotButton2 = $(".dot_buttons span")[1];
 
 for(let i = 0; i < 3; i++){
-  dotButtons[i].addEventListener("click", function(e){
+  dotButtons[i].addEventListener("click", () => {
     percentage = i * 100
     $(".related_product_slides").css("right",percentage+"%");
     $(".related_product_slides").css("transition","1s");
   })
 }
 
+
+// const related_carousel_left_arrow = $(".related_carousel_left_arrow");
+// const related_carousel_right_arrow = $(".related_carousel_right_arrow");
+//
+// related_carousel_left_arrow.on('click', () => {
+//   $(".related_product_slides").css("left","100%");
+//   $(".related_product_slides").css("transition","1s");
+// })
+//
+// related_carousel_right_arrow.on('click', () => {
+//   $(".related_product_slides").css("right","100%");
+//   $(".related_product_slides").css("transition","1s");
+// })
 
 
 
