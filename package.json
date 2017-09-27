@@ -2,7 +2,7 @@
   "name": "hypebeast_clone",
   "version": "1.0.0",
   "description": "A clone of the Hypebeast website built on Node, Postgresql and the Pug template engine.",
-  "main": "routes.js",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",

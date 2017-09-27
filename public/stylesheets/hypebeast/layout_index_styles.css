@@ -8,6 +8,12 @@ html, body{
   font-family: "Source Sans Pro HB","Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft Yahei";
 }
 
+.username_div{
+  display: inline-block;
+  padding-right: 10px;
+  color:grey;
+}
+
 button:focus{
   outline:none;
 }

@@ -58,13 +58,24 @@ let queries = {
     return db.any("SELECT * FROM users WHERE id = $1", [id]);
   },
 
+  findByIdGoogle: function(id){
+    return db.any("SELECT * FROM google_users WHERE id = $1", [id]);
+  },
+
+  findByIdFacebook: function(id){
+    return db.any("SELECT * FROM facebook_users WHERE id = $1", [id]);
+  },
+
   // the function below helps with our passport OAUTH apis. If the user is not already in our database we sign them up.
   findOneAndUpdateGh: function(searchAndUpdate){
     return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
       .then( user => {
+        console.log('user (queries,73) -> ',user);
         if(!user){
           // if user is not found in the users table we add them to our github table
-          return db.oneOrNone("INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+          const result = db.oneOrNone("INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+          console.log('result (queries,77) -> ',result);
+          return result;
         } else {
           return user;
           // done(null, user)

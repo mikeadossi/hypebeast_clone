@@ -39,6 +39,9 @@ html
         .navBtnContainer
           .navSelectBtnContainer
             .navAccountContainer
+              - if(user){
+                .username_div #{user.username}
+              - }
               button.avatar
                 img.avatar_img(src="/images/hypebeast_images/avatars/png/fox.png")
               button.navBtns.account Account 
@@ -46,9 +49,16 @@ html
                   a(href="/login") Login
                   a(href="/logout") Logout
                   a(href="/register") Register
-                .accountDropDownLoggedIn
-                  a.settings_link(href="/account") Your Settings
-                  a(href="/logout") Logout
+                //- - if(req.user){
+                //-   .accountDropDownLoggedIn
+                //-     a.settings_link(href="/account") Your Settings
+                //-     a(href="/logout") Logout
+                //- - } else {
+                //-   .accountDropDown
+                //-     a(href="/login") Login
+                //-     a(href="/logout") Logout
+                //-     a(href="/register") Register
+                //- - }
             .navGlobeContainer
               img.globe_img(src="/images/hypebeast_images/general/globe.png")
               button.navBtns.language English

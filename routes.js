@@ -3,12 +3,12 @@ const router = express.Router();
 const cookieParser = require('cookie-parser');
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
-const passport = require('passport');
+const passport = require('./passport');
 
 /************************** Hypebeast (below) *******************************/
 
 router.get('/', function(req, res, next) {
-
+  // console.log('req.user => ',req.user);
   Promise.all([queries.getPosts(), queries.getTopTenByHypeCount()]).then(results => {
 
     const post_titles = [];
@@ -22,11 +22,15 @@ router.get('/', function(req, res, next) {
           post_titles.push(title.substring(0,88) + '...')
         }
     }
+    // console.log('res =>  ',res);
+    // const email = req.body.username;
+    console.log('(routes,27) req.user => ',req.user);
 
     res.render('index', {
       posts: results[0],
       topTen: results[1],
-      postTitles: post_titles
+      postTitles: post_titles,
+      user: req.user
     })
   }).catch(err => next(err))
 })
@@ -60,7 +64,25 @@ router.get('/store', function(req, res) {
 })
 
 router.get('/register/success', function(req, res) {
-  res.render('successful_register');
+  let email = req;
+  console.log('=>',email);
+  res.render('successful_register', {
+    username: email
+  });
+})
+
+router.get('/loggedIn', function(req, res) {
+  const email = req.user.username
+  if(req.user) {
+        res.render('index', {
+          username: email
+        })
+        .catch( err => {
+          console.log('err: ', err);
+        })
+    } else {
+      res.redirect('/error')
+    }
 })
 
 router.get('/account', function(req, res) {
@@ -85,7 +107,7 @@ router.post('/register', function(req, res) {
 
   try{
     queries.createUser(email, password).then(() => {
-      res.status(200).redirect('/successful_register')
+      res.status(200).redirect('/register/success')
     })
   }catch(e){
     console.log(e);
@@ -105,7 +127,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', function(req, res) {
   req.logout();
   console.log('logged out!');
-  res.status(200).redirect('/');
+  res.redirect('/');
 })
 
 router.get('/auth/google',
@@ -118,8 +140,9 @@ router.get('/auth/google/callback',
     failureRedirect: '/error'
   }),
   function(req, res) {
+    console.log('req.user (routes,143) -> ',req.user);
     res.redirect('/');
-    res.json(req.user);
+    // res.json(req.user);
   }
 );
 
