@@ -33,11 +33,18 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/post/:id', function(req, res) {
-  let id = req.params.id;
-  console.log('called!!!');
-  queries.getPost(id)
-    .then( post => {
-      res.render('post', { post: post, user: req.user })
+  const id = req.params.id;
+
+  Promise.all([queries.getPosts(id), queries.getPostComments(id)]).then( results => {
+      const post = results[0];
+      const all_comments = results[1];
+
+      // console.log('all_comments (routes,41) => ',all_comments);
+
+      res.render('post', {
+        post: post,
+        all_comments: all_comments,
+        user: req.user })
     })
     .catch( err => {
       console.log('err: ', err);
@@ -45,8 +52,8 @@ router.get('/post/:id', function(req, res) {
 })
 
 router.get('/hbx_store/:id', function(req, res) {
-  let id = req.params.id;
-  console.log('called!!!');
+  const id = req.params.id;
+
   queries.getPost(id)
     .then( brand => {
       res.render('hbx_brand', { brand: brand })
@@ -166,6 +173,24 @@ router.get('/auth/error', function(req, res){
 
 router.get('/error', function(req, res) {
   res.render('error');
+});
+
+router.post('/post/post_comment/:id', function(req, res) {
+  // console.log('req (routes,174) ----> ',req);
+  const user_comment = req.body.user_comment;
+  const article_id = req.params.id;
+  const user_id = req.user.id;
+  const user_name = req.user.username;
+
+  console.log('user_id: ',user_id,'\n', 'article_id: ',article_id,'\n','user_comment: ',user_comment,'\n');
+
+  try{
+    queries.storeComment(user_comment, article_id, user_id, user_name).then(() => {
+      res.status(200).redirect('/post/'+article_id)
+    })
+  }catch(e){
+    console.log(e);
+  }
 });
 
 

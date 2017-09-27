@@ -39,38 +39,46 @@ block content
         .post_comment_header
         .post_conversation
           .post_postbox
-            .post_avatar 
-              img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
-            .post_textarea_content
-              textarea.post_textarea(placeholder="Join the discussion...")
-              .post_actions
-                - if(user){
-                    .post_as_user post as !{user.username}
-                - } else {
-                    .post_as_user
-                - }
+            - if(!user){
+              .post_avatar
+              .post_textarea_content
+                textarea.post_textarea(placeholder="Join the discussion...")
+                .post_actions
+                  .post_as_user
+            - } else {
+              - const article_id = post[0].id;
+              form(method="post" action="post_comment/"+article_id)
+                .post_avatar 
+                  img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
+                .post_textarea_content
+                    textarea.post_textarea(name="user_comment" placeholder="Join the discussion...")
+                    .post_actions
+                        input.post_as_user(type="submit" value ="post as "+user.username)
+            - }
+            
           .posts_comments_main_container
-            .post_comments_container
-              .commenter_avatar
-                img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
-              .post_comment 
-                .commenter_content
-                  .commenter_username Louis
-                    span.reply_dot_seperator .
-                    span.comment_time an hour ago
-                  .commenter_input_container
-                    input.comment_text(value="hey")
-                  .comment_reply_container
-                    span.fa.fa-angle-up
-                    span.reply_seperator |
-                    span.fa.fa-angle-down
-                    span.reply_dot_seperator .
-                    span
-                      a(href="#").reply_button Reply
-                    span.reply_dot_seperator .
-                    span.share_reply_button Share
-                .post_replies_main_container
-                  
+            - for(let i = 0; i < all_comments.length; i++){
+                .post_comments_container
+                  .commenter_avatar
+                    img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
+                  .post_comment 
+                    .commenter_content
+                      .commenter_username !{all_comments[i].user_name}
+                        span.reply_dot_seperator .
+                        span.comment_time an hour ago
+                      .commenter_input_container
+                        input.comment_text(value=all_comments[i].comment_text)
+                      .comment_reply_container
+                        span.fa.fa-angle-up
+                        span.reply_seperator |
+                        span.fa.fa-angle-down
+                        span.reply_dot_seperator .
+                        span
+                          a(href="#").reply_button Reply
+                        span.reply_dot_seperator .
+                        span.share_reply_button Share
+                    .post_replies_main_container
+            - }
     
     
     

@@ -106,12 +106,11 @@
 
 .post_comments_container{
   display:flex;
-  margin-top:3px;
+  margin-top:20px;
 }
 
 .post_comment{
   padding: 5px;
-  border: 2px solid grey;
   width:90%;
 }
 

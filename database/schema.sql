@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS google_users CASCADE;
 DROP TABLE IF EXISTS facebook_users CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS all_users CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
@@ -44,6 +45,14 @@ CREATE TABLE all_users (
   avatar TEXT,
   google_users_id INTEGER REFERENCES google_users(id),
   facebook_users_id INTEGER REFERENCES facebook_users(id)
+);
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER,
+  user_name TEXT,
+  post_id INTEGER,
+  comment_text TEXT
 );
 
 INSERT INTO posts (post_title_string, post_title, post_image, post_author, category, post_time_of, post_hype_count, post_comment_count, post_subtitle, post_content, image_credit)

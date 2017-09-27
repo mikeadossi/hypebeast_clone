@@ -39,7 +39,7 @@ button:focus{
 
 /* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
 .login_successful{
-  /*display:none;*/
+  display:none;
   background-color: #DFF0D7;
   padding: 15px 0 15px 20px;
   margin: 0 0 20px 0;
