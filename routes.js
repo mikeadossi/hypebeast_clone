@@ -275,13 +275,11 @@ router.get('/brands/:brand', function(req, res) {
     })
 })
 
-router.get('/brands/:brand?sort=desc', function(req, res) {
-  console.log('desc!!!!')
-})
-
-router.get('/brands/:brand?sort=asc', function(req, res) {
-  console.log('asc!!!!')
-})
+// router.get('/brands/:brand?sort=desc', function(req, res) {
+// })
+//
+// router.get('/brands/:brand?sort=asc', function(req, res) {
+// })
 
 
 router.get('/brands/:brand/:product', function(req, res) {
@@ -429,6 +427,10 @@ router.get('/brands/:brand/:product', function(req, res) {
     .catch( err => {
       console.log('err: ', err);
     })
+})
+
+router.get("/hbx_login", function(req, res) {
+  res.render('hbx_login')
 })
 
 

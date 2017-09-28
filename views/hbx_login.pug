@@ -1,0 +1,44 @@
+extends hbx_layout
+
+block content
+  
+  .hbx_login_content
+    .login_select_container
+      .login_select.login_select_login 
+        .login_title Log In
+        .login_subtitle EXISTING CUSTOMERS
+      .login_select.login_select_create 
+        .login_title Create Account
+        .login_subtitle NEW CUSTOMERS
+    .login_main_container
+      .login_first_div
+        p.login_instructions Log In with your Facebook or Google account
+        form.hbx_form(method='get' action="#")
+          input.hbx_login_social.login_hbx_facebook(value="LOG IN WITH FACEBOOK")
+        form.hbx_form(method='get' action="#")
+          input.hbx_login_social.login_hbx_google(value="LOG IN WITH GOOGLE")
+      hr.hbx_hr
+      .login_or or
+      .login_second_div
+        p.login_instructions Sign in with your email address username
+        form.hbx_form(method='get' action="#")
+          div.label
+            label EMAIL / USERNAME
+          div
+            input.login_input(name="username" type="text" placeholder="Email / Username")
+          div.label.password_label
+            label PASSWORD
+          div
+            input.login_input(name="password" type="text" placeholder="Password")
+          
+          .login_options_container
+            .pull_left
+              input#hbx_remember_me(type='checkbox') 
+              span REMEMBER ME?
+              
+            .pull_right
+              a.hbx_forgot_password(class="special_link") Forgot password?
+          
+          input#hbx_log_in(type="submit" value="LOG IN")
+        
+          

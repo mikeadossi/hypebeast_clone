@@ -24,27 +24,27 @@ $( window ).resize(function() {
 // }
 
 
-$('select').on('change', function() {
-  let href = window.location.href;
-  href = href.split('/')
-  console.log('href: ',href);
-  let this_brand = href.pop();
-  href = href.join('/');
-  href = href+'/'+this_brand;
-  console.log('href popped: ',href);
-
-  if(this.value === 'high_to_low'){
-    console.log(href+'?sort=desc');
-    window.location=href+'?sort=desc';
-  } else if(this.value === 'low_to_high'){
-    console.log(href+'?sort=asc');
-    window.location=href+'?sort=asc';
-  } else if(this.value === 'newest_first'){
-    console.log(href);
-    window.location=href;
-  }
-
-})
+// $('select').on('change', function() {
+//   let href = window.location.href;
+//   href = href.split('/')
+//   console.log('href: ',href);
+//   let this_brand = href.pop();
+//   href = href.join('/');
+//   href = href+'/'+this_brand;
+//   console.log('href popped: ',href);
+//
+//   if(this.value === 'high_to_low'){
+//     console.log(href+'?sort=desc');
+//     window.location=href+'?sort=desc';
+//   } else if(this.value === 'low_to_high'){
+//     console.log(href+'?sort=asc');
+//     window.location=href+'?sort=asc';
+//   } else if(this.value === 'newest_first'){
+//     console.log(href);
+//     window.location=href;
+//   }
+//
+// })
 
 
 // code for product carousel

@@ -1,0 +1,175 @@
+.login_select_container{
+  /*margin:auto;*/
+  text-align: center;
+  width:94%;
+  max-width:590px;
+  margin:auto;
+  margin-top:30px;
+}
+
+.login_select{
+  display:inline-block;
+  width:50%;
+  text-align:center;
+  /*border: 1px solid black;*/
+  padding:20px 0 20px 0;
+}
+
+.login_main_container{
+  background-color:#FBFBFB;
+}
+
+.login_select_login{
+  cursor:pointer;
+  background-color:#FBFBFB;
+}
+
+.login_title{
+  font-size:19px;
+}
+
+.login_subtitle{
+  color: #A2A2A5;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.login_select_create{
+  background-color:#F2F2F2;
+  cursor:pointer;
+}
+
+.login_main_container{
+  width: 74%;
+  max-width: 510px;
+  background-color: #FBFBFB;
+  padding: 40px;
+  margin: auto;
+  margin-bottom: 60px;
+}
+
+.login_hbx_facebook, .login_hbx_google{
+  width: 42.7%;
+  padding: 16px;
+  text-align: center;
+}
+
+.login_hbx_facebook{
+  margin-right:10px;
+  background-color: #4464A2;
+  color:white;
+  border:none;
+  font-size:12px;
+}
+
+.login_hbx_google:hover, .login_hbx_facebook:hover{
+  opacity:0.9;
+  cursor:pointer;
+}
+
+.login_hbx_google{
+  background-color:#D23F39;
+  color:white;
+  border:none;
+  font-size:12px;
+}
+
+.login_or{
+  position: relative;
+  margin: auto;
+  top: -35px;
+  padding: 10px;
+  background-color: #FBFBFB;
+  color: #A2A2A5;
+  width: 13px;
+}
+
+.login_instructions{
+  color:#A2A2A5;
+  font-size:14px;
+}
+
+.login_second_div{
+  margin-top: -44px;
+  margin-bottom: 10px;
+}
+
+.hbx_form{
+  display:unset;
+}
+
+.login_input:focus{
+  outline:none;
+}
+
+.login_input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 94%;
+  padding: 11px;
+}
+
+.password_label{
+  margin-top:15px;
+}
+
+#hbx_log_in:hover{
+  opacity:0.8;
+  cursor:pointer;
+}
+
+#hbx_log_in{
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+}
+
+#hbx_remember_me{
+  margin-right:10px;
+  cursor:pointer;
+}
+
+.hbx_forgot_password:hover{
+  cursor:pointer;
+  color:#A2A2A5;
+}
+
+.hbx_forgot_password{
+  font-size:14px;
+}
+
+.login_options_container{
+  margin-top:20px;
+  display:flex;
+}
+
+.pull_right, .pull_left{
+  width:50%;
+}
+
+.pull_right{
+  text-align:right;
+}
+
+
+@media only screen and (max-width: 769px){
+  .hbx_login_content{
+    width: 95%;
+    margin: auto;
+  }
+  .login_select_container, .login_main_container{
+    width: unset;
+  }
+  .hbx_login_social{
+    width:95%;
+    margin-bottom:10px;
+  }
+  .hbx_hr{
+    display:block;
+  }
+}

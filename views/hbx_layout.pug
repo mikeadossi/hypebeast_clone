@@ -9,6 +9,7 @@ html
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_footer.css')
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_store.css')
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_product.css')
+    link(rel='stylesheet', href='/stylesheets/hbx/hbx_login.css')
     link(rel='icon', href='/images/hypebeast_images/general/favicon.png')
   body
     
@@ -26,7 +27,7 @@ html
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")
         ul.register.nav_elements
-          li.nav_login.hbx_nav_link.nav_elements LOG IN
+          a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
           li.nav_help.hbx_nav_link.nav_elements HELP
         ul.cart.nav_elements
           li.shopping_bag_container
