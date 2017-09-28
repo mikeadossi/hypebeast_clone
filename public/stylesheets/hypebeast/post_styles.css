@@ -11,6 +11,10 @@
   width:100%;
 }
 
+.post_content{
+  margin-bottom: 100px !important;
+}
+
 .post_content .post_title{
   font-size: 28px;
 }
@@ -66,6 +70,10 @@
   margin-left: 116px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+}
+
+.post_actions_empty{
+  height:30px;
 }
 
 .post_as_user:hover{

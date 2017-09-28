@@ -162,8 +162,8 @@ let queries = {
     return db.any("SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
   },
 
-  getRelatedProducts: function(product){
-    return db.any("SELECT product_images FROM products",product)
+  getAllHBXProducts: function(){
+    return db.any("SELECT brand_name,product_images FROM products")
   }
 }
 

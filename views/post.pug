@@ -43,8 +43,7 @@ block content
               .post_avatar
               .post_textarea_content
                 textarea.post_textarea(placeholder="Join the discussion...")
-                .post_actions
-                  .post_as_user
+                .post_actions.post_actions_empty
             - } else {
               - const article_id = post[0].id;
               form(method="post" action="post_comment/"+article_id)

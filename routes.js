@@ -23,6 +23,8 @@ router.get('/', function(req, res, next) {
         }
     }
 
+    // console.log('req.user (routes,26) => ',req.user);
+
     res.render('index', {
       posts: results[0],
       topTen: results[1],
@@ -176,7 +178,6 @@ router.get('/error', function(req, res) {
 });
 
 router.post('/post/post_comment/:id', function(req, res) {
-  // console.log('req (routes,174) ----> ',req);
   const user_comment = req.body.user_comment;
   const article_id = req.params.id;
   const user_id = req.user.id;
@@ -225,7 +226,6 @@ router.get('/brands/:brand', function(req, res) {
         colors_arr.push(colors[i].color);
       }
 
-      // below we get all unique items in the categories_arr and colors_arr.
       categories_arr = categories_arr.filter(
         function(item,pos){
           return categories_arr.indexOf(item) == pos
@@ -250,30 +250,15 @@ router.get('/brands/:brand', function(req, res) {
       let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
       let product_sizes_arr = [];
-      // console.log('product_sizes[0] -----> ',product_sizes[0]);
       let p = 0; for(key in product_sizes){p++}
       var numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
           if(product_sizes[j][brand_names[i]] && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
-            // console.log('size_arr['+i+'] -> ',size_arr[i]);
             product_sizes_arr.push( size_arr[i] );
           }
         }
       }
-
-      // console.log('product_sizes_arr: ',product_sizes_arr);
-      // console.log('product_sizes: ',product_sizes);
-
-      // let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
-      // let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
-      //
-      // let product_count_arr = [];
-      // for(let i = 0; i < 18; i++){
-      //   if(product_count[0][brand_names[i]]){
-      //     product_count_arr.push( size_arr[i] );
-      //   }
-      // }
 
       res.render('hbx_store', {
         brand: brand,
@@ -290,6 +275,14 @@ router.get('/brands/:brand', function(req, res) {
     })
 })
 
+router.get('/brands/:brand?sort=desc', function(req, res) {
+  console.log('desc!!!!')
+})
+
+router.get('/brands/:brand?sort=asc', function(req, res) {
+  console.log('asc!!!!')
+})
+
 
 router.get('/brands/:brand/:product', function(req, res) {
   let brand = req.params.brand;
@@ -299,15 +292,13 @@ router.get('/brands/:brand/:product', function(req, res) {
     hbx_queries.getProductContent(brand,product),
     hbx_queries.getProductSizes(product),
     hbx_queries.getProductColors(product),
-    hbx_queries.getRelatedProducts(product)
+    hbx_queries.getAllHBXProducts()
   ])
     .then( results => {
       let product_content = results[0];
       let product_sizes = results[1];
       let product_colors = results[2];
-      let related_products = results[3];
-
-      // get product_sizes_arr
+      let all_hbx_products = results[3];
 
       let brandNameObj = {
         '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
@@ -330,53 +321,98 @@ router.get('/brands/:brand/:product', function(req, res) {
         }
       }
 
-      // get product_colors_arr
       const product_colors_arr = Object.values(product_colors[0]);
 
 
-
-
-
-
-
-
-
-      // get related products by sorting through all products
-        // start by storing in an array all the first images from every product in the db
       const related_products_arr = [];
       const product_name = product_content[0].product_name_route;
-      let collect_products;
+      let hbx_product_brand;
+      let hbx_product_name;
+      let hbx_product_obj;
+      let first_image;
+      let ex = 0
+      for(key in all_hbx_products){
+        hbx_product_brand = Object.values(all_hbx_products[key]);
+        hbx_product_obj = {};
+        hbx_product_obj.brand = hbx_product_brand[0];
+        first_image = hbx_product_brand[1];
+        first_image = first_image.split(',');
+        first_image = first_image[0];
+        hbx_product_obj.images = first_image;
 
-      for(key in related_products){
-        collect_products = Object.values(related_products[key]);
-        collect_products = collect_products[0].split(',')
-        collect_products = collect_products[0];
-        if( !(collect_products.includes(product_name)) ){
-          related_products_arr.push(collect_products);
+        if( hbx_product_obj.name !== product_name ){
+          related_products_arr.push(hbx_product_obj);
         }
       }
 
-      let all_brands_arr = ['adidas'];
+
+
       let this_brand_images_arr = [];
       let brand_name_string = product_content[0].brand_name;
       let category_id = product_content[0].category_id;
+      let product_obj;
+
+      let our_product_name;
 
       for(let q = 0; q < related_products_arr.length; q++){
-        if(related_products_arr[q].includes(brand_name_string, category_id) && related_products_arr[q] !== ''){
-          this_brand_images_arr.push(related_products_arr[q]);
-          related_products_arr.splice(q,1,'');
+        if(related_products_arr[q] && related_products_arr[q].images.includes(brand_name_string) && related_products_arr[q].images.includes(category_id) && related_products_arr[q] !== ''){
+          product_obj = {}
+
+          our_product_name = related_products_arr[q].images;
+          our_product_name = our_product_name.split(',');
+          our_product_name = our_product_name[0];
+          our_product_name = our_product_name.split('/');
+          our_product_name = our_product_name[5];
+          our_product_name = our_product_name.split('_');
+          our_product_name = our_product_name[0];
+
+          product_obj.brand = related_products_arr[q].brand
+          product_obj.image = related_products_arr[q].images
+          product_obj.product_name = our_product_name
+
+          this_brand_images_arr.push(product_obj);
+          related_products_arr[q] = null;
         }
       }
       for(let i = 0; i < related_products_arr.length; i++){
-        if(related_products_arr[i].includes(brand_name_string) && related_products_arr[i] !== ''){
-          this_brand_images_arr.push(related_products_arr[i]);
-          related_products_arr.splice(i,1,'');
+
+        if(related_products_arr[i] && related_products_arr[i].images.includes(brand_name_string) && related_products_arr[i] !== undefined){
+          product_obj = {}
+
+          our_product_name = related_products_arr[i].images;
+          our_product_name = our_product_name.split(',');
+          our_product_name = our_product_name[0];
+          our_product_name = our_product_name.split('/');
+          our_product_name = our_product_name[5];
+          our_product_name = our_product_name.split('_');
+          our_product_name = our_product_name[0];
+
+          product_obj.brand = related_products_arr[i].brand
+          product_obj.image = related_products_arr[i].images
+          product_obj.product_name = our_product_name
+
+          this_brand_images_arr.push(product_obj);
+          related_products_arr.splice(i,1,null);
         }
       }
       for(let j = 0; j < related_products_arr.length; j++){
-        if(related_products_arr[j] !== ''){
-          this_brand_images_arr.push(related_products_arr[j]);
-          related_products_arr.splice(j,1,'');
+        if(related_products_arr[j] && related_products_arr[j] !== ''){
+          product_obj = {}
+
+          our_product_name = related_products_arr[j].images;
+          our_product_name = our_product_name.split(',');
+          our_product_name = our_product_name[0];
+          our_product_name = our_product_name.split('/');
+          our_product_name = our_product_name[5];
+          our_product_name = our_product_name.split('_');
+          our_product_name = our_product_name[0];
+
+          product_obj.brand = related_products_arr[j].brand
+          product_obj.image = related_products_arr[j].images
+          product_obj.product_name = our_product_name
+
+          this_brand_images_arr.push(product_obj);
+          related_products_arr.splice(j,1,null);
         }
       }
 

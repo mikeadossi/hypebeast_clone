@@ -106,32 +106,27 @@ block content
     .related_header Related products
     ul.related_products
       - let q = 0;
-      - var nuisance = this_brand_images_arr.indexOf(product_content[0].product_name_route)
+      - let brand_name;
+      - let product;
+      - let route;
+      - let brand_data_obj;
+      
       - for(let j = 0; j < 3; j++){
         ul.related_product_slides(class="related_product_slides"+j)
           - for(let i = 0; i < 4; i++){
-            - let location = this_brand_images_arr[q];
-            - location = location.split('/');
-            - location = location[5]
-            - location = location.split('.')
-            - location = location[0]
-            - location = location.split('_')
-            - location = location[0]
-            
-            - let brand_name = product_content[0].brand_name;
-            - let product_name = product_content[0].product_name_route;
-            - let brand_route = '/brands/' + brand_name
-            - let route = '/brands/' + brand_name + '/' + location
-
+            - brand_data_obj = this_brand_images_arr[q];
+            - brand_name = brand_data_obj.brand;
+            - product = brand_data_obj.product_name;
+            - route = '/brands/' + brand_name + '/' + product
             li
-              a.related_product_img( href = route ) !{this_brand_images_arr[q]}
-              a.product_brand( href = brand_route ) !{ brand_name_string }
-              a.product_name( href = route ) !{ product_content[0].product_name }
+              a.related_product_img( href = route ) !{brand_data_obj.image}
+              a.product_brand( href = route ) !{ brand_name }
+              a.product_name( href = route ) !{ product }
               .product_price USD !{ product_content[0].product_price }.00 
               span.relaed_product_new NEW
-
+            
             - q++
-            - }
+          - }
       - }
     .carousel_controls
       span
