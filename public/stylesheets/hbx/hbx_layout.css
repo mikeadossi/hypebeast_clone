@@ -486,6 +486,23 @@ ul{
   top: -17px;
 }
 
+.order_tot{
+  color:#99999F;
+}
+
+.hbx_nav_scroll{
+  background-color:red;
+}
+
+.fixed_top{
+  position:fixed;
+  top:0;
+  left:0;
+  width:97%;
+  height: 43px;
+  z-index:20;
+}
+
 
 
 

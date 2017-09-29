@@ -135,6 +135,14 @@ $('#bag_button').hover(
   }
 )
 
+$(window).scroll(function(){
+  let sticky = $('.hbx_nav'),
+      scroll = $(window).scrollTop();
+
+  if (scroll >= 10) sticky.addClass('fixed_top');
+  else sticky.removeClass('fixed_top');
+});
+
 
 
 
