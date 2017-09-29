@@ -4,10 +4,10 @@ block content
   
   .hbx_login_content
     .login_select_container
-      .login_select.login_select_login 
+      a(href="/hbx_login").login_select.login_select_signin 
         .login_title Log In
         .login_subtitle EXISTING CUSTOMERS
-      a(href="/hbx_register").login_select.login_select_create 
+      .login_select.login_select_register 
         .login_title Create Account
         .login_subtitle NEW CUSTOMERS
     .login_main_container
@@ -25,20 +25,16 @@ block content
           div.label
             label EMAIL / USERNAME
           div
-            input.login_input(name="username" type="text" placeholder="Email / Username")
+            input.login_input(name="username" type="text")
           div.label.password_label
             label PASSWORD
           div
-            input.login_input(name="password" type="text" placeholder="Password")
+            input.login_input(name="password" type="text")
           
-          .login_options_container
-            .pull_left
-              input#hbx_remember_me(type='checkbox') 
-              span REMEMBER ME?
-              
-            .pull_right
-              a.hbx_forgot_password(class="special_link") Forgot password?
+          .register_options_container
+            span By signing up, you agree to our 
+            span.option_button Terms of Use 
+            span and 
+            span.option_button Privacy Policy.
           
           input#hbx_log_in(type="submit" value="LOG IN")
-        
-          

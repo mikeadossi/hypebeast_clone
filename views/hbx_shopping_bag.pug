@@ -1,0 +1,65 @@
+extends hbx_layout
+
+block content
+
+  .hbx_shopping_bag_content
+    .hbx_shopping_header_container
+      .hbx_store_header_container
+        ul.hbx_header_left_links.hbx_product_header_links
+          li 
+            a(href="#") Home 
+          li
+            img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
+      .hbx_shopping_title Shopping Bag
+      .product_footer_details_contact.hbx_shopping_contact
+        ul
+          li Have questions?
+          li 
+            img.contact_images(src="/images/hbx_images/general/speech_bubble.png")
+            span Live Chat
+          li
+            img.contact_images(src="/images/hbx_images/general/mailing_envelope.png") 
+            span Email Us
+          li 
+            img.contact_images(src="/images/hbx_images/general/phone.png")
+            span Call Us
+    .hbx_cart_flex_container
+      .hbx_cart_left_column
+        .hbx_cart_table
+          ul.hbx_cart_header
+            li.product_row PRODUCT
+            ul.product_row_right
+              li PRICE
+              li QTY 
+              li TOTAL 
+        .hbx_product_row
+          .cart_product_img
+            img(src="images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
+          .cart_product_details_container
+            .cart_product_brand adidas originals
+            .cart_product_name T-shirt
+            .cart_size Size: L
+            .cart_notice This item is excluded from promotions.
+          .hbx_right_rows
+            .hbx_price_row
+              .cart_price USD 36.00
+            .hbx_quantity_row
+              .hbx_quantity_control
+                .cart_select_minus -
+                #cart_count 1
+                .cart_select_plus +
+              .cart_remove_items REMOVE
+            .hbx_total_row 
+              span.hbx_total_usd USD
+              span.hbx_total_price 100.00
+          
+        .hbx_update_container
+          .hbx_update_btn UPDATE BAG
+        
+      .hbx_cart_right_column
+        .hbx_shipping_notice USD $100 away from Free Shipping.
+    
+    
+        
+    
+      

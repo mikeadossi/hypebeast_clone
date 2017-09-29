@@ -1,0 +1,169 @@
+.hbx_shopping_bag_content{
+  padding: 0 30px 30px 30px;
+}
+
+.hbx_shopping_header_container{
+  display:flex;
+  margin-top:2px;
+}
+
+.hbx_shopping_title{
+  text-align: center;
+  position: absolute;
+  top: 78px;
+  width: 100%;
+  font-size: 30px;
+}
+
+.hbx_shopping_contact{
+  border-top:unset;
+  margin-left:auto;
+  margin-top:4px;
+}
+
+.hbx_cart_flex_container{
+  display:flex;
+}
+
+.hbx_cart_left_column{
+  background-color:red;
+  width:65%;
+}
+
+.hbx_cart_right_column{
+  background-color:orange;
+  width:35%;
+}
+
+.hbx_product_row, .prouct_row_right{
+  display:flex;
+  padding-top:10px;
+}
+
+.hbx_cart_header{
+  display: flex;
+  padding-left: unset;
+  margin:0;
+  font-size: 13px;
+}
+
+.hbx_cart_header li{
+  width:130px;
+  background-color:green;
+  padding-bottom:8px;
+}
+
+.product_row{
+  width: 100% !important;
+}
+
+.product_row_right{
+  padding-left: unset;
+  width:50%;
+  display: flex;
+}
+
+.hbx_price_row, .hbx_total_row {
+  background-color:indianred;
+}
+
+.cart_product_details_container {
+  padding-left: 10px;
+  width: 100%;
+}
+
+.cart_product_details_container div{
+  margin-bottom:4px;
+}
+
+.cart_product_img img{
+  height:120px;
+}
+
+.cart_size{
+  margin-bottom:10px !important;
+  margin-top:10px !important;
+  font-size:13px;
+}
+
+.cart_notice{
+  color: grey;
+  font-size: 14px;
+}
+
+.cart_price{
+  margin-top: 45px;
+  padding-left: 20px;
+}
+
+.hbx_total_row{
+  margin-top: 45px;
+}
+
+.hbx_total_row, .hbx_price_row, .hbx_quantity_row{
+  width:130px;
+}
+
+.hbx_right_rows{
+  display:flex;
+}
+
+.hbx_quantity_control{
+  display:flex;
+  margin-top: 28px;
+}
+
+.cart_select_minus{
+  margin-left: 2px;
+}
+
+.cart_select_minus, .cart_select_plus{
+  border: 1px solid grey;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+#cart_count{
+  border: 1px solid grey;
+  margin: 4px;
+  width: 70px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cart_remove_items{
+  font-size: 12px;
+  color: grey;
+  text-align: center;
+}
+
+.hbx_update_container{
+  border-top:1px solid grey;
+}
+
+.hbx_update_btn{
+  border:1px solid grey;
+  padding: 10px 30px 10px 30px;
+  margin-top:20px;
+  margin-left:auto;
+  width:81px;
+  font-size:13px;
+}
+
+.hbx_total_usd{
+  padding-left: 20px;
+}
+
+.hbx_update_btn:hover{
+  background-color:#E9E9E9;
+  cursor:pointer;
+}
+
+.hbx_product_row{
+  margin-bottom: 10px;
+  border-top:1px solid grey;
+}

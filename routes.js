@@ -433,6 +433,14 @@ router.get("/hbx_login", function(req, res) {
   res.render('hbx_login')
 })
 
+router.get("/hbx_register", function(req, res) {
+  res.render('hbx_register')
+})
+
+router.get("/hbx_shopping_bag", function(req, res) {
+  res.render('hbx_shopping_bag')
+})
+
 
 
 module.exports = router;
