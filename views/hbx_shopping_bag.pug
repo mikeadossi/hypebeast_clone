@@ -1,8 +1,17 @@
 extends hbx_layout
 
 block content
-
-  .hbx_shopping_bag_content
+  
+        
+          
+    .hbx_shopping_bag_content
+      .hbx_empty_cart_content
+        .shopping_bag_div
+          img(src="images/hbx_images/general/shopping_bag.png")
+        p.empty_bag Your bag is currently empty.
+        a(href="/hbx_index").continue_shopping Continue Shopping
+        .empty_cart_disclaimer If you are trying to add items to your cart and it remains empty, you may have cookies disabled in your browser settings. If that's the case, please enable acceptance of cookies and try again.
+          
     .hbx_shopping_header_container
       .hbx_store_header_container
         ul.hbx_header_left_links.hbx_product_header_links
@@ -15,13 +24,13 @@ block content
         ul
           li Have questions?
           li 
-            img.contact_images(src="/images/hbx_images/general/speech_bubble.png")
+            img.contact_images(src="/images/hbx_images/general/speech_bubble_white.png")
             span Live Chat
           li
-            img.contact_images(src="/images/hbx_images/general/mailing_envelope.png") 
+            img.contact_images(src="/images/hbx_images/general/mailing_envelope_white.png") 
             span Email Us
           li 
-            img.contact_images(src="/images/hbx_images/general/phone.png")
+            img.contact_images(src="/images/hbx_images/general/phone_white.png")
             span Call Us
     .hbx_cart_flex_container
       .hbx_cart_left_column
@@ -57,7 +66,47 @@ block content
           .hbx_update_btn UPDATE BAG
         
       .hbx_cart_right_column
-        .hbx_shipping_notice USD $100 away from Free Shipping.
+        .hbx_right_main_container
+          .hbx_shipping_notice USD $100 away from Free Shipping.
+          .hbx_right_container
+            .order_summary_container Order Summary
+            .shopping_sale_container
+              .bag_total Bag Subtotal
+              .bag_cost 
+                span.usd USD
+                span 60.00
+            .shopping_sale_container
+              .duty_total *Duty/Tax
+              .duty_cost 
+                span.usd USD
+                span 60.00
+            .shopping_sale_container
+              .shipping_total Shipping Total
+              .shipping_cost 
+                span Free Shipping
+            .order_total_container
+              .order_total ORDER TOTAL 
+              .order_cost
+                span.usd USD
+                span 60.00
+            .proceed_button PROCEED TO CHECKOUT
+            .promotional_container
+              .duty_total Have a promotional cose?
+              .duty_cost 
+                .fa.fa-chevron-down
+            .promotional_container
+              .duty_total Have a Gift Card or Store Credit?
+              .duty_cost 
+                .fa.fa-chevron-down
+        .learn_more 
+          span Learn about our 
+          span.blue_hover_text Returns Policy 
+          span and 
+          span.blue_hover_text Delivery & Shipping 
+          span information
+        .taxes *All tax & duties will be covered by us. If you are charged any duty/tax fees for your order, please send us a copy of the invoice so we can settle the charges.
+          
+          
     
     
         

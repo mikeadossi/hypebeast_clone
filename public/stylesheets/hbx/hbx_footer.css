@@ -194,7 +194,7 @@ hr{
 
 @media only screen and (max-width: 769px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
   }
   .hbx_download_container{
     display:block;
@@ -234,7 +234,7 @@ hr{
 
 @media (min-width: 770px) and (max-width: 989px){
   body{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
   }
   .right_side_footer{
     display:block;
@@ -243,12 +243,12 @@ hr{
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
-    background-color:indianred;
+    /*background-color:indianred;*/
   }
 }
 
 @media (min-width: 1231px) {
   body{
-    background-color:limegreen;
+    /*background-color:limegreen;*/
   }
 }
