@@ -13,14 +13,11 @@ ul{
   list-style: none;
 }
 
-/*.right_nav_items, .left_nav_items{}*/
-
 .right_nav_items{
   position: absolute;
   right: 0;
   top: 7px;
   width: 430px;
-  /*background-color: green;*/
 }
 
 .hbx_links_container{
@@ -321,6 +318,7 @@ ul{
   width: 337px;
   left: 40px;
   display:none;
+  z-index:20;
 }
 
 .items_in_bag{
