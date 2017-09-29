@@ -20,7 +20,7 @@ html
         a(href="/store")
           img.hbx_title(src="/images/hbx_images/general/hbx_logo.png")
         ul.hbx_links_container.nav_elements
-          li.nav_menswear.hbx_nav_link.nav_elements MEN
+          a(href="/store").nav_menswear.hbx_nav_link.nav_elements MEN
           li.nav_womenswear.hbx_nav_link.nav_elements WOMEN 
           li.nav_archives.hbx_nav_link.nav_elements ARCHIVES
           li.nav_sale.hbx_nav_link.nav_elements SALE 
@@ -30,12 +30,57 @@ html
         ul.register.nav_elements
           a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
           li.nav_help.hbx_nav_link.nav_elements HELP
-        ul.cart.nav_elements
-          li.shopping_bag_container
+        .cart.nav_elements#bag_button
+          .shopping_bag_container
             .shopping_bag_handle
             .shopping_bag 99
           span.hbx_nav_link YOUR BAG
           img.arrow_down(src="/images/hbx_images/general/arrow_down.png")
+          .cart_dropdown
+            .nav_button_cover
+              .shopping_bag_container.shopping_bag_container_hover
+                .shopping_bag_handle.hover_handle
+                .shopping_bag 99
+              span.hbx_nav_link.hbx_nav_link_hover YOUR BAG
+              img.arrow_down.arrow_down_hover(src="/images/hbx_images/general/arrow_down.png")
+            .items_in_bag
+              span 1 Item
+              span in Bag
+            .dropdown_notice_top Please note: Item(s) is not reserved until checkout is completed.
+            .cart_dropdown_product
+              .dropdown_img
+                img(src="images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
+              .cart_product_details_container
+                .cart_product_brand adidas originals
+                .cart_product_name T-shirt
+                .cart_size Size: L
+                .cart_notice This item is excluded from promotions.
+                .quantity_and_price_container
+                  .quantity_and_price
+                    .quantity
+                      span.qty Qty:
+                      span.minus_item -
+                      span.item_count 1
+                      span.add_item +
+                    .dropdown_price 
+                      span USD
+                      span.product_price 60
+                        span .00
+            .dropdown_order_total_container
+              .dropdown_order_total
+                span ORDER TOTAL
+                span USD 
+                span.cart_price 60
+                  span .00
+            .dropdown_notice
+              span You will be charged in 
+              span.usd USD 
+                span.cart_price 660
+                  span .00
+            .dropdown_button_container
+              .view_bag VIEW BAG
+              .checkout_now CHECKOUT NOW
+            .dropdown_notice.dropdown_last_notice Have a Promotional Code or Gift Card? Add it in the Bag.
         ul.language.nav_elements
           img.hbx_flag(src="/images/hbx_images/general/usa_flag.png")
           span.hbx_nav_link USD

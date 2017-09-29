@@ -117,7 +117,7 @@
 }
 
 .cart_select_minus, .cart_select_plus{
-  border: 1px solid grey;
+  border: 1px solid #E0E0E0;
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -126,7 +126,7 @@
 }
 
 #cart_count{
-  border: 1px solid grey;
+  border: 1px solid #E0E0E0;
   margin: 4px;
   width: 70px;
   text-align: center;
@@ -243,11 +243,11 @@
 .proceed_button{
   color: white;
   background-color: #006FBB;
-  width: 190px;
-  padding: 15px 70px 15px 70px;
+  padding: 15px 25px 15px 25px;
   margin: auto;
-  font-size: 16px;
-  margin-bottom:20px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .hbx_right_container{

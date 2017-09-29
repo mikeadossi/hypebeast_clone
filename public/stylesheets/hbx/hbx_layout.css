@@ -312,6 +312,180 @@ ul{
   padding:15px;
 }
 
+.cart_dropdown{
+  background-color: #E9E9E9;
+  border: 1px solid #F0F0F0;
+  position: absolute;
+  top: 48px;
+  padding: 14px;
+  width: 337px;
+  left: 40px;
+  display:none;
+}
+
+.items_in_bag{
+  margin-top: -29px;
+}
+
+.items_in_bag span,
+.quantity span,
+.dropdown_price span,
+.dropdown_order_total span,
+.dropdown_notice span{
+  border: unset;
+  padding: unset;
+  padding-right:5px;
+}
+
+.dropdown_notice, .dropdown_notice_top{
+  padding-bottom: 10px;
+  padding-top: 13px;
+  color: #99999F;
+  font-size: 12px;
+}
+
+.dropdown_notice_top{
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 15px;
+}
+
+.cart_dropdown_product{
+  padding:15px 10px 10px 0;
+  display:flex;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.dropdown_img img{
+  height:82px;
+}
+
+.quantity{
+  margin-top: -12px;
+}
+
+.quantity_and_price{
+  display:flex;
+}
+
+.qty{
+  font-size:12px
+}
+
+.minus_item:hover, .add_item:hover{
+  opacity:0.7;
+  cursor:pointer;
+}
+
+.item_count{
+  padding: 0 15px 0 10px;
+}
+
+.minus_item, .add_item{
+  color:#99999F;
+}
+
+.add_item{
+  font-size:19px;
+}
+
+.minus_item{
+  font-size:30px;
+  top: 3px;
+  position: relative;
+}
+
+.dropdown_price{
+  margin-left: auto;
+  font-size: 13px;
+  padding-top: 4px;
+  font-weight: 700;
+}
+
+.dropdown_order_total_container{
+  display:block;
+}
+
+.dropdown_order_total{
+  padding-top: 10px;
+  text-align: right;
+}
+
+.dropdown_notice{
+  text-align: right;
+}
+
+.dropdown_notice .cart_price{
+  margin-top:unset;
+  padding-left:unset;
+}
+
+.dropdown_notice span{
+  padding:unset;
+}
+
+.dropdown_button_container{
+  display:flex;
+}
+
+.view_bag:hover, .checkout_now:hover{
+  opacity:0.8;
+  cursor:pointer;
+}
+
+.view_bag, .checkout_now{
+  padding: 14px;
+  color: white;
+  font-size: 12px;
+  margin-top: 10px;
+  text-align:center;
+}
+
+.view_bag{
+  background-color:black;
+  margin-right: 5px;
+  width: 113px;
+}
+
+.checkout_now{
+  background-color:#026FBA;
+  width: 160px;
+}
+
+.dropdown_last_notice{
+  text-align:unset;
+}
+
+.nav_button_cover{
+  position: relative;
+  /*background-color: #E9E9E9;*/
+  top: -47px;
+  width: 122px;
+}
+
+.hover_handle{
+  left: 14px !important;
+}
+
+.shopping_bag_container_hover{
+  position: relative !important;
+  top: -17px !important;
+  left: 129px;
+  z-index: 10;
+}
+
+.hbx_nav_link_hover{
+  background-color: #E9E9E9;
+  border:1px solid #CACACA !important;
+  border-bottom:1px solid #E9E9E9 !important;
+  position: relative;
+  left: 130px;
+}
+
+.arrow_down_hover{
+  left: 235px !important;
+  top: -17px;
+}
+
 
 
 
