@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
 router.get('/post/:id', function(req, res) {
   const id = req.params.id;
 
-  Promise.all([queries.getPosts(id), queries.getPostComments(id)]).then( results => {
+  Promise.all([queries.getPost(id), queries.getPostComments(id)]).then( results => {
       const post = results[0];
       const all_comments = results[1];
 
