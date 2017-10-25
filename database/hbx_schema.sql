@@ -167,10 +167,13 @@ VALUES (
   'jackets'
 ),
 (
-  'shoes'
+  'jackets'
 ),
 (
   'shorts'
+),
+(
+  'boots'
 ),
 (
   'sneakers'
@@ -414,7 +417,7 @@ VALUES (
   '3',
   'adidas-originals',
   '3',
-  '8'
+  '6'
 ),
 (
   '75',
@@ -444,7 +447,7 @@ VALUES (
   '3',
   'adidas-originals',
   '5',
-  '2'
+  '5'
 ),
 (
   '410',
@@ -535,7 +538,7 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '10'
+  '5'
 ),
 (
   '550',
@@ -1256,7 +1259,7 @@ VALUES (
   '4',
   'denim-by-vanquish-fragment',
   '5',
-  '17'
+  '18'
 ),
 (
   '105',
