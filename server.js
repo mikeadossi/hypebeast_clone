@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const routes = require('./routes.js');
-const config = require('./config');
+const config = require('./configure');
 const flash = require('connect-flash');
 const passport = require('./passport')
 

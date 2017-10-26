@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const queries = require('./database/queries.js');
-const config = require('./config');
+const config = require('./configure');
 
 const strategy = (new LocalStrategy(
   function(username, password, done) {
