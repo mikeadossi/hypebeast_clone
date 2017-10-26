@@ -247,7 +247,22 @@ router.get('/brands/:brand', function(req, res) {
       }
 
       let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
-      let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
+      let brand_names = [
+        'small_count',
+        'medium_count',
+        'large_count',
+        'xlarge_count',
+        'us_8_count',
+        'us_8_5_count',
+        'us_9_count',
+        'us_9_5_count',
+        'us_10_count',
+        'us_10_5_count',
+        'us_11_count',
+        'us_11_5_count',
+        'us_12_count',
+        'us_12_5_count',
+        'pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
 
       let product_sizes_arr = [];
       let p = 0; for(key in product_sizes){p++}
@@ -307,20 +322,65 @@ router.get('/brands/:brand/:product', function(req, res) {
         'undercover': 'Undercover'
       }
 
+      // console.log('product_content ---> ',product_content);
+      // console.log('product_sizes ---> ',product_sizes);
+
       let product_images_arr = product_content[0].product_images.split(',')
 
-      let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
-      let brand_names = ['small_count','medium_count','large_count','xlarge_count','us_8_count','us_8_5_count','us_9_count','us_9_5_count','us_10_count','us_10_5_count','us_11_count','us_11_5_count','us_12_count','us_12_5_count','pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
+      let size_arr = [
+        'S',
+        'M',
+        'L',
+        'XL',
+        '8',
+        '8.5',
+        '9',
+        '9.5',
+        '10',
+        '10.5',
+        '11',
+        '11.5',
+        '12',
+        '12.5',
+        '28',
+        '30',
+        '32',
+        '34',
+        '36'
+      ];
+
+      let brand_names = [
+        'small_count',
+        'medium_count',
+        'large_count',
+        'xlarge_count',
+        'us_8_count',
+        'us_8_5_count',
+        'us_9_count',
+        'us_9_5_count',
+        'us_10_count',
+        'us_10_5_count',
+        'us_11_count',
+        'us_11_5_count',
+        'us_12_count',
+        'us_12_5_count',
+        'pants_28_count',
+        'pants_30_count',
+        'pants_32_count',
+        'pants_34_count',
+        'pants_36_count'
+      ];
+
+      // console.log('routes(371) all_hbx_products -> ',all_hbx_products);
 
       let product_sizes_arr = [];
-      for(let i = 0; i < 18; i++){
+      for(let i = 0; i < size_arr.length-1; i++){
         if(product_sizes[0][brand_names[i]]){
           product_sizes_arr.push( size_arr[i] );
         }
       }
 
       const product_colors_arr = Object.values(product_colors[0]);
-
 
       const related_products_arr = [];
       const product_name = product_content[0].product_name_route;
@@ -337,23 +397,33 @@ router.get('/brands/:brand/:product', function(req, res) {
         first_image = first_image.split(',');
         first_image = first_image[0];
         hbx_product_obj.images = first_image;
+        hbx_product_obj.category = hbx_product_brand[2];
 
         if( hbx_product_obj.name !== product_name ){
           related_products_arr.push(hbx_product_obj);
         }
       }
 
+      // console.log('\n routes(407) hbx_product_obj => ',hbx_product_obj);
 
 
-      let this_brand_images_arr = [];
+
+      let this_brand_images_arr = []; // this_brand_images_arr will eventually get sent to hbx_product in our response, but first we'll need to populate it with an image, name, and other details from the related_products_arr object.
       let brand_name_string = product_content[0].brand_name;
       let category_id = product_content[0].category_id;
       let product_obj;
 
       let our_product_name;
 
+      // console.log('category_id - ',category_id);
+      // console.log('related_products_arr[1] -> ',related_products_arr[1]);
+
+      // below we collect all products which share any similar characteristics with our main image
+      // console.log('\n routes(423) related_products_arr[0] => ',related_products_arr[0]);
       for(let q = 0; q < related_products_arr.length; q++){
-        if(related_products_arr[q] && related_products_arr[q].images.includes(brand_name_string) && related_products_arr[q].images.includes(category_id) && related_products_arr[q] !== ''){
+
+        if(related_products_arr[q] !== undefined && related_products_arr[q].images.includes(brand_name_string) && related_products_arr[q].category == category_id && !(related_products_arr[q].images.includes(product))){
+          console.log('hey');
           product_obj = {}
 
           our_product_name = related_products_arr[q].images;
@@ -372,29 +442,48 @@ router.get('/brands/:brand/:product', function(req, res) {
           related_products_arr[q] = null;
         }
       }
+
+
+      // below we collect every remaining specific brand related product into the this_brand_images_arr.
       for(let i = 0; i < related_products_arr.length; i++){
 
-        if(related_products_arr[i] && related_products_arr[i].images.includes(brand_name_string) && related_products_arr[i] !== undefined){
+        if(related_products_arr[i] !== null && related_products_arr[i] !== undefined && related_products_arr[i].images.includes(brand_name_string) /*&& !(related_products_arr[i].images.includes(product))*/ ){
+          console.log('ho');
           product_obj = {}
 
-          our_product_name = related_products_arr[i].images;
-          our_product_name = our_product_name.split(',');
-          our_product_name = our_product_name[0];
-          our_product_name = our_product_name.split('/');
-          our_product_name = our_product_name[5];
-          our_product_name = our_product_name.split('_');
-          our_product_name = our_product_name[0];
+          if(related_products_arr[i].images.includes(product)){
+            // console.log('routes(454) -> ',related_products_arr[i].images);
+            related_products_arr[i].images = null
+          } else {
+            our_product_name = related_products_arr[i].images;
+            our_product_name = our_product_name.split(',');
+            our_product_name = our_product_name[0];
+            our_product_name = our_product_name.split('/');
+            our_product_name = our_product_name[5];
+            our_product_name = our_product_name.split('_');
+            our_product_name = our_product_name[0];
 
-          product_obj.brand = related_products_arr[i].brand
-          product_obj.image = related_products_arr[i].images
-          product_obj.product_name = our_product_name
+            product_obj.brand = related_products_arr[i].brand
+            product_obj.image = related_products_arr[i].images
+            product_obj.product_name = our_product_name
 
-          this_brand_images_arr.push(product_obj);
-          related_products_arr.splice(i,1,null);
+            this_brand_images_arr.push(product_obj);
+            related_products_arr.splice(i,1,null);
+          }
+
         }
+
       }
+
+      // below we collect every other product besides the primary product into the this_brand_images_arr.
       for(let j = 0; j < related_products_arr.length; j++){
-        if(related_products_arr[j] && related_products_arr[j] !== ''){
+        // console.log('routes(478) related_products_arr['+j+'] -> ',related_products_arr[j]);
+        if(related_products_arr[j] == null){
+          console.log('routes(line 482) null item ignored!');
+        } else if(related_products_arr[j].images == null){
+          console.log('routes(line 484) null item image ignored!');
+        } else {
+
           product_obj = {}
 
           our_product_name = related_products_arr[j].images;
@@ -410,6 +499,7 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj.product_name = our_product_name
 
           this_brand_images_arr.push(product_obj);
+          // console.log('\n routes(495) this_brand_images_arr: ',this_brand_images_arr);
           related_products_arr.splice(j,1,null);
         }
       }

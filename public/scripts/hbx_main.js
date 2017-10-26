@@ -67,32 +67,28 @@ for(let i = 0; i < num_of_images; i++){
   })
 }
 
-// code for related products carousel
-// let product_slide;
-// let percentage;
-//
-// let dotButtons = $(".dot_buttons span");
-//
-// let position = 0;
-// let prev_position = 0;
-//
-// for(let i = 0; i < 3; i++){
-//   dotButtons[i].addEventListener("click", () => {
-//     percentage = i * 100
-//     $(".related_product_slides").css("right",percentage+"%");
-//     $(".related_product_slides").css("transition","1s");
-//     position = percentage
-//
-//     // $(".circle_1").attr('style', 'color: grey');
-//     $(position_obj[prev_position]).attr('style', 'color: grey');
-//     $(position_obj[position]).attr('style', 'color: black !important');
-//     // $(position_obj[2]).attr('style', 'color: grey');
-//     // $(".color_"+i).attr('style', 'color: red !important');
-//     // console.log('i - ',i);
-//     console.log('position: ',position);
-//     prev_position = position; // 100,200,0
-//   })
-// }
+//code for related products carousel
+let product_slide;
+let percentage;
+
+let dotButtons = $(".dot_buttons span");
+
+let position = 0;
+let prev_position = 0;
+
+for(let i = 0; i < 3; i++){
+  dotButtons[i].addEventListener("click", () => {
+    percentage = i * 100
+    $(".related_product_slides").css("right",percentage+"%");
+    $(".related_product_slides").css("transition","1s");
+    position = percentage
+
+    $(position_obj[prev_position]).attr('style', 'color: grey');
+    $(position_obj[position]).attr('style', 'color: black !important');
+    console.log('position: ',position);
+    prev_position = position; 
+  })
+}
 
 
 

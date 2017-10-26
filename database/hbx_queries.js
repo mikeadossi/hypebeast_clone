@@ -163,7 +163,7 @@ let queries = {
   },
 
   getAllHBXProducts: function(){
-    return db.any("SELECT brand_name,product_images FROM products")
+    return db.any("SELECT brand_name,product_images,category_id FROM products")
   }
 }
 
