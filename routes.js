@@ -9,7 +9,12 @@ const passport = require('./passport');
 
 router.get('/', function(req, res, next) {
   // console.log('req.user => ',req.user);
-  Promise.all([queries.getPosts(), queries.getTopTenByHypeCount()]).then(results => {
+  Promise.all(
+    [
+      queries.getPosts(),
+      queries.getTopTenByHypeCount()
+    ]
+    ).then(results => {
 
     const post_titles = [];
     let title;
@@ -37,7 +42,12 @@ router.get('/', function(req, res, next) {
 router.get('/post/:id', function(req, res) {
   const id = req.params.id;
 
-  Promise.all([queries.getPost(id), queries.getPostComments(id)]).then( results => {
+  Promise.all(
+    [
+      queries.getPost(id),
+      queries.getPostComments(id)
+    ]
+  ).then( results => {
       const post = results[0];
       const all_comments = results[1];
 
@@ -183,10 +193,18 @@ router.post('/post/post_comment/:id', function(req, res) {
   const user_id = req.user.id;
   const user_name = req.user.username;
 
-  console.log('user_id: ',user_id,'\n', 'article_id: ',article_id,'\n','user_comment: ',user_comment,'\n');
+  console.log('user_id: ',
+  user_id,'\n',
+  'article_id: ',
+  article_id,
+  '\n',
+  'user_comment: ',
+  user_comment,
+  '\n');
 
   try{
-    queries.storeComment(user_comment, article_id, user_id, user_name).then(() => {
+    queries.storeComment(user_comment, article_id, user_id, user_name)
+    .then(() => {
       res.status(200).redirect('/post/'+article_id)
     })
   }catch(e){
@@ -246,7 +264,28 @@ router.get('/brands/:brand', function(req, res) {
         store_prod_images.push(product_images[1]);
       }
 
-      let size_arr = ['S','M','L','XL','8','8.5','9','9.5','10','10.5','11','11.5','12','12.5','28','30','32','34','36'];
+      let size_arr = [
+        'S',
+        'M',
+        'L',
+        'XL',
+        '8',
+        '8.5',
+        '9',
+        '9.5',
+        '10',
+        '10.5',
+        '11',
+        '11.5',
+        '12',
+        '12.5',
+        '28',
+        '30',
+        '32',
+        '34',
+        '36'
+      ];
+
       let brand_names = [
         'small_count',
         'medium_count',
@@ -262,14 +301,20 @@ router.get('/brands/:brand', function(req, res) {
         'us_11_5_count',
         'us_12_count',
         'us_12_5_count',
-        'pants_28_count','pants_30_count','pants_32_count','pants_34_count','pants_36_count'];
+        'pants_28_count',
+        'pants_30_count',
+        'pants_32_count',
+        'pants_34_count',
+        'pants_36_count'
+      ];
 
       let product_sizes_arr = [];
       let p = 0; for(key in product_sizes){p++}
       var numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
-          if(product_sizes[j][brand_names[i]] && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
+          if(product_sizes[j][brand_names[i]]
+            && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
             product_sizes_arr.push( size_arr[i] );
           }
         }
@@ -422,8 +467,11 @@ router.get('/brands/:brand/:product', function(req, res) {
       // console.log('\n routes(423) related_products_arr[0] => ',related_products_arr[0]);
       for(let q = 0; q < related_products_arr.length; q++){
 
-        if(related_products_arr[q] !== undefined && related_products_arr[q].images.includes(brand_name_string) && related_products_arr[q].category == category_id && !(related_products_arr[q].images.includes(product))){
-          console.log('hey');
+        if(related_products_arr[q] !== undefined
+          && related_products_arr[q].images.includes(brand_name_string)
+          && related_products_arr[q].category == category_id
+          && !(related_products_arr[q].images.includes(product))){
+
           product_obj = {}
 
           our_product_name = related_products_arr[q].images;
@@ -447,8 +495,10 @@ router.get('/brands/:brand/:product', function(req, res) {
       // below we collect every remaining specific brand related product into the this_brand_images_arr.
       for(let i = 0; i < related_products_arr.length; i++){
 
-        if(related_products_arr[i] !== null && related_products_arr[i] !== undefined && related_products_arr[i].images.includes(brand_name_string) /*&& !(related_products_arr[i].images.includes(product))*/ ){
-          console.log('ho');
+        if(related_products_arr[i] !== null
+          && related_products_arr[i] !== undefined
+          && related_products_arr[i].images.includes(brand_name_string) /*&& !(related_products_arr[i].images.includes(product))*/ ){
+
           product_obj = {}
 
           if(related_products_arr[i].images.includes(product)){

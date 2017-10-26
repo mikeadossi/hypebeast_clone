@@ -19,7 +19,9 @@ let queries = {
   },
 
   storeComment: function(user_comment, post_id, user_id, user_name){
-    return db.any("INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4)", [user_comment, user_id, post_id, user_name])
+    return db.any(
+      "INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4)",
+      [user_comment, user_id, post_id, user_name])
   },
 
   getPostComments: function(post_id){
@@ -35,7 +37,9 @@ let queries = {
   },
 
   insertUser: function(email, password){
-    return db.none("INSERT INTO users (email, password) VALUES ($1, $2)", [email, password])
+    return db.none(
+      "INSERT INTO users (email, password) VALUES ($1, $2)",
+    [email, password])
   },
 
   createUser: function(email, password){
@@ -74,13 +78,21 @@ let queries = {
     return db.any("SELECT * FROM facebook_users WHERE id = $1", [id]);
   },
 
-  // the function below helps with our passport OAUTH apis. If the user is not already in our database we sign them up.
+  // the function below helps with our passport OAUTH apis. If the user is not
+  // already in our database we sign them up.
   findOneAndUpdateGh: function(searchAndUpdate){
-    return db.oneOrNone("SELECT * FROM google_users WHERE username = $1", [searchAndUpdate.name])
+    return db.oneOrNone(
+      "SELECT * FROM google_users WHERE username = $1",
+      [searchAndUpdate.name]
+    )
       .then( user => {
         if(!user){
-          // if user is not found in the users table we add them to our github table
-          const result = db.oneOrNone("INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+          // if user is not found in the users table we add them to our
+          // github table
+          const result = db.oneOrNone(
+            "INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *",
+            [searchAndUpdate.name, searchAndUpdate.someID]
+          );
           console.log('result (queries,77) -> ',result);
           return result;
         } else {
@@ -96,10 +108,14 @@ let queries = {
   },
 
   findOneAndUpdateFb: function(searchAndUpdate){
-    return db.oneOrNone("SELECT * FROM facebook_users WHERE username = $1", [searchAndUpdate.name])
+    return db.oneOrNone(
+      "SELECT * FROM facebook_users WHERE username = $1",
+    [searchAndUpdate.name])
       .then( user => {
         if(!user){
-          return db.oneOrNone("INSERT INTO facebook_users (username, profile_id) VALUES ($1, $2) RETURNING *", [searchAndUpdate.name, searchAndUpdate.someID]);
+          return db.oneOrNone(
+            "INSERT INTO facebook_users (username, profile_id) VALUES ($1, $2) RETURNING *",
+            [searchAndUpdate.name, searchAndUpdate.someID]);
         } else {
           return user;
         }
