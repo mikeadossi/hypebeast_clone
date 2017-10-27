@@ -50,16 +50,22 @@ const googleStrategy = (new GoogleStrategy({
 
   function(accessToken, refreshToken, profile, done) {
     // we get back a profile object offering us information about the user.
-    var searchAndUpdate = {
-      name: profile.displayName,
-      someID: profile.id
-    };
 
-    queries.findOneAndUpdateGh(searchAndUpdate)
+    console.log('profile.emails[0].value :',profile.emails[0].value);
+    let userEmail = profile.emails[0].value
+    return queries.findByEmail(userEmail)
       .then(user => {
-        return done(null, user); // serializes it at done
+        console.log('passport(line 65) user -> ',user);
+        if(!user){
+          return queries.createUser(userEmail)
+            .then(newUser => {
+              return done(null, newUser);
+            })
+        } else {
+          return done(null, user); // serializes it at done
+        }
       }).catch(error => {
-        return done(null, error);
+        return done(error);
       });
   }
 
@@ -74,10 +80,11 @@ const facebookStrategy = (new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
     var searchAndUpdate = {
       name: profile.displayName,
-      someID: profile.id
+      someID: profile.id,
+      email: profile.emails[0].value
     };
 
-    queries.findOneAndUpdateFb(searchAndUpdate)
+    return queries.findOneAndUpdateFb(searchAndUpdate)
       .then(user => {
         return done(null, user);
       }).catch(error => {
