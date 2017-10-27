@@ -22,29 +22,15 @@ CREATE TABLE posts (
   image_credit VARCHAR
 );
 
-CREATE TABLE google_users (
-  id SERIAL PRIMARY KEY,
-  profile_id NUMERIC,
-  username VARCHAR
-);
-
-CREATE TABLE facebook_users (
-  id SERIAL PRIMARY KEY,
-  profile_id NUMERIC,
-  username VARCHAR
-);
-
-CREATE TABLE users (
+CREATE TABLE local_users (
   id SERIAL PRIMARY KEY,
   email VARCHAR,
   password VARCHAR
 );
 
-CREATE TABLE all_users (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  avatar TEXT,
-  google_users_id INTEGER REFERENCES google_users(id),
-  facebook_users_id INTEGER REFERENCES facebook_users(id)
+  email VARCHAR
 );
 
 CREATE TABLE comments (
