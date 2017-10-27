@@ -55,7 +55,7 @@ const googleStrategy = (new GoogleStrategy({
     let userEmail = profile.emails[0].value
     return queries.findByEmail(userEmail)
       .then(user => {
-        console.log('passport(line 65) user -> ',user);
+        // console.log('passport(line 65) user -> ',user);
         if(!user){
           return queries.createUser(userEmail)
             .then(newUser => {
@@ -74,21 +74,33 @@ const googleStrategy = (new GoogleStrategy({
 const facebookStrategy = (new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL
+    callbackURL: config.facebook.callbackURL,
+    profileFields: ['id', 'displayName', 'email']
   },
 
   function(accessToken, refreshToken, profile, done) {
-    var searchAndUpdate = {
-      name: profile.displayName,
-      someID: profile.id,
-      email: profile.emails[0].value
-    };
+  //   var searchAndUpdate = {
+  //     name: profile.displayName,
+  //     someID: profile.id,
+  //     email: profile.emails[0].value
+  //   };
+    // console.log('passport(line 87) profile -> ',profile);
+    let userEmail = profile.emails[0].value
+    // console.log('passport(line 89) USER EMAIL: ',userEmail);
 
-    return queries.findOneAndUpdateFb(searchAndUpdate)
+    return queries.findByEmail(userEmail)
       .then(user => {
-        return done(null, user);
+        // console.log('passport(line 92) user -> ',user);
+        if(!user){
+          return queries.createUser(userEmail)
+            .then(newUser => {
+              return done(null, newUser);
+            })
+        } else {
+          return done(null, user); // serializes it at done
+        }
       }).catch(error => {
-        return done(null, error);
+        return done(error);
       });
   }
 
@@ -99,34 +111,24 @@ passport.use(googleStrategy);
 passport.use(facebookStrategy);
 
 passport.serializeUser(function(user, done) {
-  console.log('passport(line 78) user => ',user);
+  // console.log('passport(line 114) user => ',user);
   // req.session.passport.user or req.user
   done(null, user.id); // sends to deserialize
 });
 
 passport.deserializeUser(function(id, done) {
-  // console.log('passport(line 83) id => ',id);
+  // console.log('passport(line 120) id => ',id);
 
-// the serialize and deserialize steps help poulate the cookie
+// the serialize and deserialize steps help populate the cookie
   queries.findById(id)
     .then(user => {
-      done(null, user)
+      // console.log('passport(line 125) user: ',user);
+      done(null, user[0])
     })
     .catch(error => {
       done(error)
     })
 
-  // queries.findByIdGoogle(id)
-  //   .then(user => {console.log('user[0] ->',user[0]); done(null,user[0])}) // sends to entire application
-  //   .catch(error => done(null, error))
-
-  // queries.findByIdFacebook(id)
-  //   .then(user => done(null,user[0]))
-  //   .catch(error => done(null, error))
-
-  // queries.findById(id)
-  //   .then(user => done(null,user[0]))
-  //   .catch(error => done(null, error))
 });
 
 module.exports = passport

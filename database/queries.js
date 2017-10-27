@@ -18,7 +18,6 @@ let queries = {
     // if(!dbPassword) reject('No user of that name exists!')
     return this.findByEmailLocal(email)
       .then(user => {
-        console.log('here!');
         return bcrypt.compare(password, user.password)
       })
   },

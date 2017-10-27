@@ -160,13 +160,11 @@ router.get('/auth/google/callback',
   }),
   function(req, res) {
     res.redirect('/');
-    // res.json(req.user);
   }
 );
 
 router.get('/auth/facebook',
   passport.authenticate('facebook', {
-    authType: 'rerequest',
     scope: ['user_friends', 'manage_pages']
   } ));
 
@@ -174,7 +172,6 @@ router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/error' }),
   function(req, res) {
     res.redirect('/');
-    res.json(req.user);
   }
 );
 
