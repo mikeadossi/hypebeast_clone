@@ -4,15 +4,24 @@ let db = pgp(connectionString);
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const comparePassword = function(password, dbPassword){
-  if(!dbPassword) reject('No user of that name exists!')
-  return bcrypt.compare(password, dbPassword)
-    .then(function(res) {
-      return resolve(res)
-    })
-};
+// const comparePassword = function(password, dbPassword){
+//   if(!dbPassword) reject('No user of that name exists!')
+//   return bcrypt.compare(password, dbPassword)
+//     .then(function(res) {
+//       return resolve(res)
+//     })
+// };
 
 let queries = {
+
+  comparePassword : function(email, password){
+    // if(!dbPassword) reject('No user of that name exists!')
+    return this.findByEmailLocal(email)
+      .then(user => {
+        console.log('here!');
+        return bcrypt.compare(password, user.password)
+      })
+  },
 
   getPosts: function(){
     return db.any("SELECT * FROM posts") // returns a promise, because pgp
@@ -36,28 +45,40 @@ let queries = {
     return db.any("SELECT * FROM posts WHERE id = $1", id)
   },
 
-  insertUser: function(email, password){
-    return db.none(
-      "INSERT INTO users (email, password) VALUES ($1, $2)",
-    [email, password])
-  },
-
-  createUser: function(email, password){
+  createLocalUser: function(email, password){
+    this.createUser(email);
     return bcrypt.hash(password, saltRounds).then(hash => {
-      queries.insertUser(email, hash)
-        .then(result => {
-          console.log('hash: ',hash);
-        })
-        .catch(err => {
-          console.log('error: ',err);
-          // return next(err);
-          // return err;
-        })
+      return db.none(
+        "INSERT INTO local_users (email, password) VALUES ($1, $2)",
+        [email, hash])
     })
   },
 
+  createUser: function(email){
+    return db.none(
+      "INSERT INTO users (email) VALUES ($1)",
+    [email])
+  },
+
+  // createUser: function(email, password){
+  //   return bcrypt.hash(password, saltRounds).then(hash => {
+  //     queries.insertUser(email, hash)
+  //       .then(result => {
+  //         console.log('hash: ',hash);
+  //       })
+  //       .catch(err => {
+  //         console.log('error: ',err);
+  //         // return next(err);
+  //         // return err;
+  //       })
+  //   })
+  // },
+
   find: function(email, password){
-    return db.oneOrNone("SELECT * FROM users WHERE users.email = $1", [email])
+    return db.oneOrNone(
+      "SELECT * FROM users WHERE users.email = $1",
+      [email]
+    )
       .then(user => {
         return comparePassword(password, user.password) ? user : false
       })
@@ -68,6 +89,15 @@ let queries = {
 
   findById: function(id){
     return db.any("SELECT * FROM users WHERE id = $1", [id]);
+  },
+
+  findByEmail: function(email){
+    return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
+  },
+
+  findByEmailLocal: function(email){
+    console.log('queries(line 99) email -> ',email);
+    return db.oneOrNone("SELECT * FROM local_users WHERE email = $1", [email]);
   },
 
   findByIdGoogle: function(id){

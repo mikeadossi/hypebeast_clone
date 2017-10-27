@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const cookieParser = require('cookie-parser');
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('./passport');
@@ -122,11 +121,12 @@ router.get('/register', function(req, res) {
 })
 
 router.post('/register', function(req, res) {
-  const email = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
   try{
-    queries.createUser(email, password).then(() => {
+    queries.createLocalUser(email, password)
+    .then(() => {
       res.status(200).redirect('/register/success')
     })
   }catch(e){

@@ -2,8 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const routes = require('./routes.js');
 const config = require('./configure');
 const flash = require('connect-flash');
@@ -17,13 +16,11 @@ app.use(flash());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(cookieParser());
-
-app.use(session({
-  secret: config.secret,
-  resave: true,
-  saveUnitialized: true
-}))
+app.use(cookieSession({
+  name: 'session',
+  keys: [config.secret],
+  maxAge: 24*60*60*1000
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());

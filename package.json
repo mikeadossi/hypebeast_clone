@@ -7,10 +7,9 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "express-session": "^1.15.5",
     "nodemon": "*",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
@@ -26,7 +25,7 @@
     "start": "nodemon server.js",
     "drop:db": "dropdb comment_system_db",
     "create:db": "createdb comment_system_db;",
-    "seed:db": "psql comment_system_db < database/schema.sql & psql comment_system_db < database/hbx_schema.sql"
+    "schema:db": "psql comment_system_db < database/schema.sql & psql comment_system_db < database/hbx_schema.sql"
   },
   "author": "Mike Adossi",
   "license": "MIT"

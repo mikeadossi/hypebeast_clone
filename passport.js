@@ -6,21 +6,38 @@ const queries = require('./database/queries.js');
 const config = require('./configure');
 
 const strategy = (new LocalStrategy(
-  function(username, password, done) {
+  {
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(email, password, done) {
+    console.log('\n email => ',email,'\n password => ',password);
     try{
-      queries.find(username, password)
-        .then(result => {
-          if(!result) {
+      queries.findByEmail(email)
+        .then(user => {
+          console.log('\n passport(line 13) user => ',user,'\n');
+          if(!user) {
+          console.log('\n passport(line 15) user => USER UNDEFINED')
             return done(
               null,
               false,
-              {message: 'Incorrect username or password'});
+              {message: 'user not found'});
           } else {
-            return done(null, result);
+            // check if given password matches password in db
+            console.log('lookey here!');
+            return queries.comparePassword(email, password)
+              .then(result => {
+                if(result){
+                  return done(null, user);
+                } else {
+                  return done(null, false, {message: 'passwords do not match'})
+                }
+              })
+
           }
         })
     }catch(error){
-      return done(null, error);
+      return done(error);
     }
   })
 );
@@ -76,14 +93,25 @@ passport.use(facebookStrategy);
 
 passport.serializeUser(function(user, done) {
   console.log('passport(line 78) user => ',user);
+  // req.session.passport.user or req.user
   done(null, user.id); // sends to deserialize
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('passport(line 83) id => ',id);
-  queries.findByIdGoogle(id)
-    .then(user => {console.log('user[0] ->',user[0]); done(null,user[0])}) // sends to entire application
-    .catch(error => done(null, error))
+  // console.log('passport(line 83) id => ',id);
+
+// the serialize and deserialize steps help poulate the cookie
+  queries.findById(id)
+    .then(user => {
+      done(null, user)
+    })
+    .catch(error => {
+      done(error)
+    })
+
+  // queries.findByIdGoogle(id)
+  //   .then(user => {console.log('user[0] ->',user[0]); done(null,user[0])}) // sends to entire application
+  //   .catch(error => done(null, error))
 
   // queries.findByIdFacebook(id)
   //   .then(user => done(null,user[0]))
