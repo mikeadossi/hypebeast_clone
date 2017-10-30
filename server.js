@@ -13,7 +13,7 @@ const app = express();
 
 app.use(flash());
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [__dirname + '/views/hypebeast', __dirname + '/views/hbx']);
 app.set('view engine', 'pug');
 
 app.use(cookieSession({
