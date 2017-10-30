@@ -13,23 +13,23 @@ block content
     .login_main_container
       .login_first_div
         p.login_instructions Log In with your Facebook or Google account
-        form.hbx_form(method='get' action="#")
+        form.hbx_form(method='get' action="/hbx/auth/facebook/")
           input.hbx_login_social.login_hbx_facebook(value="LOG IN WITH FACEBOOK")
-        form.hbx_form(method='get' action="#")
+        form.hbx_form(method='get' action="/hbx/auth/google/")
           input.hbx_login_social.login_hbx_google(value="LOG IN WITH GOOGLE")
       hr.hbx_hr
       .login_or or
       .login_second_div
         p.login_instructions Sign in with your email address username
-        form.hbx_form(method='get' action="#")
+        form.hbx_form(method='post' action="hbx_register")
           div.label
             label EMAIL / USERNAME
           div
-            input.login_input(name="username" type="text")
+            input.login_input(name="email" type="email")
           div.label.password_label
             label PASSWORD
           div
-            input.login_input(name="password" type="text")
+            input.login_input(name="password" type="password")
           
           .register_options_container
             span By signing up, you agree to our 
@@ -37,4 +37,4 @@ block content
             span and 
             span.option_button Privacy Policy.
           
-          input#hbx_log_in(type="submit" value="LOG IN")
+          input#hbx_log_in(type="submit" value="SIGN UP")

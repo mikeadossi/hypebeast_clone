@@ -5,11 +5,11 @@ block content
     h2 Login to HYPEBEAST
     p Connect to HYPEBEAST with your Facebook account
     .social_media_login
-      form(method='get' action='http://127.0.0.1:3000/auth/facebook/')
+      form(method='get' action='/auth/facebook/')
         button#facebook_login.log_in_btn(type='submit') 
           i.fa.fa-fw.fa-facebook#facebook-login
           span Login with Facebook
-      form(method='get' action='http://127.0.0.1:3000/auth/google/')
+      form(method='get' action='/auth/google/')
         button#google_login.log_in_btn(type='submit') 
           i.fa.fa-fw.fa-google 
           span Login with Google

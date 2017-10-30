@@ -525,9 +525,9 @@ router.get('/brands/:brand/:product', function(req, res) {
       for(let j = 0; j < related_products_arr.length; j++){
         // console.log('routes(478) related_products_arr['+j+'] -> ',related_products_arr[j]);
         if(related_products_arr[j] == null){
-          console.log('routes(line 482) null item ignored!');
+          console.log('routes(line 528) null item ignored!');
         } else if(related_products_arr[j].images == null){
-          console.log('routes(line 484) null item image ignored!');
+          console.log('routes(line 530) null item image ignored!');
         } else {
 
           product_obj = {}
@@ -569,14 +569,70 @@ router.get("/hbx_login", function(req, res) {
   res.render('hbx_login')
 })
 
+router.post('/hbx_login', passport.authenticate('local', {
+  successRedirect: '/store',
+  failureRedirect: '/hbx_login',
+  failureFlash: true
+}));
+
 router.get("/hbx_register", function(req, res) {
   res.render('hbx_register')
+})
+
+router.post("/hbx_register", function(req, res) {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try{
+    queries.createLocalUser(email, password)
+    .then(() => {
+      res.status(200).redirect('/hbx_register/success')
+    })
+  }catch(e){
+    console.log(e);
+  }
 })
 
 router.get("/hbx_shopping_bag", function(req, res) {
   res.render('hbx_shopping_bag')
 })
 
+router.get('/hbx_register/success', function(req, res) {
+  res.render('hbx_successful_register');
+})
+
+router.get('/hbx/auth/facebook',
+  passport.authenticate('hbx-facebook', {
+    scope: ['user_friends', 'manage_pages']
+  } ));
+
+router.get('/hbx/auth/facebook/callback',
+  passport.authenticate('hbx-facebook', {
+    successRedirect: '/store',
+    failureRedirect: '/hbx_error',
+    failureFlash: true
+  })
+);
+
+router.get('/hbx/auth/google',
+  passport.authenticate('hbx-google', { scope: ['profile','email'] })
+);
+
+router.get('/hbx/auth/google/callback',
+  passport.authenticate('hbx-google', {
+    successRedirect: '/store',
+    failureRedirect: '/hbx_error',
+    failureFlash: true
+  })
+);
+
+router.get('/hbx/auth/error', function(req, res){
+  res.render('hbx_error');
+});
+
+router.get('/hbx_error', function(req, res) {
+  res.render('hbx_error');
+});
 
 
 module.exports = router;

@@ -13,23 +13,29 @@ block content
     .login_main_container
       .login_first_div
         p.login_instructions Log In with your Facebook or Google account
-        form.hbx_form(method='get' action="#")
-          input.hbx_login_social.login_hbx_facebook(value="LOG IN WITH FACEBOOK")
-        form.hbx_form(method='get' action="#")
-          input.hbx_login_social.login_hbx_google(value="LOG IN WITH GOOGLE")
+        form.hbx_form(method='get' action="/hbx/auth/facebook/")
+          button#facebook_login.log_in_btn(type='submit') 
+            i.fa.fa-fw.fa-facebook#facebook-login
+            span LOG IN WITH FACEBOOK
+          //- input.hbx_login_social.login_hbx_facebook(value="LOG IN WITH FACEBOOK")
+        form.hbx_form(method='get' action="/hbx/auth/google/")
+          button#google_login.log_in_btn(type='submit') 
+            i.fa.fa-fw.fa-google 
+            span LOG IN WITH GOOGLE
+          //- input.hbx_login_social.login_hbx_google(value="LOG IN WITH GOOGLE")
       hr.hbx_hr
       .login_or or
       .login_second_div
         p.login_instructions Sign in with your email address username
-        form.hbx_form(method='get' action="#")
+        form.hbx_form(method='post' action="hbx_login")
           div.label
             label EMAIL / USERNAME
           div
-            input.login_input(name="username" type="text" placeholder="Email / Username")
+            input.login_input(name="email" type="email" placeholder="Email / Username")
           div.label.password_label
             label PASSWORD
           div
-            input.login_input(name="password" type="text" placeholder="Password")
+            input.login_input(name="password" type="password" placeholder="Password")
           
           .login_options_container
             .pull_left

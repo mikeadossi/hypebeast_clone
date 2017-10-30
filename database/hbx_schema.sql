@@ -8,10 +8,10 @@ DROP TABLE IF EXISTS cart CASCADE;
 DROP TABLE IF EXISTS brands CASCADE;
 DROP TABLE IF EXISTS color_type CASCADE;
 
-DROP TABLE IF EXISTS all_hbx_users CASCADE;
-DROP TABLE IF EXISTS hbx_google_users CASCADE;
-DROP TABLE IF EXISTS hbx_facebook_users CASCADE;
-DROP TABLE IF EXISTS hbx_users CASCADE;
+-- DROP TABLE IF EXISTS all_hbx_users CASCADE;
+-- DROP TABLE IF EXISTS hbx_google_users CASCADE;
+-- DROP TABLE IF EXISTS hbx_facebook_users CASCADE;
+-- DROP TABLE IF EXISTS hbx_users CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
 
 CREATE TABLE cart (
@@ -28,31 +28,31 @@ CREATE TABLE orders (
   cart_id INTEGER REFERENCES cart(id)
 );
 
-CREATE TABLE hbx_users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR,
-  password VARCHAR,
-  order_id INTEGER REFERENCES orders(id)
-);
-
-CREATE TABLE hbx_google_users (
-  id SERIAL PRIMARY KEY,
-  profile_id NUMERIC,
-  username VARCHAR
-);
-
-CREATE TABLE hbx_facebook_users (
-  id SERIAL PRIMARY KEY,
-  profile_id NUMERIC,
-  username VARCHAR
-);
-
-CREATE TABLE all_hbx_users (
-  id SERIAL PRIMARY KEY,
-  avatar TEXT,
-  hbx_google_users_id INTEGER REFERENCES hbx_google_users(id),
-  hbx_facebook_users_id INTEGER REFERENCES hbx_facebook_users(id)
-);
+-- CREATE TABLE hbx_users (
+--   id SERIAL PRIMARY KEY,
+--   email VARCHAR,
+--   password VARCHAR,
+--   order_id INTEGER REFERENCES orders(id)
+-- );
+--
+-- CREATE TABLE hbx_google_users (
+--   id SERIAL PRIMARY KEY,
+--   profile_id NUMERIC,
+--   username VARCHAR
+-- );
+--
+-- CREATE TABLE hbx_facebook_users (
+--   id SERIAL PRIMARY KEY,
+--   profile_id NUMERIC,
+--   username VARCHAR
+-- );
+--
+-- CREATE TABLE all_hbx_users (
+--   id SERIAL PRIMARY KEY,
+--   avatar TEXT,
+--   hbx_google_users_id INTEGER REFERENCES hbx_google_users(id),
+--   hbx_facebook_users_id INTEGER REFERENCES hbx_facebook_users(id)
+-- );
 
 CREATE TABLE brands (
   id SERIAL PRIMARY KEY,

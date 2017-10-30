@@ -38,7 +38,11 @@ html
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")
         ul.register.nav_elements
-          a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
+          - if(user){
+              a(href="#").nav_login.hbx_nav_link.nav_elements ACCOUNT
+          - } else {
+              a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
+          - }
           li.nav_help.hbx_nav_link.nav_elements HELP
         .cart.nav_elements#bag_button
           .shopping_bag_container

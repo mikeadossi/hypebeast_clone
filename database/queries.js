@@ -4,13 +4,6 @@ let db = pgp(connectionString);
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-// const comparePassword = function(password, dbPassword){
-//   if(!dbPassword) reject('No user of that name exists!')
-//   return bcrypt.compare(password, dbPassword)
-//     .then(function(res) {
-//       return resolve(res)
-//     })
-// };
 
 let queries = {
 
@@ -58,20 +51,6 @@ let queries = {
       "INSERT INTO users (email) VALUES ($1)",
     [email])
   },
-
-  // createUser: function(email, password){
-  //   return bcrypt.hash(password, saltRounds).then(hash => {
-  //     queries.insertUser(email, hash)
-  //       .then(result => {
-  //         console.log('hash: ',hash);
-  //       })
-  //       .catch(err => {
-  //         console.log('error: ',err);
-  //         // return next(err);
-  //         // return err;
-  //       })
-  //   })
-  // },
 
   find: function(email, password){
     return db.oneOrNone(

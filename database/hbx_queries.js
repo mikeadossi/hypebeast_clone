@@ -164,7 +164,23 @@ let queries = {
 
   getAllHBXProducts: function(){
     return db.any("SELECT brand_name,product_images,category_id FROM products")
-  }
+  },
+
+  createHBXLocalUser: function(email, password){
+    this.createUser(email);
+    return bcrypt.hash(password, saltRounds).then(hash => {
+      return db.none(
+        "INSERT INTO local_users (email, password) VALUES ($1, $2)",
+        [email, hash])
+    })
+  },
+
+  createHBXUser: function(email){
+    return db.none(
+      "INSERT INTO users (email) VALUES ($1)",
+    [email])
+  },
+
 }
 
 module.exports = queries;

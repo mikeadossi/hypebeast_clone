@@ -5,6 +5,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const queries = require('./database/queries.js');
 const config = require('./configure');
 
+/* ~~~~~~~~~~~~~~~~~ local strategy ~~~~~~~~~~~~~~~~~ */
+
 const strategy = (new LocalStrategy(
   {
     usernameField: 'email',
@@ -42,36 +44,74 @@ const strategy = (new LocalStrategy(
   })
 );
 
-const googleStrategy = (new GoogleStrategy({
+/* ~~~~~~~~~~~~~~~~~ google strategy ~~~~~~~~~~~~~~~~~ */
+
+const googleVerificationCallback = (accessToken, refreshToken, profile, done) => {
+  // we get back a profile object offering us information about the user.
+
+  console.log('profile.emails[0].value :',profile.emails[0].value);
+  let userEmail = profile.emails[0].value
+  return queries.findByEmail(userEmail)
+    .then(user => {
+      if(!user){
+        return queries.createUser(userEmail)
+          .then(newUser => {
+            return done(null, newUser);
+          })
+      } else {
+        return done(null, user); // serializes it at done
+      }
+    }).catch(error => {
+      return done(error);
+    });
+};
+
+passport.use('google', new GoogleStrategy({
     clientID: config.google.clientID,
     clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
 
   function(accessToken, refreshToken, profile, done) {
-    // we get back a profile object offering us information about the user.
-
-    console.log('profile.emails[0].value :',profile.emails[0].value);
-    let userEmail = profile.emails[0].value
-    return queries.findByEmail(userEmail)
-      .then(user => {
-        // console.log('passport(line 65) user -> ',user);
-        if(!user){
-          return queries.createUser(userEmail)
-            .then(newUser => {
-              return done(null, newUser);
-            })
-        } else {
-          return done(null, user); // serializes it at done
-        }
-      }).catch(error => {
-        return done(error);
-      });
+    googleVerificationCallback(accessToken, refreshToken, profile, done);
   }
 
 ));
 
-const facebookStrategy = (new FacebookStrategy({
+passport.use('hbx-google', new GoogleStrategy({
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
+    callbackURL: config.google.hbxCallbackURL
+  },
+
+  function(accessToken, refreshToken, profile, done) {
+    googleVerificationCallback(accessToken, refreshToken, profile, done);
+  }
+
+));
+
+/* ~~~~~~~~~~~~~~~~~ facebook strategy ~~~~~~~~~~~~~~~~~ */
+
+const facebookVerificationCallback = (accessToken, refreshToken, profile, done) => {
+
+  let userEmail = profile.emails[0].value
+
+  return queries.findByEmail(userEmail)
+    .then(user => {
+      if(!user){
+        return queries.createUser(userEmail)
+          .then(newUser => {
+            return done(null, newUser);
+          })
+      } else {
+        return done(null, user); // serializes it at done
+      }
+    }).catch(error => {
+      return done(error);
+    });
+}
+
+passport.use('facebook', new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
@@ -79,36 +119,27 @@ const facebookStrategy = (new FacebookStrategy({
   },
 
   function(accessToken, refreshToken, profile, done) {
-  //   var searchAndUpdate = {
-  //     name: profile.displayName,
-  //     someID: profile.id,
-  //     email: profile.emails[0].value
-  //   };
-    // console.log('passport(line 87) profile -> ',profile);
-    let userEmail = profile.emails[0].value
-    // console.log('passport(line 89) USER EMAIL: ',userEmail);
-
-    return queries.findByEmail(userEmail)
-      .then(user => {
-        // console.log('passport(line 92) user -> ',user);
-        if(!user){
-          return queries.createUser(userEmail)
-            .then(newUser => {
-              return done(null, newUser);
-            })
-        } else {
-          return done(null, user); // serializes it at done
-        }
-      }).catch(error => {
-        return done(error);
-      });
+    facebookVerificationCallback(accessToken, refreshToken, profile, done);
   }
 
 ));
 
+passport.use('hbx-facebook', new FacebookStrategy({
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
+    callbackURL: config.facebook.hbxCallbackURL,
+    profileFields: ['id', 'displayName', 'email']
+  },
+
+  function(accessToken, refreshToken, profile, done) {
+    facebookVerificationCallback(accessToken, refreshToken, profile, done);
+  }
+
+));
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 passport.use(strategy);
-passport.use(googleStrategy);
-passport.use(facebookStrategy);
 
 passport.serializeUser(function(user, done) {
   // console.log('passport(line 114) user => ',user);

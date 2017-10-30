@@ -170,6 +170,48 @@
   font-size:14px;
 }
 
+.hbx_successful_register_content{
+  height:100vh;
+}
+
+.hbx_successful_register_message p{
+  margin-bottom: 40px;
+  margin-top:35px;
+  font-size:13px;
+  color:#333333;
+}
+
+.hbx_successful_register_header{
+  font-size: 22px;
+  font-weight: 500;
+  border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 20px;
+}
+
+.hbx_successful_register_message{
+  background-color: #F6F6F6;
+  text-align: center;
+  padding: 75px 75px 30px 75px;
+  width: 430px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.hbx_continue_link:hover{
+  /*background-color:#236CA6;*/
+  cursor:pointer;
+}
+
+.hbx_continue_link{
+  color:white;
+  text-decoration:none;
+  background-color: black;
+  border: none;
+  font-size: 14px;
+  width: 100%;
+  padding: 10px 43.5% 10px 43.5%;
+}
+
 
 @media only screen and (max-width: 769px){
   .hbx_login_content{
