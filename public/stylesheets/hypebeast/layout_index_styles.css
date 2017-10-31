@@ -191,7 +191,9 @@ textarea{
   display:inline-block;
 }
 
-.accountDropDown, .globeDropDown, .accountDropDownLoggedIn{
+.accountDropDown,
+.globeDropDown,
+.accountDropDownLoggedIn{
   position:absolute;
   z-index: 10;
   background-color:white;
@@ -201,11 +203,15 @@ textarea{
   display:none;
 }
 
-.accountDropDown div:first-child, .globeDropDown div:first-child, .accountDropDownLoggedIn div:first-child{
+.accountDropDown div:first-child,
+.globeDropDown div:first-child,
+.accountDropDownLoggedIn div:first-child{
   padding-bottom:15px;
 }
 
-.accountDropDown a:hover, .globeDropDown div:hover, .accountDropDownLoggedIn a:hover{
+.accountDropDown a:hover,
+.globeDropDown div:hover,
+.accountDropDownLoggedIn a:hover{
   color:grey;
 }
 

@@ -40,7 +40,12 @@ html
         img.hbx_search(src="/images/hbx_images/general/search.png")
         ul.register.nav_elements
           - if(user){
-              a(href="#").nav_login.hbx_nav_link.nav_elements ACCOUNT
+              .nav_login.nav_elements
+                button.hbx_nav_link.hbx_account_button ACCOUNT
+                  .hbxAccountMenu
+                    .hbx_topmost_line
+                    a(href="/hbx_account") YOUR SETTINGS
+                    a(href="/hbx_logout") LOGOUT
           - } else {
               a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
           - }

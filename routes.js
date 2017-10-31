@@ -67,7 +67,7 @@ router.get('/hbx_store/:id', function(req, res) {
 
   queries.getPost(id)
     .then( brand => {
-      res.render('hbx_brand', { brand: brand })
+      res.render('hbx_brand', { brand: brand, user: req.user })
     })
     .catch( err => {
       console.log('err: ', err);
@@ -75,7 +75,9 @@ router.get('/hbx_store/:id', function(req, res) {
 })
 
 router.get('/store', function(req, res) {
-  res.render('hbx_index');
+  res.render('hbx_index', {
+    user: req.user
+  });
 })
 
 router.get('/register/success', function(req, res) {
@@ -146,7 +148,6 @@ router.post('/login', passport.authenticate('local', {
 
 router.get('/logout', function(req, res) {
   req.logout();
-  console.log('logged out!');
   res.redirect('/');
 })
 
@@ -323,7 +324,8 @@ router.get('/brands/:brand', function(req, res) {
         categories_arr: categories_arr,
         colors_arr: colors_arr,
         price_range_arr: ranges,
-        product_sizes_arr: product_sizes_arr
+        product_sizes_arr: product_sizes_arr,
+        user: req.user
       })
     })
     .catch( err => {
@@ -557,7 +559,8 @@ router.get('/brands/:brand/:product', function(req, res) {
         brand_name_string: brandNameObj[brand],
         product_sizes_arr: product_sizes_arr,
         product_colors_arr: product_colors_arr,
-        this_brand_images_arr: this_brand_images_arr
+        this_brand_images_arr: this_brand_images_arr,
+        user: req.user
       })
     })
     .catch( err => {
@@ -581,22 +584,22 @@ router.post('/hbx_login', passport.authenticate('local', {
 
 router.get('/hbx_account', function(req, res) {
   if(req.user){
-    res.render('hbx_account', {user: req.user});
+    res.render('hbx_account', { user: req.user });
   } else {
-    res.render('error')
+    res.render('hbx_error')
   }
 })
 
 router.get('/hbx_account/password', function(req, res) {
   if(req.user){
-    res.render('hbx_change_password', {user: req.user});
+    res.render('hbx_change_password', { user: req.user });
   } else {
-    res.render('error');
+    res.render('hbx_error');
   }
 })
 
 router.get('/hbx_account/close-account', function(req, res) {
-  res.render('hbx_close_account');
+  res.render('hbx_close_account', { user: req.user });
 })
 
 
@@ -623,7 +626,7 @@ router.post("/hbx_register", function(req, res) {
 })
 
 router.get("/hbx_shopping_bag", function(req, res) {
-  res.render('hbx_shopping_bag')
+  res.render('hbx_shopping_bag', { user: req.user })
 })
 
 router.get('/hbx_register/success', function(req, res) {
@@ -662,6 +665,11 @@ router.get('/hbx/auth/error', function(req, res){
 router.get('/hbx_error', function(req, res) {
   res.render('hbx_error');
 });
+
+router.get('/hbx_logout', function(req, res) {
+  req.logout();
+  res.redirect('/store');
+})
 
 
 

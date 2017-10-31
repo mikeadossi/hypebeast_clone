@@ -4,6 +4,10 @@
   border-bottom: 1px solid #F0F0F0;
 }
 
+.hbx_account_btn{
+  padding-left: 8px !important;
+}
+
 .hbx_title{
   height:43px;
   cursor:pointer;
@@ -100,6 +104,39 @@ ul{
   padding: 0 5px 0 22px;
   font-size:12px;
   color:grey;
+}
+
+.hbx_account_button{
+  padding: 0 5px 27px 2.4px !important;
+  border:none;
+  background-color: transparent;
+}
+
+.hbx_topmost_line{
+  border-bottom:1px solid gainsboro;
+  margin: 8px 0px 5px 0px;
+}
+
+.hbxAccountMenu{
+  position:absolute;
+  z-index: 10;
+  background-color:white;
+  border:1px solid #F0F0F0;
+  padding: 10px 30px 10px 30px;
+  margin: 27px 0 0 -47px;
+  /*display:none;*/
+}
+
+.hbxAccountMenu a:hover{
+  color:grey;
+}
+
+.hbxAccountMenu a{
+  display:block;
+  margin:auto;
+  text-align:center;
+  padding:5px;
+  font-size:12px;
 }
 
 .hbx_search{
@@ -499,6 +536,16 @@ ul{
   width:99%;
   height: 43px;
   z-index:20;
+}
+
+.hbxAccountDropDown{
+  position:absolute;
+  z-index: 10;
+  background-color:white;
+  border:1px solid lightgrey;
+  padding: 10px 50px 10px 30px;
+  margin: 10px 0 0 -79px;
+  display:none;
 }
 
 

@@ -95,7 +95,13 @@ $(window).scroll(function(){
 });
 
 
-
+$('.hbx_account_button').hover(
+  () => {
+    $('.hbxAccountMenu').css('display','block');
+  }, () => {
+    $('.hbxAccountMenu').css('display','none');
+  }
+)
 
 
 
