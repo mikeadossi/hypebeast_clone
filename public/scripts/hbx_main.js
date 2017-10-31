@@ -104,7 +104,7 @@ $('.hbx_account_button').hover(
 )
 
 let currentSelectedSize;
-item_count_amt = Number($('.item_count_amt')[0].innerHTML);
+let item_count_amt = Number($('.item_count_amt')[0].innerHTML);
 
 let product_size_categories_arr = $('.hidden_product_sizes_arr')[0].innerHTML;
 
@@ -179,18 +179,48 @@ const product_price = Number(product_usd[1]);
 const addSelectedItemsToCart = () => {
   if(currentSelectedSize){
 
-    itemsInCart.push({
-      product_size: currentSelectedSize.replace(/\s/g, ''),
-      product_count: item_count_amt,
-      product_color: $(".form-control option:selected").text(),
-      product_brand: product_brand,
-      product_name: product_name,
-      product_price: product_price
-    })
-    console.log('cart: ',itemsInCart);
+    if($('.product_add_to_cart_button')[0].innerHTML == "PROCEED TO BAG"){
+      let href = window.location.href;
+      href = href.split('brands')
+      href = href[0] + 'hbx_shopping_bag'
+      console.log('href: ',href);
+
+      window.location = href;
+
+    } else {
+
+      itemsInCart.push({
+        product_size: currentSelectedSize.replace(/\s/g, ''),
+        product_count: item_count_amt,
+        product_color: $(".form-control option:selected").text(),
+        product_brand: product_brand,
+        product_name: product_name,
+        product_price: product_price
+      })
+
+    }
+
   }
+  updateCartIcon();
+  proceedToBag();
 }
 
+const proceedToBag = () => {
+  $('.product_add_to_cart_button').css('background-color','green');
+  $('.product_add_to_cart_button')[0].innerHTML = "PROCEED TO BAG";
+}
+
+const updateCartIcon = () => {
+  let itemsInCartString = JSON.stringify(itemsInCart);
+  document.cookies = "itemsInCart="+itemsInCartString;
+  let cookies = document.cookies;
+  cookies = cookies.split('=');
+  cookies = JSON.parse(cookies[1]);
+
+  let numOfCartItems = itemsInCart.length;
+  $('.shopping_bag')[0].innerHTML = numOfCartItems;
+  $('.shopping_bag_deux')[0].innerHTML = numOfCartItems;
+}
 
 
 
