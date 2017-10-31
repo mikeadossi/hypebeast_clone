@@ -112,6 +112,10 @@ ul{
   background-color: transparent;
 }
 
+.hbx_account_button:focus {
+  outline:0;
+}
+
 .hbx_topmost_line{
   border-bottom:1px solid gainsboro;
   margin: 8px 0px 5px 0px;
@@ -124,7 +128,7 @@ ul{
   border:1px solid #F0F0F0;
   padding: 10px 30px 10px 30px;
   margin: 27px 0 0 -47px;
-  /*display:none;*/
+  display:none;
 }
 
 .hbxAccountMenu a:hover{

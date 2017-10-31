@@ -33,17 +33,18 @@ block content
           span.product_title SIZE
           span.find_your_size FIND YOUR SIZE
           .sizes_container
+            .hidden_product_sizes_arr !{product_sizes_arr}
             - for(let s = 0; s < product_sizes_arr.length; s++){
-                .product_sizes !{ product_sizes_arr[s] }
+                .product_sizes(class= "product_size_"+s, onclick="selectSize("+s+")") !{ product_sizes_arr[s] } 
             - }
         .product_purchase_container
           .product_title QUANTITY
           .product_item_count_select_container
-            .item_count_minus -
+            .item_count_minus(onclick="decrementCount()") -
             .item_count_amt 1
-            .item_count_plus +
+            .item_count_plus(onclick="incrementCount()") +
         .product_add_to_cart_button
-          .select_size PLEASE SELECT A SIZE
+          .select_size(onclick="addSelectedItemsToCart()") PLEASE SELECT A SIZE
         
         .product_disclaimer_1
           img.disclaimer_images(src="/images/hbx_images/general/30_days.png")

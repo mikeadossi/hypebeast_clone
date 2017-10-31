@@ -12,6 +12,12 @@ html, body{
   display: inline-block;
   padding-right: 10px;
   color:grey;
+  position: absolute;
+  margin-top: 33px;
+  font-size: 11px;
+  width: 164px;
+  text-align: center;
+  border: none;
 }
 
 button:focus{

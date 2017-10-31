@@ -63,7 +63,7 @@ html
           .navSelectBtnContainer
             .navAccountContainer
               - if(user){
-                .username_div= user.email
+                input.username_div(value=user.email)
               - }
               button.avatar
                 img.avatar_img(

@@ -103,8 +103,93 @@ $('.hbx_account_button').hover(
   }
 )
 
+let currentSelectedSize;
+item_count_amt = Number($('.item_count_amt')[0].innerHTML);
+
+let product_size_categories_arr = $('.hidden_product_sizes_arr')[0].innerHTML;
+
+const selectSize = (indexPos) => {
+
+  for(let i = 0; i < product_size_categories_arr.length; i++){
+    $('.product_size_'+i).css('background-color','transparent')
+    $('.product_size_'+i).css('color','black')
+  }
+
+  $('.product_size_'+indexPos).css('background-color','black')
+  $('.product_size_'+indexPos).css('color','white')
+
+  currentSelectedSize = $('.product_sizes')[indexPos].innerHTML
+  $('.product_add_to_cart_button').css('background-color','#006FB9');
+  $('.product_add_to_cart_button').hover(function(){
+    $(this).css('cursor','pointer','important');
+  })
+}
+
+const decrementCount = () => {
+  $('.item_count_plus').hover(function(){
+    $(this).css('cursor','pointer');
+  })
+
+  if(item_count_amt === 1){
+    $('.item_count_minus').hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  } else if(item_count_amt > 1){
+    $('.item_count_plus').hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  }
+
+  if(item_count_amt > 1 && item_count_amt <= 5){
+    item_count_amt -= 1;
+    $('.item_count_amt')[0].innerHTML = item_count_amt;
+  }
+}
+
+const incrementCount = () => {
+  $('.item_count_minus').hover(function(){
+    $(this).css('cursor','pointer','important');
+  })
+
+  if(item_count_amt === 5){
+    $('.item_count_plus').hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  } else if(item_count_amt < 5){
+    $('.item_count_plus').hover(function(){
+      $(this).css('cursor','pointer','important');
+    })
+  }
+
+  if(item_count_amt > 0 && item_count_amt <= 4){
+    item_count_amt += 1;
+    $('.item_count_amt')[0].innerHTML = item_count_amt;
+  }
+
+}
+
+const itemsInCart = [];
+const product_brand = $('.product_brand')[0].innerHTML;
+const product_name = $('.product_name_left')[0].innerHTML;
+let product_usd = $('.product_price_left')[0].innerHTML;
+product_usd = product_usd.split(' ');
+const product_price = Number(product_usd[1]);
 
 
+const addSelectedItemsToCart = () => {
+  if(currentSelectedSize){
+
+    itemsInCart.push({
+      product_size: currentSelectedSize.replace(/\s/g, ''),
+      product_count: item_count_amt,
+      product_color: $(".form-control option:selected").text(),
+      product_brand: product_brand,
+      product_name: product_name,
+      product_price: product_price
+    })
+    console.log('cart: ',itemsInCart);
+  }
+}
 
 
 
