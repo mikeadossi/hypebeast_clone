@@ -1,0 +1,53 @@
+.hbx_your_settings_content{
+  height:100vh;
+  display:flex;
+  flex-wrap:wrap;
+  padding-left:5%;
+  min-height: 400px;
+}
+
+.hbx_settings_nav, .hbx_settings_controls{
+  display:inline-block;
+  padding-top:30px;
+}
+
+.hbx_settings_nav_link:hover{
+  color:#2D86D0;
+  cursor:pointer;
+}
+
+.hbx_settings_nav_link{
+  font-size:15px;
+}
+
+.hbx_settings_nav{
+  width:200px;
+}
+
+.hbx_settings_nav div{
+  padding-bottom:20px;
+}
+
+.hbx_settings_nav_link:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.hbx_settings_nav_link{
+  font-size:15px;
+  color:grey;
+  display:block;
+  text-decoration:none;
+  padding-bottom:20px;
+}
+
+.hbx_edit_profile_header{
+  color:#333333;
+  font-weight: 500;
+  font-size: 22px;
+  padding-bottom:30px;
+}
+
+.hbx_label{
+  text-align:left;
+}

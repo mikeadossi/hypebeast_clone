@@ -14,9 +14,13 @@ block content
       .login_first_div
         p.login_instructions Log In with your Facebook or Google account
         form.hbx_form(method='get' action="/hbx/auth/facebook/")
-          input.hbx_login_social.login_hbx_facebook(value="LOG IN WITH FACEBOOK")
+          button.hbx_login_social.login_hbx_facebook(type='submit') 
+            i.fa.fa-fw.fa-facebook#facebook-login
+            span LOG IN WITH FACEBOOK
         form.hbx_form(method='get' action="/hbx/auth/google/")
-          input.hbx_login_social.login_hbx_google(value="LOG IN WITH GOOGLE")
+          button.hbx_login_social.login_hbx_google(type='submit') 
+            i.fa.fa-fw.fa-google 
+            span LOG IN WITH GOOGLE
       hr.hbx_hr
       .login_or or
       .login_second_div

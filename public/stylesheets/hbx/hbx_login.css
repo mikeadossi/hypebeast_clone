@@ -47,7 +47,7 @@
 }
 
 .login_hbx_facebook, .login_hbx_google{
-  width: 42.7%;
+  width: 49%;
   padding: 16px;
   text-align: center;
 }
@@ -186,6 +186,10 @@
   font-weight: 500;
   border-bottom: 1px solid #EEEEEE;
   padding-bottom: 20px;
+}
+
+.hbx_continue_link:hover{
+  background-color:#272727;
 }
 
 .hbx_successful_register_message{

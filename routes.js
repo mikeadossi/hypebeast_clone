@@ -575,6 +575,35 @@ router.post('/hbx_login', passport.authenticate('local', {
   failureFlash: true
 }));
 
+
+
+
+
+router.get('/hbx_account', function(req, res) {
+  if(req.user){
+    res.render('hbx_account', {user: req.user});
+  } else {
+    res.render('error')
+  }
+})
+
+router.get('/hbx_account/password', function(req, res) {
+  if(req.user){
+    res.render('hbx_change_password', {user: req.user});
+  } else {
+    res.render('error');
+  }
+})
+
+router.get('/hbx_account/close-account', function(req, res) {
+  res.render('hbx_close_account');
+})
+
+
+
+
+
+
 router.get("/hbx_register", function(req, res) {
   res.render('hbx_register')
 })
@@ -633,6 +662,8 @@ router.get('/hbx/auth/error', function(req, res){
 router.get('/hbx_error', function(req, res) {
   res.render('hbx_error');
 });
+
+
 
 
 module.exports = router;

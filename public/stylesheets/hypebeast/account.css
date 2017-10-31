@@ -7,10 +7,15 @@
   height:100vh;
   display:flex;
   flex-wrap:wrap;
+  padding-left:5%;
+  min-height: 400px;
 }
 
 .edit_profile_header{
   color:#333333;
+  font-weight: 500;
+  font-size: 22px;
+  padding-bottom:30px;
 }
 
 .settings_nav, .settings_controls{
@@ -25,6 +30,10 @@
 
 .settings_nav_link{
   font-size:15px;
+  color:#555555;
+  display:block;
+  text-decoration:none;
+  padding-bottom:20px;
 }
 
 .settings_nav{
@@ -33,12 +42,6 @@
 
 .settings_nav div{
   padding-bottom:20px;
-}
-
-.edit_profile_header{
-  font-weight: 500;
-  font-size: 22px;
-  padding-bottom:30px;
 }
 
 .form_group{
@@ -52,13 +55,6 @@
 .profile_input{
   width:330px;
   padding:6px;
-}
-
-.settings_nav_link{
-  color:#555555;
-  display:block;
-  text-decoration:none;
-  padding-bottom:20px;
 }
 
 #update_profile:hover, #save_password_changes:hover{
