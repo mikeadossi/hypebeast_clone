@@ -1,0 +1,237 @@
+.hbx_addressing_content{
+  padding:20px;
+}
+
+.hbx_checkout_header{
+  text-align:center;
+  font-size:30px;
+}
+
+.checkout_steps{
+  display:inline-block;
+  margin:1px;
+  padding-right:15%;
+  border-bottom:3px solid black;
+  padding-bottom:7px;
+}
+
+.checkout_progressbar{
+  width:80%;
+  margin:auto;
+  text-align:center;
+  margin-top:20px;
+  padding-bottom:30px;
+}
+
+.checkout_title{
+  padding-left:7px;
+  font-size:13px;
+}
+
+.checkout_edit{
+  font-size:11px;
+  color:grey;
+  cursor:pointer;
+}
+
+.checkout_step_number{
+  font-weight:bold;
+  font-size:25px;
+}
+
+#step_two, #step_three{
+  color:gainsboro;
+  border-bottom:3px solid gainsboro;
+}
+
+.checkout_sub_content{
+  width:80%;
+  margin:auto;
+  margin-bottom: 30px;
+}
+
+.contact_details_container{
+  width: 62.5%;
+  display: inline-block;
+}
+
+.checkout_header{
+  font-size:23px;
+  padding-bottom:20px;
+  border-top: 1px solid gainsboro;
+  padding-top: 25px;
+}
+
+.contact_form label{
+  font-size:12px;
+}
+
+.contact_label_container{
+  padding-bottom:5px;
+}
+
+.contact_input_container{
+  padding-bottom:15px;
+}
+
+.contact_input_container input:focus{
+  outline:none;
+}
+
+.contact_input_container input{
+  border: 1px solid gainsboro;
+  padding:9px;
+  font-size:13px;
+  width: 93%;
+}
+
+.row{
+  display:flex;
+}
+
+.form_group{
+  display: inline-block;
+  padding-right: 30px;
+  width: 45%;
+}
+
+.checkout_order_summary_container{
+  display: inline-block;
+  width: 335px;
+  padding: 9px;
+  background-color: #FAFAFA;
+  border: 1px solid gainsboro;
+  position: absolute;
+  margin-left: 20px;
+}
+
+.order_summary_heading{
+  font-size:17px;
+}
+
+.checkout_order_notice{
+  font-size:13px;
+  color:grey;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gainsboro;
+  margin-bottom:0;
+}
+
+.checkout_textarea:focus{
+  outline:none;
+}
+
+.checkout_textarea{
+  width:98%;
+  /*height:190px;*/
+}
+
+.contact_billing input{
+  margin-right:10px;
+}
+
+.contact_billing p{
+  width:70%;
+  display:inline-block;
+  margin-top:0;
+}
+
+.wide_checkout_input{
+  width:203% !important;
+}
+
+.form_group select:focus{
+  outline:none;
+}
+
+.form_group select{
+  width:210%;
+  height:35px;
+}
+
+.checkout_item_container{
+  border-bottom:1px solid gainsboro;
+  padding: 15px 3px 15px 3px;
+}
+
+.checkout_item_details_container{
+  margin-left:10px;
+}
+
+.checkout_item_details_container div{
+  padding-bottom:10px;
+}
+
+.checkout_item_name{
+  max-width: 170px;
+}
+
+.checkout_item_img, .checkout_item_details_container{
+  display:inline-block;
+}
+
+.checkout_item_img img{
+  height:120px;
+}
+
+.checkout_item_size span, .checkout_item_quantity span{
+  font-size:12px;
+}
+
+.checkout_item_usd span{
+  font-weight:bold;
+}
+
+.checkout_item_final_cost{
+  margin-left:3px;
+}
+
+.checkout_item_usd{
+  text-align: right;
+  margin-top: -20px;
+  font-size: 15px;
+}
+
+.align_right{
+  text-align:right;
+  margin-top:-18px;
+}
+
+.checkout_total{
+  padding-bottom: 20px;
+}
+
+.checkout_summary_container{
+  padding-top: 18px;
+  border-bottom:1px solid gainsboro;
+}
+
+.checkout_order_usd{
+  text-align:right;
+  margin-top:-18px;
+}
+
+.checkout_order_details{
+  padding-top: 10px;
+  font-weight:600;
+}
+
+.checkout_continue_button{
+  background-color: #006fbb;
+  border: 1px solid #006fbb;
+  padding: 15px;
+  color: white;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 13px;
+}
+
+.checkout_items_main_container{
+  overflow-y:scroll;
+  max-height:486px;
+}
+
+.checkout_continue_button:hover{
+  cursor:pointer;
+  opacity:0.8;
+}

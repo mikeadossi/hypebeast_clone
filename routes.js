@@ -671,6 +671,18 @@ router.get('/hbx_logout', function(req, res) {
   res.redirect('/store');
 })
 
+router.get('/checkout/addressing', function(req, res) {
+  res.render('hbx_addressing');
+})
+
+router.get('/checkout/delivery_and_payment', function(req, res) {
+  res.render('hbx_delivery_and_payment');
+})
+
+router.get('/checkout/complete', function(req, res) {
+  res.render('hbx_order_complete');
+})
+
 
 
 

@@ -206,7 +206,7 @@ const addSelectedItemsToCart = () => {
 }
 
 const proceedToBag = () => {
-  $('.product_add_to_cart_button').css('background-color','green');
+  $('.product_add_to_cart_button').css('background-color','#5DB75C');
   $('.product_add_to_cart_button')[0].innerHTML = "PROCEED TO BAG";
 }
 
@@ -217,7 +217,7 @@ const updateCartIcon = () => {
   cookies = cookies.split('=');
   cookies = JSON.parse(cookies[1]);
 
-  let numOfCartItems = itemsInCart.length;
+  let numOfCartItems = itemsInCart[0].product_count;
   $('.shopping_bag')[0].innerHTML = numOfCartItems;
   $('.shopping_bag_deux')[0].innerHTML = numOfCartItems;
 }
