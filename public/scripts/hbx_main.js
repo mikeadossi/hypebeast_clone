@@ -2,6 +2,17 @@ $(document).ready(function(){
   if(document.cookie == ''){
     $('.shopping_bag')[0].innerHTML = 0;
     $('.shopping_bag_deux')[0].innerHTML = 0;
+  } else {
+    let cookieArray = document.cookie.split('=')[1];
+    cookieArray = JSON.parse(cookieArray);
+    let totalItems = 0;
+    let itemCount;
+    for(let i = 0; i < cookieArray.length; i++){
+      itemCount = Number(cookieArray[i].product_count);
+      totalItems += itemCount;
+    }
+    $('.shopping_bag')[0].innerHTML = totalItems;
+    $('.shopping_bag_deux')[0].innerHTML = totalItems;
   }
 })
 
@@ -205,12 +216,12 @@ const addSelectedItemsToCart = () => {
         product_name: product_name,
         product_price: product_price
       }
+      updateCart();
+      proceedToBag();
 
     }
 
   }
-  updateCart();
-  proceedToBag();
 }
 
 const proceedToBag = () => {
