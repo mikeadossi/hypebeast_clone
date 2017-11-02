@@ -81,7 +81,7 @@ router.get('/store', function(req, res) {
 })
 
 router.get('/register/success', function(req, res) {
-  res.render('successful_register');
+  res.render('successful_register', { user: req.user });
 })
 
 router.get('/loggedIn', function(req, res) {
@@ -102,7 +102,7 @@ router.get('/account', function(req, res) {
   if(req.user){
     res.render('account', {user: req.user});
   } else {
-    res.render('error')
+    res.render('error', { user: req.user })
   }
 })
 
@@ -110,12 +110,12 @@ router.get('/account/password', function(req, res) {
   if(req.user){
     res.render('change_password', {user: req.user});
   } else {
-    res.render('error');
+    res.render('error', { user: req.user });
   }
 })
 
 router.get('/account/close-account', function(req, res) {
-  res.render('close_account');
+  res.render('close_account', { user: req.user });
 })
 
 router.get('/register', function(req, res) {
@@ -137,7 +137,7 @@ router.post('/register', function(req, res) {
 })
 
 router.get('/login', function(req, res) {
-  res.render('login')
+  res.render('login', { user: req.user })
 })
 
 router.post('/login', passport.authenticate('local', {
@@ -177,11 +177,11 @@ router.get('/auth/facebook/callback',
 );
 
 router.get('/auth/error', function(req, res){
-  res.render('error');
+  res.render('error', { user: req.user });
 });
 
 router.get('/error', function(req, res) {
-  res.render('error');
+  res.render('error', { user: req.user });
 });
 
 router.post('/post/post_comment/:id', function(req, res) {
@@ -582,7 +582,7 @@ router.get('/hbx_account', function(req, res) {
   if(req.user){
     res.render('hbx_account', { user: req.user });
   } else {
-    res.render('hbx_error')
+    res.render('hbx_error', { user: req.user })
   }
 })
 
@@ -590,7 +590,7 @@ router.get('/hbx_account/password', function(req, res) {
   if(req.user){
     res.render('hbx_change_password', { user: req.user });
   } else {
-    res.render('hbx_error');
+    res.render('hbx_error', { user: req.user });
   }
 })
 
@@ -626,7 +626,7 @@ router.get("/hbx_shopping_bag", function(req, res) {
 })
 
 router.get('/hbx_register/success', function(req, res) {
-  res.render('hbx_successful_register');
+  res.render('hbx_successful_register', { user: req.user });
 })
 
 router.get('/hbx/auth/facebook',

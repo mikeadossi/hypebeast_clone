@@ -35,7 +35,7 @@ block content
           .sizes_container
             .hidden_product_sizes_arr !{product_sizes_arr}
             - for(let s = 0; s < product_sizes_arr.length; s++){
-                .product_sizes(class= "product_size_"+s, onclick="selectSize("+s+")") !{ product_sizes_arr[s] } 
+                .product_sizes(class= "product_size_"+s, onclick="selectPreferredSize("+s+")") !{ product_sizes_arr[s] } 
             - }
         .product_purchase_container
           .product_title QUANTITY
