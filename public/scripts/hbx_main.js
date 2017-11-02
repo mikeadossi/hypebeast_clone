@@ -1,3 +1,10 @@
+$(document).ready(function(){
+  if(document.cookie == ''){
+    $('.shopping_bag')[0].innerHTML = 0;
+    $('.shopping_bag_deux')[0].innerHTML = 0;
+  }
+})
+
 $('.hbx_search').on('click', () => {
   $('.hbx_search_mobile').toggle();
 });
@@ -120,9 +127,11 @@ const selectSize = (indexPos) => {
 
   currentSelectedSize = $('.product_sizes')[indexPos].innerHTML
   $('.product_add_to_cart_button').css('background-color','#006FB9');
+  $('.product_add_to_cart_button')[0].innerHTML = "PLEASE SELECT A SIZE"
   $('.product_add_to_cart_button').hover(function(){
     $(this).css('cursor','pointer','important');
   })
+
 }
 
 const decrementCount = () => {
@@ -168,7 +177,7 @@ const incrementCount = () => {
 
 }
 
-const itemsInCart = [];
+let itemsInCartObj = {};
 const product_brand = $('.product_brand')[0].innerHTML;
 const product_name = $('.product_name_left')[0].innerHTML;
 let product_usd = $('.product_price_left')[0].innerHTML;
@@ -183,25 +192,24 @@ const addSelectedItemsToCart = () => {
       let href = window.location.href;
       href = href.split('brands')
       href = href[0] + 'hbx_shopping_bag'
-      console.log('href: ',href);
 
       window.location = href;
 
     } else {
 
-      itemsInCart.push({
+      itemsInCartObj = {
         product_size: currentSelectedSize.replace(/\s/g, ''),
         product_count: item_count_amt,
         product_color: $(".form-control option:selected").text(),
         product_brand: product_brand,
         product_name: product_name,
         product_price: product_price
-      })
+      }
 
     }
 
   }
-  updateCartIcon();
+  updateCart();
   proceedToBag();
 }
 
@@ -210,17 +218,52 @@ const proceedToBag = () => {
   $('.product_add_to_cart_button')[0].innerHTML = "PROCEED TO BAG";
 }
 
-const updateCartIcon = () => {
-  let itemsInCartString = JSON.stringify(itemsInCart);
-  document.cookies = "itemsInCart="+itemsInCartString;
-  let cookies = document.cookies;
-  cookies = cookies.split('=');
-  cookies = JSON.parse(cookies[1]);
+const updateCart = () => {
+  let itemsInCartString = JSON.stringify(itemsInCartObj);
+  const expiryDate = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+  const path = "; path=/";
 
-  let numOfCartItems = itemsInCart[0].product_count;
-  $('.shopping_bag')[0].innerHTML = numOfCartItems;
-  $('.shopping_bag_deux')[0].innerHTML = numOfCartItems;
+  if(document.cookie == ''){
+    document.cookie = "itemsInCart=["+itemsInCartString+"]"+expiryDate+path;
+  } else {
+
+    let cookie_obj = document.cookie.split(']');
+    cookie_obj = cookie_obj[0].split(']');
+    cookie_obj.splice(1,0,itemsInCartString);
+    cookie_obj = cookie_obj.join() + ']' + expiryDate + path;
+    document.cookie = cookie_obj;
+  }
+
+  let cookieArray = document.cookie.split('=')[1];
+  cookieArray = JSON.parse(cookieArray);
+  let totalItems = 0;
+  let itemCount;
+  for(let i = 0; i < cookieArray.length; i++){
+    itemCount = Number(cookieArray[i].product_count);
+    totalItems += itemCount;
+  }
+  $('.shopping_bag')[0].innerHTML = totalItems;
+  $('.shopping_bag_deux')[0].innerHTML = totalItems;
+
 }
+
+
+
+
+const getCookieAtIndex = (index) => {
+  // let cookie = document.cookie;
+  // cookie = cookie.split(',');
+  // console.log('cookie -> ', document.cookie);
+  // for(let i = 0; i < cookie.length; i++){
+  //   console.log('-> ',cookie[i]);
+  // }
+  // console.log('cookie boolean -> ',document.cookie == '');
+
+  // console.log('cookie -> ',document.cookie);
+
+}
+
+// getCookieAtIndex();
 
 
 

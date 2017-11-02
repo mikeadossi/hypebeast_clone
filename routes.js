@@ -525,12 +525,8 @@ router.get('/brands/:brand/:product', function(req, res) {
 
       // below we collect every other product besides the primary product into the this_brand_images_arr.
       for(let j = 0; j < related_products_arr.length; j++){
-        // console.log('routes(478) related_products_arr['+j+'] -> ',related_products_arr[j]);
-        if(related_products_arr[j] == null){
-          console.log('routes(line 528) null item ignored!');
-        } else if(related_products_arr[j].images == null){
-          console.log('routes(line 530) null item image ignored!');
-        } else {
+
+        if(related_products_arr[j] !== null && related_products_arr[j].images !== null){
 
           product_obj = {}
 
@@ -547,7 +543,7 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj.product_name = our_product_name
 
           this_brand_images_arr.push(product_obj);
-          // console.log('\n routes(495) this_brand_images_arr: ',this_brand_images_arr);
+
           related_products_arr.splice(j,1,null);
         }
       }

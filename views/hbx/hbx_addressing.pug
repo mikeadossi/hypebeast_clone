@@ -21,29 +21,29 @@ block content
         form.contact_form(method="post" action="")
           .checkout_header Contact Details
           .row
-            .form_group
+            .checkout_form_group
               .contact_first_name.contact_label_container
                 label FIRST NAME
               .contact_input_container
                 input.first_name_input(name="contact_first_name" type="text")
-            .form_group
+            .checkout_form_group
               .contact_email.contact_label_container
                 label EMAIL
               .contact_input_container
                 input.email_input(name="contact_email" type="email")
           .row
-            .form_group
+            .checkout_form_group
               .contact_phone.contact_label_container
                 label PHONE
               .contact_input_container
                 input.phone_input(name="contact_phone" type="text")
-            .form_group
+            .checkout_form_group
               .contact_last_name.contact_label_container
                 label LAST NAME
               .contact_input_container
                 input.last_name_input(name="contact_last_name" type="text")
           .row
-            .form_group
+            .checkout_form_group
               .contact_email.contact_label_container
                 label CONFIRM EMAIL
               .contact_input_container
@@ -51,24 +51,24 @@ block content
           
           .checkout_header Shipping Address
           .row
-            .form_group
+            .checkout_form_group
               .contact_first_name.contact_label_container
                 label ADDRESS LINE
               .contact_input_container
                 input.first_name_input.wide_checkout_input(name="contact_address" type="text")
           .row
-            .form_group
+            .checkout_form_group
               .contact_town_city.contact_label_container
                 label TOWN/CITY
               .contact_input_container
                 input.email_input(name="contact_address_town" type="email")
-            .form_group
+            .checkout_form_group
               .contact_postcode.contact_label_container
                 label POSTCODE/ZIP
               .contact_input_container
                 input.email_input(name="contact_address_town" type="email")
           .row
-            .form_group
+            .checkout_form_group
               .contact_first_name.contact_label_container
                 label COUNTRY
               .contact_input_container
@@ -321,7 +321,7 @@ block content
                   option(value='Zambia') Zambia
                   option(value='Zimbabwe') Zimbabwe
           .row
-            .form_group
+            .checkout_form_group
               .contact_email.contact_label_container
                 label PROVINCE/STATE
               .contact_input_container
@@ -400,7 +400,7 @@ block content
                   option(value='Victoria') Victoria
                   option(value='Western Australia') Western Australia
           .row
-            .form_group
+            .checkout_form_group
               .contact_email.contact_label_container
                 label COMPANY NAME (OPTIONAL)
               .contact_input_container
