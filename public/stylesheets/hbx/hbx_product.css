@@ -146,8 +146,8 @@
 }
 
 .item_count_minus, .item_count_plus{
-  padding: 13px 10px 13px 10px;
   user-select: none;
+  padding: 13px 10px 13px 10px;
 }
 
 .item_count_amt{

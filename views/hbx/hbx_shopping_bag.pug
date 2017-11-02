@@ -52,9 +52,9 @@ block content
               .cart_price USD 36.00
             .hbx_quantity_row
               .hbx_quantity_control
-                .cart_select_minus -
+                .cart_select_minus(onclick="decrementCount(this)") -
                 #cart_count 1
-                .cart_select_plus +
+                .cart_select_plus(onclick="incrementCount(this)") +
               .cart_remove_items REMOVE
             .hbx_total_row 
               span.hbx_total_usd USD

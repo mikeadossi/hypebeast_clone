@@ -40,9 +40,9 @@ block content
         .product_purchase_container
           .product_title QUANTITY
           .product_item_count_select_container
-            .item_count_minus(onclick="decrementCount()") -
+            .item_count_minus(onclick="decrementCount(this)") -
             .item_count_amt 1
-            .item_count_plus(onclick="incrementCount()") +
+            .item_count_plus(onclick="incrementCount(this)") +
         .product_add_to_cart_button(onclick="addSelectedItemsToCart()")
           .select_size PLEASE SELECT A SIZE
         

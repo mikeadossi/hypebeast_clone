@@ -398,6 +398,10 @@ ul{
   height:82px;
 }
 
+.dropdown_img{
+  width: 63px;
+}
+
 .quantity{
   margin-top: -12px;
 }
@@ -552,6 +556,21 @@ ul{
   display:none;
 }
 
+.cart_dropdown_product_container{
+  overflow-y: scroll;
+  max-height:140px;
+}
+
+.cart_product_container{
+  width: 81%;
+}
+
+.cart_product{
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid gainsboro;
+}
 
 
 

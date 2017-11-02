@@ -65,6 +65,63 @@ $( window ).resize(function() {
 // })
 
 
+
+const decrementCount = (element) => {
+  let container = element.parentNode;
+  let number = Number(container.children[1].innerHTML);
+  let decrement_element = container.children[0].className
+
+  let increment_element = container.children[2].className;
+
+  $('.'+increment_element).hover(function(){
+    $(this).css('cursor','pointer');
+  })
+
+  if(number === 1){
+    $('.'+decrement_element).hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  } else if(number > 1){
+    $('.'+increment_element).hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  }
+
+  if(number > 1 && number <= 5){
+    number -= 1;
+    container.children[1].innerHTML = number;
+  }
+}
+
+const incrementCount = (element) => {
+  let container = element.parentNode;
+  let number = Number(container.children[1].innerHTML);
+  let decrement_element = container.children[0].className
+  let increment_element = container.children[2].className;
+
+  $('.'+decrement_element).hover(function(){
+    $(this).css('cursor','pointer','important');
+  })
+
+
+  if(number === 5){
+    $('.'+increment_element).hover(function(){
+      $(this).css('cursor','not-allowed','important');
+    })
+  } else if(number < 5){
+    $('.'+increment_element).hover(function(){
+      $(this).css('cursor','pointer','important');
+    })
+  }
+
+  if(number > 0 && number <= 4){
+    number += 1;
+    container.children[1].innerHTML = number;
+  }
+
+}
+
+
 const position_obj = {'0':'.circle_1','100':'.circle_2','200':'.circle_3'}
 $(".circle_1").attr('style', 'color: black !important');
 
@@ -142,49 +199,6 @@ const selectSize = (indexPos) => {
   $('.product_add_to_cart_button').hover(function(){
     $(this).css('cursor','pointer','important');
   })
-
-}
-
-const decrementCount = () => {
-  $('.item_count_plus').hover(function(){
-    $(this).css('cursor','pointer');
-  })
-
-  if(item_count_amt === 1){
-    $('.item_count_minus').hover(function(){
-      $(this).css('cursor','not-allowed','important');
-    })
-  } else if(item_count_amt > 1){
-    $('.item_count_plus').hover(function(){
-      $(this).css('cursor','not-allowed','important');
-    })
-  }
-
-  if(item_count_amt > 1 && item_count_amt <= 5){
-    item_count_amt -= 1;
-    $('.item_count_amt')[0].innerHTML = item_count_amt;
-  }
-}
-
-const incrementCount = () => {
-  $('.item_count_minus').hover(function(){
-    $(this).css('cursor','pointer','important');
-  })
-
-  if(item_count_amt === 5){
-    $('.item_count_plus').hover(function(){
-      $(this).css('cursor','not-allowed','important');
-    })
-  } else if(item_count_amt < 5){
-    $('.item_count_plus').hover(function(){
-      $(this).css('cursor','pointer','important');
-    })
-  }
-
-  if(item_count_amt > 0 && item_count_amt <= 4){
-    item_count_amt += 1;
-    $('.item_count_amt')[0].innerHTML = item_count_amt;
-  }
 
 }
 

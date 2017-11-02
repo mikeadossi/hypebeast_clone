@@ -655,11 +655,11 @@ router.get('/hbx/auth/google/callback',
 );
 
 router.get('/hbx/auth/error', function(req, res){
-  res.render('hbx_error');
+  res.render('hbx_error', {user: req.user});
 });
 
 router.get('/hbx_error', function(req, res) {
-  res.render('hbx_error');
+  res.render('hbx_error', {user: req.user});
 });
 
 router.get('/hbx_logout', function(req, res) {
@@ -668,15 +668,15 @@ router.get('/hbx_logout', function(req, res) {
 })
 
 router.get('/checkout/addressing', function(req, res) {
-  res.render('hbx_addressing');
+  res.render('hbx_addressing', {user: req.user});
 })
 
 router.get('/checkout/delivery_and_payment', function(req, res) {
-  res.render('hbx_delivery_and_payment');
+  res.render('hbx_delivery_and_payment', {user: req.user});
 })
 
 router.get('/checkout/complete', function(req, res) {
-  res.render('hbx_order_complete');
+  res.render('hbx_order_complete', {user: req.user});
 })
 
 
