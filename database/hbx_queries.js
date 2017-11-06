@@ -176,8 +176,8 @@ let queries = {
   },
 
   createHBXUser: function(email){
-    return db.none(
-      "INSERT INTO users (email) VALUES ($1)",
+    return db.oneOrNone(
+      "INSERT INTO users (email) VALUES ($1) RETURNING *",
     [email])
   },
 

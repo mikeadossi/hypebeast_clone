@@ -2,7 +2,6 @@
 
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS local_users CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE posts (
@@ -24,11 +23,6 @@ CREATE TABLE local_users (
   id SERIAL PRIMARY KEY,
   email VARCHAR,
   password VARCHAR
-);
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR
 );
 
 CREATE TABLE comments (

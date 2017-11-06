@@ -47,8 +47,8 @@ let queries = {
   },
 
   createUser: function(email){
-    return db.none(
-      "INSERT INTO users (email) VALUES ($1)",
+    return db.oneOrNone(
+      "INSERT INTO users (email) VALUES ($1) RETURNING *",
     [email])
   },
 
@@ -101,7 +101,6 @@ let queries = {
             "INSERT INTO google_users (username, profile_id) VALUES ($1, $2) RETURNING *",
             [searchAndUpdate.name, searchAndUpdate.someID]
           );
-          console.log('result (queries,77) -> ',result);
           return result;
         } else {
           return user;

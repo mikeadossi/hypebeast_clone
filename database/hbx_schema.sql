@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS cart CASCADE;
 DROP TABLE IF EXISTS brands CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE brands (
   id SERIAL PRIMARY KEY,
@@ -59,23 +60,30 @@ CREATE TABLE products (
   tot_count INTEGER
 );
 
-CREATE TABLE cart ( 
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR
+);
+
+CREATE TABLE cart (
   id SERIAL PRIMARY KEY,
   item_quantity INTEGER,
   item_cost INTEGER,
   item_color VARCHAR,
   item_size VARCHAR,
-  users_id INTEGER REFERENCES users(id),
-  products_id INTEGER REFERENCES products(id)
+  products_id INTEGER REFERENCES products(id),
+  users_id INTEGER REFERENCES users(id)
 );
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER,
   purchased_at TIMESTAMP,
   shipped_at TIMESTAMP,
-  cart_id INTEGER REFERENCES cart(id)
+  cart VARCHAR,
+  users_id INTEGER REFERENCES users(id)
 );
+
+
 
 
 INSERT INTO brands (brand_name, brand_name_link, brand_description)

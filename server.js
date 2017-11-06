@@ -22,24 +22,19 @@ app.use(cookieSession({
   maxAge: 24*60*60*1000
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(function(req, res) {
   const err = new Error('Not Found')
   err.status = 404
-  // next(err)
 });
 
-// app.use(function(req, res, next) {
-//   res.locals.username = req.user.username;
-//   next();
-// })
 
 app.listen(3000, () => {
   console.log('Server is listening on port 3000.');
