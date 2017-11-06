@@ -6,53 +6,7 @@ DROP TABLE IF EXISTS products CASCADE;
 
 DROP TABLE IF EXISTS cart CASCADE;
 DROP TABLE IF EXISTS brands CASCADE;
-DROP TABLE IF EXISTS color_type CASCADE;
-
--- DROP TABLE IF EXISTS all_hbx_users CASCADE;
--- DROP TABLE IF EXISTS hbx_google_users CASCADE;
--- DROP TABLE IF EXISTS hbx_facebook_users CASCADE;
--- DROP TABLE IF EXISTS hbx_users CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
-
-CREATE TABLE cart (
-  id SERIAL PRIMARY KEY,
-  product_id_array INTEGER,
-  cost_per_item INTEGER
-);
-
-CREATE TABLE orders (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER,
-  purchased_at TIMESTAMP,
-  shipped_at TIMESTAMP,
-  cart_id INTEGER REFERENCES cart(id)
-);
-
--- CREATE TABLE hbx_users (
---   id SERIAL PRIMARY KEY,
---   email VARCHAR,
---   password VARCHAR,
---   order_id INTEGER REFERENCES orders(id)
--- );
---
--- CREATE TABLE hbx_google_users (
---   id SERIAL PRIMARY KEY,
---   profile_id NUMERIC,
---   username VARCHAR
--- );
---
--- CREATE TABLE hbx_facebook_users (
---   id SERIAL PRIMARY KEY,
---   profile_id NUMERIC,
---   username VARCHAR
--- );
---
--- CREATE TABLE all_hbx_users (
---   id SERIAL PRIMARY KEY,
---   avatar TEXT,
---   hbx_google_users_id INTEGER REFERENCES hbx_google_users(id),
---   hbx_facebook_users_id INTEGER REFERENCES hbx_facebook_users(id)
--- );
 
 CREATE TABLE brands (
   id SERIAL PRIMARY KEY,
@@ -105,7 +59,23 @@ CREATE TABLE products (
   tot_count INTEGER
 );
 
+CREATE TABLE cart ( 
+  id SERIAL PRIMARY KEY,
+  item_quantity INTEGER,
+  item_cost INTEGER,
+  item_color VARCHAR,
+  item_size VARCHAR,
+  users_id INTEGER REFERENCES users(id),
+  products_id INTEGER REFERENCES products(id)
+);
 
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER,
+  purchased_at TIMESTAMP,
+  shipped_at TIMESTAMP,
+  cart_id INTEGER REFERENCES cart(id)
+);
 
 
 INSERT INTO brands (brand_name, brand_name_link, brand_description)
