@@ -139,14 +139,14 @@ $(document).scroll(function() {
 
 
 
-$(window).scroll(function(e){
-  const top = $(this).scrollTop();
-  if (top > 1510){
-    $('.sticky_ad_one').css({'position':'fixed', 'top':'10px'});
-  }
-  if (top > 2000 )
-  {
-    $('.sticky_ad_one').css({'position':'unset'});
-  }
-
-});
+// $(window).scroll(function(e){
+//   const top = $(this).scrollTop();
+//   if (top > 1510){
+//     $('.sticky_ad_one').css({'position':'fixed', 'top':'10px'});
+//   }
+//   if (top > 2000 )
+//   {
+//     $('.sticky_ad_one').css({'position':'unset'});
+//   }
+//
+// });

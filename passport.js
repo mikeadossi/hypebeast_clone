@@ -17,16 +17,16 @@ const strategy = (new LocalStrategy(
     try{
       queries.findByEmail(email)
         .then(user => {
-          console.log('\n passport(line 13) user => ',user,'\n');
+          // console.log('\n passport(line 13) user => ',user,'\n');
           if(!user) {
-          console.log('\n passport(line 15) user => USER UNDEFINED')
+          // console.log('\n passport(line 15) user => USER UNDEFINED')
             return done(
               null,
               false,
               {message: 'user not found'});
           } else {
             // check if given password matches password in db
-            console.log('lookey here!');
+            // console.log('lookey here!');
             return queries.comparePassword(email, password)
               .then(result => {
                 if(result){
