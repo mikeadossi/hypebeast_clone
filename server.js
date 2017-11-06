@@ -22,13 +22,13 @@ app.use(cookieSession({
   maxAge: 24*60*60*1000
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(function(req, res) {
   const err = new Error('Not Found')
