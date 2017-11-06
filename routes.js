@@ -7,7 +7,7 @@ const passport = require('./passport');
 /************************** Hypebeast (below) *******************************/
 
 router.get('/', function(req, res, next) {
-  // console.log('req.user => ',req.user);
+
   Promise.all(
     [
       queries.getPosts(),
@@ -677,6 +677,28 @@ router.get('/checkout/delivery_and_payment', function(req, res) {
 
 router.get('/checkout/complete', function(req, res) {
   res.render('hbx_order_complete', {user: req.user});
+})
+
+router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
+  console.log('req.body: ',req.body);
+  // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
+  // fetch does not send that cookie automatically.
+
+  // why is req.user undefined here?
+  // passport sets our req.user, what's wrong w/ passport and why's it not working for this route?
+
+  if(!req.user){
+    res.status(401).json({status:'error',message:'user is not present on the request object'})
+    return;
+  }
+
+  if(!req.body.product_count){
+    res.status(401).json({status:'error',message:'cart has no items'})
+    return;
+  }
+
+  // TODO: add data to cart on db
+  console.log('req.body: ',req.body);
 })
 
 

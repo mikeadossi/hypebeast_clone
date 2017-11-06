@@ -15,7 +15,7 @@ const updateCartIcon = () => {
 
 
 $(document).ready(function(){
-  
+
   $('.shopping_bag')[0].innerHTML = 0;
   $('.shopping_bag_deux')[0].innerHTML = 0;
 
@@ -81,6 +81,7 @@ const addSelectedItemsToCart = () => {
       populateCookie();
       updateCartIcon();
       proceedToBag();
+      post_cart_to_db(itemsInCartObj);
     }
 
   }
