@@ -3,3 +3,20 @@ extends hbx_layout
 block content
   
   .hbx_order_complete_content
+    .hbx_checkout_header Checkout
+    .checkout_progressbar
+      .checkout_steps 
+        span.checkout_step_number 1
+        span.checkout_title CONTACT & ADDRESSES 
+        span.checkout_edit 
+      .checkout_steps 
+        span.checkout_step_number 2
+        span.checkout_title DELIVERY & PAYMENT
+        span.checkout_edit 
+      .checkout_steps
+        span.checkout_step_number 3 
+        span.checkout_title ORDER COMPLETE
+    
+    .order_complete_message Thank you for your order.
+    .continue_shopping_button
+      a(href="/store") Continue Shopping
