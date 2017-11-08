@@ -569,10 +569,11 @@ router.get("/hbx_login", function(req, res) {
 })
 
 router.post('/hbx_login', passport.authenticate('local', {
-  successRedirect: '/store',
-  failureRedirect: '/hbx_login',
-  failureFlash: true
-}));
+    successRedirect: '/store',
+    failureRedirect: '/hbx_login',
+    failureFlash: true
+  })
+);
 
 
 
@@ -680,7 +681,6 @@ router.get('/checkout/complete', function(req, res) {
 })
 
 router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
-  console.log('req.body: ',req.body);
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
   // fetch does not send that cookie automatically.
 
@@ -689,16 +689,30 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
 
   if(!req.user){
     res.status(401).json({status:'error',message:'user is not present on the request object'})
-    return;
   }
 
-  if(!req.body.product_count){
+  if(!req.body.product_quantity){
     res.status(401).json({status:'error',message:'cart has no items'})
+  }
+
+  try{
+    hbx_queries.addToCart(
+      req.body.product_quantity,
+      req.body.product_cost,
+      req.body.product_color,
+      req.body.product_size,
+      req.body.product_id,
+      req.user.id
+    )
+    .then(() => {
+      return;
+      // res.status(200).redirect('/hbx_register/success')
+    })
+  }catch(error){
+    res.status(401).json({status:'error',message:'item not added to database'})
     return;
   }
 
-  // TODO: add data to cart on db
-  console.log('req.body: ',req.body);
 })
 
 

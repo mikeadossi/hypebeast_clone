@@ -134,7 +134,4 @@ $('.hbx_account_button').hover(
 
 
 
-
-
-
 //

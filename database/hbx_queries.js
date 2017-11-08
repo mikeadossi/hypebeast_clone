@@ -84,7 +84,9 @@ let queries = {
             return ranges;
           }
 
-          let curr = arr[0]; // curr will serve as the last element in our ranges array, which we'll use to increment to create our range values.
+          let curr = arr[0];
+          // curr will serve as the last element in our ranges array, which
+          // we'll use to increment to create our range values.
 
           ranges.push(curr); // our first element is created in the ranges array.
           spacing += 10;
@@ -92,7 +94,8 @@ let queries = {
           let next; // this holds the integer to be added to our ranges array.
           next = curr + spacing;
 
-          let modulo; // will track our modulus difference between 50 and eventually 100.
+          let modulo; // will track our modulus difference
+          // between 50 and eventually 100.
 
           // below we ensure our results are rounded to hundredeths.
           if(next % 50 > 0){
@@ -150,16 +153,59 @@ let queries = {
   },
 
   getProductCount: function(brand){
-    return db.any("SELECT small_count,medium_count,large_count,xlarge_count,US_8_count,US_8_5_count,US_9_count,US_9_count,US_9_5_count,US_10_count,US_10_5_count,US_11_count,US_11_5_count,US_12_count,US_12_5_count,pants_28_count,pants_30_count,pants_32_count,pants_34_count,pants_36_count from products WHERE brand_name = $1", brand)
+    return db.any(`SELECT
+      small_count,
+      medium_count,
+      large_count,
+      xlarge_count,
+      US_8_count,
+      US_8_5_count,
+      US_9_count,
+      US_9_count,
+      US_9_5_count,
+      US_10_count,
+      US_10_5_count,
+      US_11_count,
+      US_11_5_count,
+      US_12_count,
+      US_12_5_count,
+      pants_28_count,
+      pants_30_count,
+      pants_32_count,
+      pants_34_count,
+      pants_36_count
+    from products WHERE brand_name = $1`, brand)
   },
 
   getProductSizes: function(product){
-    return db.any("SELECT small_count,medium_count,large_count,xlarge_count,US_8_count,US_8_5_count,US_9_count,US_9_count,US_9_5_count,US_10_count,US_10_5_count,US_11_count,US_11_5_count,US_12_count,US_12_5_count,pants_28_count,pants_30_count,pants_32_count,pants_34_count,pants_36_count from products WHERE product_name_route = $1", product)
+    return db.any(`SELECT
+      small_count,
+      medium_count,
+      large_count,
+      xlarge_count,
+      US_8_count,
+      US_8_5_count,
+      US_9_count,
+      US_9_count,
+      US_9_5_count,
+      US_10_count,
+      US_10_5_count,
+      US_11_count,
+      US_11_5_count,
+      US_12_count,
+      US_12_5_count,
+      pants_28_count,
+      pants_30_count,
+      pants_32_count,
+      pants_34_count,
+      pants_36_count
+    from products WHERE product_name_route = $1`, product)
   },
 
   getSortedInventoryDirection: function(brand, direction){
     console.log("----------------> executing sql query for ", direction)
-    return db.any("SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
+    return db.any(
+      "SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
   },
 
   getAllHBXProducts: function(){
@@ -180,6 +226,61 @@ let queries = {
       "INSERT INTO users (email) VALUES ($1) RETURNING *",
     [email])
   },
+
+  addToCart: function(
+    item_quantity,
+    item_cost,
+    item_color,
+    item_size,
+    item_id,
+    users_id){
+
+    return db.none(
+      `INSERT INTO cart (
+        item_quantity,
+        item_cost,
+        item_color,
+        item_size,
+        products_id,
+        users_id)
+      VALUES ($1, $2, $3, $4, $5, $6)`,
+    [item_quantity, item_cost, item_color, item_size, item_id, users_id])
+  },
+
+  clearAllCartDataById: function(id){
+    return db.none("DELETE FROM cart WHERE users_id = 1", [id])
+  },
+
+  addNewOrder: function(){
+    return db.none(
+      `INSERT INTO orders (
+        purchased_at,
+        shipped_at,
+        address,
+        item_quantity,
+        item_cost,
+        item_color,
+        item_size,
+        products_id,
+        users_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+    [
+      purchased_at,
+      shipped_at,
+      address,
+      item_quantity,
+      item_cost,
+      item_color,
+      item_size,
+      products_id,
+      users_id
+    ])
+  },
+
+  clearAllOrdersDataById: function(id){
+    return db.none("DELETE FROM orders WHERE users_id = 1", [id])
+  }
+
 
 }
 

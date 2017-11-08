@@ -29,7 +29,7 @@ CREATE TABLE product_colors (
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   product_price INTEGER,
-  product_count INTEGER,
+  product_quantity INTEGER,
   product_name VARCHAR,
   product_name_route VARCHAR UNIQUE,
   product_images TEXT,
@@ -79,7 +79,9 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   purchased_at TIMESTAMP,
   shipped_at TIMESTAMP,
-  cart VARCHAR,
+  address_obj VARCHAR,
+  purchased_product_details_obj VARCHAR,
+  payment_info_obj VARCHAR,
   users_id INTEGER REFERENCES users(id)
 );
 

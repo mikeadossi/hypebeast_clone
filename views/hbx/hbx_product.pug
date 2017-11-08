@@ -3,6 +3,7 @@ extends hbx_layout
 block content
   
   .hbx_product_content
+    .hidden_user !{JSON.stringify(user)}
     .hbx_store_header_container
       ul.hbx_header_left_links.hbx_product_header_links
         li 
@@ -145,7 +146,8 @@ block content
           
           
   script.
-    const GLOBAL_PRODUCT = !{JSON.stringify(product_content[0])}
-    console.log('GLOBAL_PRODUCT: ',GLOBAL_PRODUCT) 
+    let GLOBAL_PRODUCT = !{JSON.stringify(product_content[0])}
+    let GLOBAL_USER = document.querySelector(".hidden_user").innerHTML;
+
   
     
