@@ -6,7 +6,7 @@ const cookieSession = require('cookie-session');
 const routes = require('./routes.js');
 const config = require('./configure');
 const flash = require('connect-flash');
-const passport = require('./passport')
+const passport = require('./passport');
 
 const app = express();
 const PORT = process.env.PORT || 3000

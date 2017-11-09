@@ -3,10 +3,14 @@ const router = express.Router();
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('./passport');
+const cookieLib = require('cookie');
 
 /************************** Hypebeast (below) *******************************/
 
 router.get('/', function(req, res, next) {
+
+  let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  cart = JSON.parse(cart)[0];
 
   Promise.all(
     [
@@ -27,13 +31,13 @@ router.get('/', function(req, res, next) {
         }
     }
 
-    // console.log('req.user (routes,26) => ',req.user);
 
     res.render('index', {
       posts: results[0],
       topTen: results[1],
       postTitles: post_titles,
-      user: req.user
+      user: req.user,
+      cart: cart || 0
     })
   }).catch(err => next(err))
 })
@@ -85,7 +89,7 @@ router.get('/register/success', function(req, res) {
 })
 
 router.get('/loggedIn', function(req, res) {
-  const email = req.user.username
+
   if(req.user) {
         res.render('index', {
           user: req.user
@@ -136,24 +140,31 @@ router.post('/register', function(req, res) {
   }
 })
 
-/*
-const { email, password } = req.body
-  queries.createLocalUser(email, password)
-    .then(() => res.status(200).redirect('/register/success'))
-    .catch( e => console.log(e) )
-*/
-
 router.get('/login', function(req, res) {
   res.render('login', { user: req.user })
 })
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
+router.post('/login', passport.authenticate('local'),
+(req, res) => {
+
+  let user_id = req.user.id;
+  hbx_queries.getCartById(user_id)
+  .then(cart => {
+    res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
+      httpOnly: true,
+      maxAge: Infinity
+    }))
+
+    res.redirect('/')
+  })
+})
 
 router.get('/logout', function(req, res) {
+  // clear cookies
+  res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
+    httpOnly: true,
+    maxAge: 0
+  }))
   req.logout();
   res.redirect('/');
 })
@@ -196,15 +207,6 @@ router.post('/post/post_comment/:id', function(req, res) {
   const article_id = req.params.id;
   const user_id = req.user.id;
   const user_name = req.user.username;
-
-  console.log('user_id: ',
-  user_id,'\n',
-  'article_id: ',
-  article_id,
-  '\n',
-  'user_comment: ',
-  user_comment,
-  '\n');
 
   try{
     queries.storeComment(user_comment, article_id, user_id, user_name)
@@ -372,9 +374,6 @@ router.get('/brands/:brand/:product', function(req, res) {
         'undercover': 'Undercover'
       }
 
-      // console.log('product_content ---> ',product_content);
-      // console.log('product_sizes ---> ',product_sizes);
-
       let product_images_arr = product_content[0].product_images.split(',')
 
       let size_arr = [
@@ -421,7 +420,6 @@ router.get('/brands/:brand/:product', function(req, res) {
         'pants_36_count'
       ];
 
-      // console.log('routes(371) all_hbx_products -> ',all_hbx_products);
 
       let product_sizes_arr = [];
       for(let i = 0; i < size_arr.length-1; i++){
@@ -454,8 +452,6 @@ router.get('/brands/:brand/:product', function(req, res) {
         }
       }
 
-      // console.log('\n routes(407) hbx_product_obj => ',hbx_product_obj);
-
 
 
       let this_brand_images_arr = []; // this_brand_images_arr will eventually get sent to hbx_product in our response, but first we'll need to populate it with an image, name, and other details from the related_products_arr object.
@@ -465,11 +461,7 @@ router.get('/brands/:brand/:product', function(req, res) {
 
       let our_product_name;
 
-      // console.log('category_id - ',category_id);
-      // console.log('related_products_arr[1] -> ',related_products_arr[1]);
-
       // below we collect all products which share any similar characteristics with our main image
-      // console.log('\n routes(423) related_products_arr[0] => ',related_products_arr[0]);
       for(let q = 0; q < related_products_arr.length; q++){
 
         if(related_products_arr[q] !== undefined
@@ -507,7 +499,7 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj = {}
 
           if(related_products_arr[i].images.includes(product)){
-            // console.log('routes(454) -> ',related_products_arr[i].images);
+
             related_products_arr[i].images = null
           } else {
             our_product_name = related_products_arr[i].images;
@@ -575,16 +567,20 @@ router.get("/hbx_login", function(req, res) {
   res.render('hbx_login')
 })
 
-router.post('/hbx_login', passport.authenticate('local', {
-    successRedirect: '/store',
-    failureRedirect: '/hbx_login',
-    failureFlash: true
+router.post('/hbx_login', passport.authenticate('local'),
+(req, res) => {
+
+  let user_id = req.user.id;
+  hbx_queries.getCartById(user_id)
+  .then(cart => {
+    res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
+      httpOnly: true,
+      maxAge: Infinity
+    }))
+
+    res.redirect('/store')
   })
-);
-
-
-
-
+})
 
 router.get('/hbx_account', function(req, res) {
   if(req.user){
@@ -605,11 +601,6 @@ router.get('/hbx_account/password', function(req, res) {
 router.get('/hbx_account/close-account', function(req, res) {
   res.render('hbx_close_account', { user: req.user });
 })
-
-
-
-
-
 
 router.get("/hbx_register", function(req, res) {
   res.render('hbx_register')
@@ -671,6 +662,10 @@ router.get('/hbx_error', function(req, res) {
 });
 
 router.get('/hbx_logout', function(req, res) {
+  res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
+    httpOnly: true,
+    maxAge: 0
+  }))
   req.logout();
   res.redirect('/store');
 })
@@ -727,15 +722,12 @@ router.get('/get-cart-by-id', function(req, res) {
   let user_id = req.headers.user_id;
 
   try{
-    console.log('1');
     hbx_queries.getCartById(user_id)
     .then((cart) => {
-      console.log('2');
       res.json(cart);
     })
   }catch(error){
     res.status(401).json({status:'error',message:'cart db retrieval failed' + error.toString()})
-    return;
   }
 })
 
@@ -744,20 +736,3 @@ router.get('/get-cart-by-id', function(req, res) {
 
 
 module.exports = router;
-
-
-
-// what happens between a server and web browser.
-
-
-
-
-
-
-
-// task: write a search bar w/ functionality and a frontend
-// 1. build a simple frontend, button, search bar
-// 2. sql query, route
-// 3. fetch function which calls a route,
-// 4 write code handling the response in fetch
-// 5. append the data to the html inside my fetch
