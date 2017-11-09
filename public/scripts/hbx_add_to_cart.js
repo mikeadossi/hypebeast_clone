@@ -1,4 +1,9 @@
 const updateCartIcon = () => {
+
+  // if we have a logged in user...
+  if($('.hidden_user').text()){}
+
+  // if cookies are set and no user is logged in...
   if(document.cookie !== ''){
     let cookieString = document.cookie.split('=')[1];
     let cookieArray = JSON.parse(cookieString);
@@ -10,16 +15,19 @@ const updateCartIcon = () => {
 
     $('.shopping_bag')[0].innerHTML = totalNumOfItems;
     $('.shopping_bag_deux')[0].innerHTML = totalNumOfItems;
-  } 
+    return;
+  }
+
+  $('.shopping_bag')[0].innerHTML = 0;
+  $('.shopping_bag_deux')[0].innerHTML = 0;
 }
 
 
 $(document).ready(function(){
 
-  $('.shopping_bag')[0].innerHTML = 0;
-  $('.shopping_bag_deux')[0].innerHTML = 0;
-
   updateCartIcon();
+  fetch_cart_contents_by_id(GLOBAL_USER.id);
+
 })
 
 
@@ -88,17 +96,17 @@ const addSelectedItemsToCart = () => {
         console.log('posted to db!!!');
         itemsInCartObj.user_id = GLOBAL_USER.id
 
-        if(document.cookie){
-          let cookie = document.cookie;
-          cookie = cookie.split('=')
-          cookie = cookie[1];
-          cookie = JSON.parse(cookie);
+        // if(document.cookie){
+        //   let cookie = document.cookie;
+        //   cookie = cookie.split('=')
+        //   cookie = cookie[1];
+        //   cookie = JSON.parse(cookie);
+        //
+        //   for(let i = 0; i < cookie.length; i++){
+        //     post_cart_to_db(cookie[i])
+        //   }
+        // }
 
-          for(let i = 0; i < cookie.length; i++){
-            post_cart_to_db(cookie[i])
-          }
-        }
-        document.cookie = '';
         post_cart_to_db(itemsInCartObj);
         updateCartIcon();
         proceedToBag();
@@ -134,10 +142,6 @@ const populateCookie = () => {
     document.cookie = cookie_obj;
   }
 
-  let cookie = document.cookie
-  cookie = cookie.split('itemsInCart=')[1]
-  cookie = JSON.parse(cookie)
-  console.log('cookie ===> ',cookie.length);
 }
 
 const proceedToBag = () => {

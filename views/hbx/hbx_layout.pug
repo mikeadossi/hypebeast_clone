@@ -42,6 +42,7 @@ html
         img.hbx_search(src="/images/hbx_images/general/search.png")
         ul.register.nav_elements
           - if(user){
+              .hidden_user !{JSON.stringify(user)}
               .nav_login.nav_elements
                 button.hbx_nav_link.hbx_account_button ACCOUNT
                   .hbxAccountMenu

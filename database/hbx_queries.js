@@ -248,7 +248,7 @@ let queries = {
   },
 
   clearAllCartDataById: function(id){
-    return db.none("DELETE FROM cart WHERE users_id = 1", [id])
+    return db.none("DELETE FROM cart WHERE users_id = $1", [id])
   },
 
   addNewOrder: function(){
@@ -278,7 +278,11 @@ let queries = {
   },
 
   clearAllOrdersDataById: function(id){
-    return db.none("DELETE FROM orders WHERE users_id = 1", [id])
+    return db.none("DELETE FROM orders WHERE users_id = $1", [id])
+  },
+
+  getCartById: function(id){
+    return db.any("SELECT * FROM cart WHERE users_id = $1", id)
   }
 
 

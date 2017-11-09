@@ -136,6 +136,13 @@ router.post('/register', function(req, res) {
   }
 })
 
+/*
+const { email, password } = req.body
+  queries.createLocalUser(email, password)
+    .then(() => res.status(200).redirect('/register/success'))
+    .catch( e => console.log(e) )
+*/
+
 router.get('/login', function(req, res) {
   res.render('login', { user: req.user })
 })
@@ -715,7 +722,42 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
 
 })
 
+router.get('/get-cart-by-id', function(req, res) {
+
+  let user_id = req.headers.user_id;
+
+  try{
+    console.log('1');
+    hbx_queries.getCartById(user_id)
+    .then((cart) => {
+      console.log('2');
+      res.json(cart);
+    })
+  }catch(error){
+    res.status(401).json({status:'error',message:'cart db retrieval failed' + error.toString()})
+    return;
+  }
+})
+
+
 
 
 
 module.exports = router;
+
+
+
+// what happens between a server and web browser.
+
+
+
+
+
+
+
+// task: write a search bar w/ functionality and a frontend
+// 1. build a simple frontend, button, search bar
+// 2. sql query, route
+// 3. fetch function which calls a route,
+// 4 write code handling the response in fetch
+// 5. append the data to the html inside my fetch

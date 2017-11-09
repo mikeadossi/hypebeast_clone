@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 const passport = require('./passport')
 
 const app = express();
-
+const PORT = process.env.PORT || 3000
 
 app.use(flash());
 
@@ -36,8 +36,8 @@ app.use(function(req, res) {
 });
 
 
-app.listen(3000, () => {
-  console.log('Server is listening on port 3000.');
+app.listen(PORT, () => {
+  console.log('Server is listening on port' + PORT);
 });
 
 module.exports = app;
