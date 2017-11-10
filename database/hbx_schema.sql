@@ -814,7 +814,7 @@ VALUES (
   '80',
   'Army Sweatshirt',
   'army-sweatshirt',
-  '<img src="/images/hbx_images/tres-bien/sweatshirts/army_front.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army_side.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army_rear.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army_full.jpg" />',
+  '<img src="/images/hbx_images/tres-bien/sweatshirts/army-sweatshirt_front.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army-sweatshirt_side.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army-sweatshirt_rear.jpg" />,<img src="/images/hbx_images/tres-bien/sweatshirts/army-sweatshirt_full.jpg" />',
   '<div class="product_details"><p>Sweden-based fashion brand and retailer Très Bien was founded in 2006 by the Hogeman brothers Simon and Hannes Hogeman together. The Très Bien aesthetics are defined by the juxtaposition of high-fashion sensibilities: custom made fabrics, clean lines and quality garments combined with streetwear-elements like bold graphics and an overall more dressed down, loose look.</p><ul><li>Long sleeves.</li><li>Rib crewneck.</li><li>Single chest pocket.</li><li>Straight hem with slit side vents.</li><li>100% Cotton.</li></ul></div>',
   '2',
   'tres-bien',
