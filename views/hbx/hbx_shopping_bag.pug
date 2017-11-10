@@ -38,28 +38,32 @@ block content
             ul.product_row_right
               li PRICE
               li QTY 
-              li TOTAL 
-        .hbx_product_row
-          .cart_product_img
-            img(src="images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
-          .cart_product_details_container
-            .cart_product_brand adidas originals
-            .cart_product_name T-shirt
-            .cart_size Size: L
-            .cart_notice This item is excluded from promotions.
-          .hbx_right_rows
-            .hbx_price_row
-              .cart_price USD 36.00
-            .hbx_quantity_row
-              .hbx_quantity_control
-                //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
-                .cart_select_minus(onclick="decrementCount(this)") -
-                #cart_count 1
-                .cart_select_plus(onclick="incrementCount(this)") +
-              .cart_remove_items REMOVE
-            .hbx_total_row 
-              span.hbx_total_usd USD
-              span.hbx_total_price 100.00
+              li TOTAL
+        - if(cart){
+            - for(let i = 0; i < cart.length; i++){
+              .hbx_product_row
+                .cart_product_img
+                  img(src="images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
+                .cart_product_details_container
+                  .cart_product_brand adidas originals
+                  .cart_product_name T-shirt
+                  .cart_size Size: !{cart[i].item_size}
+                  .cart_notice This item is excluded from promotions.
+                .hbx_right_rows
+                  .hbx_price_row
+                    .cart_price USD 36.00
+                  .hbx_quantity_row
+                    .hbx_quantity_control
+                      //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
+                      .cart_select_minus(onclick="decrementCount(this)") -
+                      #cart_count !{cart[i].item_quantity}
+                      .cart_select_plus(onclick="incrementCount(this)") +
+                    .cart_remove_items REMOVE
+                  .hbx_total_row 
+                    span.hbx_total_usd USD
+                    span.hbx_total_price !{cart[i].item_cost}.00
+            - }
+        - }
           
         .hbx_update_container
           .hbx_update_btn UPDATE BAG

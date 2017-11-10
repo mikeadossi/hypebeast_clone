@@ -419,66 +419,25 @@ block content
         .order_summary_heading Order Summary
         p.checkout_order_notice Please note: Items and promotional pricing are not reserved until checkout is complete.
         .checkout_items_main_container
-          .checkout_item_container
-            .checkout_item_img
-              img(src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
-            .checkout_item_details_container
-              .checkout_item_brand Tres Bien
-              .checkout_item_name Rose Block Jacquard S/S Polo
-              .checkout_item_size 
-                span Size: 
-                span.checkout_item_final_size L
-              .checkout_item_quantity
-                span Qty:
-                span.checkout_item_final_quantity 2
-            .checkout_item_usd 
-              span USD
-              span.checkout_item_final_cost 100.00
-          .checkout_item_container
-            .checkout_item_img
-              img(src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
-            .checkout_item_details_container
-              .checkout_item_brand Tres Bien
-              .checkout_item_name Rose Block Jacquard S/S Polo
-              .checkout_item_size 
-                span Size: 
-                span.checkout_item_final_size L
-              .checkout_item_quantity
-                span Qty:
-                span.checkout_item_final_quantity 2
-            .checkout_item_usd 
-              span USD
-              span.checkout_item_final_cost 100.00
-          .checkout_item_container
-            .checkout_item_img
-              img(src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
-            .checkout_item_details_container
-              .checkout_item_brand Tres Bien
-              .checkout_item_name Rose Block Jacquard S/S Polo
-              .checkout_item_size 
-                span Size: 
-                span.checkout_item_final_size L
-              .checkout_item_quantity
-                span Qty:
-                span.checkout_item_final_quantity 2
-            .checkout_item_usd 
-              span USD
-              span.checkout_item_final_cost 150.00
-          .checkout_item_container
-            .checkout_item_img
-              img(src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
-            .checkout_item_details_container
-              .checkout_item_brand Tres Bien
-              .checkout_item_name Rose Block Jacquard S/S Polo
-              .checkout_item_size 
-                span Size: 
-                span.checkout_item_final_size L
-              .checkout_item_quantity
-                span Qty:
-                span.checkout_item_final_quantity 2
-            .checkout_item_usd 
-              span USD
-              span.checkout_item_final_cost 160.00
+          - if (cart){
+            - for(let i = 0; i < cart.length; i++){
+              .checkout_item_container
+                .checkout_item_img
+                  img(src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
+                .checkout_item_details_container
+                  .checkout_item_brand Tres Bien
+                  .checkout_item_name Rose Block Jacquard S/S Polo
+                  .checkout_item_size 
+                    span Size: 
+                    span.checkout_item_final_size !{cart[i].item_size}
+                  .checkout_item_quantity
+                    span Qty:
+                    span.checkout_item_final_quantity !{cart[i].item_quantity}
+                .checkout_item_usd 
+                  span USD
+                  span.checkout_item_final_cost !{cart[i].item_cost}.00
+            - }
+          - }
         .checkout_summary_container
           .checkout_total
             .bag_total_label Bag Subtotal
