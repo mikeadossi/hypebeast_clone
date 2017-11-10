@@ -3,14 +3,10 @@ const router = express.Router();
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('./passport');
-const cookieLib = require('cookie');
 
 /************************** Hypebeast (below) *******************************/
 
 router.get('/', function(req, res, next) {
-
-  let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  cart = JSON.parse(cart)[0];
 
   Promise.all(
     [
@@ -31,13 +27,11 @@ router.get('/', function(req, res, next) {
         }
     }
 
-
     res.render('index', {
       posts: results[0],
       topTen: results[1],
       postTitles: post_titles,
-      user: req.user,
-      cart: cart || 0
+      user: req.user
     })
   }).catch(err => next(err))
 })
@@ -54,48 +48,75 @@ router.get('/post/:id', function(req, res) {
       const post = results[0];
       const all_comments = results[1];
 
-      // console.log('all_comments (routes,41) => ',all_comments);
-
       res.render('post', {
         post: post,
         all_comments: all_comments,
-        user: req.user })
+        user: req.user
+       })
     })
     .catch( err => {
       console.log('err: ', err);
+      res.render('hbx_error', {user: req.user});
     })
 })
 
-router.get('/hbx_store/:id', function(req, res) {
-  const id = req.params.id;
-
-  queries.getPost(id)
-    .then( brand => {
-      res.render('hbx_brand', { brand: brand, user: req.user })
-    })
-    .catch( err => {
-      console.log('err: ', err);
-    })
-})
+// router.get('/hbx_store/:id', function(req, res) {
+//   const id = req.params.id;
+//
+//   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+//   // cart = JSON.parse(cart);
+//
+//   queries.getPost(id)
+//     .then( brand => {
+//       res.render('hbx_brand', {
+//         brand: brand,
+//         user: req.user
+//         // cart: cart || 0
+//        })
+//     })
+//     .catch( err => {
+//       console.log('err: ', err);
+//     })
+// })
 
 router.get('/store', function(req, res) {
-  res.render('hbx_index', {
-    user: req.user
-  });
+  if(req.user){
+    let user_id = req.user.id;
+
+    hbx_queries.getCartById(user_id)
+    .then( cart => {
+      res.render('hbx_index', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log('err: ',err);
+      res.render('hbx_error', {user: req.user});
+    })
+  } else {
+    res.render('hbx_index', {
+      user: req.user
+    });
+  }
+
+
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
 })
 
 router.get('/register/success', function(req, res) {
-  res.render('hbx_successful_register', { user: req.user });
+  res.render('successful_register', { user: req.user });
 })
 
 router.get('/loggedIn', function(req, res) {
 
   if(req.user) {
-        res.render('index', {
-          user: req.user
-        })
+        res.render('index', { user: req.user })
         .catch( err => {
           console.log('err: ', err);
+          res.render('hbx_error', {user: req.user});
         })
     } else {
       res.redirect('/error')
@@ -103,19 +124,33 @@ router.get('/loggedIn', function(req, res) {
 })
 
 router.get('/account', function(req, res) {
+
+
   if(req.user){
-    res.render('account', {user: req.user});
+    res.render('account', { user: req.user });
   } else {
     res.render('error')
   }
 })
 
 router.get('/account/password', function(req, res) {
-  if(req.user){
-    res.render('change_password', {user: req.user});
-  } else {
-    res.render('error');
-  }
+  const user_id = req.user.id || '';
+
+  hbx_queries.getCartById(user_id)
+    .then( cart => {
+      res.render('change_password', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log('err: ',err);
+      res.render('hbx_error', {user: req.user});
+    })
+
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
 })
 
 router.get('/account/close-account', function(req, res) {
@@ -141,30 +176,43 @@ router.post('/register', function(req, res) {
 })
 
 router.get('/login', function(req, res) {
-  res.render('login', { user: req.user })
+
+  res.render('login', {
+    user: req.user
+   })
 })
 
-router.post('/login', passport.authenticate('local'),
-(req, res) => {
+router.post('/login', passport.authenticate('local', {
+   successRedirect: '/',
+   failureRedirect: '/login',
+   failureFlash: true
+}));
 
-  let user_id = req.user.id;
-  hbx_queries.getCartById(user_id)
-  .then(cart => {
-    res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
-      httpOnly: true,
-      maxAge: Infinity
-    }))
-
-    res.redirect('/')
-  })
-})
+// router.post('/login', passport.authenticate('local'),
+// (req, res) => {
+//
+//   let user_id = req.user.id;
+//   hbx_queries.getCartById(user_id)
+//   .then(cart => {
+//     res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
+//       httpOnly: true,
+//       maxAge: Infinity
+//     }))
+//
+//     res.redirect('/')
+//   })
+//   .catch( (err) => {
+//     console.log('error: ',err);
+//     res.redirect('/login')
+//   })
+// })
 
 router.get('/logout', function(req, res) {
   // clear cookies
-  res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
-    httpOnly: true,
-    maxAge: 0
-  }))
+  // res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
+  //   httpOnly: true,
+  //   maxAge: 0
+  // }))
   req.logout();
   res.redirect('/');
 })
@@ -185,7 +233,8 @@ router.get('/auth/google/callback',
 router.get('/auth/facebook',
   passport.authenticate('facebook', {
     scope: ['user_friends', 'manage_pages']
-  } ));
+  } )
+);
 
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/error' }),
@@ -195,11 +244,11 @@ router.get('/auth/facebook/callback',
 );
 
 router.get('/auth/error', function(req, res){
-  res.render('hbx_error', { user: req.user });
+  res.render('error', { user: req.user });
 });
 
 router.get('/error', function(req, res) {
-  res.render('hbx_error', { user: req.user });
+  res.render('error', { user: req.user });
 });
 
 router.post('/post/post_comment/:id', function(req, res) {
@@ -222,6 +271,14 @@ router.post('/post/post_comment/:id', function(req, res) {
 /**************************** HBX (below) ***********************************/
 
 router.get('/brands/:brand', function(req, res) {
+
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  let conditional_promise;
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
   let brand = req.params.brand;
   Promise.all([
     hbx_queries.getBrandDetails(brand),
@@ -229,7 +286,8 @@ router.get('/brands/:brand', function(req, res) {
     hbx_queries.getBrandCategories(brand),
     hbx_queries.getBrandProductColors(brand),
     hbx_queries.getBrandPriceRange(brand),
-    hbx_queries.getProductCount(brand)
+    hbx_queries.getProductCount(brand),
+    conditional_promise
   ])
     .then( results => {
 
@@ -239,6 +297,7 @@ router.get('/brands/:brand', function(req, res) {
       let colors = results[3];
       let ranges = results[4];
       let product_sizes = results[5];
+      let cart = results[6];
 
       let categories_arr = [];
       for(let i = 0; i < categories.length; i++){
@@ -326,6 +385,7 @@ router.get('/brands/:brand', function(req, res) {
         }
       }
 
+
       res.render('hbx_store', {
         brand: brand,
         product: product,
@@ -334,7 +394,8 @@ router.get('/brands/:brand', function(req, res) {
         colors_arr: colors_arr,
         price_range_arr: ranges,
         product_sizes_arr: product_sizes_arr,
-        user: req.user
+        user: req.user,
+        cart: cart
       })
     })
     .catch( err => {
@@ -352,18 +413,26 @@ router.get('/brands/:brand', function(req, res) {
 router.get('/brands/:brand/:product', function(req, res) {
   let brand = req.params.brand;
   let product = req.params.product;
+  let conditional_promise;
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+  // console.log('cart$ ---> ',cart);
 
   Promise.all([
     hbx_queries.getProductContent(brand,product),
     hbx_queries.getProductSizes(product),
     hbx_queries.getProductColors(product),
-    hbx_queries.getAllHBXProducts()
+    hbx_queries.getAllHBXProducts(),
+    conditional_promise
   ])
     .then( results => {
       let product_content = results[0];
       let product_sizes = results[1];
       let product_colors = results[2];
       let all_hbx_products = results[3];
+      let cart = results[4];
 
       let brandNameObj = {
         '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
@@ -472,6 +541,7 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj = {}
 
           our_product_name = related_products_arr[q].images;
+          console.log('our_product_name => ',our_product_name);
           our_product_name = our_product_name.split(',');
           our_product_name = our_product_name[0];
           our_product_name = our_product_name.split('/');
@@ -555,11 +625,13 @@ router.get('/brands/:brand/:product', function(req, res) {
         product_sizes_arr: product_sizes_arr,
         product_colors_arr: product_colors_arr,
         this_brand_images_arr: this_brand_images_arr,
-        user: req.user
+        user: req.user,
+        cart: cart
       })
     })
     .catch( err => {
-      console.log('err: ', err);
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
     })
 })
 
@@ -567,39 +639,92 @@ router.get("/hbx_login", function(req, res) {
   res.render('hbx_login')
 })
 
-router.post('/hbx_login', passport.authenticate('local'),
-(req, res) => {
+router.post('/hbx_login', passport.authenticate('local', {
+   successRedirect: '/store',
+   failureRedirect: '/hbx_login',
+   failureFlash: true
+ })
+);
 
-  let user_id = req.user.id;
-  hbx_queries.getCartById(user_id)
-  .then(cart => {
-    res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
-      httpOnly: true,
-      maxAge: Infinity
-    }))
-
-    res.redirect('/store')
-  })
-})
+// router.post('/hbx_login', passport.authenticate('local'),
+// (req, res) => {
+//
+//   let user_id = req.user.id;
+//   hbx_queries.getCartById(user_id)
+//   .then(cart => {
+//     res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
+//       httpOnly: true,
+//       maxAge: Infinity
+//     }))
+//
+//     res.redirect('/store')
+//   })
+//   .catch( (err) => {
+//     console.log('error: ',err);
+//     res.redirect('/hbx_login')
+//   })
+// })
 
 router.get('/hbx_account', function(req, res) {
-  if(req.user){
-    res.render('hbx_account', { user: req.user });
-  } else {
-    res.render('hbx_error')
-  }
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+  let conditional_promise;
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_account', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
 })
 
 router.get('/hbx_account/password', function(req, res) {
   if(req.user){
-    res.render('hbx_change_password', { user: req.user });
-  } else {
-    res.render('hbx_error');
+    // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+    // cart = JSON.parse(cart);
+    let conditional_promise;
+    req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+    conditional_promise
+      .then( cart => {
+        res.render('hbx_change_password', {
+          user: req.user,
+          cart: cart
+        });
+      })
+      .catch( err => {
+        console.log(err);
+        res.render('hbx_error', {user: req.user});
+      })
+
   }
 })
 
 router.get('/hbx_account/close-account', function(req, res) {
-  res.render('hbx_close_account', { user: req.user });
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+  let conditional_promise;
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_close_account', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
 })
 
 router.get("/hbx_register", function(req, res) {
@@ -615,17 +740,51 @@ router.post("/hbx_register", function(req, res) {
     .then(() => {
       res.status(200).redirect('/hbx_register/success')
     })
-  }catch(e){
-    console.log(e);
+  }catch(err){
+    console.log(err);
   }
 })
 
 router.get("/hbx_shopping_bag", function(req, res) {
-  res.render('hbx_shopping_bag', { user: req.user })
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_shopping_bag', {
+        user: req.user,
+        cart: cart
+      })
+    })
+    .catch( err => {
+      console.log('err: ',err);
+      res.render('hbx_error', {user: req.user});
+    })
+
 })
 
 router.get('/hbx_register/success', function(req, res) {
-  res.render('hbx_successful_register', { user: req.user });
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_successful_register', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
 })
 
 router.get('/hbx/auth/facebook',
@@ -654,40 +813,122 @@ router.get('/hbx/auth/google/callback',
 );
 
 router.get('/hbx/auth/error', function(req, res){
-  res.render('hbx_error', {user: req.user});
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_error', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
 });
 
 router.get('/hbx_error', function(req, res) {
-  res.render('hbx_error', {user: req.user});
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      console.log('HIT THE PAGE!');
+      res.render('hbx_error', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log('ERRORRRRRRRRRRR');
+      console.log(err);
+    })
 });
 
 router.get('/hbx_logout', function(req, res) {
-  res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
-    httpOnly: true,
-    maxAge: 0
-  }))
+  // res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
+  //   httpOnly: true,
+  //   maxAge: 0
+  // }))
   req.logout();
   res.redirect('/store');
 })
 
 router.get('/checkout/addressing', function(req, res) {
-  res.render('hbx_addressing', {user: req.user});
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_addressing', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
+
 })
 
 router.get('/checkout/delivery_and_payment', function(req, res) {
-  res.render('hbx_delivery_and_payment', {user: req.user});
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_delivery_and_payment', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
 })
 
 router.get('/checkout/complete', function(req, res) {
-  res.render('hbx_order_complete', {user: req.user});
+  let conditional_promise;
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // cart = JSON.parse(cart);
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_order_complete', {
+        user: req.user,
+        cart: cart
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
 })
 
 router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
   // fetch does not send that cookie automatically.
-
-  // why is req.user undefined here?
-  // passport sets our req.user, what's wrong w/ passport and why's it not working for this route?
 
   if(!req.user){
     res.status(401).json({status:'error',message:'user is not present on the request object'})

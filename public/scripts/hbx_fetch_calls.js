@@ -29,6 +29,7 @@ const post_cart_to_db = (cartItemsObj) => {
       console.log('in it to win it');
       fetch_cart_contents_by_id(GLOBAL_USER.id);
       update_cart_icon_count_by_id(GLOBAL_USER.id);
+      return;
     })
     .catch(err => console.log(err))
   }
