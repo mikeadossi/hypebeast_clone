@@ -33,6 +33,7 @@ block content
         .product_size_container
           span.product_title SIZE
           span.find_your_size FIND YOUR SIZE
+          p.hidden_category !{product_category[0].category_type} 
           .sizes_container
             .hidden_product_sizes_arr !{product_sizes_arr}
             - for(let s = 0; s < product_sizes_arr.length; s++){

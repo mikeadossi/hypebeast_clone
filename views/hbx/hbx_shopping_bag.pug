@@ -43,10 +43,10 @@ block content
             - for(let i = 0; i < cart.length; i++){
               .hbx_product_row
                 .cart_product_img
-                  img(src="images/hbx_images/tres-bien/pants/work-trousers_full.jpg")
+                  img(src=cart[i].item_image)
                 .cart_product_details_container
-                  .cart_product_brand adidas originals
-                  .cart_product_name T-shirt
+                  .cart_product_brand !{cart[i].item_name}
+                  .cart_product_name !{cart[i].item_category}
                   .cart_size Size: !{cart[i].item_size}
                   .cart_notice This item is excluded from promotions.
                 .hbx_right_rows

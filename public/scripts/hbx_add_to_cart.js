@@ -69,9 +69,9 @@ const product_price = Number(product_usd[1]);
 const addSelectedItemsToCart = () => {
   if(currentSelectedSize){
     // move on to shopping bag page
+    let href = window.location.href;
 
     if($('.product_add_to_cart_button')[0].innerHTML == "PROCEED TO BAG"){
-      let href = window.location.href;
       href = href.split('brands')
       href = href[0] + 'hbx_shopping_bag'
 
@@ -81,6 +81,8 @@ const addSelectedItemsToCart = () => {
       // add to cart
       let product_quantity = Number($('.item_count_amt')[0].innerHTML)
       let product_cost = product_price * product_quantity;
+      let product_category = $('.hidden_category').text();
+      // let product_image = $('.product_preview_img')[0].text()
 
       itemsInCartObj = {
         product_quantity: Number($('.item_count_amt')[0].innerHTML),
@@ -89,7 +91,10 @@ const addSelectedItemsToCart = () => {
         product_size: currentSelectedSize.replace(/\s/g, ''),
         product_name: product_name,
         product_id: GLOBAL_PRODUCT.id,
-        product_brand: product_brand
+        product_brand: product_brand,
+        product_image: $('.product_preview_img')[0],
+        product_route: href,
+        product_category: product_category
       }
 
       if($('.hidden_user').text()){

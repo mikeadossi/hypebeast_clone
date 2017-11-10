@@ -1,13 +1,13 @@
 
 const post_cart_to_db = (cartItemsObj) => {
-  console.log('posting?...');
+
   let url = window.location.href + '/add-to-cart';
   let myHeaders = new Headers();
 
   if(GLOBAL_USER){
-    console.log('post global user...');
-    console.log('P: ',GLOBAL_PRODUCT.id);
-    console.log('U: ',GLOBAL_USER.id);
+    let product_image_first_child = cartItemsObj.product_image.firstChild;
+    let product_image = product_image_first_child.getAttribute('src');
+
     fetch(url, {
       method:'POST',
       headers: new Headers({
@@ -20,7 +20,10 @@ const post_cart_to_db = (cartItemsObj) => {
         product_color: cartItemsObj.product_color,
         product_size: cartItemsObj.product_size,
         product_id: GLOBAL_PRODUCT.id,
-        users_id: GLOBAL_USER.id
+        users_id: GLOBAL_USER.id,
+        product_category: cartItemsObj.product_category,
+        product_image: product_image,
+        product_name: cartItemsObj.product_name
       }),
       credentials: "same-origin"
     })

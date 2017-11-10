@@ -233,7 +233,10 @@ let queries = {
     item_color,
     item_size,
     item_id,
-    users_id){
+    users_id,
+    item_category,
+    item_image,
+    item_name){
 
     return db.none(
       `INSERT INTO cart (
@@ -242,9 +245,12 @@ let queries = {
         item_color,
         item_size,
         products_id,
-        users_id)
-      VALUES ($1, $2, $3, $4, $5, $6)`,
-    [item_quantity, item_cost, item_color, item_size, item_id, users_id])
+        users_id,
+        item_category,
+        item_image,
+        item_name)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name])
   },
 
   clearAllCartDataById: function(id){
@@ -283,6 +289,10 @@ let queries = {
 
   getCartById: function(id){
     return db.any("SELECT * FROM cart WHERE users_id = $1", id)
+  },
+
+  getCategory: function(product_name){
+    return db.any("SELECT category_type FROM categories JOIN products ON categories.id = products.category_id WHERE product_name_route = $1", [product_name])
   }
 
 

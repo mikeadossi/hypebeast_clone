@@ -425,6 +425,7 @@ router.get('/brands/:brand/:product', function(req, res) {
     hbx_queries.getProductSizes(product),
     hbx_queries.getProductColors(product),
     hbx_queries.getAllHBXProducts(),
+    hbx_queries.getCategory(product),
     conditional_promise
   ])
     .then( results => {
@@ -432,7 +433,8 @@ router.get('/brands/:brand/:product', function(req, res) {
       let product_sizes = results[1];
       let product_colors = results[2];
       let all_hbx_products = results[3];
-      let cart = results[4];
+      let product_category = results[4]
+      let cart = results[5];
 
       let brandNameObj = {
         '11-by-boris-bidjan-saberi': '11 by Boris Bidjan Saberi',
@@ -541,7 +543,7 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj = {}
 
           our_product_name = related_products_arr[q].images;
-          console.log('our_product_name => ',our_product_name);
+          // console.log('our_product_name => ',our_product_name);
           our_product_name = our_product_name.split(',');
           our_product_name = our_product_name[0];
           our_product_name = our_product_name.split('/');
@@ -617,7 +619,6 @@ router.get('/brands/:brand/:product', function(req, res) {
         }
       }
 
-
       res.render('hbx_product', {
         product_content: product_content,
         product_images_arr: product_images_arr,
@@ -626,7 +627,8 @@ router.get('/brands/:brand/:product', function(req, res) {
         product_colors_arr: product_colors_arr,
         this_brand_images_arr: this_brand_images_arr,
         user: req.user,
-        cart: cart
+        cart: cart,
+        product_category: product_category
       })
     })
     .catch( err => {
@@ -945,7 +947,10 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
       req.body.product_color,
       req.body.product_size,
       req.body.product_id,
-      req.user.id
+      req.user.id,
+      req.body.product_category,
+      req.body.product_image,
+      req.body.product_name
     )
     .then(() => {
       return;

@@ -67,12 +67,18 @@ CREATE TABLE users (
 
 CREATE TABLE cart (
   id SERIAL PRIMARY KEY,
+
+  -- item_brand VARCHAR,
+
+  item_image VARCHAR,
   item_quantity INTEGER,
   item_cost INTEGER,
   item_color VARCHAR,
   item_size VARCHAR,
+  item_category VARCHAR,
   products_id INTEGER REFERENCES products(id),
-  users_id INTEGER REFERENCES users(id)
+  users_id INTEGER REFERENCES users(id),
+  item_name VARCHAR
 );
 
 CREATE TABLE orders (

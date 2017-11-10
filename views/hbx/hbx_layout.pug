@@ -39,7 +39,7 @@ html
           li.nav_sale.hbx_nav_link.nav_elements SALE 
           li.nav_journal.hbx_nav_link.nav_elements JOURNAL
           - if(cart && cart.length > 0){
-              li.nav_journal.hbx_nav_link.nav_elements TESTING, CART.ID: !{JSON.stringify(cart[0].id)}
+              li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID: !{JSON.stringify(cart[0].id)}
           - }
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")
@@ -80,12 +80,10 @@ html
                 - for(let i = 0; i < cart.length; i++){
                   .cart_product
                     .dropdown_img
-                      img(
-                        src="/images/hbx_images/tres-bien/pants/work-trousers_full.jpg"
-                      )
+                      img(src=cart[i].item_image)
                     .cart_product_container
-                      .cart_product_brand adidas originals
-                      .cart_product_name T-shirt
+                      .cart_product_brand brand
+                      .cart_product_name !{cart[i].item_name}
                       .cart_size Size: !{cart[i].item_size}
                       .cart_notice This item is excluded from promotions.
                       .quantity_and_price_container
