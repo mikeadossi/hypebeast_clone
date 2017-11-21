@@ -1,0 +1,41 @@
+extends hbx_layout
+
+block content
+  .content
+    .hbx_your_settings_content
+      .hbx_settings_nav
+        .settings_nav_heading Account Settings
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account") PROFILE
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account/address_info") ADDRESS INFO
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/password") PASSWORD
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/orders") ORDERS
+      .hbx_settings_controls
+        .settings_edit_password
+          .hbx_edit_profile_header Edit Address
+          form(method="post" action="/update-address-in-db/"+user.id)
+            .form_group
+              div.hbx_label
+                label.profile_label STREET
+              div
+                input.profile_input.profile_curr_password_input(name="street" type="text" value=user_data[0].street)
+            .form_group
+              div.hbx_label
+                label.profile_label CITY / TOWN
+              div
+                input.profile_input.profile_password_input(name="city" type="text" value=user_data[0].city)
+            .form_group
+              div.hbx_label
+                label.profile_label STATE
+              div
+                input.profile_input.profile_verify_password_input(name="state" type="text" value=user_data[0].state)
+            .form_group
+              div.hbx_label
+                label.profile_label POSTCODE
+              div
+                input.profile_input.profile_verify_password_input(name="postcode" type="number" value=user_data[0].postcode)
+            .form_group
+              div.hbx_label
+                label.profile_label COMPANY
+              div
+                input.profile_input.profile_verify_password_input(name="company" type="text" value=user_data[0].company)
+            input#update_address.account_buttons(type="submit" value="Save Changes")

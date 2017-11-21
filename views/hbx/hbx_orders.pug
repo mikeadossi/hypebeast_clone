@@ -1,0 +1,55 @@
+extends hbx_layout
+
+block content
+
+  .hbx_ordered_item_modal
+    .close_modal X
+    h2 PURCHASED
+    table(style='width:100%')
+      tr
+        th PRODUCT ID
+        th PRODUCT NAME
+        th ITEM COUNT
+        th PRICE
+        th TOTAL PRICE
+      tr
+        td 4
+        td sneakers
+        td 3
+        td $20.00
+        td $60.00
+      tr
+        td 5
+        td shirt
+        td 3
+        td $200.00
+        td $600.00
+  .content
+    .hbx_your_settings_content
+      .hbx_settings_nav
+        .settings_nav_heading Account Settings
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account") PROFILE
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account/address_info") ADDRESS INFO
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/password") PASSWORD
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/orders") ORDERS
+      .hbx_settings_controls
+        .settings_edit_password
+          .hbx_edit_profile_header ORDER HISTORY
+          - if(orders && orders.length > 0){
+            table(style='width:100%')
+             - for(let i = 0; i < orders.length; i++){
+                 tr
+                   th ORDER ID
+                   th PURCHASE DATE
+                   th ITEMS
+                   th PURCHASE TOTAL
+                 tr
+                   td !{orders[i].id}
+                   td !{orders[i].purchased_at}
+                   td 
+                     a.view_order_items(href="#") view
+                   td !{orders[i].total_purchase_cost}
+             - }
+          - } else if(orders.length === 0) {
+              p.no_order_date Nothing to See here. Get Shopping!
+          - }
