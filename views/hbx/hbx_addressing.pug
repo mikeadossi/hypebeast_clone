@@ -50,6 +50,9 @@ block content
                   input.email_input(name="order_email" type="email")
             
             .checkout_header Shipping Address
+            - if(error_message){
+                .error_message !{error_message}
+            - }
             .row
               .checkout_form_group
                 .contact_first_name.contact_label_container
@@ -62,17 +65,17 @@ block content
                   label TOWN/CITY
                 .contact_input_container
                   input.email_input(name="city" type="text")
-              .checkout_form_group
+              .checkout_form_group.checkout_form_wide
                 .contact_postcode.contact_label_container
                   label POSTCODE/ZIP
                 .contact_input_container
                   input.email_input(name="postcode" type="text")
             .row
-              .checkout_form_group
+              .checkout_form_group.checkout_form_wide
                 .contact_first_name.contact_label_container
                   label COUNTRY
                 .contact_input_container
-                  select.first_name_input(name="country" type="text")
+                  select.first_name_input.country_input(name="country" type="text")
                     option(value='Afganistan') Afghanistan
                     option(value='Albania') Albania
                     option(value='Algeria') Algeria
@@ -321,11 +324,11 @@ block content
                     option(value='Zambia') Zambia
                     option(value='Zimbabwe') Zimbabwe
             .row
-              .checkout_form_group
+              .checkout_form_group.checkout_form_wide
                 .contact_email.contact_label_container
                   label PROVINCE/STATE
                 .contact_input_container
-                  select.email_input(name="state" type="text")
+                  select.email_input.state_input(name="state" type="text")
                     option(value='Alabama') Alabama
                     option(value='Alaska') Alaska
                     option(value='Arizona') Arizona
@@ -461,5 +464,4 @@ block content
               span.checkout_item_final_cost.checkout_subtotal 0
               span .00
           input.checkout_continue_button(type="submit" value="CONTINUE")
-          //- input.checkout_continue_button(href="/checkout/delivery_and_payment" type="submit" value="CONTINUE")
         

@@ -6,48 +6,34 @@ block content
       .hbx_settings_nav
         .settings_nav_heading Account Settings
         a.hbx_settings_nav_link.profile_link(href="/hbx_account") PROFILE
-        a.hbx_settings_nav_link.profile_link(href="#") ADDRESS INFO
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account/address_info") ADDRESS INFO
         a.hbx_settings_nav_link.profile_password(href="/hbx_account/password") PASSWORD
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/orders") ORDERS
       .hbx_settings_controls
         .settings_edit_profile
           .hbx_edit_profile_header Edit Profile
-          .form(method="post" action="")
-            .form_group
-              div.hbx_label
-                label.profile_label USERNAME
-              div
-                input.profile_input.profile_username_input(name="" type="")
+          form(method="post" action="update-profile-in-db")
             .form_group
               div.label
                 label.profile_label EMAIL
               div
-                input.profile_input.profile_email_input(name="" type="email" value=user.email)
+                input.profile_input.profile_email_input(name="email" type="email" value=user_data[0].email)
             .form_group
               div.label
                 label.profile_label FIRST NAME
               div
-                input.profile_input.profile_email_input(name="" type="")
+                input.profile_input.profile_email_input(name="first_name" type="text" value=user_data[0].first_name)
             .form_group
               div.label
                 label.profile_label LAST NAME
               div
-                input.profile_input.profile_email_input(name="" type="")
+                input.profile_input.profile_email_input(name="last_name" type="text" value=user_data[0].last_name)
             .form_group
               div.label
-                label.profile_label LOCATION
+                label.profile_label PHONE NUMBER
               div
-                input.profile_input.profile_email_input(name="" type="")
-            .form_group
-              div.label
-                label.profile_label BIRTHDAY
-              div
-                input.profile_input.profile_email_input(name="" type="")
-            .form_group
-              div.label
-                label.profile_label GENDER
-              div
-                input.profile_input.profile_email_input(name="" type="")
+                input.profile_input.profile_email_input(name="phone" type="text" value=user_data[0].phone_number)
             
-            input#update_profile(type="submit" value="Update Profile")
+            input#update_profile.account_buttons(type="submit" value="Update Profile")
             span 
               a.close_account(href="/hbx_account/close-account") Close Account

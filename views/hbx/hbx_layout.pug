@@ -38,9 +38,9 @@ html
           li.nav_archives.hbx_nav_link.nav_elements ARCHIVES
           li.nav_sale.hbx_nav_link.nav_elements SALE 
           li.nav_journal.hbx_nav_link.nav_elements JOURNAL
-          - if(cart && cart.length > 0){
+          - if(user){
               li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID:
-              span.users_persistent_id !{JSON.stringify(cart[0].users_id)}
+              span.users_persistent_id !{JSON.stringify(user.id)}
           - }
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")
@@ -59,15 +59,15 @@ html
           li.nav_help.hbx_nav_link.nav_elements HELP
         .cart.nav_elements#bag_button
           .shopping_bag_container
-            .shopping_bag_handle
-            .shopping_bag
+            .shopping_bag_handle 
+            .shopping_bag 77
           span.hbx_nav_link YOUR BAG
           img.arrow_down(src="/images/hbx_images/general/arrow_down.png")
           .cart_dropdown
             .nav_button_cover
               .shopping_bag_container.shopping_bag_container_hover
                 .shopping_bag_handle.hover_handle
-                .shopping_bag.shopping_bag_deux
+                .shopping_bag.shopping_bag_deux 77
               span.hbx_nav_link.hbx_nav_link_hover YOUR BAG
               img.arrow_down.arrow_down_hover(
                 src="/images/hbx_images/general/arrow_down.png"
@@ -83,7 +83,7 @@ html
                     .dropdown_img
                       img(src=cart[i].item_image)
                     .cart_product_container
-                      .cart_product_brand brand
+                      .cart_product_brand !{cart[i].item_brand}
                       .cart_product_name !{cart[i].item_name}
                       .cart_size Size: !{cart[i].item_size}
                       .cart_notice This item is excluded from promotions.
