@@ -51,13 +51,16 @@ block content
                   .cart_notice This item is excluded from promotions.
                 .hbx_right_rows
                   .hbx_price_row
-                    .cart_price USD 36.00
+                    .cart_price USD 
+                    span !{cart[i].item_cost / cart[i].item_quantity}
+                    span .00
                   .hbx_quantity_row
                     .hbx_quantity_control
                       //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
-                      .cart_select_minus(onclick="decrementCount(this)") -
+                      .cart_select_minus(onclick="decrementCount(this), addToListOfEditedItems(this, 'decrement')") -
                       #cart_count !{cart[i].item_quantity}
-                      .cart_select_plus(onclick="incrementCount(this)") +
+                      .cart_select_plus(onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')") +
+                      .hidden_cart_id !{cart[i].id}
                     .cart_remove_items REMOVE
                   .hbx_total_row 
                     span.hbx_total_usd USD
@@ -66,7 +69,7 @@ block content
         - }
           
         .hbx_update_container
-          .hbx_update_btn UPDATE BAG
+          .hbx_update_btn(onclick="updateBag()") UPDATE BAG
         
       .hbx_cart_right_column
         .hbx_right_main_container
@@ -77,12 +80,13 @@ block content
               .bag_total Bag Subtotal
               .bag_cost 
                 span.usd USD
-                span 60.00
+                span.bag_subtotal 0
+                span .00
             .shopping_sale_container
               .duty_total *Duty/Tax
               .duty_cost 
                 span.usd USD
-                span 60.00
+                span 0.00
             .shopping_sale_container
               .shipping_total Shipping Total
               .shipping_cost 
@@ -91,7 +95,8 @@ block content
               .order_total ORDER TOTAL 
               .order_cost
                 span.usd USD
-                span 60.00
+                span.checkout_subtotal 0
+                span .00
             .proceed_button_container
               a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
             .promotional_container
@@ -110,7 +115,8 @@ block content
           span information
         .taxes *All tax & duties will be covered by us. If you are charged any duty/tax fees for your order, please send us a copy of the invoice so we can settle the charges.
           
-          
+    script.
+      let LIST_OF_EDITED_ITEMS = [];
     
     
         

@@ -26,7 +26,12 @@ const updateCartIcon = () => {
 $(document).ready(function(){
 
   updateCartIcon();
-  fetch_cart_contents_by_id(GLOBAL_USER.id);
+
+  // let user_id = document.querySelector(".users_persistent_id").innerHTML;
+  // if(user_id){
+  //   update_cart_and_count_by_id(user_id);
+  // }
+  update_cart_and_count_by_id(GLOBAL_USER.id);
 
 })
 
@@ -94,7 +99,8 @@ const addSelectedItemsToCart = () => {
         product_brand: product_brand,
         product_image: $('.product_preview_img')[0],
         product_route: href,
-        product_category: product_category
+        product_category: product_category,
+        product_individual_price: product_price
       }
 
       if($('.hidden_user').text()){
@@ -113,7 +119,7 @@ const addSelectedItemsToCart = () => {
         // }
 
         post_cart_to_db(itemsInCartObj);
-        updateCartIcon();
+        update_cart_and_count_by_id(GLOBAL_USER.id);
         proceedToBag();
       } else {
         populateCookie();

@@ -39,7 +39,8 @@ html
           li.nav_sale.hbx_nav_link.nav_elements SALE 
           li.nav_journal.hbx_nav_link.nav_elements JOURNAL
           - if(cart && cart.length > 0){
-              li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID: !{JSON.stringify(cart[0].id)}
+              li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID:
+              span.users_persistent_id !{JSON.stringify(cart[0].users_id)}
           - }
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")
@@ -72,7 +73,7 @@ html
                 src="/images/hbx_images/general/arrow_down.png"
               )
             .items_in_bag
-              span 1 Item
+              span.dropdown_item_count 0 Items
               span in Bag
             .dropdown_notice_top Please note: Item(s) is not reserved until checkout is completed.
             .cart_dropdown_product_container
@@ -103,13 +104,12 @@ html
               .dropdown_order_total
                 span.order_tot ORDER TOTAL
                 span USD 
-                span.cart_price 60
-                  span .00
+                span.cart_price 0
             .dropdown_notice
               span You will be charged in 
               span.usd USD 
-                span.cart_price 660
-                  span .00
+              span.usd_cart_price 0
+              span .00
             .dropdown_button_container
               a.view_bag(href="/hbx_shopping_bag") VIEW BAG
               a.checkout_now(href="/checkout/addressing") CHECKOUT NOW
@@ -202,4 +202,6 @@ html
     script(src='/scripts/hbx_product.js')
     script(src='/scripts/hbx_add_to_cart.js')
     script(src='/scripts/hbx_fetch_calls.js')
+    script(src='/scripts/hbx_shopping_bag.js')
+    script(src='/scripts/hbx_addressing.js')
     

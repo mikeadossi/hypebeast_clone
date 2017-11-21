@@ -236,9 +236,10 @@ let queries = {
     users_id,
     item_category,
     item_image,
-    item_name){
+    item_name,
+    item_individual_price){
 
-    return db.none(
+    return db.any(
       `INSERT INTO cart (
         item_quantity,
         item_cost,
@@ -248,9 +249,10 @@ let queries = {
         users_id,
         item_category,
         item_image,
-        item_name)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name])
+        item_name,
+        item_individual_price)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name, item_individual_price])
   },
 
   clearAllCartDataById: function(id){
@@ -293,6 +295,50 @@ let queries = {
 
   getCategory: function(product_name){
     return db.any("SELECT category_type FROM categories JOIN products ON categories.id = products.category_id WHERE product_name_route = $1", [product_name])
+  },
+
+  updateCartById: function(item_id, item_count, item_tot_cost){
+    return db.any("UPDATE cart SET item_quantity = $2, item_cost = $3 WHERE id = $1",[item_id,item_count,item_tot_cost])
+  },
+
+  submitOrderAddressDetails: function(
+    first_name,
+    last_name,
+    phone,
+    order_email,
+    street,
+    city,
+    postcode,
+    state,
+    country,
+    company_name,
+    order_notes
+  ){
+    return db.none(`INSERT INTO orders (
+      first_name,
+      last_name,
+      phone,
+      order_email,
+      street,
+      city,
+      postcode,
+      state,
+      country,
+      company_name,
+      order_notes
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,[
+      first_name,
+      last_name,
+      phone,
+      order_email,
+      street,
+      city,
+      postcode,
+      state,
+      country,
+      company_name,
+      order_notes
+    ])
   }
 
 

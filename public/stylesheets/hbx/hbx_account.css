@@ -3,7 +3,7 @@
   display:flex;
   flex-wrap:wrap;
   padding-left:5%;
-  min-height: 400px;
+  min-height: 600px;
 }
 
 .hbx_settings_nav, .hbx_settings_controls{
@@ -55,4 +55,9 @@
 .hbx_error_msg{
   padding-left: 5%;
   min-height: 400px;
+}
+
+.profile_input{
+  padding: 5px;
+  width: 240px;
 }

@@ -311,3 +311,7 @@
   color: #666666;
   margin-top: 15px;
 }
+
+.hidden_cart_id{
+  display:none !important;
+}

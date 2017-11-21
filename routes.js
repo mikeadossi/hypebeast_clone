@@ -843,14 +843,12 @@ router.get('/hbx_error', function(req, res) {
 
   conditional_promise
     .then( cart => {
-      console.log('HIT THE PAGE!');
       res.render('hbx_error', {
         user: req.user,
         cart: cart
       });
     })
     .catch( err => {
-      console.log('ERRORRRRRRRRRRR');
       console.log(err);
     })
 });
@@ -885,6 +883,68 @@ router.get('/checkout/addressing', function(req, res) {
 
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/submit-address', function(req, res){
+  // here we'll need to submit the address page contents to the db!
+  if(req.body.order_email[0] !== req.body.order_email[1]){
+    console.log('emails do not match');
+    return;
+  }
+
+  console.log('\n req.body ===> ',req.body,'\n');
+
+  let first_name = req.body.first_name;
+  let last_name = req.body.last_name;
+  let phone = req.body.phone;
+  let order_email = req.body.order_email[0];
+  let street = req.body.street;
+  let city = req.body.city;
+  let postcode = req.body.postcode
+  let state = req.body.state;
+  let country = req.body.country;
+  let company_name = req.body.company_name;
+  let order_notes = req.body.order_notes;
+
+  hbx_queries.submitOrderAddressDetails(
+    first_name,
+    last_name,
+    phone,
+    order_email,
+    street,
+    city,
+    postcode,
+    state,
+    country,
+    company_name,
+    order_notes
+  )
+  .then( cart => {
+    res.redirect('/checkout/delivery_and_payment');
+  })
+  .catch( err => {
+    console.log(err);
+  })
+
+})
+
+
+
+
+
+
 
 router.get('/checkout/delivery_and_payment', function(req, res) {
   let conditional_promise;
@@ -950,10 +1010,11 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
       req.user.id,
       req.body.product_category,
       req.body.product_image,
-      req.body.product_name
+      req.body.product_name,
+      req.body.product_individual_price
     )
-    .then(() => {
-      return;
+    .then((cart) => {
+      return cart;
       // res.status(200).redirect('/hbx_register/success')
     })
   }catch(error){
@@ -975,6 +1036,18 @@ router.get('/get-cart-by-id', function(req, res) {
   }catch(error){
     res.status(401).json({status:'error',message:'cart db retrieval failed' + error.toString()})
   }
+})
+
+router.post('/update-bag', function(req, res) {
+  let item_id = req.body.item_id;
+  let item_count = req.body.item_count;
+  let item_tot_cost = req.body.item_tot_cost;
+
+  hbx_queries.updateCartById(item_id, item_count, item_tot_cost)
+  .then((results) => {
+    res.redirect('/hbx_shopping_bag')
+  })
+  .catch(err => next(err))
 })
 
 

@@ -74,7 +74,8 @@ block content
           .bag_total_label Bag Subtotal
           .bag_total.align_right
             span USD
-            span.checkout_item_final_cost 276.00
+            span.checkout_item_final_cost.bag_subtotal 0
+            span .00
         .checkout_total
           .duty_label *Duty/Tax
           .duty_total.align_right
@@ -83,12 +84,12 @@ block content
         .checkout_total
           .shipping_label Shipping Total
           .shipping_total.align_right
-            span USD
-            span.checkout_item_final_cost 7.00
+            span.checkout_item_final_cost Free Shipping
       .checkout_order_details
         span ORDER TOTAL
         .checkout_order_usd
           span USD 
-          span.checkout_item_final_cost 200.00
+          span.checkout_item_final_cost.checkout_subtotal 0
+          span .00
       a.checkout_continue_button(href="/checkout/complete") PLACE ORDER
     
