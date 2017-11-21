@@ -26,12 +26,8 @@ const updateCartIcon = () => {
 $(document).ready(function(){
 
   updateCartIcon();
-
-  // let user_id = document.querySelector(".users_persistent_id").innerHTML;
-  // if(user_id){
-  //   update_cart_and_count_by_id(user_id);
-  // }
-  update_cart_and_count_by_id(GLOBAL_USER.id);
+  let user_id = $('.users_persistent_id')[0].innerHTML;
+  update_cart_and_count_by_id(user_id);
 
 })
 
@@ -87,7 +83,6 @@ const addSelectedItemsToCart = () => {
       let product_quantity = Number($('.item_count_amt')[0].innerHTML)
       let product_cost = product_price * product_quantity;
       let product_category = $('.hidden_category').text();
-      // let product_image = $('.product_preview_img')[0].text()
 
       itemsInCartObj = {
         product_quantity: Number($('.item_count_amt')[0].innerHTML),
@@ -119,7 +114,6 @@ const addSelectedItemsToCart = () => {
         // }
 
         post_cart_to_db(itemsInCartObj);
-        update_cart_and_count_by_id(GLOBAL_USER.id);
         proceedToBag();
       } else {
         populateCookie();

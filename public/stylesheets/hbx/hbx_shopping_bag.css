@@ -315,3 +315,7 @@
 .hidden_cart_id{
   display:none !important;
 }
+
+.cart_product_brand{
+  font-size:12px;
+}

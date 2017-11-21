@@ -60,25 +60,6 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
-// router.get('/hbx_store/:id', function(req, res) {
-//   const id = req.params.id;
-//
-//   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-//   // cart = JSON.parse(cart);
-//
-//   queries.getPost(id)
-//     .then( brand => {
-//       res.render('hbx_brand', {
-//         brand: brand,
-//         user: req.user
-//         // cart: cart || 0
-//        })
-//     })
-//     .catch( err => {
-//       console.log('err: ', err);
-//     })
-// })
-
 router.get('/store', function(req, res) {
   if(req.user){
     let user_id = req.user.id;
@@ -99,10 +80,6 @@ router.get('/store', function(req, res) {
       user: req.user
     });
   }
-
-
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
 })
 
@@ -148,9 +125,6 @@ router.get('/account/password', function(req, res) {
       res.render('hbx_error', {user: req.user});
     })
 
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
-
 })
 
 router.get('/account/close-account', function(req, res) {
@@ -188,31 +162,8 @@ router.post('/login', passport.authenticate('local', {
    failureFlash: true
 }));
 
-// router.post('/login', passport.authenticate('local'),
-// (req, res) => {
-//
-//   let user_id = req.user.id;
-//   hbx_queries.getCartById(user_id)
-//   .then(cart => {
-//     res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
-//       httpOnly: true,
-//       maxAge: Infinity
-//     }))
-//
-//     res.redirect('/')
-//   })
-//   .catch( (err) => {
-//     console.log('error: ',err);
-//     res.redirect('/login')
-//   })
-// })
 
 router.get('/logout', function(req, res) {
-  // clear cookies
-  // res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
-  //   httpOnly: true,
-  //   maxAge: 0
-  // }))
   req.logout();
   res.redirect('/');
 })
@@ -271,9 +222,6 @@ router.post('/post/post_comment/:id', function(req, res) {
 /**************************** HBX (below) ***********************************/
 
 router.get('/brands/:brand', function(req, res) {
-
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
   let conditional_promise;
 
@@ -403,12 +351,6 @@ router.get('/brands/:brand', function(req, res) {
     })
 })
 
-// router.get('/brands/:brand?sort=desc', function(req, res) {
-// })
-//
-// router.get('/brands/:brand?sort=asc', function(req, res) {
-// })
-
 
 router.get('/brands/:brand/:product', function(req, res) {
   let brand = req.params.brand;
@@ -416,9 +358,6 @@ router.get('/brands/:brand/:product', function(req, res) {
   let conditional_promise;
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
-  // console.log('cart$ ---> ',cart);
 
   Promise.all([
     hbx_queries.getProductContent(brand,product),
@@ -543,7 +482,6 @@ router.get('/brands/:brand/:product', function(req, res) {
           product_obj = {}
 
           our_product_name = related_products_arr[q].images;
-          // console.log('our_product_name => ',our_product_name);
           our_product_name = our_product_name.split(',');
           our_product_name = our_product_name[0];
           our_product_name = our_product_name.split('/');
@@ -566,7 +504,7 @@ router.get('/brands/:brand/:product', function(req, res) {
 
         if(related_products_arr[i] !== null
           && related_products_arr[i] !== undefined
-          && related_products_arr[i].images.includes(brand_name_string) /*&& !(related_products_arr[i].images.includes(product))*/ ){
+          && related_products_arr[i].images.includes(brand_name_string)){
 
           product_obj = {}
 
@@ -648,37 +586,17 @@ router.post('/hbx_login', passport.authenticate('local', {
  })
 );
 
-// router.post('/hbx_login', passport.authenticate('local'),
-// (req, res) => {
-//
-//   let user_id = req.user.id;
-//   hbx_queries.getCartById(user_id)
-//   .then(cart => {
-//     res.setHeader('Set-Cookie', cookieLib.serialize('userCart', JSON.stringify(cart), {
-//       httpOnly: true,
-//       maxAge: Infinity
-//     }))
-//
-//     res.redirect('/store')
-//   })
-//   .catch( (err) => {
-//     console.log('error: ',err);
-//     res.redirect('/hbx_login')
-//   })
-// })
-
 router.get('/hbx_account', function(req, res) {
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
+
   let conditional_promise;
 
-  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
-    .then( cart => {
+    .then( user_data => {
       res.render('hbx_account', {
         user: req.user,
-        cart: cart
+        user_data: user_data
       });
     })
     .catch( err => {
@@ -688,32 +606,68 @@ router.get('/hbx_account', function(req, res) {
 })
 
 router.get('/hbx_account/password', function(req, res) {
-  if(req.user){
-    // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-    // cart = JSON.parse(cart);
-    let conditional_promise;
-    req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
-    conditional_promise
-      .then( cart => {
-        res.render('hbx_change_password', {
-          user: req.user,
-          cart: cart
-        });
-      })
-      .catch( err => {
-        console.log(err);
-        res.render('hbx_error', {user: req.user});
-      })
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
+  conditional_promise
+    .then( user_data => {
+      res.render('hbx_change_password', {
+        user: req.user,
+        user_data: user_data
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
+
+})
+
+router.get('/hbx_account/address_info', function(req, res) {
+
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( user_data => {
+      res.render('hbx_edit_address', {
+        user: req.user,
+        user_data: user_data
+      });
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
+})
+
+router.get('/hbx_account/orders', function(req, res){
+  if(!req.user){
+    res.redirect('error');
   }
+
+  hbx_queries.getPreviousOrdersByID(req.user.id)
+  .then( (orders) => {
+    console.log('orders: ',orders);
+    console.log('orders.length: ',orders.length);
+    res.render('hbx_orders', {
+      user: req.user,
+      orders: orders
+    })
+  })
+  .catch(err => console.log(err))
+})
+
+router.post('/edit_address', function(req, res){
+  console.log('edit address!');
+
 })
 
 router.get('/hbx_account/close-account', function(req, res) {
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
   let conditional_promise;
-
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
@@ -749,9 +703,6 @@ router.post("/hbx_register", function(req, res) {
 
 router.get("/hbx_shopping_bag", function(req, res) {
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
-
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
@@ -885,67 +836,6 @@ router.get('/checkout/addressing', function(req, res) {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-router.post('/submit-address', function(req, res){
-  // here we'll need to submit the address page contents to the db!
-  if(req.body.order_email[0] !== req.body.order_email[1]){
-    console.log('emails do not match');
-    return;
-  }
-
-  console.log('\n req.body ===> ',req.body,'\n');
-
-  let first_name = req.body.first_name;
-  let last_name = req.body.last_name;
-  let phone = req.body.phone;
-  let order_email = req.body.order_email[0];
-  let street = req.body.street;
-  let city = req.body.city;
-  let postcode = req.body.postcode
-  let state = req.body.state;
-  let country = req.body.country;
-  let company_name = req.body.company_name;
-  let order_notes = req.body.order_notes;
-
-  hbx_queries.submitOrderAddressDetails(
-    first_name,
-    last_name,
-    phone,
-    order_email,
-    street,
-    city,
-    postcode,
-    state,
-    country,
-    company_name,
-    order_notes
-  )
-  .then( cart => {
-    res.redirect('/checkout/delivery_and_payment');
-  })
-  .catch( err => {
-    console.log(err);
-  })
-
-})
-
-
-
-
-
-
-
 router.get('/checkout/delivery_and_payment', function(req, res) {
   let conditional_promise;
   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
@@ -1000,8 +890,10 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
     res.status(401).json({status:'error',message:'cart has no items'})
   }
 
-  try{
-    hbx_queries.addToCart(
+  console.log('\n req.body ----> ',req.body,'\n');
+
+
+  hbx_queries.addToCart(
       req.body.product_quantity,
       req.body.product_cost,
       req.body.product_color,
@@ -1011,16 +903,15 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
       req.body.product_category,
       req.body.product_image,
       req.body.product_name,
-      req.body.product_individual_price
+      req.body.product_individual_price,
+      req.body.product_brand
     )
     .then((cart) => {
-      return cart;
-      // res.status(200).redirect('/hbx_register/success')
+      res.json(cart)
     })
-  }catch(error){
-    res.status(401).json({status:'error',message:'item not added to database'})
-    return;
-  }
+    .catch((error) => {
+      res.status(401).json({status:'error',message:'item not added to database'})
+    })
 
 })
 
@@ -1050,6 +941,89 @@ router.post('/update-bag', function(req, res) {
   .catch(err => next(err))
 })
 
+router.post('/submit-address', function(req, res){
+  // here we'll need to submit the address page contents to the db!
+  if(req.body.order_email[0] !== req.body.order_email[1]){
+    console.log('emails do not match');
+    return;
+  }
+
+  let first_name = req.body.first_name;
+  let last_name = req.body.last_name;
+  let phone = req.body.phone;
+  let order_email = req.body.order_email[0];
+  let street = req.body.street;
+  let city = req.body.city;
+  let postcode = req.body.postcode
+  let state = req.body.state;
+  let country = req.body.country;
+  let company_name = req.body.company_name;
+  let order_notes = req.body.order_notes;
+  let users_id = req.user.id;
+
+  hbx_queries.submitOrderAddressDetails(
+    first_name,
+    last_name,
+    phone,
+    order_email,
+    street,
+    city,
+    postcode,
+    state,
+    country,
+    company_name,
+    order_notes,
+    users_id
+  )
+  .then( () => {
+    res.redirect('/checkout/delivery_and_payment');
+  })
+  .catch( err => {
+    console.log(err);
+    res.render('hbx_addressing',{error_message:err})
+  })
+
+})
+
+router.post('/update-profile-in-db', function(req, res){
+  console.log('req.body: ',req.body);
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.updateUserProfile(req.body.first_name, req.body.last_name, req.body.phone, req.body.email) : conditional_promise = Promise.resolve(undefined)
+
+  Promise.all([
+    conditional_promise,
+    hbx_queries.getUserByID(req.user.id)
+  ])
+  .then( results => {
+    let user_data = results[1];
+
+    res.redirect('hbx_account')
+  })
+  .catch( err => {
+    console.log(err);
+    res.render('hbx_error',{error_message:err})
+  })
+})
+
+router.post('/update-address-in-db/:id', function(req, res){
+  let user_id = req.params.id;
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.updateUserAddress(req.body.street, req.body.city, req.body.state, req.body.postcode, req.body.company, user_id) : conditional_promise = Promise.resolve(undefined)
+
+  Promise.all([
+    conditional_promise,
+    hbx_queries.getUserByID(req.user.id)
+  ])
+  .then( results => {
+    let user_data = results[1][0];
+
+    res.redirect('/hbx_account/address_info')
+  })
+  .catch( err => {
+    console.log(err);
+    res.render('hbx_error',{error_message:err})
+  })
+})
 
 
 

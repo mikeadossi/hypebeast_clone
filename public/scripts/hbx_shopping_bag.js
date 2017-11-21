@@ -18,10 +18,10 @@ const addToListOfEditedItems = (element, changeInValue) => {
     }
   }
   LIST_OF_EDITED_ITEMS.push(editedItem);
-  console.log('LIST_OF_EDITED_ITEMS => ',LIST_OF_EDITED_ITEMS);
 }
 
 const updateBag = () => {
+  console.log('LIST_OF_EDITED_ITEMS -> ',LIST_OF_EDITED_ITEMS);
   for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
     fetch('/update-bag', {
       method:'POST',
@@ -37,7 +37,8 @@ const updateBag = () => {
       credentials: "same-origin"
     })
     .then(() => {
-      update_cart_and_count_by_id(GLOBAL_USER.id);
+      let user_id = $('.users_persistent_id')[0].innerHTML;
+      update_cart_and_count_by_id(user_id);
     })
     .catch(err => console.log(err))
   }

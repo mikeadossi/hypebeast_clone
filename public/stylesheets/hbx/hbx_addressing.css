@@ -222,7 +222,7 @@
   padding: 15px;
   color: white;
   margin-top: 20px;
-  width: 90.3%;
+  width: 100%;
   font-size: 13px;
   display:block;
   text-align:center;
@@ -236,4 +236,14 @@
 .checkout_continue_button:hover{
   cursor:pointer;
   opacity:0.8;
+}
+
+.country_input, .state_input, .checkout_form_wide{
+  width:100%;
+}
+
+.error_message{
+  background-color:red;
+  text-align:center;
+  color:white;
 }
