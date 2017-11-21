@@ -1,9 +1,6 @@
-let pgp = require('pg-promise')();
-let connectionString = `postgres://${process.env.USER}@localhost:5432/comment_system_db`;
-let db = pgp(connectionString);
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
+const {db} = require('./connection.js');
+const {bcrypt} = require('./connection.js');
+const {saltRounds} = require('./connection.js');
 
 let queries = {
 
@@ -74,7 +71,6 @@ let queries = {
   },
 
   findByEmailLocal: function(email){
-    console.log('queries(line 99) email -> ',email);
     return db.oneOrNone("SELECT * FROM local_users WHERE email = $1", [email]);
   },
 

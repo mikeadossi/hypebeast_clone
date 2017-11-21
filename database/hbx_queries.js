@@ -1,10 +1,12 @@
-let pgp = require('pg-promise')();
-let connectionString = `postgres://${process.env.USER}@localhost:5432/comment_system_db`;
-let db = pgp(connectionString);
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const {db} = require('./connection.js');
+const {bcrypt} = require('./connection.js');
+const {saltRounds} = require('./connection.js');
 
 let queries = {
+
+  getUserByID: function(user_id){
+    return db.any("SELECT * FROM users WHERE id = $1", user_id);
+  },
 
   getBrandDetails: function(brand){
     return db.any("SELECT * FROM brands WHERE brand_name_link = $1", brand);
@@ -237,7 +239,8 @@ let queries = {
     item_category,
     item_image,
     item_name,
-    item_individual_price){
+    item_individual_price,
+    item_brand){
 
     return db.any(
       `INSERT INTO cart (
@@ -250,9 +253,10 @@ let queries = {
         item_category,
         item_image,
         item_name,
-        item_individual_price)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
-    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name, item_individual_price])
+        item_individual_price,
+        item_brand)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand])
   },
 
   clearAllCartDataById: function(id){
@@ -294,11 +298,15 @@ let queries = {
   },
 
   getCategory: function(product_name){
-    return db.any("SELECT category_type FROM categories JOIN products ON categories.id = products.category_id WHERE product_name_route = $1", [product_name])
+    return db.any(`
+      SELECT category_type FROM categories
+      JOIN products ON categories.id = products.category_id
+      WHERE product_name_route = $1`, [product_name])
   },
 
   updateCartById: function(item_id, item_count, item_tot_cost){
-    return db.any("UPDATE cart SET item_quantity = $2, item_cost = $3 WHERE id = $1",[item_id,item_count,item_tot_cost])
+    return db.any(`UPDATE cart SET item_quantity = $2,
+      item_cost = $3 WHERE id = $1`,[item_id,item_count,item_tot_cost])
   },
 
   submitOrderAddressDetails: function(
@@ -312,7 +320,8 @@ let queries = {
     state,
     country,
     company_name,
-    order_notes
+    order_notes,
+    users_id
   ){
     return db.none(`INSERT INTO orders (
       first_name,
@@ -325,8 +334,9 @@ let queries = {
       state,
       country,
       company_name,
-      order_notes
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,[
+      order_notes,
+      users_id
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,[
       first_name,
       last_name,
       phone,
@@ -337,9 +347,50 @@ let queries = {
       state,
       country,
       company_name,
-      order_notes
+      order_notes,
+      users_id
     ])
+  },
+
+  editUserAddress: function(street, city, state, postcode, company, user_id){
+    return db.one(`
+      UPDATE users SET street = $1,
+      city = $2,
+      state = $3,
+      postcode = $4,
+      company = $5
+      VALUES ($1, $2, $3, $4, $5) WHERE id = $6`, [
+        street,
+        city,
+        state,
+        postcode,
+        company,
+        user_id
+      ])
+  },
+
+  getPreviousOrdersByID: function(users_id){
+    return db.any("SELECT * FROM orders WHERE users_id = $1", users_id)
+  },
+
+  updateUserProfile: function(first_name, last_name, phone, email){
+    return db.oneOrNone(`UPDATE users SET first_name = $1,
+      last_name = $2,
+      phone_number = $3
+      WHERE email = $4`,
+    [first_name, last_name, phone, email])
+  },
+
+  updateUserAddress: function(street, city, state, postcode, company, id){
+    return db.oneOrNone(`UPDATE users SET street = $1,
+      city = $2,
+      state = $3,
+      postcode = $4,
+      company = $5
+      WHERE id = $6`,
+    [street, city, state, postcode, company, id])
   }
+
 
 
 }
