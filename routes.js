@@ -140,7 +140,7 @@ router.post('/register', function(req, res) {
   const password = req.body.password;
 
   try{
-    queries.createLocalUser(email, password)
+    queries.createUser(email, password)
     .then(() => {
       res.status(200).redirect('/register/success')
     })

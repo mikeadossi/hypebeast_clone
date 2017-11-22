@@ -6,7 +6,7 @@ let queries = {
 
   comparePassword : function(email, password){
     // if(!dbPassword) reject('No user of that name exists!')
-    return this.findByEmailLocal(email)
+    return this.findByEmail(email)
       .then(user => {
         return bcrypt.compare(password, user.password)
       })
@@ -35,10 +35,9 @@ let queries = {
   },
 
   createLocalUser: function(email, password){
-    this.createUser(email);
     return bcrypt.hash(password, saltRounds).then(hash => {
       return db.none(
-        "INSERT INTO local_users (email, password) VALUES ($1, $2)",
+        "INSERT INTO users (email, password) VALUES ($1, $2)",
         [email, hash])
     })
   },
@@ -70,9 +69,9 @@ let queries = {
     return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
   },
 
-  findByEmailLocal: function(email){
-    return db.oneOrNone("SELECT * FROM local_users WHERE email = $1", [email]);
-  },
+  // findByEmailLocal: function(email){
+  //   return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
+  // },
 
   findByIdGoogle: function(id){
     return db.any("SELECT * FROM google_users WHERE id = $1", [id]);

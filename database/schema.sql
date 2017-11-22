@@ -1,7 +1,6 @@
 \c comment_system_db
 
 DROP TABLE IF EXISTS posts CASCADE;
-DROP TABLE IF EXISTS local_users CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE posts (
@@ -17,12 +16,6 @@ CREATE TABLE posts (
   post_subtitle TEXT,
   post_content TEXT,
   image_credit VARCHAR
-);
-
-CREATE TABLE local_users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR,
-  password VARCHAR
 );
 
 CREATE TABLE comments (

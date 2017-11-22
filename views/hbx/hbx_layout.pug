@@ -41,6 +41,7 @@ html
           - if(user){
               li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID:
               span.users_persistent_id !{JSON.stringify(user.id)}
+              span.users_persistent_id !{ Boolean(user.password) }
           - }
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")

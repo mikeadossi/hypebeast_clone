@@ -63,6 +63,7 @@ CREATE TABLE products (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR,
+  password VARCHAR,
   first_name VARCHAR,
   last_name VARCHAR,
   phone_number VARCHAR(22),
