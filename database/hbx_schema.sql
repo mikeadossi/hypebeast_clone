@@ -74,6 +74,27 @@ CREATE TABLE users (
   company VARCHAR
 );
 
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  purchased_at TIMESTAMP DEFAULT now(),
+  purchased_product_details_array VARCHAR,
+  total_purchase_cost INTEGER,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  phone VARCHAR,
+  order_email VARCHAR,
+  street VARCHAR,
+  city VARCHAR,
+  postcode INTEGER,
+  state VARCHAR,
+  country VARCHAR,
+  company_name VARCHAR,
+  order_notes VARCHAR,
+  payment_type VARCHAR,
+  users_id INTEGER REFERENCES users(id),
+  shipping_cost INTEGER
+);
+
 CREATE TABLE cart (
   id SERIAL PRIMARY KEY,
   item_image VARCHAR,
@@ -87,28 +108,6 @@ CREATE TABLE cart (
   users_id INTEGER REFERENCES users(id),
   item_name VARCHAR,
   item_brand VARCHAR
-);
-
-CREATE TABLE orders (
-  id SERIAL PRIMARY KEY,
-  purchased_at TIMESTAMP DEFAULT now(),
-  shipped_at TIMESTAMP,
-  address_obj VARCHAR,
-  purchased_product_details_obj VARCHAR,
-  payment_info_obj VARCHAR,
-  total_purchase_cost INTEGER,
-  first_name VARCHAR,
-  last_name VARCHAR,
-  phone VARCHAR,
-  order_email VARCHAR,
-  street VARCHAR,
-  city VARCHAR,
-  postcode INTEGER,
-  state VARCHAR,
-  country VARCHAR,
-  company_name VARCHAR,
-  order_notes VARCHAR,
-  users_id INTEGER REFERENCES users(id)
 );
 
 

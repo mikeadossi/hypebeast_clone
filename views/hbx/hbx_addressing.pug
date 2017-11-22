@@ -25,29 +25,49 @@ block content
                 .contact_first_name.contact_label_container
                   label FIRST NAME
                 .contact_input_container
-                  input.first_name_input(name="first_name" type="text")
+                  - if(user_data){
+                      input.first_name_input(name="first_name" type="text" value=user_data[0].first_name)
+                  - } else {
+                      input.first_name_input(name="first_name" type="text")
+                  - }
               .checkout_form_group
-                .contact_email.contact_label_container
-                  label EMAIL
+                .contact_last_name.contact_label_container
+                  label LAST NAME
                 .contact_input_container
-                  input.email_input(name="order_email" type="email")
+                  - if(user_data){
+                      input.last_name_input(name="last_name" type="text" value=user_data[0].last_name)
+                  - } else {
+                      input.last_name_input(name="last_name" type="text")
+                  - }
             .row
               .checkout_form_group
                 .contact_phone.contact_label_container
                   label PHONE
                 .contact_input_container
-                  input.phone_input(name="phone" type="text")
+                  - if(user_data){
+                      input.phone_input(name="phone" type="text" value=user_data[0].phone_number)
+                  - } else {
+                      input.phone_input(name="phone" type="text")
+                  - }
               .checkout_form_group
-                .contact_last_name.contact_label_container
-                  label LAST NAME
-                .contact_input_container
-                  input.last_name_input(name="last_name" type="text")
+                  .contact_email.contact_label_container
+                    label EMAIL
+                  .contact_input_container
+                    - if(user_data){
+                        input.email_input(name="order_email" type="email" value=user_data[0].email)
+                    - } else {
+                        input.email_input(name="order_email" type="email")
+                    - }
             .row
               .checkout_form_group
                 .contact_email.contact_label_container
                   label CONFIRM EMAIL
                 .contact_input_container
-                  input.email_input(name="order_email" type="email")
+                  - if(user_data){
+                      input.email_input(name="confirm_order_email" type="email" value=user_data[0].email)
+                  - } else {
+                      input.email_input(name="confirm_order_email" type="email")
+                  - }
             
             .checkout_header Shipping Address
             - if(error_message){
@@ -58,18 +78,30 @@ block content
                 .contact_first_name.contact_label_container
                   label ADDRESS LINE
                 .contact_input_container
-                  input.first_name_input.wide_checkout_input(name="street" type="text")
+                  - if(user_data){
+                      input.first_name_input.wide_checkout_input(name="street" type="text" value=user_data[0].street)
+                  - } else {
+                      input.first_name_input.wide_checkout_input(name="street" type="text" value='nope')
+                  - }
             .row
               .checkout_form_group
                 .contact_town_city.contact_label_container
                   label TOWN/CITY
                 .contact_input_container
-                  input.email_input(name="city" type="text")
+                  - if(user_data){
+                      input.email_input(name="city" type="text" value=user_data[0].city)
+                  - } else {
+                      input.email_input(name="city" type="text")
+                  - }
               .checkout_form_group.checkout_form_wide
                 .contact_postcode.contact_label_container
                   label POSTCODE/ZIP
                 .contact_input_container
-                  input.email_input(name="postcode" type="text")
+                  - if(user_data){
+                      input.email_input(name="postcode" type="text" value=user_data[0].postcode)
+                  - } else {
+                      input.email_input(name="postcode" type="text")
+                  - }
             .row
               .checkout_form_group.checkout_form_wide
                 .contact_first_name.contact_label_container
@@ -407,7 +439,11 @@ block content
                 .contact_email.contact_label_container
                   label COMPANY NAME (OPTIONAL)
                 .contact_input_container
-                  input.email_input.wide_checkout_input(name="company_name" type="text")
+                  - if(user_data){
+                      input.email_input.wide_checkout_input(name="company_name" type="text" value=user_data[0].company)
+                  - } else {
+                      input.email_input.wide_checkout_input(name="company_name" type="text")
+                  - }
                 
             .checkout_header Billing Address
             .contact_billing 

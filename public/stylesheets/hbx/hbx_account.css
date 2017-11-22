@@ -104,3 +104,7 @@ table, th, td {
   color: white;
   padding: 12px 30px 12px 30px;
 }
+
+.order_table{
+  max-width: 920px;
+}

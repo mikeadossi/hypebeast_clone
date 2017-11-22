@@ -57,8 +57,6 @@ const update_cart_and_count_by_id = (user_id) => {
   })
   .then((cartJSON) => {
 
-    console.log('cartJSON --> ',cartJSON);
-
     if(cartJSON.length === 1){
 
       $('.shopping_bag')[0].innerHTML = cartJSON[0].item_quantity;

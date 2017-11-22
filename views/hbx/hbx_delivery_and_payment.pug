@@ -18,32 +18,31 @@ block content
         span.checkout_title ORDER COMPLETE
 
   
-  .delivery_sub_content
+  form.delivery_sub_content(method="post" action="/checkout/complete")
     .delivery_left_container
       .hbx_delivery_details_container
         .checkout_header Shipping Method
           .shipping_time_container
-            //- input.shipping_radio_input(type="radio")
-            .fa.fa-check-circle
+            input.shipping_radio_input(type="radio" name="shipping_cost" checked="checked" value="0")
             .shipping_time_text
-              div.title EXPRESS (USD 9.00)
+              div.title EXPRESS (Free Shipping)
               span ESTIMATED DELIVERY DATE:
               span.estimated_delivery_date NOV, 08
       .hbx_delivery_details_container
         .checkout_header Payment Information
           .payment_choice_container
             .payment_select
-              //- input.shipping_radio_input(type="radio")
-              .fa.fa-check-circle
+              input.shipping_radio_input(type="radio" name="payment_type" value="VISA")
               .shipping_time_text VISA
             .payment_select
-              //- input.shipping_radio_input(type="radio")
-              .fa.fa-check-circle
+              input.shipping_radio_input(type="radio" name="payment_type" value="PAYPAL")
               .shipping_time_text PAYPAL
           .payment_select
-            //- input.shipping_radio_input(type="radio")
-            .fa.fa-check-circle
+            input.shipping_radio_input(type="radio" name="payment_type" value="BITCOIN")
             .shipping_time_text BITCOIN
+          .hidden_user
+            input.record_obj(name="order_obj_value" value=order_obj)
+            input.cart(name="users_cart" value=cart)
           
   
     .checkout_order_summary_container
@@ -91,5 +90,5 @@ block content
           span USD 
           span.checkout_item_final_cost.checkout_subtotal 0
           span .00
-      a.checkout_continue_button(href="/checkout/complete") PLACE ORDER
+      input.checkout_continue_button(type="submit" value="PLACE ORDER")
     

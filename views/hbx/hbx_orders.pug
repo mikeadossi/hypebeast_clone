@@ -38,18 +38,20 @@ block content
         .settings_edit_password
           .hbx_edit_profile_header ORDER HISTORY
           - if(orders && orders.length > 0){
-            table(style='width:100%')
+            table.order_table(style='width:100%')
              - for(let i = 0; i < orders.length; i++){
                  tr
                    th ORDER ID
                    th PURCHASE DATE
                    th ITEMS
+                   th PAYMENT
                    th PURCHASE TOTAL
                  tr
                    td !{orders[i].id}
                    td !{orders[i].purchased_at}
                    td 
                      a.view_order_items(href="#") view
+                   td !{orders[i].payment_type}
                    td !{orders[i].total_purchase_cost}
              - }
           - } else if(orders.length === 0) {

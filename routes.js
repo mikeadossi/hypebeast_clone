@@ -3,6 +3,8 @@ const router = express.Router();
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('./passport');
+const {bcrypt} = require('./database/connection.js');
+const {saltRounds} = require('./database/connection.js');
 
 /************************** Hypebeast (below) *******************************/
 
@@ -815,16 +817,25 @@ router.get('/hbx_logout', function(req, res) {
 
 router.get('/checkout/addressing', function(req, res) {
   let conditional_promise;
+  let conditional_promise2;
   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
   // cart = JSON.parse(cart);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise2 = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
-  conditional_promise
-    .then( cart => {
+  Promise.all([
+    conditional_promise,
+    conditional_promise2
+  ])
+    .then( results => {
+      let cart = results[0];
+      let user_data = results[1];
+
       res.render('hbx_addressing', {
         user: req.user,
-        cart: cart
+        cart: cart,
+        user_data: user_data
       });
     })
     .catch( err => {
@@ -838,8 +849,6 @@ router.get('/checkout/addressing', function(req, res) {
 
 router.get('/checkout/delivery_and_payment', function(req, res) {
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
@@ -857,18 +866,58 @@ router.get('/checkout/delivery_and_payment', function(req, res) {
 
 })
 
-router.get('/checkout/complete', function(req, res) {
+router.post('/checkout/complete', function(req, res) {
+
+  if(!req.user){
+    res.redirect('error');
+  }
+
+  let order_obj = JSON.parse(req.body.order_obj_value);
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
-  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  let cart = JSON.parse(req.body.users_cart);
+  let purchased_product_details_array = [];
+  let tot_cost = 0;
 
-  conditional_promise
-    .then( cart => {
+  for(let i = 0; i < cart.length; i++){
+    let purchased_products_details = new Object();
+    purchased_products_details.item_image = cart[i].item_image;
+    purchased_products_details.item_quantity = cart[i].item_quantity;
+    purchased_products_details.item_individual_price = cart[i].item_individual_price;
+    purchased_products_details.item_cost = cart[i].item_cost;
+    purchased_products_details.item_color = cart[i].item_color;
+    purchased_products_details.item_size = cart[i].item_size;
+    purchased_products_details.item_category = cart[i].item_category;
+    purchased_products_details.products_id = cart[i].products_id;
+    purchased_products_details.item_brand = cart[i].item_brand;
+    purchased_product_details_array.push(purchased_products_details);
+    tot_cost += cart[i].item_cost;
+  }
+
+  Promise.all([
+    hbx_queries.makePayment(
+      req.body.payment_type,
+      order_obj.users_id,
+      req.body.shipping_cost,
+      order_obj.first_name,
+      order_obj.last_name,
+      order_obj.phone,
+      order_obj.order_email,
+      order_obj.street,
+      order_obj.city,
+      order_obj.postcode,
+      order_obj.country,
+      order_obj.state,
+      order_obj.company_name,
+      order_obj.order_notes,
+      purchased_product_details_array,
+      tot_cost
+    ),
+    hbx_queries.clearCartByUserID(order_obj.users_id)
+  ])
+    .then( results => {
       res.render('hbx_order_complete', {
-        user: req.user,
-        cart: cart
+        user: req.user
       });
     })
     .catch( err => {
@@ -942,51 +991,37 @@ router.post('/update-bag', function(req, res) {
 })
 
 router.post('/submit-address', function(req, res){
-  // here we'll need to submit the address page contents to the db!
-  if(req.body.order_email[0] !== req.body.order_email[1]){
-    console.log('emails do not match');
-    return;
+  if(req.body.order_email !== req.body.confirm_order_email){
+    res.render('hbx_addressing',{error_message:'emails do not match'})
   }
 
-  let first_name = req.body.first_name;
-  let last_name = req.body.last_name;
-  let phone = req.body.phone;
-  let order_email = req.body.order_email[0];
-  let street = req.body.street;
-  let city = req.body.city;
-  let postcode = req.body.postcode
-  let state = req.body.state;
-  let country = req.body.country;
-  let company_name = req.body.company_name;
-  let order_notes = req.body.order_notes;
-  let users_id = req.user.id;
+  let order_obj = new Object();
 
-  hbx_queries.submitOrderAddressDetails(
-    first_name,
-    last_name,
-    phone,
-    order_email,
-    street,
-    city,
-    postcode,
-    state,
-    country,
-    company_name,
-    order_notes,
-    users_id
-  )
-  .then( () => {
-    res.redirect('/checkout/delivery_and_payment');
-  })
-  .catch( err => {
-    console.log(err);
-    res.render('hbx_addressing',{error_message:err})
-  })
+  order_obj.first_name = req.body.first_name;
+  order_obj.last_name = req.body.last_name;
+  order_obj.phone = req.body.phone;
+  order_obj.order_email = req.body.order_email[0];
+  order_obj.street = req.body.street;
+  order_obj.city = req.body.city;
+  order_obj.postcode = req.body.postcode
+  order_obj.state = req.body.state;
+  order_obj.country = req.body.country;
+  order_obj.company_name = req.body.company_name;
+  order_obj.order_notes = req.body.order_notes;
+  order_obj.users_id = req.user.id;
+
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  conditional_promise
+    .then( cart => {
+      res.render('hbx_delivery_and_payment',{user:req.user, order_obj:order_obj, cart:cart})
+    })
+    .catch( err => next(err))
 
 })
 
 router.post('/update-profile-in-db', function(req, res){
-  console.log('req.body: ',req.body);
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.updateUserProfile(req.body.first_name, req.body.last_name, req.body.phone, req.body.email) : conditional_promise = Promise.resolve(undefined)
 
@@ -997,7 +1032,7 @@ router.post('/update-profile-in-db', function(req, res){
   .then( results => {
     let user_data = results[1];
 
-    res.redirect('hbx_account')
+    res.redirect('/hbx_account')
   })
   .catch( err => {
     console.log(err);
@@ -1023,6 +1058,62 @@ router.post('/update-address-in-db/:id', function(req, res){
     console.log(err);
     res.render('hbx_error',{error_message:err})
   })
+})
+
+router.post('/update-password-in-db', function(req, res){
+  console.log('1. inside updatep pass!');
+  res.redirect('/hbx_error')
+  // if(!req.user.password){
+  //   res.redirect('/error')
+  // }
+  //
+  // let verify_password = req.body.verify_password;
+  // let new_password = req.body.new_password;
+  // // let hash;
+  //
+  // if(verify_password !== new_password){
+  //   res.render('hbx_change_password',{message:'new passwords do not match'})
+  // }
+  //
+  // let submitted_current_password = req.body.current_password;
+  // let user_email = req.params.email;
+  // let user_id = req.params.id;
+  //
+  // console.log('\n user_email: ',user_email,'\n submitted_current_password: ',submitted_current_password,'\n user_id: ',user_id);
+  //
+  // // check if our user password checks out
+  // queries.comparePassword(user_email, submitted_current_password)
+  //   .then( user => {
+  //     if(!user){
+  //       console.log('password not found');
+  //       res.render('hbx_change_password',{message:'incorrect current password'})
+  //     }
+  //     console.log('2. inside comparePassword');
+  //     return user;
+  //   })
+  //   .then( user => {
+  //     console.log('3. user ====> ',user);
+  //     bcrypt.hash(password, saltRounds).then(hash => {
+  //       hbx_queries.updateUserPassword(hash, user.id)
+  //       .then(() => console.log('4. updated!!!'))
+  //       .catch((err) => console.log(err))
+  //     })
+  //     .then(() => console.log('success'))
+  //     .catch(err => console.log(err))
+  //   })
+  //   .catch( err => {
+  //     console.log(err);
+  //     res.render('hbx_error',{error_message:err})
+  //   })
+
+
+
+
+  // if they match then turn password to a hash
+  // run updatePassword
+
+  // req.user ? conditional_promise = hbx_queries.updateUserPassword(req.body.new_password, user_id) : conditional_promise = Promise.resolve(undefined)
+
 })
 
 

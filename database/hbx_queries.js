@@ -309,49 +309,6 @@ let queries = {
       item_cost = $3 WHERE id = $1`,[item_id,item_count,item_tot_cost])
   },
 
-  submitOrderAddressDetails: function(
-    first_name,
-    last_name,
-    phone,
-    order_email,
-    street,
-    city,
-    postcode,
-    state,
-    country,
-    company_name,
-    order_notes,
-    users_id
-  ){
-    return db.none(`INSERT INTO orders (
-      first_name,
-      last_name,
-      phone,
-      order_email,
-      street,
-      city,
-      postcode,
-      state,
-      country,
-      company_name,
-      order_notes,
-      users_id
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,[
-      first_name,
-      last_name,
-      phone,
-      order_email,
-      street,
-      city,
-      postcode,
-      state,
-      country,
-      company_name,
-      order_notes,
-      users_id
-    ])
-  },
-
   editUserAddress: function(street, city, state, postcode, company, user_id){
     return db.one(`
       UPDATE users SET street = $1,
@@ -389,8 +346,71 @@ let queries = {
       company = $5
       WHERE id = $6`,
     [street, city, state, postcode, company, id])
-  }
+  },
 
+  updateUserPassword: function(hash, user_id){
+    return db.any("UPDATE users SET password = $1 WHERE id = $2",
+    [hash, user_id])
+  },
+
+  makePayment: function(
+    payment_type,
+    users_id,
+    shipping_cost,
+    first_name,
+    last_name,
+    phone,
+    order_email,
+    street,
+    city,
+    postcode,
+    country,
+    state,
+    company_name,
+    order_notes,
+    purchased_product_details_array,
+    tot_cost
+  ){
+    return db.any(`INSERT INTO orders (
+      payment_type,
+      users_id,
+      shipping_cost,
+      first_name,
+      last_name,
+      phone,
+      order_email,
+      street,
+      city,
+      postcode,
+      country,
+      state,
+      company_name,
+      order_notes,
+      purchased_product_details_array,
+      total_purchase_cost
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`, [
+      payment_type,
+      users_id,
+      shipping_cost,
+      first_name,
+      last_name,
+      phone,
+      order_email,
+      street,
+      city,
+      postcode,
+      country,
+      state,
+      company_name,
+      order_notes,
+      purchased_product_details_array,
+      tot_cost
+    ])
+  },
+
+  clearCartByUserID: function(users_id){
+    return db.any("DELETE FROM cart WHERE users_id = $1", users_id)
+  }
 
 
 }
