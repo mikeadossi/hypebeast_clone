@@ -69,7 +69,9 @@ block content
         - }
           
         .hbx_update_container
-          .hbx_update_btn(onclick="updateBag()") UPDATE BAG
+          - if(cart.length){
+              .hbx_update_btn(onclick="updateBag()") UPDATE BAG
+          - }
         
       .hbx_cart_right_column
         .hbx_right_main_container
@@ -98,7 +100,11 @@ block content
                 span.checkout_subtotal 0
                 span .00
             .proceed_button_container
-              a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
+              - if(!cart.length){
+                  .proceed_button_waiting PROCEED TO CHECKOUT
+              - } else {
+                  a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
+              - }
             .promotional_container
               .duty_total Have a promotional cose?
               .duty_cost 

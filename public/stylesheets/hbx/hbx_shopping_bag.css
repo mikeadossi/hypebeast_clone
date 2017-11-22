@@ -252,6 +252,17 @@
   display:block;
 }
 
+.proceed_button_waiting{
+  color: white;
+  background-color: gainsboro;
+  padding: 15px 25px 15px 25px;
+  margin: auto;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+  display:block;
+}
+
 .hbx_right_container{
   padding: 15px 15px 0 15px;
   border:1px solid #E0E0E0;

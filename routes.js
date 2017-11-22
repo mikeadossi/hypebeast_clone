@@ -816,10 +816,9 @@ router.get('/hbx_logout', function(req, res) {
 })
 
 router.get('/checkout/addressing', function(req, res) {
+
   let conditional_promise;
   let conditional_promise2;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
   req.user ? conditional_promise2 = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
@@ -831,6 +830,12 @@ router.get('/checkout/addressing', function(req, res) {
     .then( results => {
       let cart = results[0];
       let user_data = results[1];
+
+      if(!cart.length){
+        console.log('not authorized!');
+        res.render('hbx_error',{user:req.user})
+      }
+
 
       res.render('hbx_addressing', {
         user: req.user,
@@ -939,8 +944,6 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
     res.status(401).json({status:'error',message:'cart has no items'})
   }
 
-  console.log('\n req.body ----> ',req.body,'\n');
-
 
   hbx_queries.addToCart(
       req.body.product_quantity,
@@ -990,6 +993,10 @@ router.post('/update-bag', function(req, res) {
   .catch(err => next(err))
 })
 
+// router.get('/submit-address', function(req, res){
+//   res.redirect('/hbx_error',{user:req.user})
+// })
+
 router.post('/submit-address', function(req, res){
   if(req.body.order_email !== req.body.confirm_order_email){
     res.render('hbx_addressing',{error_message:'emails do not match'})
@@ -1015,6 +1022,10 @@ router.post('/submit-address', function(req, res){
 
   conditional_promise
     .then( cart => {
+      if(!cart.length){
+        console.log('not authorized!');
+        res.render('hbx_error',{user:req.user})
+      }
       res.render('hbx_delivery_and_payment',{user:req.user, order_obj:order_obj, cart:cart})
     })
     .catch( err => next(err))
