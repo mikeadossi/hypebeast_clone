@@ -61,60 +61,66 @@ html
         .cart.nav_elements#bag_button
           .shopping_bag_container
             .shopping_bag_handle 
-            .shopping_bag 77
+            .shopping_bag 
           span.hbx_nav_link YOUR BAG
           img.arrow_down(src="/images/hbx_images/general/arrow_down.png")
           .cart_dropdown
             .nav_button_cover
               .shopping_bag_container.shopping_bag_container_hover
                 .shopping_bag_handle.hover_handle
-                .shopping_bag.shopping_bag_deux 77
+                .shopping_bag.shopping_bag_deux 
               span.hbx_nav_link.hbx_nav_link_hover YOUR BAG
               img.arrow_down.arrow_down_hover(
                 src="/images/hbx_images/general/arrow_down.png"
               )
-            .items_in_bag
-              span.dropdown_item_count 0 Items
-              span in Bag
-            .dropdown_notice_top Please note: Item(s) is not reserved until checkout is completed.
-            .cart_dropdown_product_container
-              - if(cart){
-                - for(let i = 0; i < cart.length; i++){
-                  .cart_product
-                    .dropdown_img
-                      img(src=cart[i].item_image)
-                    .cart_product_container
-                      .cart_product_brand !{cart[i].item_brand}
-                      .cart_product_name !{cart[i].item_name}
-                      .cart_size Size: !{cart[i].item_size}
-                      .cart_notice This item is excluded from promotions.
-                      .quantity_and_price_container
-                        .quantity_and_price
-                          .quantity
-                            span.qty Qty:
-                            span.minus_item -
-                            span.item_count !{cart[i].item_quantity}
-                            span.add_item +
-                          .dropdown_price 
-                            span USD
-                            span.product_price !{cart[i].item_cost}
-                              span .00
-                  - }
-                - }
-            .dropdown_order_total_container
-              .dropdown_order_total
-                span.order_tot ORDER TOTAL
-                span USD 
-                span.cart_price 0
-            .dropdown_notice
-              span You will be charged in 
-              span.usd USD 
-              span.usd_cart_price 0
-              span .00
-            .dropdown_button_container
-              a.view_bag(href="/hbx_shopping_bag") VIEW BAG
-              a.checkout_now(href="/checkout/addressing") CHECKOUT NOW
-            .dropdown_notice.dropdown_last_notice Have a Promotional Code or Gift Card? Add it in the Bag.
+            - if(!cart.length){
+                  p.no_items_in_bag You have no items inside your shopping bag
+                  a.new_arrivals_btn(href="/store") SHOP NEW ARRIVALS
+            - } else {
+                .items_in_bag
+                  span.dropdown_item_count 0 Items
+                  span in Bag
+                .dropdown_notice_top Please note: Item(s) is not reserved until checkout is completed.
+                .cart_dropdown_product_container
+                
+                  - for(let i = 0; i < cart.length; i++){
+                    .cart_product
+                      .dropdown_img
+                        img(src=cart[i].item_image)
+                      .cart_product_container
+                        .cart_product_brand !{cart[i].item_brand}
+                        .cart_product_name !{cart[i].item_name}
+                        .cart_size Size: !{cart[i].item_size}
+                        .cart_notice This item is excluded from promotions.
+                        .quantity_and_price_container
+                          .quantity_and_price
+                            .quantity
+                              span.qty Qty:
+                              span.minus_item -
+                              span.item_count !{cart[i].item_quantity}
+                              span.add_item +
+                            .dropdown_price 
+                              span USD
+                              span.product_price !{cart[i].item_cost}
+                                span .00
+                    - }
+                  .dropdown_order_total_container
+                    .dropdown_order_total
+                      span.order_tot ORDER TOTAL
+                      span USD 
+                      span.cart_price 0
+                  .dropdown_notice
+                    span You will be charged in 
+                    span.usd USD 
+                    span.usd_cart_price 0
+                    span .00
+                  .dropdown_button_container
+                    a.view_bag(href="/hbx_shopping_bag") VIEW BAG
+                    a.checkout_now(href="/checkout/addressing") CHECKOUT NOW
+                  .dropdown_notice.dropdown_last_notice 'Have a Promotional Code or Gift Card? Add it in the Bag.'
+                              
+            - }
+
         ul.language.nav_elements
           img.hbx_flag(src="/images/hbx_images/general/usa_flag.png")
           span.hbx_nav_link USD

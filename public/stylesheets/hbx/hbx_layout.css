@@ -573,6 +573,26 @@ ul{
   border-bottom: 1px solid gainsboro;
 }
 
+.no_items_in_bag{
+  text-align:center;
+  margin-top: -30px;
+}
+
+.new_arrivals_btn:hover{
+  opacity:0.8;
+}
+
+.new_arrivals_btn{
+  background-color:#026FBA;
+  color:white;
+  text-align:center;
+  padding:5px;
+  padding: 14px;
+  font-size: 12px;
+  width: 91%;
+  display:block;
+}
+
 
 
 @media only screen and (max-width: 769px){
