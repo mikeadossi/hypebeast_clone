@@ -3,7 +3,7 @@ extends hbx_layout
 block content
   
     .hbx_shopping_bag_content
-      - if(!cart.length){
+      - if(!cart || !cart.length){
         .hbx_empty_cart_content
           .shopping_bag_div
             img(src="images/hbx_images/general/shopping_bag.png")
@@ -70,9 +70,7 @@ block content
             - }
               
             .hbx_update_container
-              - if(cart.length){
-                  .hbx_update_btn(onclick="updateBag()") UPDATE BAG
-              - }
+              .hbx_update_btn(onclick="updateBag()") UPDATE BAG
             
           .hbx_cart_right_column
             .hbx_right_main_container
@@ -101,11 +99,7 @@ block content
                     span.checkout_subtotal 0
                     span .00
                 .proceed_button_container
-                  - if(!cart.length){
-                      .proceed_button_waiting PROCEED TO CHECKOUT
-                  - } else {
-                      a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
-                  - }
+                  a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
                 .promotional_container
                   .duty_total Have a promotional cose?
                   .duty_cost 

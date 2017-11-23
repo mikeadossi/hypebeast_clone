@@ -23,7 +23,8 @@ CREATE TABLE comments (
   user_id INTEGER,
   user_name TEXT,
   post_id INTEGER,
-  comment_text TEXT
+  comment_text TEXT,
+  response_comments TEXT
 );
 
 INSERT INTO posts (post_title_string, post_title, post_image, post_author, category, post_time_of, post_hype_count, post_comment_count, post_subtitle, post_content, image_credit)

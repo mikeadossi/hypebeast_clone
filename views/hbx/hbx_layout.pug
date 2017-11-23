@@ -73,7 +73,7 @@ html
               img.arrow_down.arrow_down_hover(
                 src="/images/hbx_images/general/arrow_down.png"
               )
-            - if(!cart.length){
+            - if(!cart || !cart.length){
                   p.no_items_in_bag You have no items inside your shopping bag
                   a.new_arrivals_btn(href="/store") SHOP NEW ARRIVALS
             - } else {
@@ -104,20 +104,20 @@ html
                               span.product_price !{cart[i].item_cost}
                                 span .00
                     - }
-                  .dropdown_order_total_container
-                    .dropdown_order_total
-                      span.order_tot ORDER TOTAL
-                      span USD 
-                      span.cart_price 0
-                  .dropdown_notice
-                    span You will be charged in 
-                    span.usd USD 
-                    span.usd_cart_price 0
-                    span .00
-                  .dropdown_button_container
-                    a.view_bag(href="/hbx_shopping_bag") VIEW BAG
-                    a.checkout_now(href="/checkout/addressing") CHECKOUT NOW
-                  .dropdown_notice.dropdown_last_notice 'Have a Promotional Code or Gift Card? Add it in the Bag.'
+                .dropdown_order_total_container
+                  .dropdown_order_total
+                    span.order_tot ORDER TOTAL
+                    span USD 
+                    span.cart_price 0
+                .dropdown_notice
+                  span You will be charged in 
+                  span.usd USD 
+                  span.usd_cart_price 0
+                  span .00
+                .dropdown_button_container
+                  a.view_bag(href="/hbx_shopping_bag") VIEW BAG
+                  a.checkout_now(href="/checkout/addressing") CHECKOUT NOW
+                .dropdown_notice.dropdown_last_notice 'Have a Promotional Code or Gift Card? Add it in the Bag.'
                               
             - }
 

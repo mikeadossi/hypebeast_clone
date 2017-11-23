@@ -99,23 +99,12 @@ const addSelectedItemsToCart = () => {
       }
 
       if($('.hidden_user').text()){
-        console.log('posted to db!!!');
+        // if user is logged in
         itemsInCartObj.user_id = GLOBAL_USER.id
-
-        // if(document.cookie){
-        //   let cookie = document.cookie;
-        //   cookie = cookie.split('=')
-        //   cookie = cookie[1];
-        //   cookie = JSON.parse(cookie);
-        //
-        //   for(let i = 0; i < cookie.length; i++){
-        //     post_cart_to_db(cookie[i])
-        //   }
-        // }
-
         post_cart_to_db(itemsInCartObj);
         proceedToBag();
       } else {
+        // if user is not registered but populating cart
         populateCookie();
         updateCartIcon();
         proceedToBag();
@@ -141,8 +130,6 @@ const populateCookie = () => {
     let cookie_obj = document.cookie.split(']');
     cookie_obj = cookie_obj[0].split(']');
     cookie_obj.splice(1,0,itemsInCartString);
-    console.log( 'cookie_obj length ---------> ', typeof cookie_obj[1] )
-    // console.log( 'cookie_obj length ---------> ', JSON.parse(cookie_obj) )
     cookie_obj = cookie_obj.join() + ']' + expiryDate + path;
     document.cookie = cookie_obj;
   }

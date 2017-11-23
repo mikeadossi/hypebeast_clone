@@ -590,33 +590,46 @@ router.post('/hbx_login', passport.authenticate('local', {
 
 router.get('/hbx_account', function(req, res) {
 
-  let conditional_promise;
+  if(!req.user){
+    res.redirect('error');
+  }
 
-  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
-
-  conditional_promise
-    .then( user_data => {
+  Promise.all([
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
+  ])
+    .then( results => {
+      let user_data = results[0];
+      let cart = results[1];
       res.render('hbx_account', {
         user: req.user,
-        user_data: user_data
+        user_data: user_data,
+        cart: cart
       });
     })
     .catch( err => {
       console.log(err);
-      res.render('hbx_error', {user: req.user});
+      res.render('hbx_error');
     })
 })
 
 router.get('/hbx_account/password', function(req, res) {
 
-  let conditional_promise;
-  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  if(!req.user){
+    res.redirect('error');
+  }
 
-  conditional_promise
-    .then( user_data => {
+  Promise.all([
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
+  ])
+    .then( results => {
+      let user_data = results[0];
+      let cart = results[1];
       res.render('hbx_change_password', {
         user: req.user,
-        user_data: user_data
+        user_data: user_data,
+        cart: cart
       });
     })
     .catch( err => {
@@ -629,14 +642,21 @@ router.get('/hbx_account/password', function(req, res) {
 
 router.get('/hbx_account/address_info', function(req, res) {
 
-  let conditional_promise;
-  req.user ? conditional_promise = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  if(!req.user){
+    res.redirect('error');
+  }
 
-  conditional_promise
-    .then( user_data => {
-      res.render('hbx_edit_address', {
+  Promise.all([
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
+  ])
+    .then( results => {
+      let user_data = results[0];
+      let cart = results[1];
+      res.render('hbx_change_password', {
         user: req.user,
-        user_data: user_data
+        user_data: user_data,
+        cart: cart
       });
     })
     .catch( err => {
@@ -686,6 +706,10 @@ router.get('/hbx_account/close-account', function(req, res) {
 })
 
 router.get("/hbx_register", function(req, res) {
+  if(req.user){
+    res.redirect('/hbx_error')
+  }
+  
   res.render('hbx_register')
 })
 
@@ -769,8 +793,6 @@ router.get('/hbx/auth/google/callback',
 
 router.get('/hbx/auth/error', function(req, res){
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
@@ -789,8 +811,6 @@ router.get('/hbx/auth/error', function(req, res){
 
 router.get('/hbx_error', function(req, res) {
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
-  // cart = JSON.parse(cart);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
@@ -831,11 +851,12 @@ router.get('/checkout/addressing', function(req, res) {
       let cart = results[0];
       let user_data = results[1];
 
-      if(!cart.length){
+      if(!cart || !cart.length && req.user){
         console.log('not authorized!');
-        res.render('hbx_error',{user:req.user})
+        res.render('hbx_error',{user:req.user, cart:cart})
+      } else if(!cart.length){
+        res.render('hbx_error')
       }
-
 
       res.render('hbx_addressing', {
         user: req.user,
