@@ -1,20 +1,94 @@
-const updateCartIcon = () => {
+const updateLocalStorageCart = () => {
 
-  // if we have a logged in user...
-  if($('.hidden_user').text()){}
-
-  // if cookies are set and no user is logged in...
-  if(document.cookie !== ''){
-    let cookieString = document.cookie.split('=')[1];
-    let cookieArray = JSON.parse(cookieString);
-
+  if(window.localStorage.hbxLocalCart){
+    let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
     let totalNumOfItems = 0;
-    for(let i = 0; i < cookieArray.length; i++){
-      totalNumOfItems += cookieArray[i].product_quantity;
+
+    for(let i = 0; i < hbxLocalCart.length; i++){
+      totalNumOfItems += hbxLocalCart[i].product_quantity;
     }
 
     $('.shopping_bag')[0].innerHTML = totalNumOfItems;
     $('.shopping_bag_deux')[0].innerHTML = totalNumOfItems;
+
+    if($('.no_items_in_bag').length || $('.new_arrivals_btn').length){
+      $('.no_items_in_bag')[0].remove();
+      $('.new_arrivals_btn')[0].remove();
+    }
+
+    $('.localStorageContent').empty();
+    
+    $('.localStorageContent').append(`
+      <div class="items_in_bag">
+        <span class="dropdown_item_count">`+totalNumOfItems+` Item(s) in Bag</span>
+      </div>
+      <div class="dropdown_notice_top">
+        Please note: Item(s) is not reserved until checkout is completed.
+      </div>
+      <div class="cart_dropdown_product_container"></div>
+    `);
+
+    let order_total = 0;
+
+    for(let i = 0; i < hbxLocalCart.length; i++){
+      order_total += hbxLocalCart[i].product_cost;
+
+      $('.cart_dropdown_product_container').append(`
+          <div class="cart_product">
+            <div class="dropdown_img">
+              <img src=`+hbxLocalCart[i].product_image+` />
+            </div>
+            <div class="cart_product_container">
+              <div class="cart_product_brand">`+hbxLocalCart[i].product_brand+`</div>
+              <div class="cart_product_name">`+hbxLocalCart[i].product_name+`</div>
+              <div class="cart_size">Size: `+hbxLocalCart[i].product_size+`</div>
+              <div class="cart_notice">This item is excluded from promotions. </div>
+              <div class="quantity_and_price_container">
+                <div class="quantity_and_price">
+                  <div class="quantity">
+                    <span class="qty"> Qty: </span>
+                    <span class="minus_item">-</span>
+                    <span class="item_count">
+                      `+hbxLocalCart[i].product_quantity+`
+                    </span>
+                    <span class="add_item">+</span>
+                  </div>
+                  <div class="dropdown_price">
+                    <span>USD</span>
+                    <span class="product_price">
+                      `+hbxLocalCart[i].product_cost+`.00
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          `);
+    }
+
+    $('.localStorageContent').append(`
+        <div class="dropdown_order_total_container">
+          <div class="dropdown_order_total">
+            <span class="order_tot">ORDER TOTAL</span>
+            <span>USD</span>
+            <span class="cart_price">`+order_total+`</span>
+          </div>
+        </div>
+        <div class="dropdown_notice">
+          <span>You will be charged in</span>
+          <span class="usd">USD</span>
+          <span class="usd_cart_price">`+order_total+`.00
+          </span>
+        </div>
+        <div class="dropdown_button_container">
+          <a class="view_bag" href="/hbx_shopping_bag">VIEW BAG</a>
+          <a class="checkout_now" href="/checkout/addressing">CHECKOUT NOW</a>
+        </div>
+        <div class="dropdown_notice dropdown_last_notice">
+          Have a Promotional Code or Gift Card? Add it in the Bag.
+        </div>
+    `);
+
     return;
   }
 
@@ -25,9 +99,12 @@ const updateCartIcon = () => {
 
 $(document).ready(function(){
 
-  updateCartIcon();
-  let user_id = $('.users_persistent_id')[0].innerHTML;
-  update_cart_and_count_by_id(user_id);
+  if($('.users_persistent_id').length){
+    let user_id = $('.users_persistent_id')[0].innerHTML;
+    update_cart_and_count_by_id(user_id);
+  } else {
+    updateLocalStorageCart();
+  }
 
 })
 
@@ -84,6 +161,9 @@ const addSelectedItemsToCart = () => {
       let product_cost = product_price * product_quantity;
       let product_category = $('.hidden_category').text();
 
+      let product_image = $('.product_preview_img')[0].outerHTML;
+      product_image = product_image.split('src=')[1].split("></div>")[0]
+
       itemsInCartObj = {
         product_quantity: Number($('.item_count_amt')[0].innerHTML),
         product_cost: product_cost,
@@ -92,7 +172,8 @@ const addSelectedItemsToCart = () => {
         product_name: product_name,
         product_id: GLOBAL_PRODUCT.id,
         product_brand: product_brand,
-        product_image: $('.product_preview_img')[0],
+        product_image: product_image,
+        // product_image: $('.product_preview_img')[0],
         product_route: href,
         product_category: product_category,
         product_individual_price: product_price
@@ -105,8 +186,8 @@ const addSelectedItemsToCart = () => {
         proceedToBag();
       } else {
         // if user is not registered but populating cart
-        populateCookie();
-        updateCartIcon();
+        populateLocalStorage(itemsInCartObj);
+        updateLocalStorageCart();
         proceedToBag();
       }
 
@@ -115,23 +196,29 @@ const addSelectedItemsToCart = () => {
   }
 }
 
-const populateCookie = () => {
+const populateLocalStorage = (itemsInCartObj) => {
   // ampersand characters need to be accounted for when saved in cookie object
   if(itemsInCartObj.product_name && itemsInCartObj.product_name.indexOf('&amp;') != -1){
     itemsInCartObj.product_name = itemsInCartObj.product_name.replace('&amp;','ampersand_char')
   }
-  let itemsInCartString = JSON.stringify(itemsInCartObj);
-  const expiryDate = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-  const path = "; path=/";
 
-  if(document.cookie == ''){
-    document.cookie = "itemsInCart=["+itemsInCartString+"]"+expiryDate+path;
+  if(!window.localStorage.hbxLocalCart/*document.cookie == ''*/){
+    // let itemsInCartString = JSON.stringify(itemsInCartObj);
+    // const expiryDate = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    // const path = "; path=/";
+    // document.cookie = "itemsInCart=["+itemsInCartString+"]"+expiryDate+path;
+    window.localStorage.setItem( 'hbxLocalCart', "["+JSON.stringify(itemsInCartObj)+"]" );
   } else {
-    let cookie_obj = document.cookie.split(']');
-    cookie_obj = cookie_obj[0].split(']');
-    cookie_obj.splice(1,0,itemsInCartString);
-    cookie_obj = cookie_obj.join() + ']' + expiryDate + path;
-    document.cookie = cookie_obj;
+    let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
+    hbxLocalCart.push(itemsInCartObj);
+    window.localStorage.setItem( 'hbxLocalCart', JSON.stringify(hbxLocalCart) )
+    // hbxLocalCart = hbxLocalCart.split(']')
+    // console.log();
+    // let cookie_obj = document.cookie.split(']');
+    // cookie_obj = cookie_obj[0].split(']');
+    // cookie_obj.splice(1,0,itemsInCartString);
+    // cookie_obj = cookie_obj.join() + ']' + expiryDate + path;
+    // document.cookie = cookie_obj;
   }
 
 }

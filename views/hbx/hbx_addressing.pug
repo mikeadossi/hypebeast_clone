@@ -462,7 +462,7 @@ block content
               - for(let i = 0; i < cart.length; i++){
                 .checkout_item_container
                   .checkout_item_img
-                    img(src=cart[i].item_image)
+                    img(src=""+JSON.parse(cart[i].item_image))
                   .checkout_item_details_container
                     .checkout_item_brand brand
                     .checkout_item_name !{cart[i].item_name}

@@ -673,8 +673,6 @@ router.get('/hbx_account/orders', function(req, res){
 
   hbx_queries.getPreviousOrdersByID(req.user.id)
   .then( (orders) => {
-    console.log('orders: ',orders);
-    console.log('orders.length: ',orders.length);
     res.render('hbx_orders', {
       user: req.user,
       orders: orders
@@ -709,7 +707,7 @@ router.get("/hbx_register", function(req, res) {
   if(req.user){
     res.redirect('/hbx_error')
   }
-  
+
   res.render('hbx_register')
 })
 
@@ -964,7 +962,6 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
   if(!req.body.product_quantity){
     res.status(401).json({status:'error',message:'cart has no items'})
   }
-
 
   hbx_queries.addToCart(
       req.body.product_quantity,

@@ -1,4 +1,4 @@
-.hidden_user, .hidden_category{
+.hidden_user, .hidden_category, .hidden_local_storage{
   display:none;
 }
 

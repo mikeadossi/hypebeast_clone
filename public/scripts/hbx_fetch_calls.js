@@ -4,10 +4,12 @@ const post_cart_to_db = (cartItemsObj) => {
   let url = window.location.href + '/add-to-cart';
 
   if(GLOBAL_USER){
-    let product_image_first_child = cartItemsObj.product_image.firstChild;
-    let product_image = product_image_first_child.getAttribute('src');
+    // let product_image_first_child = cartItemsObj.product_image.firstChild;
+    // let product_image = product_image_first_child.getAttribute('src');
 
-    console.log('\n cartItemsObj (fetch 10) --> ',cartItemsObj,'\n');
+    let product_image = cartItemsObj.product_image;
+    console.log('product_image ===> ',product_image);
+    console.log('typeof product_image ===> ',typeof product_image);
 
     fetch(url, {
       method:'POST',
@@ -23,7 +25,7 @@ const post_cart_to_db = (cartItemsObj) => {
         product_id: GLOBAL_PRODUCT.id,
         users_id: GLOBAL_USER.id,
         product_category: cartItemsObj.product_category,
-        product_image: product_image,
+        product_image:cartItemsObj.product_image,
         product_name: cartItemsObj.product_name,
         product_individual_price: cartItemsObj.product_individual_price,
         product_brand: cartItemsObj.product_brand
@@ -56,6 +58,9 @@ const update_cart_and_count_by_id = (user_id) => {
     return cart.json();
   })
   .then((cartJSON) => {
+
+    $('.shopping_bag')[0].innerHTML = 0;
+    $('.shopping_bag_deux')[0].innerHTML = 0;
 
     if(cartJSON.length === 1){
 

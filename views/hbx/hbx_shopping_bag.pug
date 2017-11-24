@@ -44,7 +44,7 @@ block content
                 - for(let i = 0; i < cart.length; i++){
                   .hbx_product_row
                     .cart_product_img
-                      img(src=cart[i].item_image)
+                      img(src=""+JSON.parse(cart[i].item_image))
                     .cart_product_details_container
                       .cart_product_brand !{cart[i].item_name}
                       .cart_product_name !{cart[i].item_category}
