@@ -90,5 +90,9 @@ block content
           span USD 
           span.checkout_item_final_cost.checkout_subtotal 0
           span .00
-      input.checkout_continue_button(type="submit" value="PLACE ORDER")
+      - if(user){
+        input.checkout_continue_button(type="submit" value="PLACE ORDER")
+      -} else {
+        .checkout_continue_button(onclick="placeLocalStorageOrder()") PLACE ORDER!!!!!!
+      -}
     

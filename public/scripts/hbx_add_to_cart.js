@@ -5,7 +5,7 @@ const updateLocalStorageCart = () => {
     let totalNumOfItems = 0;
 
     for(let i = 0; i < hbxLocalCart.length; i++){
-      totalNumOfItems += hbxLocalCart[i].product_quantity;
+      totalNumOfItems += hbxLocalCart[i].item_quantity;
     }
 
     $('.shopping_bag')[0].innerHTML = totalNumOfItems;
@@ -31,17 +31,17 @@ const updateLocalStorageCart = () => {
     let order_total = 0;
 
     for(let i = 0; i < hbxLocalCart.length; i++){
-      order_total += hbxLocalCart[i].product_cost;
+      order_total += hbxLocalCart[i].item_cost;
 
       $('.cart_dropdown_product_container').append(`
           <div class="cart_product">
             <div class="dropdown_img">
-              <img src=`+hbxLocalCart[i].product_image+` />
+              <img src=`+hbxLocalCart[i].item_image+` />
             </div>
             <div class="cart_product_container">
-              <div class="cart_product_brand">`+hbxLocalCart[i].product_brand+`</div>
-              <div class="cart_product_name">`+hbxLocalCart[i].product_name+`</div>
-              <div class="cart_size">Size: `+hbxLocalCart[i].product_size+`</div>
+              <div class="cart_product_brand">`+hbxLocalCart[i].item_brand+`</div>
+              <div class="cart_product_name">`+hbxLocalCart[i].item_name+`</div>
+              <div class="cart_size">Size: `+hbxLocalCart[i].item_size+`</div>
               <div class="cart_notice">This item is excluded from promotions. </div>
               <div class="quantity_and_price_container">
                 <div class="quantity_and_price">
@@ -49,14 +49,14 @@ const updateLocalStorageCart = () => {
                     <span class="qty"> Qty: </span>
                     <span class="minus_item">-</span>
                     <span class="item_count">
-                      `+hbxLocalCart[i].product_quantity+`
+                      `+hbxLocalCart[i].item_quantity+`
                     </span>
                     <span class="add_item">+</span>
                   </div>
                   <div class="dropdown_price">
                     <span>USD</span>
                     <span class="product_price">
-                      `+hbxLocalCart[i].product_cost+`.00
+                      `+hbxLocalCart[i].item_cost+`.00
                     </span>
                   </div>
                 </div>
@@ -171,17 +171,17 @@ const addSelectedItemsToCart = () => {
       product_image = product_image.split('src=')[1].split("></div>")[0]
 
       itemsInCartObj = {
-        product_quantity: Number($('.item_count_amt')[0].innerHTML),
-        product_cost: product_cost,
-        product_color: $(".form-control option:selected").text(),
-        product_size: currentSelectedSize.replace(/\s/g, ''),
-        product_name: product_name,
-        product_id: GLOBAL_PRODUCT.id,
-        product_brand: product_brand,
-        product_image: product_image,
-        product_route: href,
-        product_category: product_category,
-        product_individual_price: product_price
+        item_quantity: Number($('.item_count_amt')[0].innerHTML),
+        item_cost: product_cost,
+        item_color: $(".form-control option:selected").text(),
+        item_size: currentSelectedSize.replace(/\s/g, ''),
+        item_name: product_name,
+        products_id: GLOBAL_PRODUCT.id,
+        item_brand: product_brand,
+        item_image: product_image,
+        item_route: href,
+        item_category: product_category,
+        item_individual_price: product_price
       }
 
       if($('.hidden_user').text()){
@@ -203,8 +203,8 @@ const addSelectedItemsToCart = () => {
 
 const populateLocalStorage = (itemsInCartObj) => {
   // ampersand characters need to be accounted for when saved in cookie object
-  if(itemsInCartObj.product_name && itemsInCartObj.product_name.indexOf('&amp;') != -1){
-    itemsInCartObj.product_name = itemsInCartObj.product_name.replace('&amp;','ampersand_char')
+  if(itemsInCartObj.item_name && itemsInCartObj.item_name.indexOf('&amp;') != -1){
+    itemsInCartObj.item_name = itemsInCartObj.item_name.replace('&amp;','ampersand_char')
   }
 
   if(!window.localStorage.hbxLocalCart){

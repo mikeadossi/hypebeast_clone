@@ -1,5 +1,5 @@
 const populateAddressCheckoutPage = () => {
-  console.log('populating...');
+
   if(!window.localStorage.hbxLocalCart){
     $('.hbx_addressing_content').remove();
     $('.localStorageAddressCheckoutContent').append(`
@@ -11,7 +11,7 @@ const populateAddressCheckoutPage = () => {
     let bag_subtotal = 0;
 
     for(let i = 0; i < hbxLocalCart.length; i++){
-      bag_subtotal += hbxLocalCart[i].product_cost;
+      bag_subtotal += hbxLocalCart[i].item_cost;
     }
 
     $('.localStorageAddressCheckoutContent').append(`
@@ -35,7 +35,7 @@ const populateAddressCheckoutPage = () => {
             </div>
           </div>
 
-          <form class="contact_form" method="post" action="/submit-address">
+          <form class="contact_form" method="post" action="/checkout/delivery_and_payment">
             <div class="checkout_sub_content">
               <div class="contact_details_container">
                 <div class="checkout_header">
@@ -47,7 +47,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">FIRST NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="first_name_input" type="text" name="last_name" />
+                      <input class="first_name_input" type="text" name="first_name" value="u"/>
                     </div>
                   </div>
                   <div class="checkout_form_group">
@@ -55,7 +55,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">LAST NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="last_name_input" type="text" name="last_name" />
+                      <input class="last_name_input" type="text" name="last_name" value="u"/>
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">PHONE</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="phone_input" type="text" name="phone" />
+                      <input class="phone_input" type="text" name="phone" value=9 />
                     </div>
                   </div>
                   <div class="checkout_form_group">
@@ -73,7 +73,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">EMAIL</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="email_input" type="text" name="order_email" />
+                      <input class="email_input" type="text" name="order_email" value="u@aol.com" />
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">CONFIRM EMAIL</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="email_input" type="text" name="confirm_order_email" />
+                      <input class="email_input" type="text" name="confirm_order_email" value="u@aol.com" />
                     </div>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">ADDRESS LINE</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="first_name_input wide_checkout_input" type="text" name="street" />
+                      <input class="first_name_input wide_checkout_input" type="text" name="street" value="u"/>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">TOWN/CITY</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="city_input" type="text" name="city" />
+                      <input class="city_input" type="text" name="city" value="u"/>
                     </div>
                   </div>
                   <div class="checkout_form_group checkout_form_wide">
@@ -115,7 +115,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">POSTCODE/ZIP</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="postcode_input" type="text" name="postcode" />
+                      <input class="postcode_input" type="text" name="postcode" value=9 />
                     </div>
                   </div>
                 </div>
@@ -468,7 +468,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">COMPANY NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="company_input wide_checkout_input" type="text" name="company_name" />
+                      <input class="company_input wide_checkout_input" type="text" name="company_name" value="u"/>
                     </div>
                   </div>
                 </div>
@@ -535,33 +535,31 @@ const populateAddressCheckoutPage = () => {
         </div>
         `);
 
-      console.log('hbxLocalCart[0].product_name => ',hbxLocalCart[0].product_name);
-
       for(let i = 0; i < hbxLocalCart.length; i++){
         $('.checkout_items_main_container').append(`
           <div class="checkout_item_container">
             <div class="checkout_item_img">
-              <img src=`+hbxLocalCart[i].product_image+` alt="">
+              <img src=`+hbxLocalCart[i].item_image+` alt="">
             </div>
             <div class="checkout_item_details_container">
               <div class="checkout_item_brand">
                 brand
               </div>
               <div class="checkout_item_name">
-                `+hbxLocalCart[i].product_name+`
+                `+hbxLocalCart[i].item_name+`
               </div>
               <div class="checkout_item_size">
                 <span>Size: </span>
-                <span class="checkout_item_final_size">`+hbxLocalCart[i].product_size+`</span>
+                <span class="checkout_item_final_size">`+hbxLocalCart[i].item_size+`</span>
               </div>
               <div class="checkout_item_quantity">
                 <span>Qty: </span>
-                <span class="checkout_item_final_quantity">`+hbxLocalCart[i].product_quantity+`</span>
+                <span class="checkout_item_final_quantity">`+hbxLocalCart[i].item_quantity+`</span>
               </div>
             </div>
             <div class="checkout_item_usd">
               <span>USD</span>
-              <span class="checkout_item_final_cost">`+hbxLocalCart[i].product_cost+`.00</span>
+              <span class="checkout_item_final_cost">`+hbxLocalCart[i].item_cost+`.00</span>
             </div>
           </div>
         `);

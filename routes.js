@@ -63,7 +63,7 @@ router.get('/post/:id', function(req, res) {
 })
 
 router.get('/store', function(req, res) {
-  console.log('\n req -> ',req,'\n');
+
   if(req.user){
     let user_id = req.user.id;
 
@@ -867,41 +867,21 @@ router.get('/checkout/addressing', function(req, res) {
       res.render('hbx_error', {user: req.user});
     })
 
-
 })
 
-
-router.get('/checkout/delivery_and_payment', function(req, res) {
-  let conditional_promise;
-
-  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
-
-  conditional_promise
-    .then( cart => {
-      res.render('hbx_delivery_and_payment', {
-        user: req.user,
-        cart: cart
-      });
-    })
-    .catch( err => {
-      console.log(err);
-      res.render('hbx_error', {user: req.user});
-    })
-
-})
 
 router.post('/checkout/complete', function(req, res) {
 
-  if(!req.user){
-    res.redirect('error');
+  if(!req.user && !req.body.users_cart[0]){
+    res.redirect('/hbx_error');
   }
 
-  let order_obj = JSON.parse(req.body.order_obj_value);
-  let conditional_promise;
+  let cart = req.body.users_cart
 
-  let cart = JSON.parse(req.body.users_cart);
+  let order_obj = JSON.parse(req.body.order_obj_value);
   let purchased_product_details_array = [];
   let tot_cost = 0;
+
 
   for(let i = 0; i < cart.length; i++){
     let purchased_products_details = new Object();
@@ -918,10 +898,15 @@ router.post('/checkout/complete', function(req, res) {
     tot_cost += cart[i].item_cost;
   }
 
+  let users_id = order_obj.users_id || null
+  let conditional_promise;
+
+  req.user ? conditional_promise = hbx_queries.clearCartByUserID(order_obj.users_id) : conditional_promise = undefined
+
   Promise.all([
-    hbx_queries.makePayment(
+    hbx_queries.completeOrder(
       req.body.payment_type,
-      order_obj.users_id,
+      users_id,
       req.body.shipping_cost,
       order_obj.first_name,
       order_obj.last_name,
@@ -937,17 +922,23 @@ router.post('/checkout/complete', function(req, res) {
       purchased_product_details_array,
       tot_cost
     ),
-    hbx_queries.clearCartByUserID(order_obj.users_id)
+    conditional_promise
   ])
-    .then( results => {
+  .then( results => {
+    if(req.user){
       res.render('hbx_order_complete', {
         user: req.user
       });
-    })
-    .catch( err => {
-      console.log(err);
-      res.render('hbx_error', {user: req.user});
-    })
+    } else {
+      res.redirect('/store');
+      // res.render('hbx_order_complete')
+      console.log('worked!!!');
+    }
+  })
+  .catch( err => {
+    console.log(err);
+    res.render('hbx_error', {user: req.user});
+  })
 
 })
 
@@ -964,17 +955,17 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
   }
 
   hbx_queries.addToCart(
-      req.body.product_quantity,
-      req.body.product_cost,
-      req.body.product_color,
-      req.body.product_size,
-      req.body.product_id,
+      req.body.item_quantity,
+      req.body.item_cost,
+      req.body.item_color,
+      req.body.item_size,
+      req.body.products_id,
       req.user.id,
-      req.body.product_category,
-      req.body.product_image,
-      req.body.product_name,
-      req.body.product_individual_price,
-      req.body.product_brand
+      req.body.item_category,
+      req.body.item_image,
+      req.body.item_name,
+      req.body.item_individual_price,
+      req.body.item_brand
     )
     .then((cart) => {
       res.json(cart)
@@ -1000,22 +991,18 @@ router.get('/get-cart-by-id', function(req, res) {
 })
 
 router.post('/update-bag', function(req, res) {
-  let item_id = req.body.item_id;
+  let id = req.body.id;
   let item_count = req.body.item_count;
   let item_tot_cost = req.body.item_tot_cost;
 
-  hbx_queries.updateCartById(item_id, item_count, item_tot_cost)
+  hbx_queries.updateCartById(id, item_count, item_tot_cost)
   .then((results) => {
     res.redirect('/hbx_shopping_bag')
   })
   .catch(err => next(err))
 })
 
-// router.get('/submit-address', function(req, res){
-//   res.redirect('/hbx_error',{user:req.user})
-// })
-
-router.post('/submit-address', function(req, res){
+router.post('/checkout/delivery_and_payment', function(req, res){
   if(req.body.order_email !== req.body.confirm_order_email){
     res.render('hbx_addressing',{error_message:'emails do not match'})
   }
@@ -1033,7 +1020,12 @@ router.post('/submit-address', function(req, res){
   order_obj.country = req.body.country;
   order_obj.company_name = req.body.company_name;
   order_obj.order_notes = req.body.order_notes;
-  order_obj.users_id = req.user.id;
+
+  if(req.user){
+    order_obj.users_id = req.user.id;
+  } else {
+    res.render('hbx_delivery_and_payment',{order_obj:order_obj})
+  }
 
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)

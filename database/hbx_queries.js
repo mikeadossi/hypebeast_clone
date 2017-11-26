@@ -234,7 +234,7 @@ let queries = {
     item_cost,
     item_color,
     item_size,
-    item_id,
+    products_id,
     users_id,
     item_category,
     item_image,
@@ -256,7 +256,7 @@ let queries = {
         item_individual_price,
         item_brand)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
-    [item_quantity, item_cost, item_color, item_size, item_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand])
+    [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand])
   },
 
   clearAllCartDataById: function(id){
@@ -304,9 +304,9 @@ let queries = {
       WHERE product_name_route = $1`, [product_name])
   },
 
-  updateCartById: function(item_id, item_count, item_tot_cost){
+  updateCartById: function(id, item_count, item_tot_cost){
     return db.any(`UPDATE cart SET item_quantity = $2,
-      item_cost = $3 WHERE id = $1`,[item_id,item_count,item_tot_cost])
+      item_cost = $3 WHERE id = $1`,[id,item_count,item_tot_cost])
   },
 
   editUserAddress: function(street, city, state, postcode, company, user_id){
@@ -353,7 +353,7 @@ let queries = {
     [hash, user_id])
   },
 
-  makePayment: function(
+  completeOrder: function(
     payment_type,
     users_id,
     shipping_cost,

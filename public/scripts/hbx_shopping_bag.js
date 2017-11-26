@@ -13,7 +13,6 @@ const addToListOfEditedItems = (element, changeInValue) => {
   for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
     if(LIST_OF_EDITED_ITEMS[i].id === item_id){
       LIST_OF_EDITED_ITEMS[i].count = item_count;
-      console.log('LIST_OF_EDITED_ITEMS: ',LIST_OF_EDITED_ITEMS);
       return;
     }
   }
@@ -21,7 +20,6 @@ const addToListOfEditedItems = (element, changeInValue) => {
 }
 
 const updateBag = () => {
-  console.log('LIST_OF_EDITED_ITEMS -> ',LIST_OF_EDITED_ITEMS);
   for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
     fetch('/update-bag', {
       method:'POST',
@@ -30,7 +28,7 @@ const updateBag = () => {
         'Content-Type': 'application/json'
       }),
       body: JSON.stringify({
-        item_id: LIST_OF_EDITED_ITEMS[i].id,
+        id: LIST_OF_EDITED_ITEMS[i].id,
         item_count: LIST_OF_EDITED_ITEMS[i].count,
         item_tot_cost: LIST_OF_EDITED_ITEMS[i].tot_cost
       }),
@@ -101,21 +99,21 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
     let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
 
     for(let i = 0; i < hbxLocalCart.length; i++){
-      let product_total_cost = hbxLocalCart[i].product_individual_price * hbxLocalCart[i].product_quantity
+      let item_total_cost = hbxLocalCart[i].item_individual_price * hbxLocalCart[i].item_quantity
       $('.orderSummaryContent').append(`
         <div class="hbx_product_row">
           <div class="cart_product_img">
-            <img src=`+hbxLocalCart[i].product_image+` alt="">
+            <img src=`+hbxLocalCart[i].item_image+` alt="">
           </div>
           <div class="cart_product_details_container">
             <div class="cart_product_brand">
-              `+hbxLocalCart[i].product_name+`
+              `+hbxLocalCart[i].item_name+`
             </div>
             <div class="cart_product_name">
-              `+hbxLocalCart[i].product_category+`
+              `+hbxLocalCart[i].item_category+`
             </div>
             <div class="cart_size">
-              Size: `+hbxLocalCart[i].product_size+`
+              Size: `+hbxLocalCart[i].item_size+`
             </div>
             <div class="cart_notice">
               This item is excluded from promotions.
@@ -126,7 +124,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
               <div class="cart_price">
                 USD
               </div>
-              <span>`+hbxLocalCart[i].product_individual_price+`.00</span>
+              <span>`+hbxLocalCart[i].item_individual_price+`.00</span>
             </div>
             <div class="hbx_quantity_row">
               <div class="hbx_quantity_control">
@@ -134,7 +132,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
                   -
                 </div>
                 <div id="cart_count">
-                  `+hbxLocalCart[i].product_quantity+`
+                  `+hbxLocalCart[i].item_quantity+`
                 </div>
                 <div class="cart_select_plus" onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')">
                   +
@@ -149,7 +147,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
             </div>
             <div class="hbx_total_row">
               <span class="hbx_total_usd">USD</span>
-              <span class="hbx_total_price">`+product_total_cost+`.00</span>
+              <span class="hbx_total_price">`+item_total_cost+`.00</span>
             </div>
           </div>
         </div>
@@ -158,7 +156,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
 
     let bag_subtotal = 0;
     for(let i = 0; i < hbxLocalCart.length; i++){
-      bag_subtotal += hbxLocalCart[i].product_cost;
+      bag_subtotal += hbxLocalCart[i].item_cost;
     }
 
     $('.orderSummaryFooter').append(`

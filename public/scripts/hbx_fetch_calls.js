@@ -1,21 +1,3 @@
-let url = window.location.href + '/lola';
-fetch('/lola',{
-  method: 'GET',
-  headers: new Headers({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }),
-  credentials: "same-origin"
-})
-.then((cart) => {
-  res.render('hbx_account')
-})
-.catch(err => console.log(err))
-
-
-
-
-
 const post_cart_to_db = (cartItemsObj) => {
 
   let url = window.location.href + '/add-to-cart';
@@ -33,17 +15,17 @@ const post_cart_to_db = (cartItemsObj) => {
         'Content-Type': 'application/json'
       }),
       body: JSON.stringify({
-        product_quantity: cartItemsObj.product_quantity,
-        product_cost: cartItemsObj.product_cost,
-        product_color: cartItemsObj.product_color,
-        product_size: cartItemsObj.product_size,
-        product_id: GLOBAL_PRODUCT.id,
+        item_quantity: cartItemsObj.item_quantity,
+        item_cost: cartItemsObj.item_cost,
+        item_color: cartItemsObj.item_color,
+        item_size: cartItemsObj.item_size,
+        products_id: GLOBAL_PRODUCT.id,
         users_id: GLOBAL_USER.id,
-        product_category: cartItemsObj.product_category,
-        product_image:cartItemsObj.product_image,
-        product_name: cartItemsObj.product_name,
-        product_individual_price: cartItemsObj.product_individual_price,
-        product_brand: cartItemsObj.product_brand
+        item_category: cartItemsObj.item_category,
+        item_image:cartItemsObj.item_image,
+        item_name: cartItemsObj.item_name,
+        item_individual_price: cartItemsObj.item_individual_price,
+        item_brand: cartItemsObj.item_brand
       }),
       credentials: "same-origin"
     })
@@ -78,6 +60,7 @@ const update_cart_and_count_by_id = (user_id) => {
     $('.shopping_bag_deux')[0].innerHTML = 0;
 
     if(cartJSON.length === 1){
+      console.log('cartJSON -> ',cartJSON);
 
       $('.shopping_bag')[0].innerHTML = cartJSON[0].item_quantity;
       $('.shopping_bag_deux')[0].innerHTML = cartJSON[0].item_quantity;

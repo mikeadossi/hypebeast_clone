@@ -2,121 +2,125 @@ extends hbx_layout
 
 block content
   
-    .hbx_shopping_bag_content
-      - if(!cart || !cart.length){
-        .localStorageShoppingBagContent
-        .hbx_empty_cart_content
-          .shopping_bag_div
-            img(src="images/hbx_images/general/shopping_bag.png")
-          p.empty_bag Your bag is currently empty.
-          a(href="/store").continue_shopping Continue Shopping
-          .empty_cart_disclaimer "If you are trying to add items to your cart and it remains empty, you may have cookies disabled in your browser settings. If that's the case, please enable acceptance of cookies and try again."
-      - } else {
-        .hbx_shopping_header_container
-          .hbx_store_header_container
-            ul.hbx_header_left_links.hbx_product_header_links
-              li 
-                a(href="#") Home 
-              li
-                img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
-          .hbx_shopping_title Shopping Bag
-          .product_footer_details_contact.hbx_shopping_contact
-            ul
-              li Have questions?
-              li 
-                img.contact_images(src="/images/hbx_images/general/speech_bubble_white.png")
-                span Live Chat
-              li
-                img.contact_images(src="/images/hbx_images/general/mailing_envelope_white.png") 
-                span Email Us
-              li 
-                img.contact_images(src="/images/hbx_images/general/phone_white.png")
-                span Call Us
-        .hbx_cart_flex_container
-          .hbx_cart_left_column
-            .hbx_cart_table
-              ul.hbx_cart_header
-                li.product_row PRODUCT
-                ul.product_row_right
-                  li PRICE
-                  li QTY 
-                  li TOTAL
-            - if(cart){
-                - for(let i = 0; i < cart.length; i++){
-                  .hbx_product_row
-                    .cart_product_img
-                      img(src=""+JSON.parse(cart[i].item_image))
-                    .cart_product_details_container
-                      .cart_product_brand !{cart[i].item_name}
-                      .cart_product_name !{cart[i].item_category}
-                      .cart_size Size: !{cart[i].item_size}
-                      .cart_notice This item is excluded from promotions.
-                    .hbx_right_rows
-                      .hbx_price_row
-                        .cart_price USD 
-                        span !{cart[i].item_individual_price}
-                        span .00
-                      .hbx_quantity_row
-                        .hbx_quantity_control
-                          //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
-                          .cart_select_minus(onclick="decrementCount(this), addToListOfEditedItems(this, 'decrement')") -
-                          #cart_count !{cart[i].item_quantity}
-                          .cart_select_plus(onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')") +
-                          .hidden_cart_id !{cart[i].id}
-                        .cart_remove_items REMOVE
-                      .hbx_total_row 
-                        span.hbx_total_usd USD
-                        span.hbx_total_price !{cart[i].item_cost}.00
-                - }
-            - }
+    .localStorageShoppingBagContent
+    - if(user){
+      .hbx_shopping_bag_content
+        - if(!cart || !cart.length){
+          .hbx_empty_cart_content
+            .shopping_bag_div
+              img(src="images/hbx_images/general/shopping_bag.png")
+            p.empty_bag Your bag is currently empty.
+            a(href="/store").continue_shopping Continue Shopping
+            .empty_cart_disclaimer "If you are trying to add items to your cart and it remains empty, you may have cookies disabled in your browser settings. If that's the case, please enable acceptance of cookies and try again."
+        - } else {
+          .hbx_shopping_header_container
+            .hbx_store_header_container
+              ul.hbx_header_left_links.hbx_product_header_links
+                li 
+                  a(href="#") Home 
+                li
+                  img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
+            .hbx_shopping_title Shopping Bag
+            .product_footer_details_contact.hbx_shopping_contact
+              ul
+                li Have questions?
+                li 
+                  img.contact_images(src="/images/hbx_images/general/speech_bubble_white.png")
+                  span Live Chat
+                li
+                  img.contact_images(src="/images/hbx_images/general/mailing_envelope_white.png") 
+                  span Email Us
+                li 
+                  img.contact_images(src="/images/hbx_images/general/phone_white.png")
+                  span Call Us
+          .hbx_cart_flex_container
+            .hbx_cart_left_column
+              .hbx_cart_table
+                ul.hbx_cart_header
+                  li.product_row PRODUCT
+                  ul.product_row_right
+                    li PRICE
+                    li QTY 
+                    li TOTAL
+              - if(cart){
+                  - for(let i = 0; i < cart.length; i++){
+                    .hbx_product_row
+                      .cart_product_img
+                        img(src=""+JSON.parse(cart[i].item_image))
+                      .cart_product_details_container
+                        .cart_product_brand !{cart[i].item_name}
+                        .cart_product_name !{cart[i].item_category}
+                        .cart_size Size: !{cart[i].item_size}
+                        .cart_notice This item is excluded from promotions.
+                      .hbx_right_rows
+                        .hbx_price_row
+                          .cart_price USD 
+                          span !{cart[i].item_individual_price}
+                          span .00
+                        .hbx_quantity_row
+                          .hbx_quantity_control
+                            //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
+                            .cart_select_minus(onclick="decrementCount(this), addToListOfEditedItems(this, 'decrement')") -
+                            #cart_count !{cart[i].item_quantity}
+                            .cart_select_plus(onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')") +
+                            .hidden_cart_id !{cart[i].id}
+                          .cart_remove_items REMOVE
+                        .hbx_total_row 
+                          span.hbx_total_usd USD
+                          span.hbx_total_price !{cart[i].item_cost}.00
+                  - }
+              - }
+                
+              .hbx_update_container
+                .hbx_update_btn(onclick="updateBag()") UPDATE BAG
               
-            .hbx_update_container
-              .hbx_update_btn(onclick="updateBag()") UPDATE BAG
-            
-          .hbx_cart_right_column
-            .hbx_right_main_container
-              .hbx_shipping_notice USD $0 away from Free Shipping.
-              .hbx_right_container
-                .order_summary_container Order Summary
-                .shopping_sale_container
-                  .bag_total Bag Subtotal
-                  .bag_cost 
-                    span.usd USD
-                    span.bag_subtotal 0
-                    span .00
-                .shopping_sale_container
-                  .duty_total *Duty/Tax
-                  .duty_cost 
-                    span.usd USD
-                    span 0.00
-                .shopping_sale_container
-                  .shipping_total Shipping Total
-                  .shipping_cost 
-                    span Free Shipping
-                .order_total_container
-                  .order_total ORDER TOTAL 
-                  .order_cost
-                    span.usd USD
-                    span.checkout_subtotal 0
-                    span .00
-                .proceed_button_container
-                  a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
-                .promotional_container
-                  .duty_total Have a promotional code?
-                  .duty_cost 
-                    .fa.fa-chevron-down
-                .promotional_container
-                  .duty_total Have a Gift Card or Store Credit?
-                  .duty_cost 
-                    .fa.fa-chevron-down
-            .learn_more 
-              span Learn about our 
-              span.blue_hover_text Returns Policy 
-              span and 
-              span.blue_hover_text Delivery & Shipping 
-              span information
-            .taxes *All tax & duties will be covered by us. If you are charged any duty/tax fees for your order, please send us a copy of the invoice so we can settle the charges.
-      - }
+            .hbx_cart_right_column
+              .hbx_right_main_container
+                .hbx_shipping_notice USD $0 away from Free Shipping.
+                .hbx_right_container
+                  .order_summary_container Order Summary
+                  .shopping_sale_container
+                    .bag_total Bag Subtotal
+                    .bag_cost 
+                      span.usd USD
+                      span.bag_subtotal 0
+                      span .00
+                  .shopping_sale_container
+                    .duty_total *Duty/Tax
+                    .duty_cost 
+                      span.usd USD
+                      span 0.00
+                  .shopping_sale_container
+                    .shipping_total Shipping Total
+                    .shipping_cost 
+                      span Free Shipping
+                  .order_total_container
+                    .order_total ORDER TOTAL 
+                    .order_cost
+                      span.usd USD
+                      span.checkout_subtotal 0
+                      span .00
+                  .proceed_button_container
+                    a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
+                  .promotional_container
+                    .duty_total Have a promotional code?
+                    .duty_cost 
+                      .fa.fa-chevron-down
+                  .promotional_container
+                    .duty_total Have a Gift Card or Store Credit?
+                    .duty_cost 
+                      .fa.fa-chevron-down
+              .learn_more 
+                span Learn about our 
+                span.blue_hover_text Returns Policy 
+                span and 
+                span.blue_hover_text Delivery & Shipping 
+                span information
+              .taxes *All tax & duties will be covered by us. If you are charged any duty/tax fees for your order, please send us a copy of the invoice so we can settle the charges.
+        - }
+    -}
+    
+    
     script.
       let LIST_OF_EDITED_ITEMS = [];
     
