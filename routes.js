@@ -850,11 +850,10 @@ router.get('/checkout/addressing', function(req, res) {
       let cart = results[0];
       let user_data = results[1];
 
-      if(!cart || !cart.length && req.user){
-        console.log('not authorized!');
+      if(req.user && !cart.length){
         res.render('hbx_error',{user:req.user, cart:cart})
-      } else if(!cart.length){
-        res.render('hbx_error')
+      } else if(!req.user){
+        res.render('hbx_addressing')
       }
 
       res.render('hbx_addressing', {

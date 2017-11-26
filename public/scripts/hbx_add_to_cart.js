@@ -98,13 +98,18 @@ const updateLocalStorageCart = () => {
 
 
 $(document).ready(function(){
-
-  if($('.users_persistent_id').length){
+  let user = $('.users_persistent_id').length
+  if(user){
     let user_id = $('.users_persistent_id')[0].innerHTML;
     update_cart_and_count_by_id(user_id);
-  } else if(window.localStorage.hbxLocalCart){
+  } else if(!user && window.localStorage.hbxLocalCart){
     updateLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
+    populateAddressCheckoutPage();
+  } else if(!user){
+    $('.shopping_bag')[0].innerHTML = 0;
+    $('.shopping_bag_deux')[0].innerHTML = 0;
+    populateAddressCheckoutPage();
   }
 
 })
