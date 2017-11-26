@@ -4,6 +4,7 @@ block content
   
     .hbx_shopping_bag_content
       - if(!cart || !cart.length){
+        .localStorageShoppingBagContent
         .hbx_empty_cart_content
           .shopping_bag_div
             img(src="images/hbx_images/general/shopping_bag.png")
@@ -74,7 +75,7 @@ block content
             
           .hbx_cart_right_column
             .hbx_right_main_container
-              .hbx_shipping_notice USD $100 away from Free Shipping.
+              .hbx_shipping_notice USD $0 away from Free Shipping.
               .hbx_right_container
                 .order_summary_container Order Summary
                 .shopping_sale_container
@@ -101,7 +102,7 @@ block content
                 .proceed_button_container
                   a.proceed_button(href="/checkout/addressing") PROCEED TO CHECKOUT
                 .promotional_container
-                  .duty_total Have a promotional cose?
+                  .duty_total Have a promotional code?
                   .duty_cost 
                     .fa.fa-chevron-down
                 .promotional_container

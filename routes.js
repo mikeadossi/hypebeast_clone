@@ -63,6 +63,7 @@ router.get('/post/:id', function(req, res) {
 })
 
 router.get('/store', function(req, res) {
+  console.log('\n req -> ',req,'\n');
   if(req.user){
     let user_id = req.user.id;
 

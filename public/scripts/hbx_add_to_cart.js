@@ -17,7 +17,7 @@ const updateLocalStorageCart = () => {
     }
 
     $('.localStorageContent').empty();
-    
+
     $('.localStorageContent').append(`
       <div class="items_in_bag">
         <span class="dropdown_item_count">`+totalNumOfItems+` Item(s) in Bag</span>
@@ -102,8 +102,9 @@ $(document).ready(function(){
   if($('.users_persistent_id').length){
     let user_id = $('.users_persistent_id')[0].innerHTML;
     update_cart_and_count_by_id(user_id);
-  } else {
+  } else if(window.localStorage.hbxLocalCart){
     updateLocalStorageCart();
+    populateShoppingBagPageWithLocalStorageContent();
   }
 
 })
@@ -173,7 +174,6 @@ const addSelectedItemsToCart = () => {
         product_id: GLOBAL_PRODUCT.id,
         product_brand: product_brand,
         product_image: product_image,
-        // product_image: $('.product_preview_img')[0],
         product_route: href,
         product_category: product_category,
         product_individual_price: product_price
@@ -202,23 +202,12 @@ const populateLocalStorage = (itemsInCartObj) => {
     itemsInCartObj.product_name = itemsInCartObj.product_name.replace('&amp;','ampersand_char')
   }
 
-  if(!window.localStorage.hbxLocalCart/*document.cookie == ''*/){
-    // let itemsInCartString = JSON.stringify(itemsInCartObj);
-    // const expiryDate = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-    // const path = "; path=/";
-    // document.cookie = "itemsInCart=["+itemsInCartString+"]"+expiryDate+path;
+  if(!window.localStorage.hbxLocalCart){
     window.localStorage.setItem( 'hbxLocalCart', "["+JSON.stringify(itemsInCartObj)+"]" );
   } else {
     let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
     hbxLocalCart.push(itemsInCartObj);
     window.localStorage.setItem( 'hbxLocalCart', JSON.stringify(hbxLocalCart) )
-    // hbxLocalCart = hbxLocalCart.split(']')
-    // console.log();
-    // let cookie_obj = document.cookie.split(']');
-    // cookie_obj = cookie_obj[0].split(']');
-    // cookie_obj.splice(1,0,itemsInCartString);
-    // cookie_obj = cookie_obj.join() + ']' + expiryDate + path;
-    // document.cookie = cookie_obj;
   }
 
 }

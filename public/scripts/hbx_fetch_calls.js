@@ -1,3 +1,20 @@
+let url = window.location.href + '/lola';
+fetch('/lola',{
+  method: 'GET',
+  headers: new Headers({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }),
+  credentials: "same-origin"
+})
+.then((cart) => {
+  res.render('hbx_account')
+})
+.catch(err => console.log(err))
+
+
+
+
 
 const post_cart_to_db = (cartItemsObj) => {
 
@@ -8,8 +25,6 @@ const post_cart_to_db = (cartItemsObj) => {
     // let product_image = product_image_first_child.getAttribute('src');
 
     let product_image = cartItemsObj.product_image;
-    console.log('product_image ===> ',product_image);
-    console.log('typeof product_image ===> ',typeof product_image);
 
     fetch(url, {
       method:'POST',
