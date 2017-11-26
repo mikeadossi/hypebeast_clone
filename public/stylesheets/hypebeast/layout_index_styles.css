@@ -41,7 +41,56 @@ button:focus{
   margin: auto;
   margin-top: 16px;
   text-align:center;
+  display:flex;
 }
+
+.banner_article_title_container{
+  background-color: white;
+  width: 600px;
+  margin-top: -125px;
+  position: absolute;
+  z-index: 20;
+  padding: 20px 20px 20px 30px;
+}
+
+.banner_article_title_container_side{
+  background-color: white;
+  width: 350px;
+  margin-top: -91px;
+  position: absolute;
+  z-index: 20;
+  padding: 15px 15px 15px 20px;
+}
+
+.banner_article_category{
+  color:steelblue;
+  text-align:left;
+}
+
+.banner_article_title_main{
+  font-size:28px;
+  text-align:left;
+  font-weight:bold;
+}
+
+.banner_article_title_side{
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.banner_article_title_main:hover, .banner_article_title_side:hover{
+  cursor:pointer;
+  opacity:0.6;
+}
+
+/*.central_banner_image{
+  width:69%;
+}
+
+.halo{
+  width:30%;
+}*/
 
 /* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
 .login_successful{
@@ -600,7 +649,7 @@ textarea{
 }
 
 .nav{
-  border-bottom: 0.5px solid gainsboro;
+  /*border-bottom: 0.5px solid gainsboro;*/
   margin: 16px 55px 0 51px;
 }
 
@@ -624,7 +673,22 @@ textarea{
   margin-top: -17px;
   width:100%;
   margin:auto;
-  max-width:1172px;
+  margin-right:20px;
+  /*max-width:1172px;*/
+  max-width:700px;
+  height:551px;
+}
+
+.index_banner_image_side_bottom{
+  padding-top:20px;
+}
+
+.index_banner_image_side{
+  margin-top:-17px;
+  width:100%;
+  margin:auto;
+  max-width:450px;
+  height:265px;
 }
 
 .top_stories{
@@ -1337,7 +1401,7 @@ textarea{
     width:70% !important;
   }
   .banner_container{
-    margin-top:-1px;
+    margin-top:1px;
   }
   .content_posts{
     width:1171px;

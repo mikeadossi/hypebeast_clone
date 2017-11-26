@@ -654,7 +654,7 @@ router.get('/hbx_account/address_info', function(req, res) {
     .then( results => {
       let user_data = results[0];
       let cart = results[1];
-      res.render('hbx_change_password', {
+      res.render('hbx_edit_address', {
         user: req.user,
         user_data: user_data,
         cart: cart
@@ -882,6 +882,7 @@ router.post('/checkout/complete', function(req, res) {
   let purchased_product_details_array = [];
   let tot_cost = 0;
 
+  console.log('\n cart $--> ',cart,'\n');
 
   for(let i = 0; i < cart.length; i++){
     let purchased_products_details = new Object();
@@ -929,11 +930,9 @@ router.post('/checkout/complete', function(req, res) {
       res.render('hbx_order_complete', {
         user: req.user
       });
-    } else {
-      res.redirect('/store');
-      // res.render('hbx_order_complete')
-      console.log('worked!!!');
     }
+
+    res.render('hbx_order_complete')
   })
   .catch( err => {
     console.log(err);

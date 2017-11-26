@@ -79,3 +79,7 @@
   width: 100%;
   display: inline-block;
 }
+
+.place_order_button{
+  width:90%;
+}
