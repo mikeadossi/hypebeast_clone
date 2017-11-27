@@ -592,6 +592,7 @@ textarea{
   background-color: #EEEEEE;
   width: 100%;
   position: absolute;
+  z-index:21;
 }
 
 .search_nav_glass{
@@ -1318,7 +1319,7 @@ textarea{
     /*text-align:center;*/
   }
   .banner_container{
-    margin-top:-1px;
+    margin-top:1px;
   }
   .top_ten_description{
     width: 87%;

@@ -36,7 +36,7 @@ const updateBag = () => {
     })
     .then(() => {
       let user_id = $('.users_persistent_id')[0].innerHTML;
-      update_cart_and_count_by_id(user_id);
+      updateCartAndCountByID(user_id);
     })
     .catch(err => console.log(err))
   }

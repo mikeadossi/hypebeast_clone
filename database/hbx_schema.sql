@@ -107,7 +107,8 @@ CREATE TABLE cart (
   products_id INTEGER REFERENCES products(id),
   users_id INTEGER REFERENCES users(id),
   item_name VARCHAR,
-  item_brand VARCHAR
+  item_brand VARCHAR,
+  item_route VARCHAR
 );
 
 

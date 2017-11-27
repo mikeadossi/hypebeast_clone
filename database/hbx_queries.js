@@ -240,7 +240,8 @@ let queries = {
     item_image,
     item_name,
     item_individual_price,
-    item_brand){
+    item_brand,
+    item_route){
 
     return db.any(
       `INSERT INTO cart (
@@ -254,9 +255,10 @@ let queries = {
         item_image,
         item_name,
         item_individual_price,
-        item_brand)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
-    [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand])
+        item_brand,
+        item_route)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
+    [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand, item_route])
   },
 
   clearAllCartDataById: function(id){
@@ -368,7 +370,7 @@ let queries = {
     state,
     company_name,
     order_notes,
-    purchased_product_details_array,
+    purchasedProductDetailsArray,
     tot_cost
   ){
     return db.any(`INSERT INTO orders (
@@ -403,7 +405,7 @@ let queries = {
       state,
       company_name,
       order_notes,
-      purchased_product_details_array,
+      purchasedProductDetailsArray,
       tot_cost
     ])
   },

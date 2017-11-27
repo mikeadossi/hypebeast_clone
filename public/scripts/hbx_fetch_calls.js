@@ -1,4 +1,4 @@
-const post_cart_to_db = (cartItemsObj) => {
+const postCartToDB = (cartItemsObj) => {
 
   let url = window.location.href + '/add-to-cart';
 
@@ -25,12 +25,13 @@ const post_cart_to_db = (cartItemsObj) => {
         item_image:cartItemsObj.item_image,
         item_name: cartItemsObj.item_name,
         item_individual_price: cartItemsObj.item_individual_price,
-        item_brand: cartItemsObj.item_brand
+        item_brand: cartItemsObj.item_brand,
+        item_route: cartItemsObj.item_route
       }),
       credentials: "same-origin"
     })
     .then((cart) => {
-      update_cart_and_count_by_id(GLOBAL_USER.id);
+      updateCartAndCountByID(GLOBAL_USER.id);
     })
     .catch(err => console.log(err))
   }
@@ -38,7 +39,7 @@ const post_cart_to_db = (cartItemsObj) => {
 }
 
 
-const update_cart_and_count_by_id = (user_id) => {
+const updateCartAndCountByID = (user_id) => {
 
   fetch('/get-cart-by-id', {
     method:'GET',
@@ -60,7 +61,6 @@ const update_cart_and_count_by_id = (user_id) => {
     $('.shopping_bag_deux')[0].innerHTML = 0;
 
     if(cartJSON.length === 1){
-      console.log('cartJSON -> ',cartJSON);
 
       $('.shopping_bag')[0].innerHTML = cartJSON[0].item_quantity;
       $('.shopping_bag_deux')[0].innerHTML = cartJSON[0].item_quantity;

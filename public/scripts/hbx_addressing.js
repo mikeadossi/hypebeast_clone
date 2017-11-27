@@ -47,7 +47,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">FIRST NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="first_name_input" type="text" name="first_name" value="u"/>
+                      <input class="first_name_input" type="text" name="first_name" />
                     </div>
                   </div>
                   <div class="checkout_form_group">
@@ -55,7 +55,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">LAST NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="last_name_input" type="text" name="last_name" value="u"/>
+                      <input class="last_name_input" type="text" name="last_name" />
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">PHONE</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="phone_input" type="text" name="phone" value=9 />
+                      <input class="phone_input" type="text" name="phone" />
                     </div>
                   </div>
                   <div class="checkout_form_group">
@@ -73,7 +73,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">EMAIL</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="email_input" type="text" name="order_email" value="u@aol.com" />
+                      <input class="email_input" type="text" name="order_email" />
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">CONFIRM EMAIL</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="email_input" type="text" name="confirm_order_email" value="u@aol.com" />
+                      <input class="email_input" type="text" name="confirm_order_email" />
                     </div>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">ADDRESS LINE</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="first_name_input wide_checkout_input" type="text" name="street" value="u"/>
+                      <input class="first_name_input wide_checkout_input" type="text" name="street" />
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">TOWN/CITY</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="city_input" type="text" name="city" value="u"/>
+                      <input class="city_input" type="text" name="city" />
                     </div>
                   </div>
                   <div class="checkout_form_group checkout_form_wide">
@@ -115,7 +115,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">POSTCODE/ZIP</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="postcode_input" type="text" name="postcode" value=9 />
+                      <input class="postcode_input" type="text" name="postcode" />
                     </div>
                   </div>
                 </div>
@@ -468,7 +468,7 @@ const populateAddressCheckoutPage = () => {
                       <label for="">COMPANY NAME</label>
                     </div>
                     <div class="contact_input_container">
-                      <input class="company_input wide_checkout_input" type="text" name="company_name" value="u"/>
+                      <input class="company_input wide_checkout_input" type="text" name="company_name" />
                     </div>
                   </div>
                 </div>

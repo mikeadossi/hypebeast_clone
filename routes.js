@@ -568,7 +568,7 @@ router.get('/brands/:brand/:product', function(req, res) {
         product_colors_arr: product_colors_arr,
         this_brand_images_arr: this_brand_images_arr,
         user: req.user,
-        cart: cart,
+        cart: cart || null,
         product_category: product_category
       })
     })
@@ -869,8 +869,11 @@ router.get('/checkout/addressing', function(req, res) {
 
 })
 
+router.get('/checkout/complete', function(req, res, next) {
+  res.render('hbx_order_complete');
+})
 
-router.post('/checkout/complete', function(req, res) {
+router.post('/checkout/complete', function(req, res, next) {
 
   if(!req.user && !req.body.users_cart[0]){
     res.redirect('/hbx_error');
@@ -879,10 +882,8 @@ router.post('/checkout/complete', function(req, res) {
   let cart = req.body.users_cart
 
   let order_obj = JSON.parse(req.body.order_obj_value);
-  let purchased_product_details_array = [];
+  let purchasedProductDetailsArray = [];
   let tot_cost = 0;
-
-  console.log('\n cart $--> ',cart,'\n');
 
   for(let i = 0; i < cart.length; i++){
     let purchased_products_details = new Object();
@@ -895,7 +896,8 @@ router.post('/checkout/complete', function(req, res) {
     purchased_products_details.item_category = cart[i].item_category;
     purchased_products_details.products_id = cart[i].products_id;
     purchased_products_details.item_brand = cart[i].item_brand;
-    purchased_product_details_array.push(purchased_products_details);
+    purchased_products_details.item_route = cart[i].item_route;
+    purchasedProductDetailsArray.push(purchased_products_details);
     tot_cost += cart[i].item_cost;
   }
 
@@ -920,7 +922,7 @@ router.post('/checkout/complete', function(req, res) {
       order_obj.state,
       order_obj.company_name,
       order_obj.order_notes,
-      purchased_product_details_array,
+      purchasedProductDetailsArray,
       tot_cost
     ),
     conditional_promise
@@ -931,8 +933,7 @@ router.post('/checkout/complete', function(req, res) {
         user: req.user
       });
     }
-
-    res.render('hbx_order_complete')
+    res.json({})
   })
   .catch( err => {
     console.log(err);
@@ -964,7 +965,8 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
       req.body.item_image,
       req.body.item_name,
       req.body.item_individual_price,
-      req.body.item_brand
+      req.body.item_brand,
+      req.body.item_route
     )
     .then((cart) => {
       res.json(cart)

@@ -101,7 +101,7 @@ $(document).ready(function(){
   let user = $('.users_persistent_id').length
   if(user){
     let user_id = $('.users_persistent_id')[0].innerHTML;
-    update_cart_and_count_by_id(user_id);
+    updateCartAndCountByID(user_id);
   } else if(!user && window.localStorage.hbxLocalCart){
     updateLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
@@ -166,9 +166,11 @@ const addSelectedItemsToCart = () => {
       let product_quantity = Number($('.item_count_amt')[0].innerHTML)
       let product_cost = product_price * product_quantity;
       let product_category = $('.hidden_category').text();
+      product_category = product_category.replace(/ /g,'');
 
       let product_image = $('.product_preview_img')[0].outerHTML;
       product_image = product_image.split('src=')[1].split("></div>")[0]
+      product_image = product_image.replace(/['"]+/g, '');
 
       itemsInCartObj = {
         item_quantity: Number($('.item_count_amt')[0].innerHTML),
@@ -184,10 +186,12 @@ const addSelectedItemsToCart = () => {
         item_individual_price: product_price
       }
 
+      console.log('** itemsInCartObj -> ',itemsInCartObj);
+
       if($('.hidden_user').text()){
         // if user is logged in
         itemsInCartObj.user_id = GLOBAL_USER.id
-        post_cart_to_db(itemsInCartObj);
+        postCartToDB(itemsInCartObj);
         proceedToBag();
       } else {
         // if user is not registered but populating cart

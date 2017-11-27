@@ -274,7 +274,7 @@ VALUES (
   'T.S. Fox',
   'Fashion',
   'Nov 26, 2017',
-  '800',
+  '810',
   '1 Comment',
   'And it may be right around the corner',
   '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/classic_akira_bike_img.jpg" /><p>If you’re a streetwear fan and an anime lover, your dream collaboration appears to be on the way; according to famed artist/screenwriter/director Katsuhiro Otomo, an Akira x Supreme collab is dropping in the near future.</p><p>The Akira creator made the announcement over the weekend during a televised interview at Tokyo’s GALLERY X BY PARCO, explaining that he had turned down the opportunity a number of times in the past before finally agreeing to the co-branded endeavor. And the best part? The collaboration may be dropping as soon as this very month.</p><p>Stay tuned for details, but in the meantime, look for Supreme’s latest collaboration with Stone Island to release this Thursday, October 5.</p><div class="text_align_left"><img src="/images/hypebeast_images/blogImages/akira_supreme_twitter.png" /></div></div>',

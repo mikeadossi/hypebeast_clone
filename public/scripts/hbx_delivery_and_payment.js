@@ -3,11 +3,15 @@ const placeLocalStorageOrder = () => {
   let order_obj_value = $('.record_obj').val();
   let payment_type = $('input[name="payment_type"]:checked').val();
 
-  fetch('/checkout/complete', {
+  let url = window.location.href;
+  url = url.split('/checkout/delivery_and_payment')[0];
+  let route = url + '/checkout/complete'
+
+  fetch(route, {
     method:'POST',
     headers: new Headers({
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }),
     body: JSON.stringify({
       'users_cart': hbxLocalCart,
@@ -15,14 +19,12 @@ const placeLocalStorageOrder = () => {
       'shipping_cost': 0,
       'payment_type': payment_type
     }),
-    mode: 'cors',
-    credentials: "same-origin",
-    cache: 'default'
+    credentials: "same-origin"
   })
   .then( () => {
-    console.log('finished?');
-    window.localStorage.removeItem(hbxLocalCart)
-    return
+    let storage = window.localStorage;
+    storage.removeItem('hbxLocalCart');
+    document.location.href = url + '/checkout/complete';
   })
   .catch( err => console.log(err))
 }

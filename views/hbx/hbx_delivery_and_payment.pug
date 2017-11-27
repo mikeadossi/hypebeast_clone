@@ -18,7 +18,7 @@ block content
         span.checkout_title ORDER COMPLETE
 
   
-  form.delivery_sub_content(method="post" action="/checkout/complete")
+  form.delivery_sub_content(method="get" action="/checkout/complete")
     .delivery_left_container
       .hbx_delivery_details_container
         .checkout_header Shipping Method
@@ -53,7 +53,7 @@ block content
           - for(let i = 0; i < cart.length; i++){
             .checkout_item_container
               .checkout_item_img
-                img(src=""+JSON.parse(cart[i].item_image))
+                img(src=cart[i].item_image)
               .checkout_item_details_container
                 .checkout_item_brand brand
                 .checkout_item_name !{cart[i].item_name}
