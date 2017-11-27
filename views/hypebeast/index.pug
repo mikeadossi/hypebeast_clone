@@ -3,22 +3,22 @@ extends layout
 block content
   .banner_container
     .central_banner_image
-      a(href="/post/"+posts[1].id)
+      a(href="/post/"+posts[20].id)
         img(src="images/hypebeast_images/blogImages/damien_hirst_gagosian_gallery.jpg").index_banner_image
       .banner_article_title_container
         .banner_article_category Arts
-        .banner_article_title_main Damien Hirst's "Visual Candy and Natural History" Exhibition Opens in Hong Kong
+        a(href="/post/"+posts[20].id).banner_article_title_main Damien Hirst's "Visual Candy and Natural History" Exhibition Opens in Hong Kong
     .adjacent_banner_images
-      a.halo(href="/post/"+posts[1].id)
+      a(href="/post/"+posts[19].id)
         img(src="images/hypebeast_images/blogImages/black_pigeon_nypd.jpg").index_banner_image_side
       .banner_article_title_container_side
         .banner_article_category Footwear
-        .banner_article_title_side NYPD Shut Down a Campout for the Nike SB Dunk Low "Black Pigeon”
-      a.halo(href="/post/"+posts[1].id)
+        a(href="/post/"+posts[19].id).banner_article_title_side NYPD Shut Down a Campout for the Nike SB Dunk Low "Black Pigeon”
+      a(href="/post/"+posts[18].id)
         img(src="images/hypebeast_images/blogImages/supreme_akira.jpg").index_banner_image_side.index_banner_image_side_bottom
       .banner_article_title_container_side
         .banner_article_category Fashion
-        .banner_article_title_side An 'Akira' x Supreme Collaboration Is Coming
+        a(href="/post/"+posts[18].id).banner_article_title_side An 'Akira' x Supreme Collaboration Is Coming
   .content
     .top_stories
       .top_ten_container

@@ -44,39 +44,41 @@ button:focus{
   display:flex;
 }
 
+.banner_article_title_container, .banner_article_title_container_side{
+  background-color:white;
+  z-index:20;
+  text-align:left;
+  position:absolute;
+}
+
 .banner_article_title_container{
-  background-color: white;
   width: 600px;
   margin-top: -125px;
-  position: absolute;
-  z-index: 20;
   padding: 20px 20px 20px 30px;
 }
 
 .banner_article_title_container_side{
-  background-color: white;
   width: 350px;
   margin-top: -91px;
-  position: absolute;
-  z-index: 20;
   padding: 15px 15px 15px 20px;
 }
 
 .banner_article_category{
   color:steelblue;
-  text-align:left;
 }
 
 .banner_article_title_main{
-  font-size:28px;
-  text-align:left;
-  font-weight:bold;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 
 .banner_article_title_side{
   font-size: 18px;
-  text-align: left;
   font-weight: bold;
+  text-decoration: none;
+  color:black;
 }
 
 .banner_article_title_main:hover, .banner_article_title_side:hover{
@@ -84,13 +86,9 @@ button:focus{
   opacity:0.6;
 }
 
-/*.central_banner_image{
-  width:69%;
+.text_align_left{
+  text-align:left !important;
 }
-
-.halo{
-  width:30%;
-}*/
 
 /* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
 .login_successful{
@@ -649,7 +647,6 @@ textarea{
 }
 
 .nav{
-  /*border-bottom: 0.5px solid gainsboro;*/
   margin: 16px 55px 0 51px;
 }
 
@@ -674,7 +671,6 @@ textarea{
   width:100%;
   margin:auto;
   margin-right:20px;
-  /*max-width:1172px;*/
   max-width:700px;
   height:551px;
 }
@@ -789,6 +785,10 @@ textarea{
 .top_ten_description div .post_title{
   margin-top: 0;
   margin-bottom: 8px;
+}
+
+.top_ten_description:hover{
+  opacity:0.6;
 }
 
 .top_ten_description{

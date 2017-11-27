@@ -266,6 +266,46 @@ VALUES (
   'Applying math to mouthwatering treats.',
   '<div class="blog_text_content"><div class="iframe_container"><iframe src="https://player.vimeo.com/video/232635098" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><p>Taking a mathematical approach to food may not sound like the most exciting way of cooking to most people, but Ukrainian pastry chef Dinara Kasko has other ideas. Working with an array of artists across various disciplines, Kasko uses algorithms and 3D printing to create a real visual spectacle from her baking endeavours.</p><p>The complex math applied to producing the moulds for Kasko’s creations simulates the movements and interactions of objects in space while taking shape and variables such as gravity into account. This process creates unique and somewhat bewildering kinetic designs for the chef’s incredible tarts. Finally, linking up with artists to collaborate on the aesthetic of the final product.</p><p>Take a look at the process in the video above, and — if you’re in the mood for more food-oriented films — why not check out <a href="https://hypebeast.com/2017/8/quentin-tarantino-wes-anderson-recipe-videos">how recipe videos might look if they were made by your favorite Hollywood directors</a>.</p></div>',
   '<div><div><span>SOURCE<span><span> DESIGNBOOM<span></div><div><span>IMAGE CREDIT</span><span> DESIGNBOOM</span></div></div>'
+),
+(
+  'An ''Akira'' x Supreme Collaboration Is Coming',
+  '<div><h2 class="post_title">An ''Akira'' x Supreme Collaboration Is Coming</h2></div>',
+  '<img class="post_image" src="/images/hypebeast_images/blogImages/classic_akira_bike_small.jpg" />',
+  'T.S. Fox',
+  'Fashion',
+  'Nov 26, 2017',
+  '800',
+  '1 Comment',
+  'And it may be right around the corner',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/classic_akira_bike_img.jpg" /><p>If you’re a streetwear fan and an anime lover, your dream collaboration appears to be on the way; according to famed artist/screenwriter/director Katsuhiro Otomo, an Akira x Supreme collab is dropping in the near future.</p><p>The Akira creator made the announcement over the weekend during a televised interview at Tokyo’s GALLERY X BY PARCO, explaining that he had turned down the opportunity a number of times in the past before finally agreeing to the co-branded endeavor. And the best part? The collaboration may be dropping as soon as this very month.</p><p>Stay tuned for details, but in the meantime, look for Supreme’s latest collaboration with Stone Island to release this Thursday, October 5.</p><div class="text_align_left"><img src="/images/hypebeast_images/blogImages/akira_supreme_twitter.png" /></div></div>',
+  '<div><span><span><span> <span></div>'
+),
+(
+  'NYPD Shut Down a Campout for the Nike SB Dunk Low "Black Pigeon”',
+  '<div><h2 class="post_title">NYPD Shut Down a Campout for the Nike SB Dunk Low "Black Pigeon”</h2></div>',
+  '<img class="post_image" src="/images/hypebeast_images/blogImages/black_pigeon_nypd.jpg" />',
+  'Nicolaus Li',
+  'Footwear',
+  'Nov 25, 2017',
+  '800',
+  '1 Comment',
+  'All for a pair of shoes.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/black_pigeon_nypd.jpg" /><p>As the official release of the Nike SB Dunk Low “Black Pigeon” nears, many sneakerheads are beginning to campout in front of their favorite retailers. Mirroring the 2005 release of the original Staple x Nike collab, the NYPD recently took notice of the commotion outside of Extra Butter’s Orchard Street location — putting a stop to the lineup. Taking to Instagram, Jeff Staple noted that law enforcement has forced Extra Butter to restrict when people can start lining up and an increased NYPD presence will be seen during the first come, first serve release to keep things orderly. Check out the Instagram post below to learn more about the upcoming release.</p><p>For more Nike news, learn more about the one day pop-up for the “Black Pigeon” Nike SB Dunk Low happening at the Reed Space in New York.</p><div class="text_align_left"><img src="/images/hypebeast_images/blogImages/nike_pigeon_twitter.png" /></div><div class="blog_text_content"><div class="iframe_container text_align_left"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fsneakernews%2Fvideos%2F10159656861990158%2F" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></div>',
+  '<div><span>IMAGE CREDIT <span><span>@GC911<span></div>'
+),
+(
+  'Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens in Hong Kong',
+  '<div><h2 class="post_title">Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens in Hong Kong
+</h2></div>',
+  '<img class="post_image" src="/images/hypebeast_images/blogImages/damien_hirst_gagosian_gallery.jpg" />',
+  'Joanna Fu',
+  'Arts',
+  '54 minutes ago',
+  '400',
+  '1 Comment',
+  'The artist’s infamous pickled animals arrive at Gagosian Gallery.',
+  '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/damien_hirst_gagosian_gallery.jpg" /><p>English artist Damien Hirst returns to the Gagosian Gallery in Hong Kong, six years after its opening, with his exhibition “Visual Candy and Natural History.” The show features the YBA artist’s works from 1993 and 1994, including his infamous pickled animal sculptures, such as a shark preserved in formaldehyde in a vitrine.</p><p>Other pickled animals include sheep, a dove, an oven-ready turkey and two calves named Cain and Abel, while another artwork which consists of a cow’s decapitated head lying in a puddle of blood, adds to the show’s shock value. Also on display is a series of vibrant spot color oil paintings collectively called Visual Candy.</p><p>Damien Hirst’s “Visual Candy and Natural History” will be on display at the Gagosian in Hong Kong until January 13, 2018. Let us know if you’re a fan of Hirst in the comments below and for more art content, Daniel Arsham unveiled a limited edition SAND CIRCLE studio device.</p><div class="text_align_left"><div>Gagosian Gallery Hong Kong</div><div>7/F Pedder Building, 12 Pedder Street</div><div>Central, Hong Kong</div></div></div>',
+  '<div><span><span><span> <span></div>'
 )
 -- (
 --   '',
@@ -277,6 +317,6 @@ VALUES (
 --   '800',
 --   '1 Comment',
 --   '',
---   '<div class="blog_text_content"><img class="blog_banner blog_images" src="" /><p></p><p></p></div>',
+--   '<div class="blog_text_content"><img class="blog_banner blog_images" src="/images/hypebeast_images/blogImages/" /><p></p><p></p></div>',
 --   '<div><span><span><span> <span></div>'
 -- ),
