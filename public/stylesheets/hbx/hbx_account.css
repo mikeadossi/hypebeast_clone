@@ -11,6 +11,10 @@
   padding-top:30px;
 }
 
+.hbx_settings_controls{
+  max-width:60%;
+}
+
 .hbx_settings_nav_link:hover{
   color:#2D86D0;
   cursor:pointer;
@@ -86,10 +90,33 @@ table, th, td {
   display:none;
 }
 
+.hbx_modal_overlay{
+  opacity:0.8;
+  background-color:#ccc;
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:24;
+  display:none;
+}
+
+.modal_contents_container{
+  overflow: scroll;
+  height: 52vh;
+  max-height: 320px;
+}
+
+.close_modal:hover{
+  color:red;
+}
+
 .close_modal{
   width: 20px;
   float: right;
   cursor:pointer;
+  font-weight:bold;
 }
 
 .account_buttons:hover{

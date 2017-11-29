@@ -672,11 +672,25 @@ router.get('/hbx_account/orders', function(req, res){
     res.redirect('error');
   }
 
-  hbx_queries.getPreviousOrdersByID(req.user.id)
-  .then( (orders) => {
+  Promise.all([
+    hbx_queries.getPreviousOrdersByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
+  ])
+  .then( (results) => {
+    let orders = results[0];
+    let purchased_product_details_array = [];
+    for(let i = 0; i < orders.length; i++){
+      purchased_product_details_array.push(JSON.parse(orders[0].purchased_product_details_array)[0]);
+    }
+    console.log('\n','purchased_product_details_array -> ',purchased_product_details_array,'\n');
+    console.log('\n','purchased_product_details_array.length -> ',purchased_product_details_array.length,'\n');
+    // console.log('\n','purchased_product_details_array[0].item_quantity -> ',purchased_product_details_array[0].item_quantity,'\n');
+    // console.log('\n','purchased_product_details_array[1].item_quantity -> ',purchased_product_details_array[1].item_quantity,'\n');
     res.render('hbx_orders', {
       user: req.user,
-      orders: orders
+      orders: orders,
+      purchased_product_details_array: purchased_product_details_array,
+      cart: results[1]
     })
   })
   .catch(err => console.log(err))
@@ -879,11 +893,16 @@ router.post('/checkout/complete', function(req, res, next) {
     res.redirect('/hbx_error');
   }
 
-  let cart = req.body.users_cart
+  let cart = JSON.parse(req.body.users_cart);
 
   let order_obj = JSON.parse(req.body.order_obj_value);
+  order_obj.phone = JSON.parse(order_obj.phone)
+  order_obj.postcode = JSON.parse(order_obj.postcode)
   let purchasedProductDetailsArray = [];
   let tot_cost = 0;
+
+  console.log('\n order_obj => ',order_obj,'\n');
+  console.log('\n cart => ',cart,'\n');
 
   for(let i = 0; i < cart.length; i++){
     let purchased_products_details = new Object();
@@ -896,10 +915,16 @@ router.post('/checkout/complete', function(req, res, next) {
     purchased_products_details.item_category = cart[i].item_category;
     purchased_products_details.products_id = cart[i].products_id;
     purchased_products_details.item_brand = cart[i].item_brand;
+    purchased_products_details.item_name = cart[i].item_name;
     purchased_products_details.item_route = cart[i].item_route;
+
     purchasedProductDetailsArray.push(purchased_products_details);
     tot_cost += cart[i].item_cost;
   }
+
+  console.log('purchasedProductDetailsArray[0] -> ',purchasedProductDetailsArray[0])
+  console.log('purchasedProductDetailsArray[0].item_name -> ',purchasedProductDetailsArray[0].item_name)
+  // console.log('* -> ',*)
 
   let users_id = order_obj.users_id || null
   let conditional_promise;
@@ -922,7 +947,7 @@ router.post('/checkout/complete', function(req, res, next) {
       order_obj.state,
       order_obj.company_name,
       order_obj.order_notes,
-      purchasedProductDetailsArray,
+      JSON.stringify(purchasedProductDetailsArray),
       tot_cost
     ),
     conditional_promise
@@ -933,7 +958,6 @@ router.post('/checkout/complete', function(req, res, next) {
         user: req.user
       });
     }
-    res.json({})
   })
   .catch( err => {
     console.log(err);

@@ -394,7 +394,7 @@ ul{
   border-bottom: 1px solid #E0E0E0;
 }
 
-.dropdown_img img{
+.dropdown_img img, .modal_img img{
   height:82px;
 }
 

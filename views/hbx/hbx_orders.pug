@@ -2,28 +2,6 @@ extends hbx_layout
 
 block content
 
-  .hbx_ordered_item_modal
-    .close_modal X
-    h2 PURCHASED
-    table(style='width:100%')
-      tr
-        th PRODUCT ID
-        th PRODUCT NAME
-        th ITEM COUNT
-        th PRICE
-        th TOTAL PRICE
-      tr
-        td 4
-        td sneakers
-        td 3
-        td $20.00
-        td $60.00
-      tr
-        td 5
-        td shirt
-        td 3
-        td $200.00
-        td $600.00
   .content
     .hbx_your_settings_content
       .hbx_settings_nav
@@ -39,18 +17,18 @@ block content
           .hbx_edit_profile_header ORDER HISTORY
           - if(orders && orders.length > 0){
             table.order_table(style='width:100%')
+             tr
+              th ORDER ID
+              th PURCHASE DATE
+              th ITEMS
+              th PAYMENT
+              th PURCHASE TOTAL
              - for(let i = 0; i < orders.length; i++){
-                 tr
-                   th ORDER ID
-                   th PURCHASE DATE
-                   th ITEMS
-                   th PAYMENT
-                   th PURCHASE TOTAL
                  tr
                    td !{orders[i].id}
                    td !{orders[i].purchased_at}
                    td 
-                     a.view_order_items(href="#") view
+                     a.view_order_items(href="#" onclick="renderViewsModal("+orders[i].id+","+orders[i].purchased_product_details_array+")" ) view
                    td !{orders[i].payment_type}
                    td !{orders[i].total_purchase_cost}
              - }
