@@ -20,7 +20,7 @@ $( window ).resize(function() {
 });
 
 
-const decrementCount = (element) => {
+const decrementCount = (element, num_floor) => {
   let container = element.parentNode;
   let number = Number(container.children[1].innerHTML);
   let decrement_element = container.children[0].className
@@ -31,17 +31,14 @@ const decrementCount = (element) => {
     $(this).css('cursor','pointer');
   })
 
-  if(number === 1){
+  if(number === num_floor){
     $('.'+decrement_element).hover(function(){
       $(this).css('cursor','not-allowed','important');
-    })
-  } else if(number > 1){
-    $('.'+increment_element).hover(function(){
-      $(this).css('cursor','not-allowed','important');
+      return;
     })
   }
 
-  if(number > 1 && number <= 5){
+  if(number > num_floor && number <= 5){
     number -= 1;
     container.children[1].innerHTML = number;
   }
@@ -68,7 +65,7 @@ const incrementCount = (element) => {
     })
   }
 
-  if(number > 0 && number <= 4){
+  if(number <= 4){
     number += 1;
     container.children[1].innerHTML = number;
   }

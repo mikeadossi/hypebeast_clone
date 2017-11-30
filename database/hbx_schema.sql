@@ -57,7 +57,9 @@ CREATE TABLE products (
   pants_32_count INTEGER,
   pants_34_count INTEGER,
   pants_36_count INTEGER,
-  tot_count INTEGER
+  product_color_type VARCHAR,
+  tot_count INTEGER,
+  category_name VARCHAR
 );
 
 CREATE TABLE users (
@@ -243,7 +245,9 @@ INSERT INTO products (
   brand_id,
   brand_name,
   product_color_id,
-  category_id
+  product_color_type,
+  category_id,
+  category_name
 )
 VALUES (
   '165',
@@ -273,7 +277,9 @@ VALUES (
   '3',
   'adidas-originals',
   '2',
-  '8'
+  'black',
+  '8',
+  'sneakers'
 ),
 (
   '155',
@@ -303,7 +309,9 @@ VALUES (
   '3',
   'adidas-originals',
   '1',
-  '8'
+  'beige',
+  '8',
+  'sneakers'
 ),
 (
   '130',
@@ -333,7 +341,9 @@ VALUES (
   '3',
   'adidas-originals',
   '1',
-  '8'
+  'beige',
+  '8',
+  'sneakers'
 ),
 (
   '115',
@@ -363,7 +373,9 @@ VALUES (
   '3',
   'adidas-originals',
   '7',
-  '8'
+  'white',
+  '8',
+  'sneakers'
 ),
 (
   '35',
@@ -393,7 +405,9 @@ VALUES (
   '3',
   'adidas-originals',
   '5',
-  '9'
+  'grey',
+  '9',
+  't-shirts'
 ),
 (
   '66',
@@ -423,7 +437,9 @@ VALUES (
   '3',
   'adidas-originals',
   '3',
-  '6'
+  'blue',
+  '6',
+  'shorts'
 ),
 (
   '75',
@@ -453,7 +469,9 @@ VALUES (
   '3',
   'adidas-originals',
   '5',
-  '5'
+  'grey',
+  '5',
+  'jackets'
 ),
 (
   '410',
@@ -484,7 +502,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '13'
+  'black',
+  '13',
+  'sweatshirts'
 ),
 (
   '475',
@@ -514,7 +534,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '8'
+  'black',
+  '8',
+  'sneakers'
 ),
 (
   '670',
@@ -544,7 +566,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '5'
+  'black',
+  '5',
+  'jackets'
 ),
 (
   '550',
@@ -574,7 +598,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '11'
+  'black',
+  '11',
+  'pants'
 ),
 (
   '120',
@@ -604,7 +630,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '1'
+  'black',
+  '1',
+  'accessories'
 ),
 (
   '380',
@@ -634,7 +662,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '10'
+  'black',
+  '10',
+  't-shirts'
 ),
 (
   '530',
@@ -664,7 +694,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '12'
+  'black',
+  '12',
+  'hoodies'
 ),
 (
   '380',
@@ -694,7 +726,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '1'
+  'black',
+  '1',
+  'accessories'
 ),
 (
   '90',
@@ -724,7 +758,9 @@ VALUES (
   '1',
   '11-by-boris-bidjan-saberi',
   '2',
-  '2'
+  'black',
+  '2',
+  'caps'
 ),
 (
   '180',
@@ -754,7 +790,9 @@ VALUES (
   '1',
   'tres-bien',
   '2',
-  '11'
+  'black',
+  '11',
+  'pants'
 ),
 (
   '395',
@@ -785,7 +823,9 @@ VALUES (
   '2',
   'tres-bien',
   '4',
-  '5'
+  'green',
+  '5',
+  'jackets'
 ),
 (
   '170',
@@ -815,7 +855,9 @@ VALUES (
   '2',
   'tres-bien',
   '8',
-  '13'
+  'purple',
+  '13',
+  'sweatshirts'
 ),
 (
   '145',
@@ -845,7 +887,9 @@ VALUES (
   '2',
   'tres-bien',
   '9',
-  '13'
+  'brown',
+  '13',
+  'sweatshirts'
 ),
 (
   '1350',
@@ -875,7 +919,9 @@ VALUES (
   '5',
   'mastermind-world',
   '1',
-  '10'
+  'beige',
+  '10',
+  'sweatshirts'
 ),
 (
   '800',
@@ -905,7 +951,9 @@ VALUES (
   '5',
   'mastermind-world',
   '1',
-  '10'
+  'beige',
+  '10',
+  't-shirt'
 ),
 (
   '1500',
@@ -935,7 +983,9 @@ VALUES (
   '5',
   'mastermind-world',
   '7',
-  '12'
+  'white',
+  '12',
+  'hoodies'
 ),
 (
   '600',
@@ -965,7 +1015,9 @@ VALUES (
   '5',
   'mastermind-world',
   '7',
-  '10'
+  'white',
+  '10',
+  't-shirts'
 ),
 (
   '600',
@@ -995,7 +1047,9 @@ VALUES (
   '5',
   'mastermind-world',
   '5',
-  '13'
+  'grey',
+  '13',
+  't-shirts'
 ),
 (
   '1380',
@@ -1025,7 +1079,9 @@ VALUES (
   '5',
   'mastermind-world',
   '3',
-  '14'
+  'blue',
+  '14',
+  'jeans'
 ),
 (
   '130',
@@ -1055,7 +1111,9 @@ VALUES (
   '6',
   'undercover',
   '4',
-  '15'
+  'green',
+  '15',
+  'toys'
 ),
 (
   '130',
@@ -1085,7 +1143,9 @@ VALUES (
   '6',
   'undercover',
   '6',
-  '15'
+  'red',
+  '15',
+  'toys'
 ),
 (
   '150',
@@ -1115,7 +1175,9 @@ VALUES (
   '6',
   'undercover',
   '2',
-  '9'
+  'black',
+  '9',
+  't-shirts'
 ),
 (
   '620',
@@ -1145,7 +1207,9 @@ VALUES (
   '6',
   'undercover',
   '3',
-  '5'
+  'blue',
+  '5',
+  'jackets'
 ),
 (
   '70',
@@ -1175,7 +1239,9 @@ VALUES (
   '4',
   'denim-by-vanquish-fragment',
   '2',
-  '17'
+  'black',
+  '17',
+  'sandals'
 ),
 (
   '40',
@@ -1205,7 +1271,9 @@ VALUES (
   '4',
   'denim-by-vanquish-fragment',
   '2',
-  '16'
+  'black',
+  '16',
+  'homeware'
 ),
 (
   '375',
@@ -1235,7 +1303,9 @@ VALUES (
   '4',
   'denim-by-vanquish-fragment',
   '3',
-  '14'
+  'blue',
+  '14',
+  'jeans'
 ),
 (
   '45',
@@ -1265,7 +1335,9 @@ VALUES (
   '4',
   'denim-by-vanquish-fragment',
   '5',
-  '18'
+  'grey',
+  '18',
+  'underwear'
 ),
 (
   '105',
@@ -1295,7 +1367,9 @@ VALUES (
   '3',
   'adidas-originals',
   '7',
-  '8'
+  'white',
+  '8',
+  'sneakers'
 ),
 (
   '105',
@@ -1325,7 +1399,9 @@ VALUES (
   '3',
   'adidas-originals',
   '7',
-  '8'
+  'white',
+  '8',
+  'sneakers'
 ),
 (
   '155',
@@ -1355,5 +1431,7 @@ VALUES (
   '3',
   'adidas-originals',
   '7',
-  '8'
+  'white',
+  '8',
+  'sneakers'
 );

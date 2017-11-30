@@ -20,26 +20,53 @@ const addToListOfEditedItems = (element, changeInValue) => {
 }
 
 const updateBag = () => {
+  let url = window.location.href;
+
   for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
-    fetch('/update-bag', {
-      method:'POST',
-      headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify({
-        id: LIST_OF_EDITED_ITEMS[i].id,
-        item_count: LIST_OF_EDITED_ITEMS[i].count,
-        item_tot_cost: LIST_OF_EDITED_ITEMS[i].tot_cost
-      }),
-      credentials: "same-origin"
-    })
-    .then(() => {
-      let user_id = $('.users_persistent_id')[0].innerHTML;
-      updateCartAndCountByID(user_id);
-    })
-    .catch(err => console.log(err))
-  }
+    if(LIST_OF_EDITED_ITEMS[i].count === 0){
+      fetch('/remove-cart-item/'+LIST_OF_EDITED_ITEMS[i].id, {
+        method:'DELETE',
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+          id: LIST_OF_EDITED_ITEMS[i].id,
+          item_count: LIST_OF_EDITED_ITEMS[i].count,
+          item_tot_cost: LIST_OF_EDITED_ITEMS[i].tot_cost
+        }),
+        credentials: "same-origin"
+      })
+      .then(() => {
+        let user_id = $('.users_persistent_id')[0].innerHTML;
+        updateCartAndCountByID(user_id);
+      })
+      .catch(err => console.log(err))
+
+    } else {
+      fetch('/update-bag', {
+        method:'POST',
+        headers: new Headers({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+          id: LIST_OF_EDITED_ITEMS[i].id,
+          item_count: LIST_OF_EDITED_ITEMS[i].count,
+          item_tot_cost: LIST_OF_EDITED_ITEMS[i].tot_cost
+        }),
+        credentials: "same-origin"
+      })
+      .then(() => {
+        let user_id = $('.users_persistent_id')[0].innerHTML;
+        updateCartAndCountByID(user_id);
+      })
+      .catch(err => console.log(err))
+    }
+    }
+
+    console.log('ok...');
+  document.location.href = url;
 }
 
 const populateShoppingBagPageWithLocalStorageContent = () => {
@@ -128,7 +155,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
             </div>
             <div class="hbx_quantity_row">
               <div class="hbx_quantity_control">
-                <div class="cart_select_minus" onclick="decrementCount(this), addToListOfEditedItems(this, 'decrement')">
+                <div class="cart_select_minus" onclick="decrementCount(this,0), addToListOfEditedItems(this, 'decrement')">
                   -
                 </div>
                 <div id="cart_count">
@@ -240,4 +267,20 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
         </div>
     `);
 
+}
+
+const removeItemByID = (item_id) => {
+  let url = window.location.href;
+  if (confirm('Are you sure you want to remove this item?')) {
+    console.log('removed!');
+    fetch('/remove-cart-item/'+item_id, {
+      method:'DELETE',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }),
+    })
+  }
+
+  document.location.href = url
 }

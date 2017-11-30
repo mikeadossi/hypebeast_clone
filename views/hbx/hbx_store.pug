@@ -45,7 +45,7 @@ block content
             - for(let i = 0; i < categories_arr.length; i++){
               ul
                 li
-                  input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i])
+                  input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
                   label.sidebar_label(for="sidebar_filter_category_homeware") !{categories_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_size_links
@@ -54,7 +54,7 @@ block content
             .sidebar_sub_header CLOTHING
             li
             - for(let i = 0; i < product_sizes_arr.length; i++){
-                li.size_div !{product_sizes_arr[i]}
+                li.size_div( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_color_links
           .hbx_sidebar_header Color
@@ -62,7 +62,7 @@ block content
             - for(let i = 0; i < colors_arr.length; i++){
               ul
                 li
-                  input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i])
+                  input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
                   label.sidebar_label(for="sidebar_filter_category_homeware") !{colors_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_price_links
@@ -72,7 +72,7 @@ block content
               - for(let i = 0; i < price_range_arr.length - 1; i += 2){
                   ul
                     li
-                      input(type="checkbox" id="sidebar_filter_"+price_range_arr[i] value=price_range_arr[i]+" - "+price_range_arr[i+1] )
+                      input(type="checkbox" id="sidebar_filter_"+price_range_arr[i] value=price_range_arr[i]+" - "+price_range_arr[i+1] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
                       label.sidebar_label(for="sidebar_filter_"+price_range_arr[i]) USD !{price_range_arr[i]}.00 - USD !{price_range_arr[i+1]}.00
               - }
         .hbx_sidebar_link_container

@@ -411,7 +411,62 @@ let queries = {
   },
 
   clearCartByUserID: function(users_id){
-    return db.any("DELETE FROM cart WHERE users_id = $1", users_id)
+    return db.none("DELETE FROM cart WHERE users_id = $1", users_id)
+  },
+
+  sortDB: function(brand_name, params_array){
+
+    let sqlQueryString;
+    const categories = [
+      'small_count',
+      'medium_count',
+      'large_count',
+      'xlarge_count',
+      'US_8_count',
+      'US_8_5_count',
+      'US_9_count',
+      'US_9_5_count',
+      'US_10_count',
+      'US_10_5_count',
+      'US_11_count',
+      'US_11_5_count',
+      'US_12_count',
+      'pants_28_count',
+      'pants_30_count',
+      'pants_32_count',
+      'pants_34_count',
+      'pants_36_count',
+    ];
+
+    if (categories.indexOf(params_array[0]) > -1){
+      sqlQueryString = `SELECT * FROM products
+          WHERE `+params_array[0]+` > 0 `
+    } else {
+       sqlQueryString = `SELECT * FROM products
+            WHERE brand_name = '`+brand_name+`' and
+              product_color_type = $1 or
+              category_name = $1
+            `
+    }
+
+    for(let i = 2 ; i < params_array.length+1; i++){
+
+       if (categories.indexOf(params_array[i-2]) > -1){
+         sqlQueryString += `or `+brand_name+` > 0`
+       } else {
+          sqlQueryString += ` or brand_name = '`+brand_name+`' and
+                 product_color_type = $`+ i +` or
+                 category_name = $`+ i +`
+               `
+       }
+     }
+
+    return db.any(sqlQueryString,params_array)
+  },
+
+
+  removeCartItemByID: function(item_id){
+    return db.none("DELETE FROM cart WHERE id = $1", item_id)
   }
 
 

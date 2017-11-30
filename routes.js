@@ -901,9 +901,6 @@ router.post('/checkout/complete', function(req, res, next) {
   let purchasedProductDetailsArray = [];
   let tot_cost = 0;
 
-  console.log('\n order_obj => ',order_obj,'\n');
-  console.log('\n cart => ',cart,'\n');
-
   for(let i = 0; i < cart.length; i++){
     let purchased_products_details = new Object();
     purchased_products_details.item_image = cart[i].item_image;
@@ -921,10 +918,6 @@ router.post('/checkout/complete', function(req, res, next) {
     purchasedProductDetailsArray.push(purchased_products_details);
     tot_cost += cart[i].item_cost;
   }
-
-  console.log('purchasedProductDetailsArray[0] -> ',purchasedProductDetailsArray[0])
-  console.log('purchasedProductDetailsArray[0].item_name -> ',purchasedProductDetailsArray[0].item_name)
-  // console.log('* -> ',*)
 
   let users_id = order_obj.users_id || null
   let conditional_promise;
@@ -970,6 +963,8 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
   // fetch does not send that cookie automatically.
 
+console.log('\n req.body -==-> ',req.body,'\n');
+
   if(!req.user){
     res.status(401).json({status:'error',message:'user is not present on the request object'})
   }
@@ -990,7 +985,8 @@ router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
       req.body.item_name,
       req.body.item_individual_price,
       req.body.item_brand,
-      req.body.item_route
+      req.body.item_route,
+      req.body.item_color_type
     )
     .then((cart) => {
       res.json(cart)
@@ -1022,7 +1018,8 @@ router.post('/update-bag', function(req, res) {
 
   hbx_queries.updateCartById(id, item_count, item_tot_cost)
   .then((results) => {
-    res.redirect('/hbx_shopping_bag')
+    // res.redirect('/hbx_shopping_bag')
+    return;
   })
   .catch(err => next(err))
 })
@@ -1104,6 +1101,35 @@ router.post('/update-address-in-db/:id', function(req, res){
     console.log(err);
     res.render('hbx_error',{error_message:err})
   })
+})
+
+router.get('/brands/:brand/filter/*', function(req, res){
+  let params_array = req.params[0].split('/');
+  let brand_name = req.params.brand;
+
+  const no_duplicates = (array) => {
+    let seen = {};
+    return array.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+  }
+
+  params_array = no_duplicates(params_array);
+
+  hbx_queries.sortDB(brand_name, params_array)
+  .then( results => {
+    console.log('\n results: ',results,'\n');
+  })
+  .catch( err => console.log(err))
+})
+
+
+router.delete('/remove-cart-item/:id', function(req, res){
+  hbx_queries.removeCartItemByID(req.params.id)
+  .then( () => {
+    return;
+  })
+  .catch( err => console.log(err))
 })
 
 router.post('/update-password-in-db', function(req, res){
