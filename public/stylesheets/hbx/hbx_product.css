@@ -102,6 +102,11 @@
   text-align: center;
 }
 
+.size_div:hover{
+  border: 1px solid black;
+  cursor:pointer;
+}
+
 .product_name_left{
   font-size:28px;
   padding-top:6px;

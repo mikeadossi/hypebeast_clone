@@ -45,16 +45,24 @@ block content
             - for(let i = 0; i < categories_arr.length; i++){
               ul
                 li
-                  input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                  - if( selected_items_array && selected_items_array.indexOf(categories_arr[i]) > -1 ){
+                    input(type="checkbox" checked="checked" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                  -} else {
+                    input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                  -}
                   label.sidebar_label(for="sidebar_filter_"+categories_arr[i]) !{categories_arr[i]}
             - }
-        .hbx_sidebar_link_container.hbx_size_links
+        .hbx_sidebar_link_clothing_container.hbx_size_links
           .hbx_sidebar_header Size
           ul 
             .sidebar_sub_header CLOTHING
             li
             - for(let i = 0; i < product_sizes_arr.length; i++){
-                li.size_div( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
+                -if(selected_sizes_array && selected_sizes_array.indexOf(product_sizes_arr[i]) > -1){
+                  li.size_div_checked( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
+                - } else {
+                  li.size_div( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
+                - }
             - }
         .hbx_sidebar_link_container.hbx_color_links
           .hbx_sidebar_header Color
@@ -76,7 +84,7 @@ block content
                       label.sidebar_label(for="sidebar_filter_"+price_range_arr[i]) USD !{price_range_arr[i]}.00 - USD !{price_range_arr[i+1]}.00
               - }
         .hbx_sidebar_link_container
-          .hbx_sidebar_clear_all CLEAR ALL
+          .hbx_sidebar_clear_all(onclick="clearAllFilters()") CLEAR ALL
         .hbx_sidebar_link_container.hbx_featured_links
           .hbx_sidebar_header Featured Brands
           ul

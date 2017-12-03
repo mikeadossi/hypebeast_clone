@@ -1,47 +1,9 @@
 const filterThisItem = (element, brandName) => {
   let value;
 
-  const uiCategories = [
-    'S',
-    'M',
-    'L',
-    'XL',
-    '8',
-    '8.5',
-    '9',
-    '9.5',
-    '10',
-    '10.5',
-    '11',
-    '11.5',
-    '12',
-    '28',
-    '30',
-    '32',
-    '34',
-    '36'
-  ];
+  const uiCategories = allProductSizesSingleValueArr;
 
-  const dbCategories = {
-    'S': 'small_count',
-    'M': 'medium_count',
-    'L': 'large_count',
-    'XL': 'xlarge_count',
-    '8': 'us_8_count',
-    '8.5': 'us_8_5_count',
-    '9': 'us_9_count',
-    '9.5': 'us_9_5_count',
-    '10': 'us_10_count',
-    '10.5': 'us_10_5_count',
-    '11': 'us_11_count',
-    '11.5': 'us_11_5_count',
-    '12': 'us_12_count',
-    '28': 'pants_28_count',
-    '30': 'pants_30_count',
-    '32': 'pants_32_count',
-    '34': 'pants_34_count',
-    '36': 'pants_36_count'
-  };
+  const dbCategories = allProductSizesObj;
 
 
   if(!element.value){
@@ -52,12 +14,18 @@ const filterThisItem = (element, brandName) => {
   }
 
   let url = window.location.href;
-  if(url.indexOf('filter') > -1){
+
+  if(url.indexOf(value) > -1){
+    url = url.replace('/'+value,'');
+    if(!url.split('/filter')[1]){
+      url = url.split('/filter')[0];
+      document.location.href = url;
+    }
+  } else if(url.indexOf('filter') > -1){
     url += '/' + value
   } else {
     url += '/filter/' + value;
   }
-
 
   fetch(url, {
     method:'GET',
@@ -68,8 +36,14 @@ const filterThisItem = (element, brandName) => {
     credentials: "same-origin"
   })
   .then(() => {
-    console.log('here');
     document.location.href = url;
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
+
+};
+
+const clearAllFilters = () => {
+  let url = window.location.href;
+  url = url.split('/filter')[0]
+  document.location.href = url;
 }

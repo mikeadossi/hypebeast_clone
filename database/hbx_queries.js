@@ -2,42 +2,72 @@ const {db} = require('./connection.js');
 const {bcrypt} = require('./connection.js');
 const {saltRounds} = require('./connection.js');
 const {knex} = require('./connection.js');
+const {allProductSizesArr} = require('./products_data');
+const {allProductSizesString} = require('./products_data');
+const {allProductClothingCategoriesArr} = require('./products_data');
+const {allProductColorsArr} = require('./products_data');
 
 let queries = {
 
   getUserByID: function(user_id){
-    return db.any("SELECT * FROM users WHERE id = $1", user_id);
+    return db.any(`
+      SELECT * FROM users
+      WHERE id = $1
+      `, user_id);
   },
 
   getBrandDetails: function(brand){
-    return db.any("SELECT * FROM brands WHERE brand_name_link = $1", brand);
+    return db.any(`
+      SELECT * FROM brands
+      WHERE brand_name_link = $1
+      `, brand);
   },
 
   getInventory: function(brand){
-    return db.any("SELECT * FROM products WHERE brand_name = $1", brand);
+    return db.any(`
+      SELECT * FROM products
+      WHERE brand_name = $1
+      `, brand);
   },
 
   getProductContent: function(brand,product){
-    return db.any("SELECT * FROM products WHERE brand_name = $1 AND product_name_route = $2",[brand,product]);
+    return db.any(`
+      SELECT * FROM products
+      WHERE brand_name = $1
+      AND product_name_route = $2
+      `,[brand,product]);
   },
 
   getBrandCategories: function(brand){
-    return db.any("SELECT category_type FROM categories JOIN products on products.category_id = categories.id WHERE brand_name = $1", brand);
+    return db.any(`
+      SELECT category_type FROM categories
+      JOIN products on products.category_id = categories.id
+      WHERE brand_name = $1
+      `,brand);
   },
 
   getBrandProductColors: function(brand){
-    return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE brand_name = $1", brand);
+    return db.any(`
+      SELECT product_colors.color FROM product_colors
+      JOIN products on products.product_color_id = product_colors.id
+      WHERE brand_name = $1
+      `, brand);
   },
 
   getProductColors: function(product){
-    return db.any("SELECT product_colors.color FROM product_colors JOIN products on products.product_color_id = product_colors.id WHERE product_name_route = $1", product);
+    return db.any(`
+      SELECT product_colors.color FROM product_colors
+      JOIN products on products.product_color_id = product_colors.id
+      WHERE product_name_route = $1
+      `, product);
   },
 
   getBrandPriceRange: function(brand){
 
-    return brandPrices = db.any(
-      "SELECT product_price FROM products WHERE brand_name = $1",
-      brand)
+    return brandPrices = db.any(`
+      SELECT product_price FROM products
+      WHERE brand_name = $1
+      `,brand)
       .then(brandPrices => {
 
         const brandPricesArr = [];
@@ -156,59 +186,26 @@ let queries = {
   },
 
   getProductCount: function(brand){
-    return db.any(`SELECT
-      small_count,
-      medium_count,
-      large_count,
-      xlarge_count,
-      US_8_count,
-      US_8_5_count,
-      US_9_count,
-      US_9_count,
-      US_9_5_count,
-      US_10_count,
-      US_10_5_count,
-      US_11_count,
-      US_11_5_count,
-      US_12_count,
-      US_12_5_count,
-      pants_28_count,
-      pants_30_count,
-      pants_32_count,
-      pants_34_count,
-      pants_36_count
-    from products WHERE brand_name = $1`, brand)
+    return db.any(`
+      SELECT
+      `+allProductSizesString+` 
+      from products WHERE brand_name = $1`, brand)
   },
 
   getProductSizes: function(product){
-    return db.any(`SELECT
-      small_count,
-      medium_count,
-      large_count,
-      xlarge_count,
-      US_8_count,
-      US_8_5_count,
-      US_9_count,
-      US_9_count,
-      US_9_5_count,
-      US_10_count,
-      US_10_5_count,
-      US_11_count,
-      US_11_5_count,
-      US_12_count,
-      US_12_5_count,
-      pants_28_count,
-      pants_30_count,
-      pants_32_count,
-      pants_34_count,
-      pants_36_count
-    from products WHERE product_name_route = $1`, product)
+    return db.any(`
+      SELECT
+      `+allProductSizesString+`
+      from products WHERE product_name_route = $1`, product)
   },
 
   getSortedInventoryDirection: function(brand, direction){
     console.log("----------------> executing sql query for ", direction)
-    return db.any(
-      "SELECT * FROM products WHERE brand_name = $1 ORDER BY product_name " + direction.toUpperCase(), brand);
+    return db.any(`
+      SELECT * FROM products
+      WHERE brand_name = $1
+      ORDER BY product_name` + direction.toUpperCase()
+      , brand);
   },
 
   getAllHBXProducts: function(){
@@ -218,16 +215,18 @@ let queries = {
   createHBXLocalUser: function(email, password){
     this.createUser(email);
     return bcrypt.hash(password, saltRounds).then(hash => {
-      return db.none(
-        "INSERT INTO local_users (email, password) VALUES ($1, $2)",
-        [email, hash])
+      return db.none(`
+        INSERT INTO local_users (email, password)
+        VALUES ($1, $2)
+        `,[email, hash])
     })
   },
 
   createHBXUser: function(email){
-    return db.oneOrNone(
-      "INSERT INTO users (email) VALUES ($1) RETURNING *",
-    [email])
+    return db.oneOrNone(`
+      INSERT INTO users (email)
+      VALUES ($1) RETURNING *
+      `,[email])
   },
 
   addToCart: function(
@@ -342,18 +341,21 @@ let queries = {
   },
 
   updateUserAddress: function(street, city, state, postcode, company, id){
-    return db.oneOrNone(`UPDATE users SET street = $1,
+    return db.oneOrNone(`
+      UPDATE users SET street = $1,
       city = $2,
       state = $3,
       postcode = $4,
       company = $5
-      WHERE id = $6`,
-    [street, city, state, postcode, company, id])
+      WHERE id = $6
+      `,[street, city, state, postcode, company, id])
   },
 
   updateUserPassword: function(hash, user_id){
-    return db.any("UPDATE users SET password = $1 WHERE id = $2",
-    [hash, user_id])
+    return db.any(`
+      UPDATE users SET password = $1
+      WHERE id = $2
+      `,[hash, user_id])
   },
 
   completeOrder: function(
@@ -374,7 +376,8 @@ let queries = {
     purchasedProductDetailsArray,
     tot_cost
   ){
-    return db.any(`INSERT INTO orders (
+    return db.any(`
+      INSERT INTO orders (
       payment_type,
       users_id,
       shipping_cost,
@@ -413,65 +416,18 @@ let queries = {
 
 
   clearCartByUserID: function(users_id){
-    return db.none("DELETE FROM cart WHERE users_id = $1", users_id)
+    return db.none(`
+      DELETE FROM cart
+      WHERE users_id = $1
+      `, users_id)
   },
 
 
   filterSortDB: function(brand_name, params_array){
 
-    const allSizes = [
-      'small_count',
-      'medium_count',
-      'large_count',
-      'xlarge_count',
-      'us_8_count',
-      'us_8_5_count',
-      'us_9_count',
-      'us_9_5_count',
-      'us_10_count',
-      'us_10_5_count',
-      'us_11_count',
-      'us_11_5_count',
-      'us_12_count',
-      'pants_28_count',
-      'pants_30_count',
-      'pants_32_count',
-      'pants_34_count',
-      'pants_36_count'
-    ];
-
-    const allClothingCategories = [
-      'accessories',
-      'caps',
-      'hats',
-      'jackets',
-      'jackets',
-      'shorts',
-      'boots',
-      'sneakers',
-      'ss t-shirts',
-      't-shirts',
-      'pants',
-      'hoodies',
-      'sweatshirts',
-      'jeans',
-      'toys',
-      'homeware',
-      'sandals',
-      'underwear'
-    ]
-
-    const allColors = [
-      'beige',
-      'black',
-      'blue',
-      'green',
-      'grey',
-      'red',
-      'white',
-      'purple',
-      'brown'
-    ]
+    const allSizes = allProductSizesArr;
+    const allClothingCategories = allProductClothingCategoriesArr;
+    const allColors = allProductColorsArr;
 
     let knexColorsArray = [];
     let knexCategoriesArray = [];
@@ -515,7 +471,10 @@ let queries = {
 
 
   removeCartItemByID: function(item_id){
-    return db.none("DELETE FROM cart WHERE id = $1", item_id)
+    return db.none(`
+      DELETE FROM cart
+      WHERE id = $1
+      `, item_id)
   }
 
 
