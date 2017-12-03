@@ -231,6 +231,7 @@ router.get('/brands/:brand', function(req, res) {
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   let brand = req.params.brand;
+
   Promise.all([
     hbx_queries.getBrandDetails(brand),
     hbx_queries.getInventory(brand),
@@ -326,7 +327,7 @@ router.get('/brands/:brand', function(req, res) {
 
       let product_sizes_arr = [];
       let p = 0; for(key in product_sizes){p++}
-      var numOfProds = p;
+      let numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
           if(product_sizes[j][brand_names[i]]
@@ -335,7 +336,6 @@ router.get('/brands/:brand', function(req, res) {
           }
         }
       }
-
 
       res.render('hbx_store', {
         brand: brand,
@@ -1116,9 +1116,127 @@ router.get('/brands/:brand/filter/*', function(req, res){
 
   params_array = no_duplicates(params_array);
 
-  hbx_queries.sortDB(brand_name, params_array)
+  let conditional_promise;
+  req.user ? conditional_promise = hbx_queries.getCartByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
+
+  Promise.all([
+    hbx_queries.filterSortDB(brand_name, params_array),
+    conditional_promise,
+    hbx_queries.getBrandCategories(brand_name),
+    hbx_queries.getBrandProductColors(brand_name),
+    hbx_queries.getBrandPriceRange(brand_name),
+    hbx_queries.getProductCount(brand_name),
+    hbx_queries.getBrandDetails(brand_name),
+    hbx_queries.getInventory(brand_name)
+  ])
   .then( results => {
-    console.log('\n results: ',results,'\n');
+
+    let sorted_products = results[0];
+    let cart = results[1];
+    let categories = results[2];
+    let colors = results[3];
+    let ranges = results[4];
+    let product_sizes = results[5];
+    let brand = results[6];
+    let inventory = results[7];
+
+    let categories_arr = [];
+    for(let i = 0; i < categories.length; i++){
+      categories_arr.push(categories[i].category_type);
+    }
+
+    let colors_arr = [];
+    for(let i = 0; i < colors.length; i++){
+      colors_arr.push(colors[i].color);
+    }
+
+    categories_arr = categories_arr.filter(
+      function(item,pos){
+        return categories_arr.indexOf(item) == pos
+      });
+
+    colors_arr = colors_arr.filter(
+      function(item,pos){
+        return colors_arr.indexOf(item) == pos
+      });
+
+    let product_images;
+    let store_prod_images = [];
+
+    for(let i = 0; i < sorted_products.length; i++){
+      product_images = sorted_products[i].product_images.replace(/[']+/g, '');
+      product_images = product_images.split(",");
+      store_prod_images.push(product_images[0]);
+      store_prod_images.push(product_images[1]);
+    }
+
+    let size_arr = [
+      'S',
+      'M',
+      'L',
+      'XL',
+      '8',
+      '8.5',
+      '9',
+      '9.5',
+      '10',
+      '10.5',
+      '11',
+      '11.5',
+      '12',
+      '12.5',
+      '28',
+      '30',
+      '32',
+      '34',
+      '36'
+    ];
+
+    let brand_names = [
+      'small_count',
+      'medium_count',
+      'large_count',
+      'xlarge_count',
+      'us_8_count',
+      'us_8_5_count',
+      'us_9_count',
+      'us_9_5_count',
+      'us_10_count',
+      'us_10_5_count',
+      'us_11_count',
+      'us_11_5_count',
+      'us_12_count',
+      'us_12_5_count',
+      'pants_28_count',
+      'pants_30_count',
+      'pants_32_count',
+      'pants_34_count',
+      'pants_36_count'
+    ];
+
+    let product_sizes_arr = [];
+    let p = 0; for(key in product_sizes){p++}
+    let numOfProds = p;
+    for(let j = 0; j < numOfProds; j++){
+      for(let i = 0; i < 19; i++){
+        if(product_sizes[j][brand_names[i]]
+          && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
+          product_sizes_arr.push( size_arr[i] );
+        }
+      }
+    }
+
+    res.render('hbx_store',{
+      brand: brand,
+      product: sorted_products,
+      user: req.user,
+      cart: cart,
+      categories_arr: categories_arr,
+      colors_arr: colors_arr,
+      store_prod_images: store_prod_images,
+      price_range_arr: ranges,
+      product_sizes_arr: product_sizes_arr
+    })
   })
   .catch( err => console.log(err))
 })
@@ -1131,6 +1249,7 @@ router.delete('/remove-cart-item/:id', function(req, res){
   })
   .catch( err => console.log(err))
 })
+
 
 router.post('/update-password-in-db', function(req, res){
   console.log('1. inside updatep pass!');

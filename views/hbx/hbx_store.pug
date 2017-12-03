@@ -46,7 +46,7 @@ block content
               ul
                 li
                   input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
-                  label.sidebar_label(for="sidebar_filter_category_homeware") !{categories_arr[i]}
+                  label.sidebar_label(for="sidebar_filter_"+categories_arr[i]) !{categories_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_size_links
           .hbx_sidebar_header Size
@@ -63,7 +63,7 @@ block content
               ul
                 li
                   input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
-                  label.sidebar_label(for="sidebar_filter_category_homeware") !{colors_arr[i]}
+                  label.sidebar_label(for="sidebar_filter_"+colors_arr[i]) !{colors_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_price_links
           .hbx_sidebar_header 

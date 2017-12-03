@@ -4,8 +4,15 @@ const db = pgp(connectionString);
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const knex = require('knex')({
+ client: 'pg',
+ connection: connectionString,
+ searchPath: ['knex', 'public'],
+});
+
 module.exports = {
   db,
   bcrypt,
-  saltRounds
+  saltRounds,
+  knex
 }

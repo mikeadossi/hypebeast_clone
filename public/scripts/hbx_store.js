@@ -40,7 +40,7 @@ const filterThisItem = (element, brandName) => {
     '30': 'pants_30_count',
     '32': 'pants_32_count',
     '34': 'pants_34_count',
-    '36': 'pants_36_count',
+    '36': 'pants_36_count'
   };
 
 
@@ -51,7 +51,13 @@ const filterThisItem = (element, brandName) => {
     value = element.value;
   }
 
-  let url = window.location.href + '/filter/' + value;
+  let url = window.location.href;
+  if(url.indexOf('filter') > -1){
+    url += '/' + value
+  } else {
+    url += '/filter/' + value;
+  }
+
 
   fetch(url, {
     method:'GET',
@@ -62,7 +68,8 @@ const filterThisItem = (element, brandName) => {
     credentials: "same-origin"
   })
   .then(() => {
-    console.log('worked');
+    console.log('here');
+    document.location.href = url;
   })
   .catch(err => console.log(err))
 }

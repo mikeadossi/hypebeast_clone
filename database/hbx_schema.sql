@@ -38,6 +38,8 @@ CREATE TABLE products (
   brand_name TEXT,
   brand_id INTEGER REFERENCES brands(id),
   product_color_id INTEGER REFERENCES product_colors(id),
+  product_color_type VARCHAR,
+  category_name VARCHAR,
   small_count INTEGER,
   medium_count INTEGER,
   large_count INTEGER,
@@ -57,9 +59,7 @@ CREATE TABLE products (
   pants_32_count INTEGER,
   pants_34_count INTEGER,
   pants_36_count INTEGER,
-  product_color_type VARCHAR,
-  tot_count INTEGER,
-  category_name VARCHAR
+  tot_count INTEGER
 );
 
 CREATE TABLE users (
@@ -199,7 +199,7 @@ VALUES (
   'hoodies'
 ),
 (
-  'sweatshirt'
+  'sweatshirts'
 ),
 (
   'jeans'
