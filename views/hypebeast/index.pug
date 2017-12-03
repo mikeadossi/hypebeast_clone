@@ -75,9 +75,9 @@ block content
         - }
         
   .feed_header_mobile
-    .feed_latest.feed_button Latest
-    .feed_rising.feed_button Rising
-    .feed_popular.feed_button Popular
+    .feed_latest.feed_button.empty_link Latest
+    .feed_rising.feed_button.empty_link Rising
+    .feed_popular.feed_button.empty_link Popular
     
   .content.content_posts 
     .sticky_container
@@ -85,29 +85,29 @@ block content
       .hypebeast_jobs
         .jobs_top_container
           .jobs_header HYPEBEAST JOBS
-          .jobs_link See more ➔
-        .jobs_container
+          .jobs_link.empty_link See more ➔
+        .jobs_container.empty_link
           .jobs_title Buyer (Womenswear)
           .jobs_location Hong Kong Full-time
-        .jobs_container
+        .jobs_container.empty_link
           .jobs_title Editor (Womenswear)
           .jobs_location Korea Full-time (Freelance)
-        .jobs_container
+        .jobs_container.empty_link
           .jobs_title Editor
           .jobs_location Hong Kong Full-time
-        .jobs_container
+        .jobs_container.empty_link
           .jobs_title Editor
           .jobs_location New York Full-time
-        .jobs_container
+        .jobs_container.empty_link
           .jobs_title Video Editor / Videographer
           .jobs_location New York Full-time
-        .jobs_button See More Job Openings
+        .jobs_button.empty_link See More Job Openings
       .newsletter_widget
         p.newsletter_heading HYPEBEAST
         p.newsletter_subtitle SIGN UP FOR OUR NEWSLETTERS
         p.newsletter_text Receive the latest in Footwear, Fashion, Music and Creativity in our Newsletters.
         input.newsletter_input(placeholder="Enter your email address")
-        button.newsletter_button Sign Up
+        button.newsletter_button.empty_link Sign Up
       //- img.sticky_ad_two(src="/images/hypebeast_images/general/ad_tall_headphones.png")
         
     .article_container
@@ -133,9 +133,9 @@ block content
     -  }
     
     .wide_ad_container
-      img.wide_ad(src="images/hypebeast_images/general/ad_wide_hypebae.png")
+      img.wide_ad.empty_link(src="images/hypebeast_images/general/ad_wide_hypebae.png")
       .sticky_container
-        img.sticky_ad_two(src="/images/hypebeast_images/general/ad_tall_headphones.png")
+        img.sticky_ad_two.empty_link(src="/images/hypebeast_images/general/ad_tall_headphones.png")
       
     - for(let i = 6; i < posts.length; i++){
       .article_container

@@ -7,7 +7,7 @@ block content
     .hbx_store_header_container
       ul.hbx_header_left_links.hbx_product_header_links
         li 
-          a(href="#") Home 
+          a(href="/store") Home 
         li
           img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
     .product_container
@@ -51,9 +51,9 @@ block content
         .product_disclaimer_1
           img.disclaimer_images(src="/images/hbx_images/general/30_days.png")
           .disclaimer_p 30 Days Return
-        .wishlist_container
-          img.disclaimer_notice_images(src="/images/hbx_images/general/wishlist_star.png")
-          .disclaimer_notice_p Add to wishlist
+        .wishlist_container.empty_link
+          img.disclaimer_notice_images.empty_link(src="/images/hbx_images/general/wishlist_star.png")
+          .disclaimer_notice_p.empty_link Add to wishlist
         .product_disclaimer_2
           img.disclaimer_images(src="/images/hbx_images/general/taxes_duties.png")
           .disclaimer_p Tax & Duties Included.
@@ -65,7 +65,7 @@ block content
           .disclaimer_notice_p This item is not limited to QTY 2 per customer. 
         .product_social_media_links
           .product_title Share
-          img(src="/images/hbx_images/general/share_social_media.png")
+          img.empty_link(src="/images/hbx_images/general/share_social_media.png")
   
         
   .product_footer_details 
@@ -83,7 +83,7 @@ block content
               li Designed exclusively for our HBX patrons
               li Model wears size that fits
               li Our Models measure: Height 183cm, Chest 35.5”/90cm, Waist 30”/76cm, Hip 33”/84cm
-        .product_sizing_button 
+        .product_sizing_button.empty_link 
           img.sizing_ruler_img(src="/images/hbx_images/general/sizing_ruler.png")
           span SIZE GUIDE
         .product_shipping_info
@@ -94,16 +94,16 @@ block content
             span .
         .product_footer_details_contact
           ul
-            li Have questions?
-            li 
-              img.contact_images(src="/images/hbx_images/general/speech_bubble.png")
-              span Live Chat
-            li
-              img.contact_images(src="/images/hbx_images/general/mailing_envelope.png") 
-              span Email Us
-            li 
-              img.contact_images(src="/images/hbx_images/general/phone.png")
-              span Call Us
+            li.empty_link Have questions?
+            li.empty_link
+              img.empty_link.contact_images(src="/images/hbx_images/general/speech_bubble.png")
+              span.empty_link Live Chat
+            li.empty_link
+              img.empty_link.contact_images(src="/images/hbx_images/general/mailing_envelope.png") 
+              span.empty_link Email Us
+            li.empty_link 
+              img.empty_link.contact_images(src="/images/hbx_images/general/phone.png")
+              span.empty_link Call Us
               
   .related_products_container
     .related_header Related products

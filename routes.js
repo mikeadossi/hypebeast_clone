@@ -478,9 +478,6 @@ router.get('/brands/:brand/:product', function(req, res) {
         }
       }
 
-      console.log('product_colors_arr -> ',product_colors_arr);
-      console.log('product_sizes_arr -> ',product_sizes_arr);
-
       res.render('hbx_product', {
         product_content: product_content,
         product_images_arr: product_images_arr,
@@ -1025,6 +1022,8 @@ router.post('/update-address-in-db/:id', function(req, res){
 })
 
 router.get('/brands/:brand/filter/*', function(req, res){
+
+  console.log('called filter!');
 
   let params_array = req.params[0].split('/');
   let brand_name = req.params.brand;

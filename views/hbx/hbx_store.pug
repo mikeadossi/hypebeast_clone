@@ -6,18 +6,18 @@ block content
     .hbx_store_header_container
       ul.hbx_header_left_links
         li 
-          a(href="#") Home 
+          a(href="/store") Home 
         li
           img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
         li 
-          a(href="#") Brands
+          a.empty_link(href="#") Brands
         li
           img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
         li 
-          a(href="#") 
+          a.empty_link(href="#")
             .inline_brand_name !{ brand[0].brand_name }
       .hbx_center_brand_name !{ brand[0].brand_name }
-      .hbx_right_brand_name !{ brand[0].brand_name } in journal
+      .hbx_right_brand_name.empty_link !{ brand[0].brand_name } in journal
         img.hbx_arrow_right(src="/images/hbx_images/general/arrow_right.png")
     .hbx_store_brand_description !{ brand[0].brand_description }
     
@@ -33,10 +33,10 @@ block content
         .hbx_sidebar_link_container.hbx_menswear_links
           .hbx_sidebar_header Men
           ul
-            li NEW ARRIVALS
-            li BACK IN STOCK
-            li SALE
-            li // 
+            li.empty_link NEW ARRIVALS
+            li.empty_link BACK IN STOCK
+            li.empty_link SALE
+            li.empty_link // 
               span.uppercase_brand_name !{ brand[0].brand_name }
               span IN SALE
         .hbx_sidebar_link_container.hbx_category_links
@@ -100,7 +100,7 @@ block content
               a.featured_brands(href="/brands/tres-bien") Très Bien
             li 
               a.featured_brands(href="/brands/undercover") Undercover
-            li#see_all_brands SEE ALL BRANDS
+            li#see_all_brands.empty_link SEE ALL BRANDS
       
       
       .hbx_product_container

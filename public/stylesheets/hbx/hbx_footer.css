@@ -44,8 +44,6 @@
 }
 
 .hbx_subscribe_input_container{
-  /*width: 59%;*/
-  /*margin: auto;*/
   padding-bottom: 6px;
 }
 
@@ -63,19 +61,16 @@
 }
 
 .hbx_subscribe_container{
-  /*background-color:orange;*/
   text-align:center;
   width: 310px;
 }
 
 .hbx_download_container{
   width: 280px;
-  /*background-color: green;*/
 }
 
 .hbx_download_container, .hbx_subscribe_container{
   display:inline-block;
-  /*width:33%;*/
 }
 
 .hbx_message, .hbx_subtitle{

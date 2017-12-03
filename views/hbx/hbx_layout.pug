@@ -47,10 +47,10 @@ html
           img.hbx_title(src="/images/hbx_images/general/hbx_logo.png")
         ul.hbx_links_container.nav_elements
           a(href="/store").nav_menswear.hbx_nav_link.nav_elements MEN
-          li.nav_womenswear.hbx_nav_link.nav_elements WOMEN 
-          li.nav_archives.hbx_nav_link.nav_elements ARCHIVES
-          li.nav_sale.hbx_nav_link.nav_elements SALE 
-          li.nav_journal.hbx_nav_link.nav_elements JOURNAL
+          li.nav_womenswear.hbx_nav_link.nav_elements.empty_link WOMEN 
+          li.nav_archives.hbx_nav_link.nav_elements.empty_link ARCHIVES
+          li.nav_sale.hbx_nav_link.nav_elements.empty_link SALE 
+          li.nav_journal.hbx_nav_link.nav_elements.empty_link JOURNAL
           - if(user){
               li.nav_journal.hbx_nav_link.nav_elements TESTING, USER.ID:
               span.users_persistent_id !{JSON.stringify(user.id)}
@@ -70,7 +70,7 @@ html
           - } else {
               a(href="/hbx_login").nav_login.hbx_nav_link.nav_elements LOG IN
           - }
-          li.nav_help.hbx_nav_link.nav_elements HELP
+          li.nav_help.hbx_nav_link.nav_elements.empty_link HELP
         .cart.nav_elements#bag_button
           .shopping_bag_container
             .shopping_bag_handle 
@@ -137,8 +137,8 @@ html
             - }
 
         ul.language.nav_elements
-          img.hbx_flag(src="/images/hbx_images/general/usa_flag.png")
-          span.hbx_nav_link USD
+          img.hbx_flag.empty_link(src="/images/hbx_images/general/usa_flag.png")
+          span.hbx_nav_link.empty_link USD
     .hbx_search_mobile 
       input.hbx_search_input_mobile(placeholder="Search")
       button.hbx_search_button_mobile Search

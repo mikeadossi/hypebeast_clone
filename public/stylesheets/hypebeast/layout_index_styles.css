@@ -90,6 +90,10 @@ button:focus{
   text-align:left !important;
 }
 
+.empty_link{
+  cursor:default !important;
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
 .login_successful{
   display:none;
@@ -224,7 +228,7 @@ textarea{
 }
 
 .header-top-section{
-  padding: 10px 10px 0 10px;
+  padding: 30px 10px 0 10px;
 }
 
 .navBtns{
@@ -448,6 +452,7 @@ textarea{
 
 .all_sections_dropdown{
   width:100%;
+  z-index:40;
 }
 
 .mobile_all_sections{
@@ -772,6 +777,7 @@ textarea{
   position: relative;
   top: -2px;
   color:grey;
+  cursor:default;
 }
 
 .top_ten_secret{
@@ -970,6 +976,9 @@ textarea{
   font-size:0.8em;
   padding: 10.12px;
   cursor:pointer;
+  border-radius: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 
 .hypebeast_jobs{
