@@ -33,7 +33,6 @@ const allProductSizesSingleValueArr = [
   '11',
   '11.5',
   '12',
-  '12.5',
   '28',
   '30',
   '32',
