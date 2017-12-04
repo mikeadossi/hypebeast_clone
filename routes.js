@@ -283,8 +283,8 @@ router.get('/brands/:brand', function(req, res) {
       for(let i = 0; i < product.length; i++){
         product_images = product[i].product_images.replace(/[']+/g, '');
         product_images = product_images.split(",");
-        store_prod_images.push(product_images[0]);
         store_prod_images.push(product_images[1]);
+        store_prod_images.push(product_images[0]);
       }
 
       let sizes_shortform_arr = allProductSizesSingleValueArr;
@@ -1022,8 +1022,6 @@ router.post('/update-address-in-db/:id', function(req, res){
 })
 
 router.get('/brands/:brand/filter/*', function(req, res){
-
-  console.log('called filter!');
 
   let params_array = req.params[0].split('/');
   let brand_name = req.params.brand;

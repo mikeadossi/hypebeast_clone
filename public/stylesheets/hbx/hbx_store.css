@@ -223,10 +223,22 @@
 }
 
 .hide_initially_img img{
-  display:none;
+  display:block;
   width: 253px;
   height: 328px;
   padding: 5px;
+  position: absolute;
+  margin-left: -263px;
+  margin-top: -352px;
+}
+
+.hide_initially_img:hover{
+  opacity: 0;
+}
+
+.main_img{
+  display:block;
+  z-index:100;
 }
 
 .product_name{
