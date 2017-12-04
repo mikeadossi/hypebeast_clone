@@ -188,7 +188,7 @@ let queries = {
   getProductCount: function(brand){
     return db.any(`
       SELECT
-      `+allProductSizesString+` 
+      `+allProductSizesString+`
       from products WHERE brand_name = $1`, brand)
   },
 
@@ -424,33 +424,40 @@ let queries = {
 
 
   filterSortDB: function(brand_name, params_array){
-
-    const allSizes = allProductSizesArr;
-    const allClothingCategories = allProductClothingCategoriesArr;
-    const allColors = allProductColorsArr;
+    const allSizeOptions = allProductSizesArr;
+    const allClothingCategoryOptions = allProductClothingCategoriesArr;
+    const allColorOptions = allProductColorsArr;
+    const priceAscDescOptions = ['high_to_low','low_to_high'];
+    const priceAscDescObj = {'high_to_low':'desc','low_to_high':'asc'};
 
     let knexColorsArray = [];
     let knexCategoriesArray = [];
     let knexSizes = [];
+    let knexPriceAvailability = [];
+    let knexPriceAscDesc = [];
 
     for(let i = 0; i < params_array.length; i++){
 
-      if(allClothingCategories.indexOf(params_array[i]) > -1){
+      if(allClothingCategoryOptions.indexOf(params_array[i]) > -1){
         knexCategoriesArray.push(params_array[i]);
-      } else if(allColors.indexOf(params_array[i]) > -1){
+      } else if(allColorOptions.indexOf(params_array[i]) > -1){
         knexColorsArray.push(params_array[i]);
-      } else if(allSizes.indexOf(params_array[i]) > -1){
-        knexSizes.push(params_array[i])
+      } else if(allSizeOptions.indexOf(params_array[i]) > -1){
+        knexSizes.push(params_array[i]);
+      } else if(params_array[i].indexOf('-') > -1){
+        knexPriceAvailability.push(params_array[i]);
+      } else if(priceAscDescOptions.indexOf(params_array[i]) > -1){
+        knexPriceAscDesc.push(params_array[i]);
       }
 
     }
 
     if(!knexColorsArray.length){
-      knexColorsArray = allColors;
+      knexColorsArray = allColorOptions;
     }
 
     if(!knexCategoriesArray.length){
-      knexCategoriesArray = allClothingCategories;
+      knexCategoriesArray = allClothingCategoryOptions;
     }
 
     let knexx = knex.select()
@@ -463,6 +470,20 @@ let queries = {
       for(let i = 0; i < knexSizes.length; i++){
         knexx = knexx.whereNot(knexSizes[i],'<',1)
       }
+    }
+
+    let range;
+
+    if(knexPriceAvailability.length){
+      for(let i = 0; i < knexPriceAvailability.length; i++){
+        range = knexPriceAvailability[i].split('-');
+        knexx = knexx.whereBetween('product_price', range)
+      }
+    }
+
+    if(knexPriceAscDesc.length){
+      // always set sql result direction to last directional parameter passed in url
+      knexx = knexx.orderBy('product_price',priceAscDescObj[knexPriceAscDesc[knexPriceAscDesc.length-1]])
     }
 
     return knexx;

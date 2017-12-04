@@ -1033,7 +1033,7 @@ router.get('/brands/:brand/filter/*', function(req, res){
   params_array = no_duplicates(params_array);
 
   let conditional_promise;
-  req.user ? conditional_promise = hbx_queries.getCartByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     hbx_queries.filterSortDB(brand_name, params_array),

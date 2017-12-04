@@ -1,30 +1,47 @@
 const filterThisItem = (element, brandName) => {
-  let value;
-
   const uiCategories = allProductSizesSingleValueArr;
 
   const dbCategories = allProductSizesObj;
 
+  let filterParameter;
 
   if(!element.value){
-    value = element.innerHTML;
-    uiCategories.indexOf(value) > -1 ? value = dbCategories[value] : value = value
+    filterParameter = element.innerHTML;
+    uiCategories.indexOf(filterParameter) > -1 ? filterParameter = dbCategories[filterParameter] : filterParameter = filterParameter
   } else {
-    value = element.value;
+    filterParameter = element.value.replace(/ /g,'');
   }
 
   let url = window.location.href;
 
-  if(url.indexOf(value) > -1){
-    url = url.replace('/'+value,'');
+  if(filterParameter === 'newest_first'){
+    url = url.replace(/\/newest_first/g,"");
+    url = url.replace(/\/high_to_low/g,"");
+    url = url.replace(/\/low_to_high/g,"");
+    document.location.href = url;
+    return;
+  }
+
+  if(url.indexOf(filterParameter) > -1){
+    url = url.replace('/'+filterParameter,'');
     if(!url.split('/filter')[1]){
       url = url.split('/filter')[0];
       document.location.href = url;
     }
   } else if(url.indexOf('filter') > -1){
-    url += '/' + value
+    url += '/' + filterParameter;
   } else {
-    url += '/filter/' + value;
+    url += '/filter/' + filterParameter;
+  }
+
+  const directions = ['high_to_low','low_to_high'];
+
+  if(directions.indexOf(filterParameter) > -1 && url.indexOf(directions[0] > -1) || directions.indexOf(filterParameter) > -1 && url.indexOf(directions[1] > -1)){
+    // remove all possible duplicates of directional params in the url
+    url = url.replace(/\/newest_first/g,"");
+    url = url.replace(/\/high_to_low/g,"");
+    url = url.replace(/\/low_to_high/g,"");
+    url += '/' + filterParameter;
   }
 
   fetch(url, {

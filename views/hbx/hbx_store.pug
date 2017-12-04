@@ -23,10 +23,22 @@ block content
     
     .hbx_sorting_button_container
       .hbx_sorting_button
-        select.form-control 
-          option(value='newest_first') NEWEST FIRST
-          option(value='high_to_low') PRICE: HIGH TO LOW
-          option(value='low_to_high') PRICE: LOW TO HIGH
+        select.form-control(onchange="filterThisItem(this, '"+brand[0].brand_name+"')")
+          - if(selected_items_array && selected_items_array.indexOf('newest_first') > -1){
+              option(value='newest_first' ) NEWEST FIRST
+          - } else {
+              option(value='newest_first') NEWEST FIRST
+          - } 
+          - if(selected_items_array && selected_items_array.indexOf('high_to_low') > -1){
+              option(value='high_to_low' selected) PRICE: HIGH TO LOW
+          - } else {
+              option(value='high_to_low') PRICE: HIGH TO LOW
+          - } 
+          - if(selected_items_array && selected_items_array.indexOf('low_to_high') > -1){
+              option(value='low_to_high' selected) PRICE: LOW TO HIGH
+          - } else {
+              option(value='low_to_high') PRICE: LOW TO HIGH
+          - } 
     
     .hbx_flexed_content
       .hbx_sidebar_nav
