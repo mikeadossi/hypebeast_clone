@@ -600,10 +600,6 @@ router.get('/hbx_account/orders', function(req, res){
     for(let i = 0; i < orders.length; i++){
       purchased_product_details_array.push(JSON.parse(orders[0].purchased_product_details_array)[0]);
     }
-    console.log('\n','purchased_product_details_array -> ',purchased_product_details_array,'\n');
-    console.log('\n','purchased_product_details_array.length -> ',purchased_product_details_array.length,'\n');
-    // console.log('\n','purchased_product_details_array[0].item_quantity -> ',purchased_product_details_array[0].item_quantity,'\n');
-    // console.log('\n','purchased_product_details_array[1].item_quantity -> ',purchased_product_details_array[1].item_quantity,'\n');
     res.render('hbx_orders', {
       user: req.user,
       orders: orders,
@@ -612,11 +608,6 @@ router.get('/hbx_account/orders', function(req, res){
     })
   })
   .catch(err => console.log(err))
-})
-
-router.post('/edit_address', function(req, res){
-  console.log('edit address!');
-
 })
 
 router.get('/hbx_account/close-account', function(req, res) {
@@ -811,7 +802,11 @@ router.post('/checkout/complete', function(req, res, next) {
     res.redirect('/hbx_error');
   }
 
-  let cart = JSON.parse(req.body.users_cart);
+  let cart;
+
+  typeof req.body.users_cart === 'string'
+    ? cart = JSON.parse(req.body.users_cart)
+    : cart = req.body.users_cart;
 
   let order_obj = JSON.parse(req.body.order_obj_value);
   order_obj.phone = JSON.parse(order_obj.phone)
@@ -868,7 +863,9 @@ router.post('/checkout/complete', function(req, res, next) {
       res.render('hbx_order_complete', {
         user: req.user
       });
-    }
+    };
+
+    res.render('hbx_order_complete');
   })
   .catch( err => {
     console.log(err);

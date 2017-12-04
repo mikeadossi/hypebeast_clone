@@ -120,6 +120,7 @@
 
 .select_color_container{
   margin-top:24px;
+  margin-bottom: 20px;
 }
 
 .select_color_inner select{
@@ -407,6 +408,11 @@
   display: flex;
   position: relative;
   right:0;
+}
+
+.proceed_to_bag_button{
+  background-color:#006FB9;
+  cursor:pointer !important;
 }
 
 

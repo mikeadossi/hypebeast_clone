@@ -24,7 +24,6 @@ let product_slide;
 let percentage;
 
 let dotButtons = $(".dot_buttons span");
-// console.log('hbx_main(line 75) dotButtons[0] => ',dotButtons[0]);
 
 let position = 0;
 let prev_position = 0;

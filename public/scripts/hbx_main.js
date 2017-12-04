@@ -82,7 +82,7 @@ $(".related_carousel_left_arrow").on('click', () => {
     position -= 100;
     $(".related_product_slides").css("right",position+"%");
     $(".related_product_slides").css("transition","1s");
-    console.log('position: ',position);
+
     $(position_obj[position+100]).attr('style', 'color: grey !important');
     $(position_obj[position]).attr('style', 'color: black !important');
     prev_position = position;
@@ -95,7 +95,7 @@ $(".related_carousel_right_arrow").on('click', () => {
     position += 100;
     $(".related_product_slides").css("right",position+"%");
     $(".related_product_slides").css("transition","1s");
-    console.log('position: ',position);
+
     $(position_obj[position-100]).attr('style', 'color: grey !important');
     $(position_obj[position]).attr('style', 'color: black !important');
     prev_position = position;

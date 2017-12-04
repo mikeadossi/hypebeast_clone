@@ -65,7 +65,6 @@ const updateBag = () => {
     }
     }
 
-    console.log('ok...');
   document.location.href = url;
 }
 
@@ -272,7 +271,6 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
 const removeItemByID = (item_id) => {
   let url = window.location.href;
   if (confirm('Are you sure you want to remove this item?')) {
-    console.log('removed!');
     fetch('/remove-cart-item/'+item_id, {
       method:'DELETE',
       headers: new Headers({

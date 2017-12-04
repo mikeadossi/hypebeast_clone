@@ -196,7 +196,6 @@ ul{
 
 .hbx_search_input_mobile{
   border: 1px solid black;
-  /* height: 30px; */
   width: 77%;
   display: inline-block;
   font-size: 13px;
@@ -279,7 +278,6 @@ ul{
 }
 
 .hbx_mobile_menu_content{
-  /*padding:20px*/
   padding-left:0;
   margin-top:0;
 }
@@ -559,7 +557,7 @@ ul{
 
 .cart_dropdown_product_container{
   overflow-y: scroll;
-  max-height:140px;
+  max-height:190px;
 }
 
 .cart_product_container{
@@ -595,6 +593,10 @@ ul{
 
 .empty_link{
   cursor:default !important;
+}
+
+input{
+  border-radius:0 !important;
 }
 
 

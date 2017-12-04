@@ -30,23 +30,28 @@ block content
               -for(let i = 0; i < product_colors_arr.length; i++){
                 option(value=product_colors_arr[i]) !{product_colors_arr[i]}
               - }
-        .product_size_container
-          span.product_title SIZE
-          span.find_your_size FIND YOUR SIZE
-          p.hidden_category !{product_category[0].category_type} 
-          .sizes_container
-            .hidden_product_sizes_arr !{product_sizes_arr}
-            - for(let s = 0; s < product_sizes_arr.length; s++){
-                .product_sizes(class= "product_size_"+s, onclick="selectPreferredSize("+s+")") !{ product_sizes_arr[s] } 
-            - }
+        - if(product_sizes_arr.length)
+          .product_size_container
+            span.product_title SIZE
+            span.find_your_size FIND YOUR SIZE
+            p.hidden_category !{product_category[0].category_type} 
+            .sizes_container
+              .hidden_product_sizes_arr !{product_sizes_arr}
+              - for(let s = 0; s < product_sizes_arr.length; s++){
+                  .product_sizes(class= "product_size_"+s, onclick="selectPreferredSize("+s+")") !{ product_sizes_arr[s] } 
+              - }
         .product_purchase_container
           .product_title QUANTITY
           .product_item_count_select_container
             .item_count_minus(onclick="decrementCount(this,1)") -
             .item_count_amt 1
             .item_count_plus(onclick="incrementCount(this)") +
-        .product_add_to_cart_button(onclick="addSelectedItemsToCart()")
-          .select_size PLEASE SELECT A SIZE
+        -if(!product_sizes_arr.length)
+          .product_add_to_cart_button.proceed_to_bag_button(onclick="selectItemOrProceedToBag(this)")
+            .select_size.proceed_now ADD TO BAG
+        - else
+          .product_add_to_cart_button(onclick="selectItemOrProceedToBag(this)")
+            .select_size PLEASE SELECT A SIZE
         
         .product_disclaimer_1
           img.disclaimer_images(src="/images/hbx_images/general/30_days.png")
