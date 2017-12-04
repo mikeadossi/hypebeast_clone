@@ -50,6 +50,7 @@
   width: 49%;
   padding: 16px;
   text-align: center;
+  border-radius:0;
 }
 
 .login_hbx_facebook{

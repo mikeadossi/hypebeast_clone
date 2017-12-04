@@ -5,7 +5,6 @@ const {saltRounds} = require('./connection.js');
 let queries = {
 
   comparePassword : function(email, password){
-    // if(!dbPassword) reject('No user of that name exists!')
     return this.findByEmail(email)
       .then(user => {
         return bcrypt.compare(password, user.password)

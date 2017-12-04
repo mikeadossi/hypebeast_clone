@@ -41,8 +41,8 @@ block content
             input.shipping_radio_input(type="radio" name="payment_type" value="BITCOIN")
             .shipping_time_text BITCOIN
           .hidden_user
-            input.record_obj(name="order_obj_value" value=order_obj)
-            input.cart(name="users_cart" value=cart)
+            input.record_obj(name="order_obj_value" value=order_obj readonly="readonly")
+            input.cart(name="users_cart" value=cart readonly="readonly")
           
   
     .checkout_order_summary_container

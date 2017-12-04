@@ -1141,58 +1141,38 @@ router.delete('/remove-cart-item/:id', function(req, res){
 
 
 router.post('/update-password-in-db', function(req, res){
-  console.log('1. inside updatep pass!');
-  res.redirect('/hbx_error')
-  // if(!req.user.password){
-  //   res.redirect('/error')
-  // }
-  //
-  // let verify_password = req.body.verify_password;
-  // let new_password = req.body.new_password;
-  // // let hash;
-  //
-  // if(verify_password !== new_password){
-  //   res.render('hbx_change_password',{message:'new passwords do not match'})
-  // }
-  //
-  // let submitted_current_password = req.body.current_password;
-  // let user_email = req.params.email;
-  // let user_id = req.params.id;
-  //
-  // console.log('\n user_email: ',user_email,'\n submitted_current_password: ',submitted_current_password,'\n user_id: ',user_id);
-  //
-  // // check if our user password checks out
-  // queries.comparePassword(user_email, submitted_current_password)
-  //   .then( user => {
-  //     if(!user){
-  //       console.log('password not found');
-  //       res.render('hbx_change_password',{message:'incorrect current password'})
-  //     }
-  //     console.log('2. inside comparePassword');
-  //     return user;
-  //   })
-  //   .then( user => {
-  //     console.log('3. user ====> ',user);
-  //     bcrypt.hash(password, saltRounds).then(hash => {
-  //       hbx_queries.updateUserPassword(hash, user.id)
-  //       .then(() => console.log('4. updated!!!'))
-  //       .catch((err) => console.log(err))
-  //     })
-  //     .then(() => console.log('success'))
-  //     .catch(err => console.log(err))
-  //   })
-  //   .catch( err => {
-  //     console.log(err);
-  //     res.render('hbx_error',{error_message:err})
-  //   })
 
+  if(!req.user.password){
+    res.redirect('/hbx_error')
+  }
 
+  let current_password = req.body.current_password;
+  let new_password = req.body.new_password;
+  let user = JSON.parse(req.body.user);
 
-
-  // if they match then turn password to a hash
-  // run updatePassword
-
-  // req.user ? conditional_promise = hbx_queries.updateUserPassword(req.body.new_password, user_id) : conditional_promise = Promise.resolve(undefined)
+  queries.comparePassword(user.email, current_password)
+    .then( user => {
+      if(!user){
+        res.render('hbx_change_password',{message:'incorrect current password'})
+      }
+      return user;
+    })
+    .then( user => {
+      bcrypt.hash(new_password, saltRounds).then( hash => {
+        let userId = JSON.parse(req.body.user).id;
+        hbx_queries.updateUserPassword(hash, userId)
+          .then(() => {
+            return;
+          })
+          .catch((err) => console.log(err))
+      })
+      .then(() => console.log('success'))
+      .catch(err => console.log(err))
+    })
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error',{error_message:err})
+    })
 
 })
 
