@@ -496,6 +496,13 @@ let queries = {
       DELETE FROM cart
       WHERE id = $1
       `, item_id)
+  },
+
+  closeHBXAccount: function(id,hash){
+    return db.none(`
+      DELETE FROM users
+      WHERE id = $1 AND password = $2
+      `, [id,hash])
   }
 
 

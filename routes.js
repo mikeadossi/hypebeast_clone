@@ -10,6 +10,8 @@ const {allProductSizesSingleValueArr} = require('./database/products_data');
 const {allBrandNamesObj} = require('./database/products_data');
 const {allProductSizesString} = require('./database/products_data');
 const {allProductSizesObj} = require('./database/products_data');
+const {checkPasswordAndDeleteUser} = require('./database/util/checkPasswordAndDeleteUser');
+const {deleteUserUsingHashAndId} = require('./database/util/deleteUserUsingHashAndId');
 
 /************************** Hypebeast (below) *******************************/
 
@@ -627,6 +629,22 @@ router.get('/hbx_account/close-account', function(req, res) {
     })
 })
 
+
+router.delete('/hbx_account/close-account', (req, res) => {
+  if(!req.user){
+    res.redirect('/hbx-error');
+  }
+
+  checkPasswordAndDeleteUser(req.body.user_password, saltRounds, req.body.user_id)
+    .then(deleteUserUsingHashAndId)
+    .then(response => res.json(response))
+    .catch((err) => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+})
+
+
 router.get("/hbx_register", function(req, res) {
   if(req.user){
     res.redirect('/hbx_error')
@@ -749,10 +767,6 @@ router.get('/hbx_error', function(req, res) {
 });
 
 router.get('/hbx_logout', function(req, res) {
-  // res.setHeader('Set-Cookie', cookieLib.serialize('userCart', '', {
-  //   httpOnly: true,
-  //   maxAge: 0
-  // }))
   req.logout();
   res.redirect('/store');
 })

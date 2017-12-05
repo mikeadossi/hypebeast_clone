@@ -135,3 +135,40 @@ table, th, td {
 .order_table{
   max-width: 920px;
 }
+
+button{
+  border-radius:0;
+}
+
+.closeAccountBtn:hover{
+  cursor:pointer;
+}
+
+.closeAccountBtn{
+  display: block;
+  border: none;
+  background-color: #D9534F;
+  color: white;
+  padding: 15px 40px 15px 40px;
+  font-size: 13px;
+  margin:auto;
+  margin-top:20px;
+}
+
+.close_account_password_label{
+  font-weight: 600;
+  font-size: 13px;
+  font-family: arial;
+}
+
+.close_account_password_input{
+  width:60%;
+  margin-left:20px;
+  padding:5px;
+  border:1px solid gainsboro;
+}
+
+.hbx_close_account_warning{
+  font-size: 14px;
+  margin-bottom: 10px;
+}

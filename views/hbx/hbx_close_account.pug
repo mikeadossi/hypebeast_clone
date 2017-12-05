@@ -1,0 +1,23 @@
+extends hbx_layout
+
+block content
+  .content
+    .hbx_your_settings_content
+      .hbx_settings_nav
+        .settings_nav_heading Account Settings
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account") PROFILE
+        a.hbx_settings_nav_link.profile_link(href="/hbx_account/address_info") ADDRESS INFO
+        - if(user.password){
+            a.hbx_settings_nav_link.profile_password(href="/hbx_account/password") PASSWORD
+        - }
+        a.hbx_settings_nav_link.profile_password(href="/hbx_account/orders") ORDERS
+
+      .hbx_settings_controls
+        .settings_edit_password
+          .hbx_edit_profile_header Close Account
+          .error_message#close_account_error_message
+          .hbx_close_account_warning Once account is closed, you won't be able to login again, and all your forum posts will be marked as "Inactive".
+          .hidden_user#hiddenUserId !{user.id}
+          label.close_account_password_label CURRENT PASSWORD
+          input(type="password").close_account_password_input
+          button.closeAccountBtn(onclick="closeHBXAccount()") CLOSE ACCOUNT 

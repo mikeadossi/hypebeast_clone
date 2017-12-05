@@ -128,7 +128,3 @@ $('.hbx_account_button').hover(
     $('.hbxAccountMenu').css('display','none');
   }
 )
-
-
-
-//
