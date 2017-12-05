@@ -17,7 +17,7 @@ html, body{
   padding-right: 10px;
   color:grey;
   position: absolute;
-  margin-top: 33px;
+  margin-top: 40px;
   font-size: 11px;
   width: 164px;
   text-align: center;
@@ -332,10 +332,13 @@ textarea{
 }
 
 .avatar_img{
-  height: 15px;
-  width: 15px;
-  padding-top: 2px;
-  padding-left: 0px;
+  height: 30px;
+  /* width: 35px; */
+  /* padding-top: 8px; */
+  /* padding-left: 0px; */
+  position: relative;
+  top: 6px;
+  cursor:pointer;
 }
 
 .navBarAndClose{

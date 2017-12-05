@@ -67,9 +67,9 @@ html
               - } else if(user){
                 input.username_div(value=user.email)
               - }
-              button.avatar
-                img.avatar_img.empty_link(
-                  src="/images/hypebeast_images/avatars/png/fox.png"
+              
+              img.avatar_img.empty_link(
+                  src="/images/hypebeast_images/general/default_avatar.png"
                 )
               button.navBtns.account Account 
                 - if(user){
@@ -237,3 +237,4 @@ html
     script(src='https://code.jquery.com/jquery-2.2.1.js')
     script(src='/scripts/main.js')
     script(src='/scripts/change_password.js')
+    script(src='/scripts/post.js')

@@ -49,7 +49,7 @@ block content
             - if(!user){
               .post_avatar
               .post_textarea_content
-                textarea.post_textarea(placeholder="Join the discussion...")
+                textarea.post_textarea( onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
                 .post_actions.post_actions_empty
             - } else {
               - const article_id = post[0].id;
@@ -57,7 +57,7 @@ block content
                 .post_avatar 
                   img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
                 .post_textarea_content
-                    textarea.post_textarea(name="user_comment" placeholder="Join the discussion...")
+                    textarea.post_textarea(name="user_comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
                     .post_actions
                         input.post_as_user(type="submit" value ="post as "+user.username)
             - }
@@ -69,28 +69,21 @@ block content
                     img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
                   .post_comment 
                     .commenter_content
-                      .commenter_username !{all_comments[i].user_name}
+                      .commenter_username_container
+                        span.commenter_name !{all_comments[i].user_name}
                         span.reply_dot_seperator .
                         span.comment_time an hour ago
                       .commenter_input_container
-                        input.comment_text(value=all_comments[i].comment_text)
+                        p.comment_text(wrap="hard") !{all_comments[i].comment_text}
                       .comment_reply_container
                         span.fa.fa-angle-up
                         span.reply_seperator |
                         span.fa.fa-angle-down
                         span.reply_dot_seperator .
                         span
-                          a(href="#").reply_button Reply
+                          button(onclick="submitReply(this)").reply_button Reply
                         span.reply_dot_seperator .
-                        span.share_reply_button Share
+                        span.share_reply_button.empty_link Share
                     .post_replies_main_container
             - }
-    
-    
-    
-    
-    //- form(method="get" action="/comment")
-    //-   button read...
-    
-    //- div.hello !{ posts[0].post_content } <!-- string interpolation used to display db object (result row, result set) -->
     

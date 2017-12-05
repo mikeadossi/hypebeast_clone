@@ -53,11 +53,11 @@
   color: white;
   font-size: 12px;
   padding: 8px;
-  border-bottom-right-radius: 5px;
-  width: 100px;
-  margin-left: auto;
-  border:2px solid #748089;
-  cursor:pointer;
+  /* border-bottom-right-radius: 5px; */
+  /* width: 100px; */
+  /* margin-left: auto; */
+  border: 2px solid #748089;
+  cursor: pointer;
 }
 
 .post_actions{
@@ -70,6 +70,7 @@
   margin-left: 116px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  text-align:right;
 }
 
 .post_actions_empty{
@@ -124,10 +125,11 @@
   left: 7px;
 }
 
-.commenter_username{
-  position:relative;
-  top:-4px;
+.commenter_name{
+  /*position:relative;
+  top:-4px;*/
   color:steelblue;
+  border:none;
 }
 
 .comment_text{
@@ -179,6 +181,7 @@
 
 .reply_button{
   font-size:13px;
+  border:none;
 }
 
 .commenter_input_container input{
@@ -259,6 +262,54 @@
   border-top: 1px solid gainsboro;
   padding-top:30px;
 }
+
+.reply_comment{
+  border:2px solid grey;
+  padding:10px;
+  display:flex;
+}
+
+.directed_at_username{
+  color:grey;
+}
+
+.directed_at{
+  height: 18px;
+  margin-left: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 759px){
   body{
