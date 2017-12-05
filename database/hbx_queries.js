@@ -1,11 +1,12 @@
 const {db} = require('./connection.js');
-const {bcrypt} = require('./connection.js');
-const {saltRounds} = require('./connection.js');
+const bcrypt = require('bcrypt');
+const {saltRounds} = require('../configure');
 const {knex} = require('./connection.js');
 const {allProductSizesArr} = require('./products_data');
 const {allProductSizesString} = require('./products_data');
 const {allProductClothingCategoriesArr} = require('./products_data');
 const {allProductColorsArr} = require('./products_data');
+
 
 let queries = {
 

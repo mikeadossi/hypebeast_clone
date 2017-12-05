@@ -8,6 +8,10 @@ html, body{
   font-family: "Source Sans Pro HB","Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft Yahei";
 }
 
+.log_in_btn, #sign_up, #log_in{
+  border-radius:0;
+}
+
 .username_div{
   display: inline-block;
   padding-right: 10px;

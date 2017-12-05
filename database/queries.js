@@ -1,6 +1,7 @@
 const {db} = require('./connection.js');
-const {bcrypt} = require('./connection.js');
-const {saltRounds} = require('./connection.js');
+const {saltRounds} = require('../configure');
+const bcrypt = require('bcrypt');
+
 
 let queries = {
 
@@ -33,12 +34,13 @@ let queries = {
     return db.any("SELECT * FROM posts WHERE id = $1", id)
   },
 
-  createLocalUser: function(email, password){
-    return bcrypt.hash(password, saltRounds).then(hash => {
-      return db.none(
-        "INSERT INTO users (email, password) VALUES ($1, $2)",
-        [email, hash])
-    })
+  createNonOauthUser: function(email, password){
+    return bcrypt.hash(password, saltRounds)
+      .then( hash => {
+        return db.any(
+          "INSERT INTO users (email, password) VALUES ($1, $2)",
+          [email, hash])
+      })
   },
 
   createUser: function(email){
@@ -68,9 +70,9 @@ let queries = {
     return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
   },
 
-  // findByEmailLocal: function(email){
-  //   return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
-  // },
+  isEmailTaken: function(email){
+    return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
+  },
 
   findByIdGoogle: function(id){
     return db.any("SELECT * FROM google_users WHERE id = $1", [id]);

@@ -3,8 +3,8 @@ const router = express.Router();
 const queries = require('./database/queries');
 const hbx_queries = require('./database/hbx_queries');
 const passport = require('./passport');
-const {bcrypt} = require('./database/connection.js');
-const {saltRounds} = require('./database/connection.js');
+const bcrypt = require('bcrypt');
+const {saltRounds} = require('./configure');
 const {allProductSizesArr} = require('./database/products_data');
 const {allProductSizesSingleValueArr} = require('./database/products_data');
 const {allBrandNamesObj} = require('./database/products_data');
@@ -146,17 +146,34 @@ router.get('/register', function(req, res) {
 })
 
 router.post('/register', function(req, res) {
-  const email = req.body.email;
-  const password = req.body.password;
 
-  try{
-    queries.createUser(email, password)
-    .then(() => {
-      res.status(200).redirect('/register/success')
-    })
-  }catch(e){
-    console.log(e);
+  const isEmailTaken = (submitted_email, submitted_password) => {
+    return queries.isEmailTaken(submitted_email)
+      .then(user => {
+        if(user){
+          throw Error ('user email already taken')
+        }
+        return {email: submitted_email, password: submitted_password}
+      })
   }
+
+  const createNonOauthUser = (userEmailAndPassword) => {
+    console.log('userEmailAndPassword.email => ',userEmailAndPassword.email);
+    console.log('userEmailAndPassword.password => ',userEmailAndPassword.password);
+    return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
+      .then(() => {
+        console.log('in here!');
+        return res.status(200).redirect('/register/success')
+      })
+  }
+
+  isEmailTaken(req.body.email, req.body.password)
+    .then(createNonOauthUser)
+    .catch( err => {
+      console.log(err);
+      res.render('hbx_error', {user: req.user});
+    })
+
 })
 
 router.get('/login', function(req, res) {
@@ -638,7 +655,7 @@ router.delete('/hbx_account/close-account', (req, res) => {
   checkPasswordAndDeleteUser(req.body.user_password, saltRounds, req.body.user_id)
     .then(deleteUserUsingHashAndId)
     .then(response => res.json(response))
-    .catch((err) => {
+    .catch( err => {
       console.log(err);
       res.render('hbx_error', {user: req.user});
     })
@@ -658,7 +675,7 @@ router.post("/hbx_register", function(req, res) {
   const password = req.body.password;
 
   try{
-    queries.createLocalUser(email, password)
+    queries.createNonOauthUser(email, password)
     .then(() => {
       res.status(200).redirect('/hbx_register/success')
     })
