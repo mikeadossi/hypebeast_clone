@@ -10,17 +10,21 @@ block content
       .settings_controls
         .settings_edit_profile
           .edit_profile_header Edit Profile
-          .form(method="post" action="")
+          form(method="post" action="/add-new-username-to-db")
             .form_group
               div.label
                 label.profile_label Username
               div
-                input.profile_input.profile_username_input(name="" type="")
+                - if(!user.username){
+                  input.profile_input.profile_username_input(name="username" type="text")
+                - } else {
+                  input.profile_input.profile_username_input(name="username" type="text" value=user.username)
+                - }
             .form_group
               div.label
                 label.profile_label Email
               div
-                input.profile_input.profile_email_input(name="" type="")
+                input.profile_input.profile_email_input(name="email" type="text" readonly="readonly" value=user.email)
             input#update_profile(type="submit" value="Update Profile")
             span 
               a.close_account(href="/account/close-account") Close Account

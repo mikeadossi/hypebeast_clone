@@ -62,7 +62,9 @@ html
         .navBtnContainer
           .navSelectBtnContainer
             .navAccountContainer
-              - if(user){
+              - if(user && user.username){
+                input.username_div(value=user.username)
+              - } else if(user){
                 input.username_div(value=user.email)
               - }
               button.avatar
@@ -234,3 +236,4 @@ html
     include footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
     script(src='/scripts/main.js')
+    script(src='/scripts/change_password.js')

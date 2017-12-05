@@ -24,9 +24,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "drop:db": "dropdb comment_system_db",
-    "create:db": "createdb comment_system_db;",
-    "schema:db": "psql comment_system_db < database/schema.sql & psql comment_system_db < database/hbx_schema.sql"
+    "drop:db": "dropdb hypebeast_clone_db",
+    "create:db": "createdb hypebeast_clone_db;",
+    "schema:db": "psql hypebeast_clone_db < database/schema.sql & psql hypebeast_clone_db < database/hbx_schema.sql",
+    "seed:db": "psql hypebeast_clone_db < database/seedFile.sql"
   },
   "author": "Mike Adossi",
   "license": "MIT"

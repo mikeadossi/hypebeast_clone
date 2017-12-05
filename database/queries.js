@@ -5,36 +5,36 @@ const bcrypt = require('bcrypt');
 
 let queries = {
 
-  comparePassword : function(email, password){
+  comparePassword : function(email, password) {
     return this.findByEmail(email)
       .then(user => {
         return bcrypt.compare(password, user.password)
       })
   },
 
-  getPosts: function(){
+  getPosts: function() {
     return db.any("SELECT * FROM posts") // returns a promise, because pgp
   },
 
-  storeComment: function(user_comment, post_id, user_id, user_name){
+  storeComment: function(user_comment, post_id, user_id, user_name) {
     return db.any(
       "INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4)",
       [user_comment, user_id, post_id, user_name])
   },
 
-  getPostComments: function(post_id){
+  getPostComments: function(post_id) {
     return db.any("SELECT * FROM comments WHERE post_id = $1", post_id)
   },
 
-  getTopTenByHypeCount: function(){
+  getTopTenByHypeCount: function() {
     return db.any("SELECT * FROM posts ORDER BY post_hype_count DESC LIMIT 10")
   },
 
-  getPost: function(id){
+  getPost: function(id) {
     return db.any("SELECT * FROM posts WHERE id = $1", id)
   },
 
-  createNonOauthUser: function(email, password){
+  createNonOauthUser: function(email, password) {
     return bcrypt.hash(password, saltRounds)
       .then( hash => {
         return db.any(
@@ -43,13 +43,13 @@ let queries = {
       })
   },
 
-  createUser: function(email){
+  createUser: function(email) {
     return db.oneOrNone(
       "INSERT INTO users (email) VALUES ($1) RETURNING *",
     [email])
   },
 
-  find: function(email, password){
+  find: function(email, password) {
     return db.oneOrNone(
       "SELECT * FROM users WHERE users.email = $1",
       [email]
@@ -57,34 +57,34 @@ let queries = {
       .then(user => {
         return comparePassword(password, user.password) ? user : false
       })
-      .catch(function(err){
+      .catch( err => {
         console.log('error: ',err);
       });
   },
 
-  findById: function(id){
+  findById: function(id) {
     return db.any("SELECT * FROM users WHERE id = $1", [id]);
   },
 
-  findByEmail: function(email){
+  findByEmail: function(email) {
     return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
   },
 
-  isEmailTaken: function(email){
+  isEmailTaken: function(email) {
     return db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
   },
 
-  findByIdGoogle: function(id){
+  findByIdGoogle: function(id) {
     return db.any("SELECT * FROM google_users WHERE id = $1", [id]);
   },
 
-  findByIdFacebook: function(id){
+  findByIdFacebook: function(id) {
     return db.any("SELECT * FROM facebook_users WHERE id = $1", [id]);
   },
 
   // the function below helps with our passport OAUTH apis. If the user is not
   // already in our database we sign them up.
-  findOneAndUpdateGh: function(searchAndUpdate){
+  findOneAndUpdateGh: function(searchAndUpdate) {
     return db.oneOrNone(
       "SELECT * FROM google_users WHERE username = $1",
       [searchAndUpdate.name]
@@ -102,7 +102,7 @@ let queries = {
           return user;
           // done(null, user)
         }
-      }).catch(function(err, user){
+      }).catch( (err, user) => {
         if(err){
           return err;
         }
@@ -110,7 +110,7 @@ let queries = {
     );
   },
 
-  findOneAndUpdateFb: function(searchAndUpdate){
+  findOneAndUpdateFb: function(searchAndUpdate) {
     return db.oneOrNone(
       "SELECT * FROM facebook_users WHERE username = $1",
     [searchAndUpdate.name])
@@ -122,12 +122,20 @@ let queries = {
         } else {
           return user;
         }
-      }).catch(function(err, user){
+      }).catch( (err, user) => {
         if(err){
           return err;
         }
       }
     );
+  },
+
+  addNewUsernameToDB: function(newUsername, email) {
+    return db.any("UPDATE users SET username = $1 WHERE email = $2 RETURNING *",[newUsername, email])
+  },
+
+  isUsernameAvailable: function(username) {
+    return db.any("SELECT * FROM users WHERE username = $1", username)
   }
 
 }

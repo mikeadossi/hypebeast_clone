@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')();
-const connectionString = `postgres://${process.env.USER}@localhost:5432/comment_system_db`;
+const connectionString = `postgres://${process.env.USER}@localhost:5432/hypebeast_clone_db`;
 const db = pgp(connectionString);
 
 const knex = require('knex')({

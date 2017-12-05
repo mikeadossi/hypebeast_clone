@@ -14,6 +14,7 @@ block content
           i.fa.fa-fw.fa-google 
           span Login with Google
     p Sign up with your email address
+    
     form(action="register" method="post")
       div.label
         label Email/Username
@@ -30,6 +31,6 @@ block content
         span and 
         span
           a(class="special_link") Privacy Policy.
-      input#sign_up(type="submit" value="Sign Up")
+      button#sign_up(type="submit" onclick="updateHBXPassword(this)") Sign Up
       
       div Have an Account? <a class="special_link" href="/login">Login</a>.

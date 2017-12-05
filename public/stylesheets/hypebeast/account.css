@@ -103,3 +103,13 @@
 .profile_close_account_input{
   width:100%;
 }
+
+.hidden_user{
+  display:none;
+}
+
+.error_message{
+  color:red;
+  margin-bottom:10px;
+  text-align:center;
+}

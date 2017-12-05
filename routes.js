@@ -15,7 +15,7 @@ const {deleteUserUsingHashAndId} = require('./database/util/deleteUserUsingHashA
 
 /************************** Hypebeast (below) *******************************/
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 
   Promise.all(
     [
@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
   }).catch(err => next(err))
 })
 
-router.get('/post/:id', function(req, res) {
+router.get('/post/:id', (req, res) => {
   const id = req.params.id;
 
   Promise.all(
@@ -69,7 +69,7 @@ router.get('/post/:id', function(req, res) {
     })
 })
 
-router.get('/store', function(req, res) {
+router.get('/store', (req, res) => {
 
   if(req.user){
     let user_id = req.user.id;
@@ -93,11 +93,11 @@ router.get('/store', function(req, res) {
 
 })
 
-router.get('/register/success', function(req, res) {
+router.get('/register/success', (req, res) => {
   res.render('successful_register', { user: req.user });
 })
 
-router.get('/loggedIn', function(req, res) {
+router.get('/loggedIn', (req, res) => {
 
   if(req.user) {
         res.render('index', { user: req.user })
@@ -110,8 +110,7 @@ router.get('/loggedIn', function(req, res) {
     }
 })
 
-router.get('/account', function(req, res) {
-
+router.get('/account', (req, res) => {
 
   if(req.user){
     res.render('account', { user: req.user });
@@ -120,7 +119,7 @@ router.get('/account', function(req, res) {
   }
 })
 
-router.get('/account/password', function(req, res) {
+router.get('/account/password', (req, res) => {
   const user_id = req.user.id || '';
 
   hbx_queries.getCartById(user_id)
@@ -137,15 +136,15 @@ router.get('/account/password', function(req, res) {
 
 })
 
-router.get('/account/close-account', function(req, res) {
+router.get('/account/close-account', (req, res) => {
   res.render('close_account', { user: req.user });
 })
 
-router.get('/register', function(req, res) {
+router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) => {
 
   const isEmailTaken = (submitted_email, submitted_password) => {
     return queries.isEmailTaken(submitted_email)
@@ -176,7 +175,7 @@ router.post('/register', function(req, res) {
 
 })
 
-router.get('/login', function(req, res) {
+router.get('/login', (req, res) => {
 
   res.render('login', {
     user: req.user
@@ -190,7 +189,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 
-router.get('/logout', function(req, res) {
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 })
@@ -203,7 +202,7 @@ router.get('/auth/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/error'
   }),
-  function(req, res) {
+ (req, res) => {
     res.redirect('/');
   }
 );
@@ -216,20 +215,20 @@ router.get('/auth/facebook',
 
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/error' }),
-  function(req, res) {
+ (req, res) => {
     res.redirect('/');
   }
 );
 
-router.get('/auth/error', function(req, res){
+router.get('/auth/error', (req, res) => {
   res.render('error', { user: req.user });
 });
 
-router.get('/error', function(req, res) {
+router.get('/error', (req, res) => {
   res.render('error', { user: req.user });
 });
 
-router.post('/post/post_comment/:id', function(req, res) {
+router.post('/post/post_comment/:id', (req, res) => {
   const user_comment = req.body.user_comment;
   const article_id = req.params.id;
   const user_id = req.user.id;
@@ -246,9 +245,41 @@ router.post('/post/post_comment/:id', function(req, res) {
 });
 
 
+router.post('/add-new-username-to-db', (req, res) => {
+
+  const isUsernameAvailable = (username, email) => {
+    return queries.isUsernameAvailable(username)
+      .then( userPresent => {
+        if(!userPresent){
+          throw Error ('user email already taken')
+        }
+        return {username: username, email: email};
+      })
+      .catch( err => console.log(err) )
+  }
+
+  const addNewUsernameToDB = (userObj) => {
+
+    return queries.addNewUsernameToDB(userObj.username, userObj.email)
+      .then( user => {
+        return user
+      })
+      .catch(err => console.log(err))
+  }
+
+  isUsernameAvailable(req.body.username, req.body.email)
+    .then(addNewUsernameToDB)
+    .then(user => {
+      res.redirect('/account')
+    })
+    .catch( err => console.log(err))
+
+})
+
+
 /**************************** HBX (below) ***********************************/
 
-router.get('/brands/:brand', function(req, res) {
+router.get('/brands/:brand', (req, res) => {
 
   let conditional_promise;
 
@@ -287,12 +318,12 @@ router.get('/brands/:brand', function(req, res) {
       }
 
       categories_arr = categories_arr.filter(
-        function(item,pos){
+        (item,pos) => {
           return categories_arr.indexOf(item) == pos
         });
 
       colors_arr = colors_arr.filter(
-        function(item,pos){
+        (item,pos) => {
           return colors_arr.indexOf(item) == pos
         });
 
@@ -340,7 +371,7 @@ router.get('/brands/:brand', function(req, res) {
 })
 
 
-router.get('/brands/:brand/:product', function(req, res) {
+router.get('/brands/:brand/:product', (req, res) => {
   let brand = req.params.brand;
   let product = req.params.product;
   let conditional_promise;
@@ -515,7 +546,7 @@ router.get('/brands/:brand/:product', function(req, res) {
     })
 })
 
-router.get("/hbx_login", function(req, res) {
+router.get("/hbx_login", (req, res) => {
   res.render('hbx_login')
 })
 
@@ -526,7 +557,7 @@ router.post('/hbx_login', passport.authenticate('local', {
  })
 );
 
-router.get('/hbx_account', function(req, res) {
+router.get('/hbx_account', (req, res) => {
 
   if(!req.user){
     res.redirect('error');
@@ -551,7 +582,7 @@ router.get('/hbx_account', function(req, res) {
     })
 })
 
-router.get('/hbx_account/password', function(req, res) {
+router.get('/hbx_account/password', (req, res) => {
 
   if(!req.user){
     res.redirect('error');
@@ -578,7 +609,7 @@ router.get('/hbx_account/password', function(req, res) {
 
 })
 
-router.get('/hbx_account/address_info', function(req, res) {
+router.get('/hbx_account/address_info', (req, res) => {
 
   if(!req.user){
     res.redirect('error');
@@ -604,7 +635,7 @@ router.get('/hbx_account/address_info', function(req, res) {
 
 })
 
-router.get('/hbx_account/orders', function(req, res){
+router.get('/hbx_account/orders', (req, res) => {
   if(!req.user){
     res.redirect('error');
   }
@@ -629,7 +660,7 @@ router.get('/hbx_account/orders', function(req, res){
   .catch(err => console.log(err))
 })
 
-router.get('/hbx_account/close-account', function(req, res) {
+router.get('/hbx_account/close-account', (req, res) => {
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
@@ -662,7 +693,7 @@ router.delete('/hbx_account/close-account', (req, res) => {
 })
 
 
-router.get("/hbx_register", function(req, res) {
+router.get("/hbx_register", (req, res) => {
   if(req.user){
     res.redirect('/hbx_error')
   }
@@ -670,7 +701,7 @@ router.get("/hbx_register", function(req, res) {
   res.render('hbx_register')
 })
 
-router.post("/hbx_register", function(req, res) {
+router.post("/hbx_register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -684,7 +715,7 @@ router.post("/hbx_register", function(req, res) {
   }
 })
 
-router.get("/hbx_shopping_bag", function(req, res) {
+router.get("/hbx_shopping_bag", (req, res) => {
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
@@ -702,7 +733,7 @@ router.get("/hbx_shopping_bag", function(req, res) {
 
 })
 
-router.get('/hbx_register/success', function(req, res) {
+router.get('/hbx_register/success', (req, res) => {
   let conditional_promise;
   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
   // cart = JSON.parse(cart);
@@ -748,7 +779,7 @@ router.get('/hbx/auth/google/callback',
   })
 );
 
-router.get('/hbx/auth/error', function(req, res){
+router.get('/hbx/auth/error', (req, res) => {
   let conditional_promise;
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
@@ -766,7 +797,7 @@ router.get('/hbx/auth/error', function(req, res){
     })
 });
 
-router.get('/hbx_error', function(req, res) {
+router.get('/hbx_error', (req, res) => {
   let conditional_promise;
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
@@ -783,12 +814,12 @@ router.get('/hbx_error', function(req, res) {
     })
 });
 
-router.get('/hbx_logout', function(req, res) {
+router.get('/hbx_logout', (req, res) => {
   req.logout();
   res.redirect('/store');
 })
 
-router.get('/checkout/addressing', function(req, res) {
+router.get('/checkout/addressing', (req, res) => {
 
   let conditional_promise;
   let conditional_promise2;
@@ -823,11 +854,11 @@ router.get('/checkout/addressing', function(req, res) {
 
 })
 
-router.get('/checkout/complete', function(req, res, next) {
+router.get('/checkout/complete', (req, res, next) => {
   res.render('hbx_order_complete');
 })
 
-router.post('/checkout/complete', function(req, res, next) {
+router.post('/checkout/complete', (req, res, next) => {
 
   if(!req.user && !req.body.users_cart[0]){
     res.redirect('/hbx_error');
@@ -905,7 +936,7 @@ router.post('/checkout/complete', function(req, res, next) {
 
 })
 
-router.post('/brands/:brand/:product/add-to-cart', function(req, res) {
+router.post('/brands/:brand/:product/add-to-cart', (req, res) => {
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
   // fetch does not send that cookie automatically.
 
@@ -943,7 +974,7 @@ console.log('\n req.body -==-> ',req.body,'\n');
 
 })
 
-router.get('/get-cart-by-id', function(req, res) {
+router.get('/get-cart-by-id', (req, res) => {
 
   let user_id = req.headers.user_id;
 
@@ -957,7 +988,7 @@ router.get('/get-cart-by-id', function(req, res) {
   }
 })
 
-router.post('/update-bag', function(req, res) {
+router.post('/update-bag', (req, res) => {
   let id = req.body.id;
   let item_count = req.body.item_count;
   let item_tot_cost = req.body.item_tot_cost;
@@ -970,7 +1001,7 @@ router.post('/update-bag', function(req, res) {
   .catch(err => next(err))
 })
 
-router.post('/checkout/delivery_and_payment', function(req, res){
+router.post('/checkout/delivery_and_payment', (req, res) => {
   if(req.body.order_email !== req.body.confirm_order_email){
     res.render('hbx_addressing',{error_message:'emails do not match'})
   }
@@ -1010,7 +1041,7 @@ router.post('/checkout/delivery_and_payment', function(req, res){
 
 })
 
-router.post('/update-profile-in-db', function(req, res){
+router.post('/update-profile-in-db', (req, res) => {
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.updateUserProfile(req.body.first_name, req.body.last_name, req.body.phone, req.body.email) : conditional_promise = Promise.resolve(undefined)
 
@@ -1029,7 +1060,7 @@ router.post('/update-profile-in-db', function(req, res){
   })
 })
 
-router.post('/update-address-in-db/:id', function(req, res){
+router.post('/update-address-in-db/:id', (req, res) => {
   let user_id = req.params.id;
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.updateUserAddress(req.body.street, req.body.city, req.body.state, req.body.postcode, req.body.company, user_id) : conditional_promise = Promise.resolve(undefined)
@@ -1049,14 +1080,14 @@ router.post('/update-address-in-db/:id', function(req, res){
   })
 })
 
-router.get('/brands/:brand/filter/*', function(req, res){
+router.get('/brands/:brand/filter/*', (req, res) => {
 
   let params_array = req.params[0].split('/');
   let brand_name = req.params.brand;
 
   const no_duplicates = (array) => {
     let seen = {};
-    return array.filter(function(item) {
+    return array.filter( item => {
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
   }
@@ -1098,12 +1129,12 @@ router.get('/brands/:brand/filter/*', function(req, res){
     }
 
     categories_arr = categories_arr.filter(
-      function(item,pos){
+      (item,pos) => {
         return categories_arr.indexOf(item) == pos
       });
 
     colors_arr = colors_arr.filter(
-      function(item,pos){
+      (item,pos) => {
         return colors_arr.indexOf(item) == pos
       });
 
@@ -1162,7 +1193,7 @@ router.get('/brands/:brand/filter/*', function(req, res){
 })
 
 
-router.delete('/remove-cart-item/:id', function(req, res){
+router.delete('/remove-cart-item/:id', (req, res) => {
   hbx_queries.removeCartItemByID(req.params.id)
   .then( () => {
     return;
@@ -1171,8 +1202,8 @@ router.delete('/remove-cart-item/:id', function(req, res){
 })
 
 
-router.post('/update-password-in-db', function(req, res){
-
+router.post('/update-password-in-db', (req, res) => {
+  console.log('called route!');
   if(!req.user.password){
     res.redirect('/hbx_error')
   }
