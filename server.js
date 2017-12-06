@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000
 
 app.use(flash());
 
-app.set('views', [__dirname + '/views/hypebeast', __dirname + '/views/hbx']);
+app.set('views', [__dirname + '/src/views/hypebeast', __dirname + '/src/views/hbx']);
 app.set('view engine', 'pug');
 
 app.use(cookieSession({
@@ -27,7 +27,7 @@ app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'src/public')));
 app.use('/', routes);
 
 app.use(function(req, res) {

@@ -117,8 +117,6 @@ const closeHBXAccount = () => {
   }
 
   if(confirm('Are you sure you want to close your account?')){
-    console.log('password: ',password);
-    console.log('userId: ',userId);
 
     fetch('/hbx_account/close-account', {
       method:'DELETE',
@@ -135,7 +133,6 @@ const closeHBXAccount = () => {
       cache: 'default'
     })
     .then( () => {
-      console.log('back in client!');
       let url = window.location.href.split('/hbx_account/')[0];
       let localStorage = window.localStorage;
       localStorage.clear();

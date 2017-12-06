@@ -1,6 +1,6 @@
 const {db} = require('./connection.js');
 const bcrypt = require('bcrypt');
-const {saltRounds} = require('../configure');
+const {saltRounds} = require('../../configure');
 const {knex} = require('./connection.js');
 const {allProductSizesArr} = require('./products_data');
 const {allProductSizesString} = require('./products_data');

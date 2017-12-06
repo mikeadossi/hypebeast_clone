@@ -11,7 +11,6 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "knex": "^0.14.2",
-    "nodemon": "*",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
@@ -23,11 +22,19 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "lint": "./node_modules/.bin/eslint src",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "drop:db": "dropdb hypebeast_clone_db",
     "create:db": "createdb hypebeast_clone_db;",
     "schema:db": "psql hypebeast_clone_db < database/schema.sql & psql hypebeast_clone_db < database/hbx_schema.sql",
     "seed:db": "psql hypebeast_clone_db < database/seedFile.sql"
+  },
+  "devDependencies": {
+  "eslint": "^4.4.1",
+  "eslint-config-airbnb-base": "^11.3.1",
+  "eslint-plugin-import": "^2.7.0",
+  "nodemon": "*"
   },
   "author": "Mike Adossi",
   "license": "MIT"

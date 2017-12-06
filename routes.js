@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const queries = require('./database/queries');
-const hbx_queries = require('./database/hbx_queries');
+const queries = require('./src/database/queries');
+const hbx_queries = require('./src/database/hbx_queries');
 const passport = require('./passport');
 const bcrypt = require('bcrypt');
 const {saltRounds} = require('./configure');
-const {allProductSizesArr} = require('./database/products_data');
-const {allProductSizesSingleValueArr} = require('./database/products_data');
-const {allBrandNamesObj} = require('./database/products_data');
-const {allProductSizesString} = require('./database/products_data');
-const {allProductSizesObj} = require('./database/products_data');
-const {checkPasswordAndDeleteUser} = require('./database/util/checkPasswordAndDeleteUser');
-const {deleteUserUsingHashAndId} = require('./database/util/deleteUserUsingHashAndId');
+const {allProductSizesArr} = require('./src/database/products_data');
+const {allProductSizesSingleValueArr} = require('./src/database/products_data');
+const {allBrandNamesObj} = require('./src/database/products_data');
+const {allProductSizesString} = require('./src/database/products_data');
+const {allProductSizesObj} = require('./src/database/products_data');
+const {checkPasswordAndDeleteUser} = require('./src/database/util/checkPasswordAndDeleteUser');
+const {deleteUserUsingHashAndId} = require('./src/database/util/deleteUserUsingHashAndId');
 
 /************************** Hypebeast (below) *******************************/
 
@@ -157,8 +157,6 @@ router.post('/register', (req, res) => {
   }
 
   const createNonOauthUser = (userEmailAndPassword) => {
-    console.log('userEmailAndPassword.email => ',userEmailAndPassword.email);
-    console.log('userEmailAndPassword.password => ',userEmailAndPassword.password);
     return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
       .then(() => {
         console.log('in here!');
@@ -229,6 +227,7 @@ router.get('/error', (req, res) => {
 });
 
 router.post('/post/post_comment/:id', (req, res) => {
+  console.log('hit route!');
   const user_comment = req.body.user_comment;
   const article_id = req.params.id;
   const user_id = req.user.id;
@@ -274,6 +273,15 @@ router.post('/add-new-username-to-db', (req, res) => {
     })
     .catch( err => console.log(err))
 
+})
+
+router.post('/post/:post_id/add-comment-to-db', (req, res) => {
+  queries.storeComment(req.body.user_comment, req.body.user_id, req.body.post_id, req.body.user_name)
+    .then( dbRow => {
+      let comment_db_id = dbRow
+      res.json(comment_db_id)
+    })
+    .catch( err => console.log(err))
 })
 
 

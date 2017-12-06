@@ -61,16 +61,16 @@
 }
 
 .post_actions{
-  /*display:inline;*/
+  /* display: inline; */
+  /* width: 82.6%; */
+  /* margin-left: 116px; */
   background-color: #F7F9FA;
   border: 2px solid #DFE3E7;
-  width: 82.6%;
   position: relative;
   margin-top: -11px;
-  margin-left: 116px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  text-align:right;
+  text-align: right;
 }
 
 .post_actions_empty{
@@ -84,7 +84,7 @@
 
 .post_textarea{
   display: inline;
-  width: 80%;
+  width: 96.6%;
   border: 2px solid #DFE3E7;
   padding: 10px;
   border-radius: 5px;
@@ -113,7 +113,7 @@
   margin-top:20px;
 }
 
-.post_comment{
+.post_comment, .reply_comment{
   padding: 5px;
   width:90%;
 }
@@ -263,11 +263,10 @@
   padding-top:30px;
 }
 
-.reply_comment{
-  border:2px solid grey;
+/*.reply_comment{
   padding:10px;
   display:flex;
-}
+}*/
 
 .directed_at_username{
   color:grey;
@@ -276,6 +275,10 @@
 .directed_at{
   height: 18px;
   margin-left: 3px;
+}
+
+.new_comment, .write_reply_comment{
+  display: flex;
 }
 
 
@@ -322,11 +325,11 @@
     margin-right: 20px;
   }
   .post_textarea{
-    width:72%;
+    /*width:72%;*/
   }
   .post_actions{
-    width: 75%;
-    margin-left: 70px;
+    /*width: 75%;
+    margin-left: 70px;*/
   }
   .post_ad_container{
     display:unset;
@@ -377,11 +380,11 @@
     padding-left: 0;
   }
   .post_actions{
-    width: 635px;
-    margin-left: 70px;
+    /*width: 635px;
+    margin-left: 70px;*/
   }
   .post_textarea{
-    width:615px;
+    /*width:615px;*/
   }
   .post_ad_container{
     display:unset;
@@ -419,11 +422,11 @@
     padding-left: 0;
   }
   .post_actions{
-    width: 821px;
-    margin-left: 69px;
+    /*width: 821px;
+    margin-left: 69px;*/
   }
   .post_textarea{
-    width:800px;
+    /*width:800px;*/
   }
   .post_ad_container{
     padding-top: 20px;
@@ -443,11 +446,12 @@
     margin:unset;
   }
   .post_actions{
-    width: 720px;
-    margin-left: 70px;
+    /*width: 720px;
+    margin-left: 70px;*/
   }
   .post_textarea{
-    width:700px;
+    /*width:700px;*/
+    /*width:96%*/
   }
   .post_ad_container{
     padding-top: 20px;

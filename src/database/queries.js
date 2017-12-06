@@ -1,5 +1,5 @@
 const {db} = require('./connection.js');
-const {saltRounds} = require('../configure');
+const {saltRounds} = require('../../configure.js');
 const bcrypt = require('bcrypt');
 
 
@@ -16,14 +16,14 @@ let queries = {
     return db.any("SELECT * FROM posts") // returns a promise, because pgp
   },
 
-  storeComment: function(user_comment, post_id, user_id, user_name) {
+  storeComment: function(user_comment, user_id, post_id, user_name) {
     return db.any(
-      "INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4)",
+      "INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4) RETURNING *",
       [user_comment, user_id, post_id, user_name])
   },
 
   getPostComments: function(post_id) {
-    return db.any("SELECT * FROM comments WHERE post_id = $1", post_id)
+    return db.any("SELECT * FROM comments WHERE post_id = $1 ORDER BY id DESC", post_id)
   },
 
   getTopTenByHypeCount: function() {

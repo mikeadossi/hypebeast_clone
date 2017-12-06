@@ -53,13 +53,13 @@ block content
                 .post_actions.post_actions_empty
             - } else {
               - const article_id = post[0].id;
-              form(method="post" action="post_comment/"+article_id)
+              .form
                 .post_avatar 
                   img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
                 .post_textarea_content
-                    textarea.post_textarea(name="user_comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
+                    textarea.post_textarea(onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
                     .post_actions
-                        input.post_as_user(type="submit" value ="post as "+user.username)
+                        button.post_as_user(onclick="submitCommentToDB(this,'"+post[0].id+"','"+user.id+"','"+user.username+"','new comment')") post as !{user.username}
             - }
             
           .posts_comments_main_container
@@ -80,10 +80,15 @@ block content
                         span.reply_seperator |
                         span.fa.fa-angle-down
                         span.reply_dot_seperator .
-                        span
-                          button(onclick="submitReply(this)").reply_button Reply
-                        span.reply_dot_seperator .
-                        span.share_reply_button.empty_link Share
+                        -if(user){
+                          span
+                            button.reply_button(onclick="writeReply(this,'"+user.username+"',"+post[0].id+","+user.id+")") Reply
+                            span.reply_dot_seperator .
+                            span.share_reply_button.empty_link Share
+                        -} else {
+                          span
+                            button.reply_button
+                        -}
                     .post_replies_main_container
             - }
     

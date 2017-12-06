@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const queries = require('./database/queries.js');
+const queries = require('./src/database/queries.js');
 const config = require('./configure');
 
 /* ~~~~~~~~~~~~~~~~~ local strategy ~~~~~~~~~~~~~~~~~ */
