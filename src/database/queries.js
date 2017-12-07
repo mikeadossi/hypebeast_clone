@@ -116,9 +116,11 @@ let queries = {
     [searchAndUpdate.name])
       .then( user => {
         if(!user){
-          return db.oneOrNone(
-            "INSERT INTO facebook_users (username, profile_id) VALUES ($1, $2) RETURNING *",
-            [searchAndUpdate.name, searchAndUpdate.someID]);
+          return db.oneOrNone(`
+            INSERT INTO facebook_users (username, profile_id)
+            VALUES ($1, $2)
+            RETURNING *
+            `,[searchAndUpdate.name, searchAndUpdate.someID]);
         } else {
           return user;
         }
@@ -131,11 +133,23 @@ let queries = {
   },
 
   addNewUsernameToDB: function(newUsername, email) {
-    return db.any("UPDATE users SET username = $1 WHERE email = $2 RETURNING *",[newUsername, email])
+    return db.any(`
+      UPDATE users SET username = $1
+      WHERE email = $2 RETURNING *
+      `,[newUsername, email])
   },
 
   isUsernameAvailable: function(username) {
     return db.any("SELECT * FROM users WHERE username = $1", username)
+  },
+
+  postReplyCommentToDB: function(parentCommentId, newComment, post_id, user_id, user_name) {
+    console.log('4. query called: inserting data in comments');
+    return db.any(`
+      INSERT INTO comments (comment_text, parent_comment_id, post_id, user_id, user_name)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *
+    `,[newComment, parentCommentId, post_id, user_id, user_name])
   }
 
 }

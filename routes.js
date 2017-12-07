@@ -227,14 +227,13 @@ router.get('/error', (req, res) => {
 });
 
 router.post('/post/post_comment/:id', (req, res) => {
-  console.log('hit route!');
   const user_comment = req.body.user_comment;
   const article_id = req.params.id;
   const user_id = req.user.id;
   const user_name = req.user.username;
 
   try{
-    queries.storeComment(user_comment, article_id, user_id, user_name)
+    queries.storeComment(user_comment, user_id, article_id, user_name)
     .then(() => {
       res.status(200).redirect('/post/'+article_id)
     })
@@ -273,16 +272,29 @@ router.post('/add-new-username-to-db', (req, res) => {
     })
     .catch( err => console.log(err))
 
-})
+});
 
 router.post('/post/:post_id/add-comment-to-db', (req, res) => {
-  queries.storeComment(req.body.user_comment, req.body.user_id, req.body.post_id, req.body.user_name)
-    .then( dbRow => {
-      let comment_db_id = dbRow
-      res.json(comment_db_id)
-    })
+  queries.storeComment(
+    req.body.user_comment,
+    req.body.user_id,
+    req.body.post_id,
+    req.body.user_name)
+    .then( comment => res.json(comment) )
     .catch( err => console.log(err))
-})
+});
+
+
+router.post('/post/:post_id/add-reply-to-db/:comment_id', (req, res) => {
+  queries.postReplyCommentToDB(
+    req.params.comment_id,
+    req.body.new_comment,
+    req.body.post_id,
+    req.body.user_id,
+    req.body.user_name)
+    .then( comment => res.json(comment) )
+    .catch( err => console.log(err))
+});
 
 
 /**************************** HBX (below) ***********************************/

@@ -23,5 +23,6 @@ CREATE TABLE comments (
   user_id INTEGER,
   user_name TEXT,
   post_id INTEGER,
-  comment_text TEXT
+  comment_text TEXT,
+  parent_comment_id INTEGER
 );

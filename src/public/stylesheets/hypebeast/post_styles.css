@@ -29,11 +29,15 @@
   height: 56px;
   width: 60px;
   background-color: lightgrey;
-  display: inline-block;
-  position: relative;
+  /*display: inline-block;*/
+  /*position: relative;*/
   top: -77px;
   margin-right: 10px;
   border-radius: 2px;
+}
+
+.disqus_form{
+  display:flex;
 }
 
 .post_textarea:focus{
@@ -42,6 +46,7 @@
 
 .post_textarea_content{
   display: inline;
+  width:100%;
 }
 
 .post_avatar{
@@ -153,15 +158,19 @@
   margin-right: 5px;
 }
 
-.reply_button:hover, .share_reply_button:hover{
+.reply_button:hover, .share_reply_button:hover, .close_reply_button:hover{
   color:black;
   cursor:pointer;
 }
 
-.reply_button, .share_reply_button{
+.reply_button, .share_reply_button, .close_reply_button{
   color:grey;
   text-decoration: none;
   font-size:13px;
+}
+
+.reply_comment_container, .new_comment_container{
+  margin-top: 20px;
 }
 
 .commenter_input_container{
@@ -277,7 +286,7 @@
   margin-left: 3px;
 }
 
-.new_comment, .write_reply_comment{
+.new_comment_container, .write_reply_comment{
   display: flex;
 }
 
