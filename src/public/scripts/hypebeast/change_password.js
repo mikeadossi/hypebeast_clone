@@ -1,5 +1,4 @@
 const updatePassword = (element) => {
-  console.log('hi');
   let user = $('.hiddenUserInput').val();
   let form = element.parentNode;
 

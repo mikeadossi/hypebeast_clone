@@ -201,7 +201,6 @@ let queries = {
   },
 
   getSortedInventoryDirection: function(brand, direction){
-    console.log("----------------> executing sql query for ", direction)
     return db.any(`
       SELECT * FROM products
       WHERE brand_name = $1

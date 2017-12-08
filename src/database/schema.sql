@@ -24,5 +24,6 @@ CREATE TABLE comments (
   user_name TEXT,
   post_id INTEGER,
   comment_text TEXT,
-  parent_comment_id INTEGER
+  parent_comment_id INTEGER,
+  replies_array TEXT
 );

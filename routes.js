@@ -51,15 +51,21 @@ router.get('/post/:id', (req, res) => {
   Promise.all(
     [
       queries.getPost(id),
-      queries.getPostComments(id)
+      queries.getPostComments(id),
+      queries.getPostCommentsWithoutParents(id),
+      queries.getPostReplies(id)
     ]
   ).then( results => {
       const post = results[0];
       const all_comments = results[1];
+      const allCommentsWithoutParents = results[2];
+      const allCommentsWithParents = results[3];
 
       res.render('post', {
         post: post,
         all_comments: all_comments,
+        allCommentsWithParents: allCommentsWithParents,
+        allCommentsWithoutParents: allCommentsWithoutParents,
         user: req.user
        })
     })
@@ -159,7 +165,6 @@ router.post('/register', (req, res) => {
   const createNonOauthUser = (userEmailAndPassword) => {
     return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
       .then(() => {
-        console.log('in here!');
         return res.status(200).redirect('/register/success')
       })
   }
@@ -959,8 +964,6 @@ router.post('/checkout/complete', (req, res, next) => {
 router.post('/brands/:brand/:product/add-to-cart', (req, res) => {
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
   // fetch does not send that cookie automatically.
-
-console.log('\n req.body -==-> ',req.body,'\n');
 
   if(!req.user){
     res.status(401).json({status:'error',message:'user is not present on the request object'})

@@ -188,6 +188,10 @@
   color:grey;
 }
 
+.fa:hover{
+  cursor:default !important;
+}
+
 .reply_button{
   font-size:13px;
   border:none;

@@ -1,3 +1,16 @@
+$(document).ready(function(){
+  generateComments(
+    $('.usernameVal').val(),
+    $('.allCommentsWithoutParents').val(),
+    $('.allCommentsWithParents').val(),
+    $('.allComments').val()
+  );
+
+  if($('.usernameVal').html()){
+    $('.reply_button').remove();
+  }
+})
+
 let top_ten_secret = $('.top_ten_secret').text();
 var arr = top_ten_secret.split("**");
 let title;
@@ -21,8 +34,6 @@ $('.close').on('click', () => {
   $('.mobileMenu').css('display','none');
   $('.magnifierMobile').css('display','inline-block');
 })
-
-// $('.search_container').css('display','none');
 
 $('.magnifier').on('click', () => {
   $('.search_nav_container').css('display','block');
