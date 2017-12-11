@@ -1,3 +1,6 @@
+/* global window, document, console, allProductSizesSingleValueArr,
+allProductSizesObj, fetch, Headers  */
+/* exported filterThisItem, clearAllFilters */
 const filterThisItem = (element, brandName) => {
   const uiCategories = allProductSizesSingleValueArr;
 
@@ -7,14 +10,14 @@ const filterThisItem = (element, brandName) => {
 
   if(!element.value){
     filterParameter = element.innerHTML;
-    uiCategories.indexOf(filterParameter) > -1 ? filterParameter = dbCategories[filterParameter] : filterParameter = filterParameter
+    uiCategories.indexOf(filterParameter) > -1 ? filterParameter = dbCategories[filterParameter] : filterParameter = filterParameter;
   } else {
-    filterParameter = element.value.replace(/ /g,'');
+    filterParameter = element.value.replace(/ /g,"");
   }
 
   let url = window.location.href;
 
-  if(filterParameter === 'newest_first'){
+  if(filterParameter === "newest_first"){
     url = url.replace(/\/newest_first/g,"");
     url = url.replace(/\/high_to_low/g,"");
     url = url.replace(/\/low_to_high/g,"");
@@ -23,44 +26,44 @@ const filterThisItem = (element, brandName) => {
   }
 
   if(url.indexOf(filterParameter) > -1){
-    url = url.replace('/'+filterParameter,'');
-    if(!url.split('/filter')[1]){
-      url = url.split('/filter')[0];
+    url = url.replace("/"+filterParameter,"");
+    if(!url.split("/filter")[1]){
+      url = url.split("/filter")[0];
       document.location.href = url;
     }
-  } else if(url.indexOf('filter') > -1){
-    url += '/' + filterParameter;
+  } else if(url.indexOf("filter") > -1){
+    url += "/" + filterParameter;
   } else {
-    url += '/filter/' + filterParameter;
+    url += "/filter/" + filterParameter;
   }
 
-  const directions = ['high_to_low','low_to_high'];
+  const directions = ["high_to_low","low_to_high"];
 
   if(directions.indexOf(filterParameter) > -1 && url.indexOf(directions[0] > -1) || directions.indexOf(filterParameter) > -1 && url.indexOf(directions[1] > -1)){
     // remove all possible duplicates of directional params in the url
     url = url.replace(/\/newest_first/g,"");
     url = url.replace(/\/high_to_low/g,"");
     url = url.replace(/\/low_to_high/g,"");
-    url += '/' + filterParameter;
+    url += "/" + filterParameter;
   }
 
   fetch(url, {
-    method:'GET',
+    method:"GET",
     headers: new Headers({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Accept": "application/json",
+      "Content-Type": "application/json"
     }),
     credentials: "same-origin"
   })
-  .then(() => {
-    document.location.href = url;
-  })
-  .catch(err => console.log(err));
+    .then(() => {
+      document.location.href = url;
+    })
+    .catch(err => console.log(err));
 
 };
 
 const clearAllFilters = () => {
   let url = window.location.href;
-  url = url.split('/filter')[0]
+  url = url.split("/filter")[0];
   document.location.href = url;
-}
+};

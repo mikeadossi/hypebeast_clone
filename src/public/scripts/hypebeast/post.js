@@ -1,14 +1,16 @@
+/* global $, fetch, Headers, console, window */
+/* exported submitCommentToDB, submitReply, writeReply, closeReply */
 const submitCommentToDB = (element, post_id, user_id, user_name) => {
   let user_comment = element.parentNode.parentNode.children[1].value;
-  let route = window.location.href + '/add-comment-to-db';
+  let route = window.location.href + "/add-comment-to-db";
   post_id = JSON.parse(post_id);
   user_id = JSON.parse(user_id);
 
   fetch(route, {
-    method: 'POST',
+    method: "POST",
     headers: new Headers({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Accept": "application/json",
+      "Content-Type": "application/json"
     }),
     body: JSON.stringify({
       user_comment: user_comment,
@@ -18,38 +20,38 @@ const submitCommentToDB = (element, post_id, user_id, user_name) => {
     }),
     credentials: "same-origin"
   })
-  .then( comments =>  comments.json() )
-  .then( commentJSON => {
-    let append_to_container = $('.posts_comments_main_container');
+    .then( comments =>  comments.json() )
+    .then( commentJSON => {
+      let append_to_container = $(".posts_comments_main_container");
 
-    insertNewComment(
-      append_to_container,
-      user_name,
-      user_comment,
-      post_id,
-      user_id,
-      commentJSON[0].id
-    );
-  })
-  .catch(err => console.log(err))
-}
+      insertNewComment(
+        append_to_container,
+        user_name,
+        user_comment,
+        post_id,
+        user_id,
+        commentJSON[0].id
+      );
+    })
+    .catch(err => console.log(err));
+};
 
 
 const submitReply = (element, post_id, user_id, user_name, comment_id, replyTo) => {
 
   let user_comment = element.parentNode.parentNode.children[1].value;
-  if(!user_comment){ return };
-  let whereToAppend = $(element).closest('.post_comment');
+  if(!user_comment){ return; }
+  let whereToAppend = $(element).closest(".post_comment");
 
-  $('.reply_comment_container').remove();
+  $(".reply_comment_container").remove();
 
-  let route = window.location.href + '/add-reply-to-db/' + comment_id;
+  let route = window.location.href + "/add-reply-to-db/" + comment_id;
 
   fetch(route, {
-    method: 'POST',
+    method: "POST",
     headers: new Headers({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Accept": "application/json",
+      "Content-Type": "application/json"
     }),
     body: JSON.stringify({
       new_comment: user_comment,
@@ -59,10 +61,10 @@ const submitReply = (element, post_id, user_id, user_name, comment_id, replyTo) 
     }),
     credentials: "same-origin"
   })
-  .then( comments =>  comments.json() )
-  .then( updatedComment => {
+    .then( comments =>  comments.json() )
+    .then( updatedComment => {
 
-    whereToAppend.append(`
+      whereToAppend.append(`
         <div class="new_comment_container">
           <div class="commenter_avatar">
             <img class="commenter_avatar_image"
@@ -94,7 +96,7 @@ const submitReply = (element, post_id, user_id, user_name, comment_id, replyTo) 
               <span class="reply_dot_separator"></span>
               <span>
                 <button class="reply_button" onclick="writeReply(this,
-                  '`+$('.user_name').val()+`',
+                  '`+$(".user_name").val()+`',
                   `+post_id+`,
                   `+user_id+`,
                   `+updatedComment[0].id+`,
@@ -108,11 +110,11 @@ const submitReply = (element, post_id, user_id, user_name, comment_id, replyTo) 
             </div>
           </div>
         </div>
-    `)
+    `);
 
-  })
-  .catch(err => console.log(err))
-}
+    })
+    .catch(err => console.log(err));
+};
 
 const insertNewComment = (container, username, comment, post_id, user_id, comment_id) => {
 
@@ -146,7 +148,7 @@ const insertNewComment = (container, username, comment, post_id, user_id, commen
           <span class="reply_dot_separator"></span>
           <span>
             <button class="reply_button" onclick="writeReply(this,
-              '`+$('.usernameVal').val()+`',
+              '`+$(".usernameVal").val()+`',
               `+post_id+`,
               `+user_id+`,
               `+comment_id+`,
@@ -161,13 +163,13 @@ const insertNewComment = (container, username, comment, post_id, user_id, commen
       </div>
     </div>
 
-    `)
-}
+    `);
+};
 
 
 const writeReply = (element, username, post_id, user_id, comment_id, replyTo) => {
-  let parent = element.parentNode.parentNode.parentNode.parentNode;
-  let whereToAppend = $(element).closest('.post_comment');
+  let whereToAppend = $(element).closest(".post_comment");
+  // let parent = element.parentNode.parentNode.parentNode.parentNode;
   // let replyTo = element.parentNode.parentNode.parentNode.children[0].children[0].innerHTML;
 
   whereToAppend.append(`
@@ -210,10 +212,10 @@ const writeReply = (element, username, post_id, user_id, comment_id, replyTo) =>
         <div class="post_replies_main_container_1">
         </div>
     </div>
-    `)
+    `);
 
-}
+};
 
 const closeReply = (element) => {
-  $(element).closest('.reply_comment_container').remove();
-}
+  $(element).closest(".reply_comment_container").remove();
+};

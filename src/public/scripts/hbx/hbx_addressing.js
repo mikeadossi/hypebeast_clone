@@ -1,8 +1,10 @@
+/* global $, window */
+/* exported populateAddressCheckoutPage */
 const populateAddressCheckoutPage = () => {
 
   if(!window.localStorage.hbxLocalCart){
-    $('.hbx_addressing_content').remove();
-    $('.localStorageAddressCheckoutContent').append(`
+    $(".hbx_addressing_content").remove();
+    $(".localStorageAddressCheckoutContent").append(`
         <h1 class="hbx_error_msg">Page not found</h1>
       `);
   } else {
@@ -14,7 +16,7 @@ const populateAddressCheckoutPage = () => {
       bag_subtotal += hbxLocalCart[i].item_cost;
     }
 
-    $('.localStorageAddressCheckoutContent').append(`
+    $(".localStorageAddressCheckoutContent").append(`
         <div class="hbx_addressing_content">
           <div class="hbx_checkout_header">
             Checkout
@@ -535,8 +537,8 @@ const populateAddressCheckoutPage = () => {
         </div>
         `);
 
-      for(let i = 0; i < hbxLocalCart.length; i++){
-        $('.checkout_items_main_container').append(`
+    for(let i = 0; i < hbxLocalCart.length; i++){
+      $(".checkout_items_main_container").append(`
           <div class="checkout_item_container">
             <div class="checkout_item_img">
               <img src=`+hbxLocalCart[i].item_image+` alt="">
@@ -563,7 +565,7 @@ const populateAddressCheckoutPage = () => {
             </div>
           </div>
         `);
-      }
+    }
 
   }
-}
+};

@@ -1,3 +1,5 @@
+/* global $ */
+/* exported createReplyDiv */
 let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, comment_id) => {
   return `
   <div class="new_comment_container">
@@ -31,7 +33,7 @@ let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, commen
         <span class="reply_dot_separator"></span>
         <span>
           <button class="reply_button" onclick="writeReply(this,
-            '`+$('.usernameVal').val()+`',
+            '`+$(".usernameVal").val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,
@@ -45,5 +47,5 @@ let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, commen
       </div>
     </div>
   </div>
-  `
+  `;
 };

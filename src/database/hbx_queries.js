@@ -1,11 +1,13 @@
-const {db} = require('./connection.js');
-const bcrypt = require('bcrypt');
-const {saltRounds} = require('../../configure');
-const {knex} = require('./connection.js');
-const {allProductSizesArr} = require('./products_data');
-const {allProductSizesString} = require('./products_data');
-const {allProductClothingCategoriesArr} = require('./products_data');
-const {allProductColorsArr} = require('./products_data');
+/* global console, purchased_at, shipped_at, address, item_quantity, item_cost,
+item_color, item_size, products_id, users_id, module */
+const {db} = require("./connection.js");
+const bcrypt = require("bcrypt");
+const {saltRounds} = require("../../configure");
+const {knex} = require("./connection.js");
+const {allProductSizesArr} = require("./products_data");
+const {allProductSizesString} = require("./products_data");
+const {allProductClothingCategoriesArr} = require("./products_data");
+const {allProductColorsArr} = require("./products_data");
 
 
 let queries = {
@@ -65,7 +67,8 @@ let queries = {
 
   getBrandPriceRange: function(brand){
 
-    return brandPrices = db.any(`
+    // return brandPrices = db.any(`
+    return db.any(`
       SELECT product_price FROM products
       WHERE brand_name = $1
       `,brand)
@@ -77,7 +80,7 @@ let queries = {
           brandPricesArr.push(brandPrices[i].product_price);
         }
 
-        const brandPriceRange = brandPricesArr.sort(function(a,b){ return a - b });
+        const brandPriceRange = brandPricesArr.sort(function(a,b){ return a - b; });
 
         const getSpacing = (arr) => {
           let difference = arr[arr.length-1] - arr[0];
@@ -161,9 +164,9 @@ let queries = {
 
             if(curr > arr[arr.length-1]){
               ranges = ranges.slice(0,ranges.length-1);
-                if(ranges[0] % 10 === 0){
-                  ranges[0] = ranges[0] - 9;
-                }
+              if(ranges[0] % 10 === 0){
+                ranges[0] = ranges[0] - 9;
+              }
               return ranges;
             }
           }
@@ -180,7 +183,7 @@ let queries = {
 
       })
       .catch(err => {
-        console.log('error: ',err);
+        console.log("error: ",err);
         // return next(err);
         // return err;
       });
@@ -190,14 +193,14 @@ let queries = {
     return db.any(`
       SELECT
       `+allProductSizesString+`
-      from products WHERE brand_name = $1`, brand)
+      from products WHERE brand_name = $1`, brand);
   },
 
   getProductSizes: function(product){
     return db.any(`
       SELECT
       `+allProductSizesString+`
-      from products WHERE product_name_route = $1`, product)
+      from products WHERE product_name_route = $1`, product);
   },
 
   getSortedInventoryDirection: function(brand, direction){
@@ -209,7 +212,7 @@ let queries = {
   },
 
   getAllHBXProducts: function(){
-    return db.any("SELECT brand_name,product_images,category_id FROM products")
+    return db.any("SELECT brand_name,product_images,category_id FROM products");
   },
 
   createHBXLocalUser: function(email, password){
@@ -218,15 +221,15 @@ let queries = {
       return db.none(`
         INSERT INTO local_users (email, password)
         VALUES ($1, $2)
-        `,[email, hash])
-    })
+        `,[email, hash]);
+    });
   },
 
   createHBXUser: function(email){
     return db.oneOrNone(`
       INSERT INTO users (email)
       VALUES ($1) RETURNING *
-      `,[email])
+      `,[email]);
   },
 
   addToCart: function(
@@ -258,11 +261,11 @@ let queries = {
         item_brand,
         item_route)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-    [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand, item_route])
+      [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand, item_route]);
   },
 
   clearAllCartDataById: function(id){
-    return db.none("DELETE FROM cart WHERE users_id = $1", [id])
+    return db.none("DELETE FROM cart WHERE users_id = $1", [id]);
   },
 
   addNewOrder: function(){
@@ -278,37 +281,37 @@ let queries = {
         products_id,
         users_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [
-      purchased_at,
-      shipped_at,
-      address,
-      item_quantity,
-      item_cost,
-      item_color,
-      item_size,
-      products_id,
-      users_id
-    ])
+      [
+        purchased_at,
+        shipped_at,
+        address,
+        item_quantity,
+        item_cost,
+        item_color,
+        item_size,
+        products_id,
+        users_id
+      ]);
   },
 
   clearAllOrdersDataById: function(id){
-    return db.none("DELETE FROM orders WHERE users_id = $1", [id])
+    return db.none("DELETE FROM orders WHERE users_id = $1", [id]);
   },
 
   getCartById: function(id){
-    return db.any("SELECT * FROM cart WHERE users_id = $1", id)
+    return db.any("SELECT * FROM cart WHERE users_id = $1", id);
   },
 
   getCategory: function(product_name){
     return db.any(`
       SELECT category_type FROM categories
       JOIN products ON categories.id = products.category_id
-      WHERE product_name_route = $1`, [product_name])
+      WHERE product_name_route = $1`, [product_name]);
   },
 
   updateCartById: function(id, item_count, item_tot_cost){
     return db.any(`UPDATE cart SET item_quantity = $2,
-      item_cost = $3 WHERE id = $1`,[id,item_count,item_tot_cost])
+      item_cost = $3 WHERE id = $1`,[id,item_count,item_tot_cost]);
   },
 
   editUserAddress: function(street, city, state, postcode, company, user_id){
@@ -325,11 +328,11 @@ let queries = {
         postcode,
         company,
         user_id
-      ])
+      ]);
   },
 
   getPreviousOrdersByID: function(users_id){
-    return db.any("SELECT * FROM orders WHERE users_id = $1", users_id)
+    return db.any("SELECT * FROM orders WHERE users_id = $1", users_id);
   },
 
   updateUserProfile: function(first_name, last_name, phone, email){
@@ -337,7 +340,7 @@ let queries = {
       last_name = $2,
       phone_number = $3
       WHERE email = $4`,
-    [first_name, last_name, phone, email])
+      [first_name, last_name, phone, email]);
   },
 
   updateUserAddress: function(street, city, state, postcode, company, id){
@@ -348,14 +351,14 @@ let queries = {
       postcode = $4,
       company = $5
       WHERE id = $6
-      `,[street, city, state, postcode, company, id])
+      `,[street, city, state, postcode, company, id]);
   },
 
   updateUserPassword: function(hash, user_id){
     return db.any(`
       UPDATE users SET password = $1
       WHERE id = $2
-      `,[hash, user_id])
+      `,[hash, user_id]);
   },
 
   completeOrder: function(
@@ -395,23 +398,23 @@ let queries = {
       purchased_product_details_array,
       total_purchase_cost
     ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`, [
-      payment_type,
-      users_id,
-      shipping_cost,
-      first_name,
-      last_name,
-      phone,
-      order_email,
-      street,
-      city,
-      postcode,
-      country,
-      state,
-      company_name,
-      order_notes,
-      purchasedProductDetailsArray,
-      tot_cost
-    ])
+        payment_type,
+        users_id,
+        shipping_cost,
+        first_name,
+        last_name,
+        phone,
+        order_email,
+        street,
+        city,
+        postcode,
+        country,
+        state,
+        company_name,
+        order_notes,
+        purchasedProductDetailsArray,
+        tot_cost
+      ]);
   },
 
 
@@ -419,7 +422,7 @@ let queries = {
     return db.none(`
       DELETE FROM cart
       WHERE users_id = $1
-      `, users_id)
+      `, users_id);
   },
 
 
@@ -427,8 +430,8 @@ let queries = {
     const allSizeOptions = allProductSizesArr;
     const allClothingCategoryOptions = allProductClothingCategoriesArr;
     const allColorOptions = allProductColorsArr;
-    const priceAscDescOptions = ['high_to_low','low_to_high'];
-    const priceAscDescObj = {'high_to_low':'desc','low_to_high':'asc'};
+    const priceAscDescOptions = ["high_to_low","low_to_high"];
+    const priceAscDescObj = {"high_to_low":"desc","low_to_high":"asc"};
 
     let knexColorsArray = [];
     let knexCategoriesArray = [];
@@ -444,7 +447,7 @@ let queries = {
         knexColorsArray.push(params_array[i]);
       } else if(allSizeOptions.indexOf(params_array[i]) > -1){
         knexSizes.push(params_array[i]);
-      } else if(params_array[i].indexOf('-') > -1){
+      } else if(params_array[i].indexOf("-") > -1){
         knexPriceAvailability.push(params_array[i]);
       } else if(priceAscDescOptions.indexOf(params_array[i]) > -1){
         knexPriceAscDesc.push(params_array[i]);
@@ -461,14 +464,14 @@ let queries = {
     }
 
     let knexx = knex.select()
-                .from('products')
-                .where({"brand_name":brand_name})
-                .whereIn('category_name', knexCategoriesArray)
-                .whereIn('product_color_type',knexColorsArray)
+      .from("products")
+      .where({"brand_name":brand_name})
+      .whereIn("category_name", knexCategoriesArray)
+      .whereIn("product_color_type",knexColorsArray);
 
     if(knexSizes.length){
       for(let i = 0; i < knexSizes.length; i++){
-        knexx = knexx.whereNot(knexSizes[i],'<',1)
+        knexx = knexx.whereNot(knexSizes[i],"<",1);
       }
     }
 
@@ -476,14 +479,14 @@ let queries = {
 
     if(knexPriceAvailability.length){
       for(let i = 0; i < knexPriceAvailability.length; i++){
-        range = knexPriceAvailability[i].split('-');
-        knexx = knexx.whereBetween('product_price', range)
+        range = knexPriceAvailability[i].split("-");
+        knexx = knexx.whereBetween("product_price", range);
       }
     }
 
     if(knexPriceAscDesc.length){
       // always set sql result direction to last directional parameter passed in url
-      knexx = knexx.orderBy('product_price',priceAscDescObj[knexPriceAscDesc[knexPriceAscDesc.length-1]])
+      knexx = knexx.orderBy("product_price",priceAscDescObj[knexPriceAscDesc[knexPriceAscDesc.length-1]]);
     }
 
     return knexx;
@@ -495,17 +498,17 @@ let queries = {
     return db.none(`
       DELETE FROM cart
       WHERE id = $1
-      `, item_id)
+      `, item_id);
   },
 
   closeHBXAccount: function(id,hash){
     return db.none(`
       DELETE FROM users
       WHERE id = $1 AND password = $2
-      `, [id,hash])
+      `, [id,hash]);
   }
 
 
-}
+};
 
 module.exports = queries;

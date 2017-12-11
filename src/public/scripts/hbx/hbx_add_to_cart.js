@@ -1,3 +1,7 @@
+/* global $, window, document, GLOBAL_USER, GLOBAL_PRODUCT, postCartToDB,
+populateAddressCheckoutPage, populateShoppingBagPageWithLocalStorageContent,
+updateCartAndCountByID */
+/* exported selectPreferredSize, selectItemOrProceedToBag */
 const updateLocalStorageCart = () => {
 
   if(window.localStorage.hbxLocalCart){
@@ -8,17 +12,17 @@ const updateLocalStorageCart = () => {
       totalNumOfItems += hbxLocalCart[i].item_quantity;
     }
 
-    $('.shopping_bag')[0].innerHTML = totalNumOfItems;
-    $('.shopping_bag_deux')[0].innerHTML = totalNumOfItems;
+    $(".shopping_bag")[0].innerHTML = totalNumOfItems;
+    $(".shopping_bag_deux")[0].innerHTML = totalNumOfItems;
 
-    if($('.no_items_in_bag').length || $('.new_arrivals_btn').length){
-      $('.no_items_in_bag')[0].remove();
-      $('.new_arrivals_btn')[0].remove();
+    if($(".no_items_in_bag").length || $(".new_arrivals_btn").length){
+      $(".no_items_in_bag")[0].remove();
+      $(".new_arrivals_btn")[0].remove();
     }
 
-    $('.localStorageContent').empty();
+    $(".localStorageContent").empty();
 
-    $('.localStorageContent').append(`
+    $(".localStorageContent").append(`
       <div class="items_in_bag">
         <span class="dropdown_item_count">`+totalNumOfItems+` Item(s) in Bag</span>
       </div>
@@ -33,7 +37,7 @@ const updateLocalStorageCart = () => {
     for(let i = 0; i < hbxLocalCart.length; i++){
       order_total += hbxLocalCart[i].item_cost;
 
-      $('.cart_dropdown_product_container').append(`
+      $(".cart_dropdown_product_container").append(`
           <div class="cart_product">
             <div class="dropdown_img">
               <img src=`+hbxLocalCart[i].item_image+` />
@@ -66,7 +70,7 @@ const updateLocalStorageCart = () => {
           `);
     }
 
-    $('.localStorageContent').append(`
+    $(".localStorageContent").append(`
         <div class="dropdown_order_total_container">
           <div class="dropdown_order_total">
             <span class="order_tot">ORDER TOTAL</span>
@@ -92,61 +96,61 @@ const updateLocalStorageCart = () => {
     return;
   }
 
-  $('.shopping_bag')[0].innerHTML = 0;
-  $('.shopping_bag_deux')[0].innerHTML = 0;
-}
+  $(".shopping_bag")[0].innerHTML = 0;
+  $(".shopping_bag_deux")[0].innerHTML = 0;
+};
 
 
 $(document).ready(function(){
-  let user = $('.users_persistent_id').length
+  let user = $(".users_persistent_id").length;
   if(user){
-    let user_id = $('.users_persistent_id')[0].innerHTML;
+    let user_id = $(".users_persistent_id")[0].innerHTML;
     updateCartAndCountByID(user_id);
   } else if(!user && window.localStorage.hbxLocalCart){
     updateLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
     populateAddressCheckoutPage();
   } else if(!user){
-    $('.shopping_bag')[0].innerHTML = 0;
-    $('.shopping_bag_deux')[0].innerHTML = 0;
+    $(".shopping_bag")[0].innerHTML = 0;
+    $(".shopping_bag_deux")[0].innerHTML = 0;
     populateAddressCheckoutPage();
   }
 
-})
+});
 
 
 let currentSelectedSize;
 
 const selectPreferredSize = (indexPos) => {
 
-  let product_size_categories_arr = $('.hidden_product_sizes_arr')[0].innerHTML;
+  let product_size_categories_arr = $(".hidden_product_sizes_arr")[0].innerHTML;
   // unaffirmed size buttons are transparent
   for(let i = 0; i < product_size_categories_arr.length; i++){
-    $('.product_size_'+i).css('background-color','transparent')
-    $('.product_size_'+i).css('color','black')
+    $(".product_size_"+i).css("background-color","transparent");
+    $(".product_size_"+i).css("color","black");
   }
 
   // affirmed size buttons are blackened
-  $('.product_size_'+indexPos).css('background-color','black')
-  $('.product_size_'+indexPos).css('color','white')
+  $(".product_size_"+indexPos).css("background-color","black");
+  $(".product_size_"+indexPos).css("color","white");
 
   // get selected size character, ex: 'S' or 'XL'
-  currentSelectedSize = $('.product_sizes')[indexPos].innerHTML
+  currentSelectedSize = $(".product_sizes")[indexPos].innerHTML;
 
   // allow cart entry once user has made a sizing choice
-  $('.product_add_to_cart_button').css('background-color','#006FB9');
-  $('.product_add_to_cart_button')[0].innerHTML = "PLEASE SELECT A SIZE"
-  $('.product_add_to_cart_button').hover(function(){
-    $(this).css('cursor','pointer','important');
-  })
+  $(".product_add_to_cart_button").css("background-color","#006FB9");
+  $(".product_add_to_cart_button")[0].innerHTML = "PLEASE SELECT A SIZE";
+  $(".product_add_to_cart_button").hover(function(){
+    $(this).css("cursor","pointer","important");
+  });
 
-}
+};
 
 let itemsInCartObj = {};
-const product_brand = $('.product_brand')[0].innerHTML;
-const product_name = $('.product_name_left')[0].innerHTML;
-let product_usd = $('.product_price_left')[0].innerHTML;
-product_usd = product_usd.split(' ');
+const product_brand = $(".product_brand")[0].innerHTML;
+const product_name = $(".product_name_left")[0].innerHTML;
+let product_usd = $(".product_price_left")[0].innerHTML;
+product_usd = product_usd.split(" ");
 const product_price = Number(product_usd[1]);
 
 
@@ -154,28 +158,28 @@ const selectItemOrProceedToBag = (element) => {
   // move on to shopping bag page
   if(element.innerHTML == "PROCEED TO BAG"){
     let href = window.location.href;
-    href = href.split('brands')
-    href = href[0] + 'hbx_shopping_bag'
+    href = href.split("brands");
+    href = href[0] + "hbx_shopping_bag";
     window.location = href;
     return;
-  };
+  }
 
   addSelectedItemsToCart();
 };
 
 const addSelectedItemsToCart = () => {
   let href = window.location.href;
-  let product_quantity = Number($('.item_count_amt')[0].innerHTML)
+  let product_quantity = Number($(".item_count_amt")[0].innerHTML);
   let product_cost = product_price * product_quantity;
-  let product_category = $('.hidden_category').text();
-  product_category = product_category.replace(/ /g,'');
+  let product_category = $(".hidden_category").text();
+  product_category = product_category.replace(/ /g,"");
 
-  let product_image = $('.product_preview_img')[0].outerHTML;
-  product_image = product_image.split('src=')[1].split("></div>")[0]
-  product_image = product_image.replace(/['"]+/g, '');
+  let product_image = $(".product_preview_img")[0].outerHTML;
+  product_image = product_image.split("src=")[1].split("></div>")[0];
+  product_image = product_image.replace(/['"]+/g, "");
 
   itemsInCartObj = {
-    item_quantity: Number($('.item_count_amt')[0].innerHTML),
+    item_quantity: Number($(".item_count_amt")[0].innerHTML),
     item_cost: product_cost,
     item_color: $(".form-control option:selected").text(),
     item_name: product_name,
@@ -187,11 +191,11 @@ const addSelectedItemsToCart = () => {
     item_individual_price: product_price
   };
 
-  currentSelectedSize ? itemsInCartObj.item_size = currentSelectedSize.replace(/\s/g, '') : itemsInCartObj.item_size = null
+  currentSelectedSize ? itemsInCartObj.item_size = currentSelectedSize.replace(/\s/g, "") : itemsInCartObj.item_size = null;
 
-  if($('.hidden_user').text()){
+  if($(".hidden_user").text()){
     // if user is logged in
-    itemsInCartObj.user_id = GLOBAL_USER.id
+    itemsInCartObj.user_id = GLOBAL_USER.id;
     postCartToDB(itemsInCartObj);
     proceedToBag();
   } else {
@@ -199,27 +203,27 @@ const addSelectedItemsToCart = () => {
     populateLocalStorage(itemsInCartObj);
     updateLocalStorageCart();
     proceedToBag();
-  };
+  }
 };
 
 const populateLocalStorage = (itemsInCartObj) => {
   // ampersand characters need to be accounted for when saved in cookie object
-  if(itemsInCartObj.item_name && itemsInCartObj.item_name.indexOf('&amp;') != -1){
-    itemsInCartObj.item_name = itemsInCartObj.item_name.replace('&amp;','ampersand_char')
-  };
+  if(itemsInCartObj.item_name && itemsInCartObj.item_name.indexOf("&amp;") != -1){
+    itemsInCartObj.item_name = itemsInCartObj.item_name.replace("&amp;","ampersand_char");
+  }
 
   if(!window.localStorage.hbxLocalCart){
-    window.localStorage.setItem( 'hbxLocalCart', "["+JSON.stringify(itemsInCartObj)+"]" );
+    window.localStorage.setItem( "hbxLocalCart", "["+JSON.stringify(itemsInCartObj)+"]" );
   } else {
     let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
     hbxLocalCart.push(itemsInCartObj);
-    window.localStorage.setItem( 'hbxLocalCart', JSON.stringify(hbxLocalCart) )
-  };
+    window.localStorage.setItem( "hbxLocalCart", JSON.stringify(hbxLocalCart) );
+  }
 
 };
 
 const proceedToBag = () => {
-  $('.product_add_to_cart_button').css('background-color','#5DB75C');
-  $('.product_add_to_cart_button')[0].innerHTML = "PROCEED TO BAG";
-  $('.proceed_to_bag_button')[0].innerHTML = "PROCEED TO BAG";
+  $(".product_add_to_cart_button").css("background-color","#5DB75C");
+  $(".product_add_to_cart_button")[0].innerHTML = "PROCEED TO BAG";
+  $(".proceed_to_bag_button")[0].innerHTML = "PROCEED TO BAG";
 };

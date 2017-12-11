@@ -1,10 +1,14 @@
+/* global $, LIST_OF_EDITED_ITEMS, console, fetch, Headers, window, document,
+confirm, updateCartAndCountByID,  */
+/* exported addToListOfEditedItems, updateBag,
+populateShoppingBagPageWithLocalStorageContent, removeItemByID */
 // save the id for every item edited in the cart
 const addToListOfEditedItems = (element, changeInValue) => {
   let container = element.parentNode;
   let containerParent = element.parentNode.parentNode.parentNode;
   let item_id = Number(container.children[3].innerHTML);
   let item_count = Number(container.children[1].innerHTML);
-  let item_cost = containerParent.children[0].children[1].innerHTML
+  let item_cost = containerParent.children[0].children[1].innerHTML;
   let item_tot_cost = item_cost * item_count;
   let editedItem = {};
   editedItem.id = item_id;
@@ -17,18 +21,18 @@ const addToListOfEditedItems = (element, changeInValue) => {
     }
   }
   LIST_OF_EDITED_ITEMS.push(editedItem);
-}
+};
 
 const updateBag = () => {
   let url = window.location.href;
 
   for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
     if(LIST_OF_EDITED_ITEMS[i].count === 0){
-      fetch('/remove-cart-item/'+LIST_OF_EDITED_ITEMS[i].id, {
-        method:'DELETE',
+      fetch("/remove-cart-item/"+LIST_OF_EDITED_ITEMS[i].id, {
+        method:"DELETE",
         headers: new Headers({
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          "Accept": "application/json",
+          "Content-Type": "application/json"
         }),
         body: JSON.stringify({
           id: LIST_OF_EDITED_ITEMS[i].id,
@@ -37,18 +41,18 @@ const updateBag = () => {
         }),
         credentials: "same-origin"
       })
-      .then(() => {
-        let user_id = $('.users_persistent_id')[0].innerHTML;
-        updateCartAndCountByID(user_id);
-      })
-      .catch(err => console.log(err))
+        .then(() => {
+          let user_id = $(".users_persistent_id")[0].innerHTML;
+          updateCartAndCountByID(user_id);
+        })
+        .catch(err => console.log(err));
 
     } else {
-      fetch('/update-bag', {
-        method:'POST',
+      fetch("/update-bag", {
+        method:"POST",
         headers: new Headers({
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          "Accept": "application/json",
+          "Content-Type": "application/json"
         }),
         body: JSON.stringify({
           id: LIST_OF_EDITED_ITEMS[i].id,
@@ -57,20 +61,20 @@ const updateBag = () => {
         }),
         credentials: "same-origin"
       })
-      .then(() => {
-        let user_id = $('.users_persistent_id')[0].innerHTML;
-        updateCartAndCountByID(user_id);
-      })
-      .catch(err => console.log(err))
+        .then(() => {
+          let user_id = $(".users_persistent_id")[0].innerHTML;
+          updateCartAndCountByID(user_id);
+        })
+        .catch(err => console.log(err));
     }
-    }
+  }
 
   document.location.href = url;
-}
+};
 
 const populateShoppingBagPageWithLocalStorageContent = () => {
-  $('.hbx_empty_cart_content').remove();
-  $('.localStorageShoppingBagContent').append(`
+  $(".hbx_empty_cart_content").remove();
+  $(".localStorageShoppingBagContent").append(`
       <div class="hbx_shopping_header_container">
         <div class="hbx_store_header_container">
           <ul class="hbx_header_left_links hbx_product_header_links">
@@ -122,11 +126,11 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
       </div>
     `);
 
-    let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
+  let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
 
-    for(let i = 0; i < hbxLocalCart.length; i++){
-      let item_total_cost = hbxLocalCart[i].item_individual_price * hbxLocalCart[i].item_quantity
-      $('.orderSummaryContent').append(`
+  for(let i = 0; i < hbxLocalCart.length; i++){
+    let item_total_cost = hbxLocalCart[i].item_individual_price * hbxLocalCart[i].item_quantity;
+    $(".orderSummaryContent").append(`
         <div class="hbx_product_row">
           <div class="cart_product_img">
             <img src=`+hbxLocalCart[i].item_image+` alt="">
@@ -178,14 +182,14 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
           </div>
         </div>
       `);
-    }
+  }
 
-    let bag_subtotal = 0;
-    for(let i = 0; i < hbxLocalCart.length; i++){
-      bag_subtotal += hbxLocalCart[i].item_cost;
-    }
+  let bag_subtotal = 0;
+  for(let i = 0; i < hbxLocalCart.length; i++){
+    bag_subtotal += hbxLocalCart[i].item_cost;
+  }
 
-    $('.orderSummaryFooter').append(`
+  $(".orderSummaryFooter").append(`
         <div class="hbx_update_container">
           <div class="hbx_update_btn" onclick="updateBag()">
             UPDATE BAG
@@ -193,7 +197,7 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
         </div>
     `);
 
-    $('.hbx_cart_right_column').append(`
+  $(".hbx_cart_right_column").append(`
         <div class="hbx_right_main_container">
           <div class="hbx_shipping_notice"> USD $0 away from Free Shipping</div>
           <div class="hbx_right_container">
@@ -266,19 +270,19 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
         </div>
     `);
 
-}
+};
 
 const removeItemByID = (item_id) => {
   let url = window.location.href;
-  if (confirm('Are you sure you want to remove this item?')) {
-    fetch('/remove-cart-item/'+item_id, {
-      method:'DELETE',
+  if (confirm("Are you sure you want to remove this item?")) {
+    fetch("/remove-cart-item/"+item_id, {
+      method:"DELETE",
       headers: new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        "Accept": "application/json",
+        "Content-Type": "application/json"
       }),
-    })
+    });
   }
 
-  document.location.href = url
-}
+  document.location.href = url;
+};

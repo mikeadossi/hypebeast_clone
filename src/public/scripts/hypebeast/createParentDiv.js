@@ -1,3 +1,5 @@
+/* global $ */
+/* exported createParentDiv */
 let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
   return `
   <div id="post_comments_container_`+comment_id+`" class="post_comments_container">
@@ -29,7 +31,7 @@ let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
         <span class="reply_dot_separator"></span>
         <span>
           <button class="reply_button" onclick="writeReply(this,
-            '`+$('.usernameVal').val()+`',
+            '`+$(".usernameVal").val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,
@@ -43,5 +45,5 @@ let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
       </div>
     </div>
   </div>
-  `
+  `;
 };
