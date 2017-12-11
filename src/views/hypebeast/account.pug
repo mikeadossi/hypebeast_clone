@@ -6,7 +6,9 @@ block content
       .settings_nav
         .settings_nav_heading Account Settings
         a.settings_nav_link.profile_link(href="/account") Profile
-        a.settings_nav_link.profile_password(href="/account/password") Password
+        - if(user.password){
+          a.settings_nav_link.profile_password(href="/account/password") Password
+        -}
       .settings_controls
         .settings_edit_profile
           .edit_profile_header Edit Profile

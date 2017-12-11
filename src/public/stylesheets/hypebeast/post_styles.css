@@ -276,11 +276,6 @@
   padding-top:30px;
 }
 
-/*.reply_comment{
-  padding:10px;
-  display:flex;
-}*/
-
 .directed_at_username{
   color:grey;
 }
@@ -294,38 +289,9 @@
   display: flex;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.post_comment_count{
+  padding: 10px 10px 10px 0;
+}
 
 @media only screen and (max-width: 759px){
   body{

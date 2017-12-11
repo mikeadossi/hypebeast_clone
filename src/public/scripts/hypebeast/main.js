@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('.allCommentsWithParents').val(),
     $('.allComments').val()
   );
-
+  console.log("$('.usernameVal').val() ---> ",$('.usernameVal').val());
   if($('.usernameVal').html()){
     $('.reply_button').remove();
   }

@@ -29,7 +29,7 @@ let queries = {
   getPostCommentsWithoutParents: function(post_id) {
     return db.any(`
       SELECT * FROM comments
-      WHERE (parent_comment_id IS NULL AND post_id = 20)
+      WHERE (parent_comment_id IS NULL AND post_id = $1)
       ORDER BY id ASC
       `, [post_id])
   },

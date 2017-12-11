@@ -363,7 +363,7 @@ textarea{
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
   background-color: #F2F2F2;
   color:black;
 }
@@ -1053,6 +1053,9 @@ textarea{
 @media only screen and (max-width: 759px){
   body{
     /*background-color: pink;*/
+  }
+  .storeNavLink{
+    padding-bottom:16px;
   }
   .top_ten_description{
     width: 87%;

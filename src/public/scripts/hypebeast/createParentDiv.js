@@ -1,4 +1,4 @@
-let createParentDiv = (username, comment, post_id, user_id, comment_id) => {
+let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
   return `
   <div id="post_comments_container_`+comment_id+`" class="post_comments_container">
     <div class="commenter_avatar">
@@ -9,7 +9,7 @@ let createParentDiv = (username, comment, post_id, user_id, comment_id) => {
       <div class="reply_commenter_content commenter_content_`+comment_id+` ">
         <div class="comment_username_container">
           <span class="commenter_name">
-            `+username+`
+            `+user_name+`
           </span>
           <span class="reply_dot_seperator">.</span>
           <span class="comment_time">an hour ago</span>
@@ -29,7 +29,7 @@ let createParentDiv = (username, comment, post_id, user_id, comment_id) => {
         <span class="reply_dot_separator"></span>
         <span>
           <button class="reply_button" onclick="writeReply(this,
-            '`+username+`',
+            '`+$('.usernameVal').val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,

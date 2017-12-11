@@ -31,7 +31,7 @@ let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, commen
         <span class="reply_dot_separator"></span>
         <span>
           <button class="reply_button" onclick="writeReply(this,
-            '`+user_name+`',
+            '`+$('.usernameVal').val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,

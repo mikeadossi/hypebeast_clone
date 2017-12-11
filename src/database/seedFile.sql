@@ -1387,8 +1387,8 @@ VALUES (
   ''
 ),
 (
-  'Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ in Philadelphia',
-  '<div><h2 class="post_title">Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ in Philadelphia</h2></div>',
+  'Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ',
+  '<div><h2 class="post_title">Sharpen Your Photography Skills This Weekend with Kosten and Darren Burton at UBIQ</h2></div>',
   '<img class="post_image" src="/images/hypebeast_images/blogImages/sharpen_your_photography.jpg" />',
   'Clarks Originals',
   'Arts',
@@ -1584,8 +1584,8 @@ VALUES (
   '<div><span>IMAGE CREDIT </span><span>@GC911</span></div>'
 ),
 (
-  'Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens in Hong Kong',
-  '<div><h2 class="post_title">Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens in Hong Kong
+  'Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens',
+  '<div><h2 class="post_title">Damien Hirst''s "Visual Candy and Natural History" Exhibition Opens
 </h2></div>',
   '<img class="post_image" src="/images/hypebeast_images/blogImages/damien_hirst_gagosian_gallery.jpg" />',
   'Joanna Fu',

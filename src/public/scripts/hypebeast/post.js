@@ -94,7 +94,7 @@ const submitReply = (element, post_id, user_id, user_name, comment_id, replyTo) 
               <span class="reply_dot_separator"></span>
               <span>
                 <button class="reply_button" onclick="writeReply(this,
-                  '`+user_name+`',
+                  '`+$('.user_name').val()+`',
                   `+post_id+`,
                   `+user_id+`,
                   `+updatedComment[0].id+`,
@@ -146,7 +146,7 @@ const insertNewComment = (container, username, comment, post_id, user_id, commen
           <span class="reply_dot_separator"></span>
           <span>
             <button class="reply_button" onclick="writeReply(this,
-              '`+username+`',
+              '`+$('.usernameVal').val()+`',
               `+post_id+`,
               `+user_id+`,
               `+comment_id+`,
@@ -169,7 +169,7 @@ const writeReply = (element, username, post_id, user_id, comment_id, replyTo) =>
   let parent = element.parentNode.parentNode.parentNode.parentNode;
   let whereToAppend = $(element).closest('.post_comment');
   // let replyTo = element.parentNode.parentNode.parentNode.children[0].children[0].innerHTML;
-  
+
   whereToAppend.append(`
       <div class="write_reply_comment reply_comment_container">
         <div class="commenter_avatar">

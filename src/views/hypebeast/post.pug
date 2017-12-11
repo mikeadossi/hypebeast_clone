@@ -53,13 +53,14 @@ block content
                 .post_actions.post_actions_empty
             - } else {
               - const article_id = post[0].id;
+              - let username = user.username || user.email
               .disqus_form
                 .post_avatar 
                   img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
                 .post_textarea_content
                     textarea.post_textarea(onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
                     .post_actions
-                        button.post_as_user(onclick="submitCommentToDB(this,'"+post[0].id+"','"+user.id+"','"+user.username+"')") post as !{user.username}
+                        button.post_as_user(onclick="submitCommentToDB(this,'"+post[0].id+"','"+user.id+"','"+username+"')") post as !{username}
             - }
           
           .posts_comments_main_container
@@ -68,7 +69,7 @@ block content
           input.hidden_user.allCommentsWithParents(value=allCommentsWithParents readonly='readonly')
           input.hidden_user.allComments(value=all_comments readonly='readonly')
           -if(user){
-            input.hidden_user.usernameVal(value=user.username readonly='readonly')
+            input.hidden_user.usernameVal(value=user.username || user.email readonly='readonly')
           -}
           .generated_comment_container
     

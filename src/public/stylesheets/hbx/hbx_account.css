@@ -128,6 +128,7 @@ table, th, td {
   background-color: black;
   border: none;
   margin-top: 10px;
+  margin-right:10px;
   color: white;
   padding: 12px 30px 12px 30px;
 }
