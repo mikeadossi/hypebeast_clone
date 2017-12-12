@@ -1,4 +1,4 @@
-\c hypebeast_clone_db
+-- \c hypebeast_clone_db
 
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
