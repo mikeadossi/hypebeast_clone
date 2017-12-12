@@ -1,6 +1,6 @@
 /* global process, module */
 const pgp = require("pg-promise")();
-const connectionString = `postgres://${process.env.USER}@localhost:5432/hypebeast_clone_db`;
+const connectionString = process.env.DATABASE_URL || `postgres://${process.env.USER}@localhost:5432/hypebeast_clone_db`;
 const db = pgp(connectionString);
 
 const knex = require("knex")({
