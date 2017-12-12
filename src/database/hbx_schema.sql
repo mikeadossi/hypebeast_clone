@@ -1,4 +1,4 @@
--- \c hypebeast_clone_db
+
 
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS product_colors CASCADE;
