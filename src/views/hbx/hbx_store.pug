@@ -120,14 +120,14 @@ block content
         - for(let i = 0; i < store_prod_images.length; i++){
           .product_display
             .product_image
-              if(i == 0 || i % 2 == 0 )
+              if(i == 0 || i % 2 == 0)
                 a.main_img !{ store_prod_images[i] }
                 .product_name !{ product[x].product_name }
                 .product_price USD !{ product[x].product_price }.00
-              else 
-                a.hide_initially_img(href="/brands/"+brand[0].brand_name_link+"/"+product[x].product_name_route) !{ store_prod_images[i] }
-                - x++;
-                - brand_id++;
+              else
+                  a.hide_initially_img(href="/brands/"+brand[0].brand_name_link+"/"+product[x].product_name_route) !{ store_prod_images[i] }
+                  - x++;
+                  - brand_id++;
         - }
             
 

@@ -4,7 +4,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const routes = require('./routes.js');
-const config = require('./configure');
 const flash = require('connect-flash');
 const passport = require('./passport');
 
@@ -18,7 +17,7 @@ app.set('view engine', 'pug');
 
 app.use(cookieSession({
   name: 'session',
-  keys: [config.secret],
+  keys: [process.env.SECRET],
   maxAge: 24*60*60*1000
 }));
 

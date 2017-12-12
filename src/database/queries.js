@@ -1,6 +1,6 @@
 /* global module, console */
+require('dotenv').config();
 const {db} = require("./connection.js");
-const {saltRounds} = require("../../configure.js");
 const bcrypt = require("bcrypt");
 
 
@@ -52,7 +52,7 @@ let queries = {
   },
 
   createNonOauthUser: function(email, password) {
-    return bcrypt.hash(password, saltRounds)
+    return bcrypt.hash(password, process.env.SALTROUNDS)
       .then( hash => {
         return db.any(
           "INSERT INTO users (email, password) VALUES ($1, $2)",

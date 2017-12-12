@@ -31,10 +31,10 @@
     "seed:db": "psql hypebeast_clone_db < src/database/seedFile.sql"
   },
   "devDependencies": {
-  "eslint": "^4.4.1",
-  "eslint-config-airbnb-base": "^11.3.1",
-  "eslint-plugin-import": "^2.7.0",
-  "nodemon": "*"
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "*"
   },
   "author": "Mike Adossi",
   "license": "MIT"

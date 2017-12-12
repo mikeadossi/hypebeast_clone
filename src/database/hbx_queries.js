@@ -1,8 +1,8 @@
 /* global console, purchased_at, shipped_at, address, item_quantity, item_cost,
 item_color, item_size, products_id, users_id, module */
+require('dotenv').config();
 const {db} = require("./connection.js");
 const bcrypt = require("bcrypt");
-const {saltRounds} = require("../../configure");
 const {knex} = require("./connection.js");
 const {allProductSizesArr} = require("./products_data");
 const {allProductSizesString} = require("./products_data");
@@ -30,6 +30,7 @@ let queries = {
     return db.any(`
       SELECT * FROM products
       WHERE brand_name = $1
+      AND tot_count > 0
       `, brand);
   },
 
@@ -38,6 +39,7 @@ let queries = {
       SELECT * FROM products
       WHERE brand_name = $1
       AND product_name_route = $2
+      AND tot_count > 0
       `,[brand,product]);
   },
 
@@ -71,6 +73,7 @@ let queries = {
     return db.any(`
       SELECT product_price FROM products
       WHERE brand_name = $1
+      AND tot_count > 0
       `,brand)
       .then(brandPrices => {
 
@@ -193,20 +196,27 @@ let queries = {
     return db.any(`
       SELECT
       `+allProductSizesString+`
-      from products WHERE brand_name = $1`, brand);
+      from products
+      WHERE brand_name = $1
+      AND tot_count > 0
+      `, brand);
   },
 
   getProductSizes: function(product){
     return db.any(`
       SELECT
       `+allProductSizesString+`
-      from products WHERE product_name_route = $1`, product);
+      from products
+      WHERE product_name_route = $1
+      AND tot_count > 0
+      `, product);
   },
 
   getSortedInventoryDirection: function(brand, direction){
     return db.any(`
       SELECT * FROM products
       WHERE brand_name = $1
+      AND tot_count > 0
       ORDER BY product_name` + direction.toUpperCase()
       , brand);
   },
@@ -217,7 +227,7 @@ let queries = {
 
   createHBXLocalUser: function(email, password){
     this.createUser(email);
-    return bcrypt.hash(password, saltRounds).then(hash => {
+    return bcrypt.hash(password, process.env.SALTROUNDS).then(hash => {
       return db.none(`
         INSERT INTO local_users (email, password)
         VALUES ($1, $2)

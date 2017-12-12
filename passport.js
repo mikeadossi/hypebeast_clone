@@ -1,9 +1,9 @@
+require('dotenv').config();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const queries = require('./src/database/queries.js');
-const config = require('./configure');
 
 /* ~~~~~~~~~~~~~~~~~ local strategy ~~~~~~~~~~~~~~~~~ */
 
@@ -64,9 +64,9 @@ const googleVerificationCallback = (accessToken, refreshToken, profile, done) =>
 };
 
 passport.use('google', new GoogleStrategy({
-    clientID: config.google.clientID,
-    clientSecret: config.google.clientSecret,
-    callbackURL: config.google.callbackURL
+    clientID: process.env.GOOGLECLIENTID,
+    clientSecret: process.env.GOOGLECLIENTSECRET,
+    callbackURL: process.env.GOOGLECALLBACKURL
   },
 
   function(accessToken, refreshToken, profile, done) {
@@ -76,9 +76,9 @@ passport.use('google', new GoogleStrategy({
 ));
 
 passport.use('hbx-google', new GoogleStrategy({
-    clientID: config.google.clientID,
-    clientSecret: config.google.clientSecret,
-    callbackURL: config.google.hbxCallbackURL
+    clientID: process.env.GOOGLECLIENTID,
+    clientSecret: process.env.GOOGLECLIENTSECRET,
+    callbackURL: process.env.GOOGLEHBXCALLBACKURL
   }, googleVerificationCallback
 ));
 
@@ -104,9 +104,9 @@ const facebookVerificationCallback = (accessToken, refreshToken, profile, done) 
 }
 
 passport.use('facebook', new FacebookStrategy({
-    clientID: config.facebook.clientID,
-    clientSecret: config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL,
+    clientID: process.env.FACEBOOKCLIENTID,
+    clientSecret: process.env.FACEBOOKCLIENTSECRET,
+    callbackURL: process.env.FACEBOOKHBXCALLBACKURL,
     profileFields: ['id', 'displayName', 'email']
   },
 
@@ -117,9 +117,9 @@ passport.use('facebook', new FacebookStrategy({
 ));
 
 passport.use('hbx-facebook', new FacebookStrategy({
-    clientID: config.facebook.clientID,
-    clientSecret: config.facebook.clientSecret,
-    callbackURL: config.facebook.hbxCallbackURL,
+    clientID: process.env.FACEBOOKCLIENTID,
+    clientSecret: process.env.FACEBOOKCLIENTSECRET,
+    callbackURL: process.env.FACEBOOKCALLBACKURL,
     profileFields: ['id', 'displayName', 'email']
   },
 

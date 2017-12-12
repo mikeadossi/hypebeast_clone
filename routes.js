@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const queries = require('./src/database/queries');
 const hbx_queries = require('./src/database/hbx_queries');
 const passport = require('./passport');
 const bcrypt = require('bcrypt');
-const {saltRounds} = require('./configure');
 const {allProductSizesArr} = require('./src/database/products_data');
 const {allProductSizesSingleValueArr} = require('./src/database/products_data');
 const {allBrandNamesObj} = require('./src/database/products_data');
@@ -708,7 +708,7 @@ router.delete('/hbx_account/close-account', (req, res) => {
     res.redirect('/hbx-error');
   }
 
-  checkPasswordAndDeleteUser(req.body.user_password, saltRounds, req.body.user_id)
+  checkPasswordAndDeleteUser(req.body.user_password, process.env.SALTROUNDS, req.body.user_id)
     .then(deleteUserUsingHashAndId)
     .then(response => res.json(response))
     .catch( err => {
@@ -1243,7 +1243,7 @@ router.post('/update-password-in-db', (req, res) => {
       return user;
     })
     .then( user => {
-      bcrypt.hash(new_password, saltRounds).then( hash => {
+      bcrypt.hash(new_password, process.env.SALTROUNDS).then( hash => {
         let userId = JSON.parse(req.body.user).id;
         hbx_queries.updateUserPassword(hash, userId)
           .then(() => {
