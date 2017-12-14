@@ -1,6 +1,15 @@
 /* global $ */
 /* exported createParentDiv */
-let createParentDiv = (user_name, comment, post_id, user_id, comment_id, user_avatar, user_avatar_background_color) => {
+let createParentDiv = (
+  user_name,
+  comment,
+  post_id,
+  user_id,
+  comment_id,
+  user_avatar,
+  user_avatar_background_color
+) => {
+  
   return `
   <div id="post_comments_container_`+comment_id+`" class="post_comments_container">
     <div

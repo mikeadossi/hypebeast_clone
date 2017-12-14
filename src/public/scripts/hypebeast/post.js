@@ -87,21 +87,6 @@ const submitReply = (
   })
     .then( comments =>  comments.json() )
     .then( updatedComment => {
-      // console.log("\n user_name =====> ",user_name,'\n');
-      // console.log("\n replyTo =====> ",replyTo,'\n');
-
-
-
-
-
-
-      let replyhere = $(element).closest('.commenter_name').text();
-      console.log('replyhere: ',replyhere);
-
-
-
-
-
 
       whereToAppend.append(`
         <div class="new_comment_container">
@@ -238,11 +223,7 @@ const writeReply = (
   user_avatar_background_color
 ) => {
   let whereToAppend = $(element).closest(".post_comment");
-  // let parent = element.parentNode.parentNode.parentNode.parentNode;
-  // let replyTo = element.parentNode.parentNode.parentNode.children[0].children[0].innerHTML;
 
-  // console.log("\n user_name =====> ",user_name,'\n');
-  // console.log("\n replyTo =====> ",replyTo,'\n');
   whereToAppend.append(`
       <div class="write_reply_comment reply_comment_container">
         <div

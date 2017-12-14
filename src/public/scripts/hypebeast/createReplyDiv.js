@@ -10,6 +10,7 @@ let createReplyDiv = (
   user_avatar,
   user_avatar_background_color
 ) => {
+
   return `
   <div class="new_comment_container">
     <div
@@ -43,8 +44,9 @@ let createReplyDiv = (
         <span class="fa fa-angle-down"></span>
         <span class="reply_dot_separator"></span>
         <span>
-          <button class="reply_button" onclick="writeReply(this,
-            '`+user_name+`',
+          <button class="reply_button" onclick="writeReply(
+              this,
+            '`+$(".usernameVal").val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,

@@ -1,12 +1,9 @@
-/* global $, createParentDiv,
-createReplyDiv,  */
+/* global $, createParentDiv, createReplyDiv,  */
 /* exported generateComments */
-const generateComments = (username, allParentCommentsString, allRepliesString, allCommentsString) => {
+const generateComments = (allParentCommentsString, allRepliesString) => {
 
   let allParentComments = JSON.parse(allParentCommentsString);
   let allReplies = JSON.parse(allRepliesString);
-  let allComments = JSON.parse(allCommentsString);
-
 
   for(let i = 0; i < allParentComments.length; i++){
     $(".generated_comment_container")
@@ -23,12 +20,32 @@ const generateComments = (username, allParentCommentsString, allRepliesString, a
       );
   }
 
+  let parentCommentsObj = new Object();
+
+  for(let i = 0; i < allParentComments.length; i++){
+    parentCommentsObj[allParentComments[i].id] = allParentComments[i];
+  }
+
+  let repliesObj = new Object();
+
+  for(let i = 0; i < allReplies.length; i++){
+    repliesObj[allReplies[i].id] = allReplies[i];
+  }
+
+  let replyTo;
+
   for(let x = 0; x < allReplies.length; x++){
+    if(parentCommentsObj[allReplies[x].parent_comment_id] === undefined){
+      replyTo = repliesObj[allReplies[x].parent_comment_id].user_name
+    } else {
+      replyTo = parentCommentsObj[allReplies[x].parent_comment_id].user_name;
+    }
+
     $("#post_comment_"+allReplies[x].parent_comment_id)
       .append(
         createReplyDiv(
           allReplies[x].user_name,
-          "getName",
+          replyTo,
           allReplies[x].comment_text,
           allReplies[x].post_id,
           allReplies[x].user_id,
@@ -36,7 +53,7 @@ const generateComments = (username, allParentCommentsString, allRepliesString, a
           allReplies[x].user_avatar,
           allReplies[x].user_avatar_background_color
         )
-      )
+      );
   }
 
 
