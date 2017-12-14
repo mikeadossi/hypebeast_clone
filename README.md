@@ -1,4 +1,4 @@
-# Hypebeast Clone
+# Hypebeast/HBX Clone
 
 A clone of the Hypebeast and HBX websites built w/ Node, Postgresql and the Pug template engine.
 

@@ -25,6 +25,11 @@
   color: grey;
 }
 
+.post_user_avatar{
+  height: 50px;
+  margin-top: 3px;
+}
+
 .post_avatar{
   height: 56px;
   width: 60px;
@@ -34,6 +39,7 @@
   top: -77px;
   margin-right: 10px;
   border-radius: 2px;
+  display:inline-block;
 }
 
 .disqus_form{
@@ -47,10 +53,6 @@
 .post_textarea_content{
   display: inline;
   width:100%;
-}
-
-.post_avatar{
-  display:inline-block;
 }
 
 .post_as_user{
@@ -123,11 +125,19 @@
   width:90%;
 }
 
+.commenter_avatar_default_image{
+  top: 5px;
+  left: 5px;
+}
+
 .commenter_avatar_image{
+  top: 2px;
+  left: 2px;
+}
+
+.commenter_avatar_image, .commenter_avatar_default_image{
   height: 47px;
   position: relative;
-  top: 4px;
-  left: 7px;
 }
 
 .commenter_name{
@@ -204,7 +214,7 @@
 }
 
 .commenter_avatar{
-  background-color: steelblue;
+  /*background-color: steelblue;*/
   height: 55px;
   width: 53px;
   margin-right: 10px;

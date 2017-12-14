@@ -1,5 +1,3 @@
-
-
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS product_colors CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
@@ -13,7 +11,7 @@ CREATE TABLE brands (
   id SERIAL PRIMARY KEY,
   brand_name VARCHAR,
   brand_name_link VARCHAR,
-  brand_description TEXT
+  brand_description VARCHAR
 );
 
 CREATE TABLE categories (
@@ -32,10 +30,10 @@ CREATE TABLE products (
   product_quantity INTEGER,
   product_name VARCHAR,
   product_name_route VARCHAR UNIQUE,
-  product_images TEXT,
-  product_details TEXT,
+  product_images VARCHAR,
+  product_details VARCHAR,
   category_id INTEGER REFERENCES categories(id),
-  brand_name TEXT,
+  brand_name VARCHAR,
   brand_id INTEGER REFERENCES brands(id),
   product_color_id INTEGER REFERENCES product_colors(id),
   product_color_type VARCHAR,
@@ -74,7 +72,9 @@ CREATE TABLE users (
   state VARCHAR,
   postcode VARCHAR,
   company VARCHAR,
-  username VARCHAR
+  username VARCHAR,
+  user_avatar VARCHAR,
+  user_avatar_background_color VARCHAR
 );
 
 CREATE TABLE orders (

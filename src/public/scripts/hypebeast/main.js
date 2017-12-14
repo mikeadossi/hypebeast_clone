@@ -6,7 +6,6 @@ $(document).ready(function(){
     $(".allCommentsWithParents").val(),
     $(".allComments").val()
   );
-  console.log("$('.usernameVal').val() ---> ",$(".usernameVal").val());
   if($(".usernameVal").html()){
     $(".reply_button").remove();
   }
@@ -26,7 +25,6 @@ $(".hamburger").on("click", () => {
   $(".close").css("display","inline-block");
   $(".mobileMenu").css("display","block");
   $(".magnifierMobile").css("display","none");
-
 });
 
 $(".close").on("click", () => {

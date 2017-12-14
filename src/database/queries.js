@@ -2,6 +2,7 @@
 require('dotenv').config();
 const {db} = require("./connection.js");
 const bcrypt = require("bcrypt");
+const fs = require('fs');
 
 
 let queries = {
@@ -17,10 +18,27 @@ let queries = {
     return db.any("SELECT * FROM posts"); // returns a promise, because pgp
   },
 
-  storeComment: function(user_comment, user_id, post_id, user_name) {
+  storeComment: function(
+    user_comment,
+    user_id,
+    post_id,
+    user_name,
+    user_avatar,
+    user_avatar_background_color
+  ) {
     return db.any(
-      "INSERT INTO comments (comment_text, user_id, post_id, user_name) VALUES ($1,$2,$3,$4) RETURNING *",
-      [user_comment, user_id, post_id, user_name]);
+      `INSERT INTO comments
+      (
+        comment_text,
+        user_id,
+        post_id,
+        user_name,
+        user_avatar,
+        user_avatar_background_color
+      ) VALUES (
+        $1,$2,$3,$4,$5,$6
+      ) RETURNING *`,
+      [user_comment, user_id, post_id, user_name, user_avatar, user_avatar_background_color]);
   },
 
   getPostComments: function(post_id) {
@@ -38,7 +56,7 @@ let queries = {
   getPostReplies: function(post_id) {
     return db.any(`
       SELECT * FROM comments
-      WHERE (parent_comment_id IS NOT NULL AND post_id = 20)
+      WHERE (parent_comment_id IS NOT NULL AND post_id = $1)
       ORDER BY id ASC
       `, [post_id]);
   },
@@ -52,11 +70,45 @@ let queries = {
   },
 
   createNonOauthUser: function(email, password) {
-    return bcrypt.hash(password, process.env.SALTROUNDS)
+    return bcrypt.hash( password, JSON.parse(process.env.SALTROUNDS) )
       .then( hash => {
         return db.any(
-          "INSERT INTO users (email, password) VALUES ($1, $2)",
-          [email, hash]);
+          `INSERT INTO users (email, password)
+          VALUES ($1, $2)
+          RETURNING users.email
+          `,[email, hash]);
+      })
+      .then( user_email => {
+        let email = user_email[0].email
+
+        let pathToAvatarDirectory = './src/public/images/hypebeast_images/avatars/png';
+        let avatarImagesArray = [];
+        fs.readdirSync(pathToAvatarDirectory).forEach(fileName => {
+          avatarImagesArray.push(fileName)
+        })
+        let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0
+        let userImage = '/images/hypebeast_images/avatars/png/' + avatarImagesArray[randomIndex];
+
+        const getRandomColor = () => {
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+
+        let userImageBackgroundColor = getRandomColor();
+        console.log('userImageBackgroundColor --> ',userImageBackgroundColor);
+        console.log('typeof userImageBackgroundColor --> ',typeof userImageBackgroundColor);
+
+        return db.any(`
+          UPDATE users
+          SET user_avatar = $1,
+          user_avatar_background_color = $2
+          WHERE email = $3
+        `,[userImage, userImageBackgroundColor, email]
+        )
       });
   },
 
@@ -160,12 +212,19 @@ let queries = {
     return db.any("SELECT * FROM users WHERE username = $1", username);
   },
 
-  postReplyCommentToDB: function(parentCommentId, newComment, post_id, user_id, user_name) {
+  postReplyCommentToDB: function(parentCommentId, newComment, post_id, user_id, user_name, user_avatar, user_avatar_background_color) {
     return db.any(`
-      INSERT INTO comments (comment_text, parent_comment_id, post_id, user_id, user_name)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO comments (
+        comment_text,
+        parent_comment_id,
+        post_id,
+        user_id,
+        user_name,
+        user_avatar,
+        user_avatar_background_color)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
-    `,[newComment, parentCommentId, post_id, user_id, user_name]);
+    `,[newComment, parentCommentId, post_id, user_id, user_name, user_avatar, user_avatar_background_color]);
   }
 
 };

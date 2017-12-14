@@ -1,11 +1,14 @@
 /* global $ */
 /* exported createParentDiv */
-let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
+let createParentDiv = (user_name, comment, post_id, user_id, comment_id, user_avatar, user_avatar_background_color) => {
   return `
   <div id="post_comments_container_`+comment_id+`" class="post_comments_container">
-    <div class="commenter_avatar">
-      <img class="commenter_avatar_image"
-        src="/images/hypebeast_images/avatars/png/fox.png" />
+    <div
+      class="commenter_avatar"
+      style="background-color:`+user_avatar_background_color+`;"
+    >
+      <img class="commenter_avatar_image post_user_avatar"
+        src=`+user_avatar+` />
     </div>
     <div id="post_comment_`+comment_id+`" class="post_comment">
       <div class="reply_commenter_content commenter_content_`+comment_id+` ">
@@ -22,20 +25,23 @@ let createParentDiv = (user_name, comment, post_id, user_id, comment_id) => {
           </p>
         </div>
       </div>
-      <div class="post_replies_main_container_1">
-      </div>
+      <p class="post_replies_main_container_1">
+      </p>
       <div class="comment_reply_container">
         <span class="fa fa-angle-up"></span>
         <span class="reply_seperator"></span>
         <span class="fa fa-angle-down"></span>
         <span class="reply_dot_separator"></span>
         <span>
-          <button class="reply_button" onclick="writeReply(this,
+          <button class="reply_button" onclick="writeReply(
+              this,
             '`+$(".usernameVal").val()+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,
-            'dunno'
+            '`+user_name+`',
+            '`+user_avatar+`',
+            '`+user_avatar_background_color+`'
           )">
             Reply^^
           </button>

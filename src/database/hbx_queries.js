@@ -227,7 +227,7 @@ let queries = {
 
   createHBXLocalUser: function(email, password){
     this.createUser(email);
-    return bcrypt.hash(password, process.env.SALTROUNDS).then(hash => {
+    return bcrypt.hash( password, JSON.parse(process.env.SALTROUNDS) ).then(hash => {
       return db.none(`
         INSERT INTO local_users (email, password)
         VALUES ($1, $2)

@@ -1,11 +1,22 @@
 /* global $ */
 /* exported createReplyDiv */
-let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, comment_id) => {
+let createReplyDiv = (
+  user_name,
+  replyTo,
+  user_comment,
+  post_id,
+  user_id,
+  comment_id,
+  user_avatar,
+  user_avatar_background_color
+) => {
   return `
   <div class="new_comment_container">
-    <div class="commenter_avatar">
-      <img class="commenter_avatar_image"
-        src="/images/hypebeast_images/avatars/png/fox.png" />
+    <div
+      class="commenter_avatar"
+      style="background-color:`+user_avatar_background_color+`;"
+    >
+      <img class="commenter_avatar_image" src=`+user_avatar+` />
     </div>
     <div id="post_comment_`+comment_id+`" class="post_comment">
       <div class="reply_commenter_content commenter_content_`+comment_id+` ">
@@ -33,11 +44,13 @@ let createReplyDiv = (user_name, replyTo, user_comment, post_id, user_id, commen
         <span class="reply_dot_separator"></span>
         <span>
           <button class="reply_button" onclick="writeReply(this,
-            '`+$(".usernameVal").val()+`',
+            '`+user_name+`',
             `+post_id+`,
             `+user_id+`,
             `+comment_id+`,
-            '`+user_name+`'
+            '`+user_name+`',
+            '`+user_avatar+`',
+            '`+user_avatar_background_color+`'
           )">
             Replyyy
           </button>

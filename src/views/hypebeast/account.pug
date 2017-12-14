@@ -15,6 +15,14 @@ block content
           form(method="post" action="/add-new-username-to-db")
             .form_group
               div.label
+                label.profile_label Avatar
+              div.account_avatar_image
+                -if(user.user_avatar){
+                  img(src=user.user_avatar)
+                -} else {
+                  img(src="images/hypebeast_images/general/default_blog_avatar.png")
+                -}
+              div.label
                 label.profile_label Username
               div
                 - if(!user.username){

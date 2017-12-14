@@ -41,26 +41,28 @@ block content
         .post_ad_description
           p.empty_link Latest women's streetwear, fashion and more
           img(src="/images/hypebeast_images/general/promoted_by.png")
-    
+
       .post_comment_section
         .post_comment_header
         .post_conversation
           .post_postbox
             - if(!user){
-              .post_avatar
-              .post_textarea_content
-                textarea.post_textarea( onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
-                .post_actions.post_actions_empty
+              .disqus_form
+                .post_avatar
+                  img.commenter_avatar_default_image(src="/images/hypebeast_images/general/default_blog_avatar.png")
+                .post_textarea_content
+                  textarea.post_textarea( onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
+                  .post_actions.post_actions_empty
             - } else {
               - const article_id = post[0].id;
               - let username = user.username || user.email
               .disqus_form
-                .post_avatar 
-                  img.commenter_avatar_image(src="/images/hypebeast_images/avatars/png/fox.png")
+                .post_avatar
+                  img.post_user_avatar(src=user.user_avatar)
                 .post_textarea_content
                     textarea.post_textarea(onfocus="this.placeholder = ''" onblur="this.placeholder = 'join the discussion...'" placeholder="join the discussion...")
                     .post_actions
-                        button.post_as_user(onclick="submitCommentToDB(this,'"+post[0].id+"','"+user.id+"','"+username+"')") post as !{username}
+                        button.post_as_user(onclick="submitCommentToDB(this,'"+post[0].id+"','"+user.id+"','"+username+"','"+user.user_avatar+"','"+user.user_avatar_background_color+"')") post as !{username}
             - }
           
           .posts_comments_main_container
@@ -70,6 +72,8 @@ block content
           input.hidden_user.allComments(value=all_comments readonly='readonly')
           -if(user){
             input.hidden_user.usernameVal(value=user.username || user.email readonly='readonly')
+            input.hidden_user.userAvatar(value=user.user_avatar readonly='readonly')
+            input.hidden_user.userAvatarBackgroundColor(value=user.user_avatar_background_color readonly='readonly')
           -}
           .generated_comment_container
     

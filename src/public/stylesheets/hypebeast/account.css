@@ -15,7 +15,7 @@
   color:#333333;
   font-weight: 500;
   font-size: 22px;
-  padding-bottom:30px;
+  padding-bottom:15px;
 }
 
 .settings_nav, .settings_controls{
@@ -112,6 +112,17 @@
   color:red;
   margin-bottom:10px;
   text-align:center;
+}
+
+.account_avatar_image img{
+  height:50px;
+}
+
+.account_avatar_image{
+  border: 1px solid gainsboro;
+  width: 50px;
+  padding: 10px 10px 7px 10px;
+  margin-bottom: 10px;
 }
 
 
