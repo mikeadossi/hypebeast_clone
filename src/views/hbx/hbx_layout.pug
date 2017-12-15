@@ -24,7 +24,6 @@ html
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_account.css')
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_addressing.css')
     link(rel='stylesheet', href='/stylesheets/hbx/hbx_delivery_and_payment.css')
-    link(rel='stylesheet', href='/stylesheets/hbx/hbx_orders.css')
     link(rel='icon', href='/images/hbx_images/general/hbx_app.png')
   body
     .hbx_modal_overlay
@@ -74,7 +73,7 @@ html
         .cart.nav_elements#bag_button
           .shopping_bag_container
             .shopping_bag_handle 
-            .shopping_bag 
+            a.shopping_bag(href="/hbx_shopping_bag") 
           span.hbx_nav_link YOUR BAG
           img.arrow_down(src="/images/hbx_images/general/arrow_down.png")
           .cart_dropdown

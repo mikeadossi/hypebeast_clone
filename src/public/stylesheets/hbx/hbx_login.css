@@ -1,5 +1,4 @@
 .login_select_container{
-  /*margin:auto;*/
   text-align: center;
   width:94%;
   max-width:590px;
@@ -11,7 +10,6 @@
   display:inline-block;
   width:50%;
   text-align:center;
-  /*border: 1px solid black;*/
   padding:20px 0 20px 0;
 }
 
@@ -203,7 +201,6 @@
 }
 
 .hbx_continue_link:hover{
-  /*background-color:#236CA6;*/
   cursor:pointer;
 }
 

@@ -1,5 +1,4 @@
 .hbx_footer_content{
-  /*padding: 30px 10px 30px 32px;*/
   background-color: #F8F8F8;
   text-align: center;
   font-size: 0.8em;
@@ -31,7 +30,6 @@
 }
 
 .hbx_download_container{
-  /*background-color:green;*/
   text-align:left;
   position: relative;
   top: -12px;
@@ -124,7 +122,6 @@
   width: 250px;
   margin-left: -9px;
   color:#999999;
-  /*border-bottom:1px solid black;*/
 }
 
 .subscribe_subtitle{
@@ -197,9 +194,7 @@ hr{
   .hbx_download_container{
     width:283px;
     display:block;
-    /*margin-top: 35px;*/
     margin:auto;
-    /*background-color: green;*/
     top:unset;
     left:unset;
     padding-top:24px;

@@ -194,7 +194,6 @@ button:focus{
 }
 
 .hypeRating span:nth-child(2n){
-  /*color:red;*/
   padding-right: 6px;
   font-size:0.8em;
 }
@@ -301,7 +300,6 @@ textarea{
   width: 50%;
   text-align: center;
   font-size: 2em;
-  /*font-weight: bold;*/
   text-decoration:none;
   color:black;
   font-size: 40px;
@@ -333,9 +331,6 @@ textarea{
 
 .avatar_img{
   height: 30px;
-  /* width: 35px; */
-  /* padding-top: 8px; */
-  /* padding-left: 0px; */
   position: relative;
   top: 6px;
   cursor:pointer;
@@ -742,17 +737,6 @@ textarea{
   width:50%;
 }
 
-.top_ten_left{
-  /*background-color:orange;*/
-}
-
-.top_ten_left .top_ten_story{
-  /*background-color:purple;*/
-}
-.top_ten_right .top_ten_story{
-  /*background-color:orange;*/
-}
-
 .top_ten_title{
   display: inline-block;
   width: 68%;
@@ -828,9 +812,7 @@ textarea{
 .top_ten_description_mobile .post_title{
   background-color: green;
 }
-.top_stories{
-  /*background-color: blue;*/
-}
+
 .top_ten_description_mobile{
   top:-37px;
   line-height:1;
@@ -930,7 +912,6 @@ textarea{
 }
 
 .sticky_container img{
-  /*width: 100%;*/
   width: 303px;
   padding-bottom:20px;
   cursor:pointer;
@@ -1289,9 +1270,6 @@ textarea{
   .top_ten_description .post_title{
     font-size: 1.2em;
   }
-  .top_ten_number div{
-    /*left: 14px;*/
-  }
   .top_ten_container{
     padding: 0px 10px 5px 10px;
   }
@@ -1335,9 +1313,6 @@ textarea{
 @media (min-width: 990px) and (max-width: 1230px){
   body{
     /*background-color:indianred;*/
-  }
-  .blog_text_content{
-    /*text-align:center;*/
   }
   .banner_container{
     margin-top:1px;
@@ -1415,7 +1390,6 @@ textarea{
   }
   .post_container{
     width: 1171px;
-    /*background-color: red;*/
     margin: auto;
   }
   .post_content{

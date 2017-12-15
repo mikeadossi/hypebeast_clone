@@ -34,8 +34,6 @@
   height: 56px;
   width: 60px;
   background-color: lightgrey;
-  /*display: inline-block;*/
-  /*position: relative;*/
   top: -77px;
   margin-right: 10px;
   border-radius: 2px;
@@ -60,17 +58,11 @@
   color: white;
   font-size: 12px;
   padding: 8px;
-  /* border-bottom-right-radius: 5px; */
-  /* width: 100px; */
-  /* margin-left: auto; */
   border: 2px solid #748089;
   cursor: pointer;
 }
 
 .post_actions{
-  /* display: inline; */
-  /* width: 82.6%; */
-  /* margin-left: 116px; */
   background-color: #F7F9FA;
   border: 2px solid #DFE3E7;
   position: relative;
@@ -141,8 +133,6 @@
 }
 
 .commenter_name{
-  /*position:relative;
-  top:-4px;*/
   color:steelblue;
   border:none;
 }
@@ -214,7 +204,6 @@
 }
 
 .commenter_avatar{
-  /*background-color: steelblue;*/
   height: 55px;
   width: 53px;
   margin-right: 10px;
@@ -313,13 +302,6 @@
     margin-left: 20px;
     margin-right: 20px;
   }
-  .post_textarea{
-    /*width:72%;*/
-  }
-  .post_actions{
-    /*width: 75%;
-    margin-left: 70px;*/
-  }
   .post_ad_container{
     display:unset;
     height: 520px;
@@ -368,13 +350,6 @@
     display: block;
     padding-left: 0;
   }
-  .post_actions{
-    /*width: 635px;
-    margin-left: 70px;*/
-  }
-  .post_textarea{
-    /*width:615px;*/
-  }
   .post_ad_container{
     display:unset;
     height: 520px;
@@ -388,9 +363,6 @@
   .post_ad_description{
     margin-bottom: 20px;
   }
-  /*.post_advert{
-    height
-  }*/
 }
 
 @media (min-width: 990px) and (max-width: 1230px){
@@ -401,7 +373,6 @@
     text-align:center;
   }
   .post_page_sticky_container{
-    /*margin-top:240px;*/
     display:none;
   }
   .post_content{
@@ -409,13 +380,6 @@
     margin: auto;
     display: block;
     padding-left: 0;
-  }
-  .post_actions{
-    /*width: 821px;
-    margin-left: 69px;*/
-  }
-  .post_textarea{
-    /*width:800px;*/
   }
   .post_ad_container{
     padding-top: 20px;
@@ -433,14 +397,6 @@
   }
   .post_content{
     margin:unset;
-  }
-  .post_actions{
-    /*width: 720px;
-    margin-left: 70px;*/
-  }
-  .post_textarea{
-    /*width:700px;*/
-    /*width:96%*/
   }
   .post_ad_container{
     padding-top: 20px;

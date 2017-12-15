@@ -9,7 +9,6 @@
 }
 
 .footer_container{
-  /*margin:60px;*/
   text-align:left;
 }
 
@@ -23,9 +22,7 @@
 
 .footer_subscribe_container{
   margin-right:13%;
-  /*min-width:206px;*/
   max-width: 354px;
-  /*background-color: green;*/
 }
 
 .footer_container button:hover{
@@ -52,15 +49,12 @@
 }
 
 .footer_subscribe_container li:first-child{
-  /*color:red;*/
   padding-top:12px;
 }
 
 .footer_headers{
-  /*background-color: green;*/
   color: #AAAAAA;
   list-style: none;
-  /*text-align: left;*/
   padding-left: 0;
   display:inline-block;
 }
@@ -81,7 +75,6 @@
 .square{
   height:10px;
   width:10px;
-  /*background-color:green;*/
   color:white;
   margin-right:5px;
   padding: 8px !important;
@@ -121,7 +114,6 @@
 
 .snapchat-ghost{
   height: 29px;
-  /* padding-top: 10px; */
   position: relative;
   top: 10px;
   padding-right: 5px;

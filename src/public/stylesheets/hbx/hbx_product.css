@@ -16,7 +16,6 @@
 }
 
 .product_preview_container{
-  /*background-color:orange;*/
   padding-right: 13px;
   width:75px;
 }
@@ -29,7 +28,6 @@
 
 .product_on_display_container{
   border-left: 10px solid white;
-  /*background-color:brown;*/
   display:flex;
   width: 553.8px;
   overflow:hidden;
@@ -344,6 +342,7 @@
 .related_products_container{
   background-color:white;
   padding:20px;
+  display:none;
 }
 
 .related_header{
@@ -364,7 +363,6 @@
 }
 
 .related_products img{
-  /*display:inline-block;*/
   height:300px;
   padding:0 20px 10px 20px;
   position:relative;
@@ -416,24 +414,62 @@
 }
 
 
-@media only screen and (max-width: 769px){
+@media only screen and (max-width: 649px){
+  body{
+    /*background-color: teal;*/
+  }
+  /*.product_preview_container{
+    height: 315px;
+    overflow: auto;
+    display: flex;
+    width: 260px;
+    margin:auto;
+  }
+  .product_preview_img img{
+    height: 300px;
+    width: 250px;
+    padding-right: 15px;
+  }
+  .product_on_display_container{
+    display:none;
+  }
+  .product_on_display img{
+    display:none;
+    height:320px;
+  }
+  .product_container{
+    display:block;
+    margin-left:unset;
+  }
+  .product_details_container{
+    padding-left: unset;
+     width: unset;
+  }*/
+}
+
+@media (min-width: 650px) and (max-width: 989px){
   body{
     /*background-color: pink;*/
   }
-  .product_preview_img img{
-    height:100%;
-    width:95vw;
+  /*.product_preview_container{
+    width:unset;
+    overflow: scroll;
+    height: 640px;
   }
+  .product_preview_img img{
+    height: 300px;
+    width: 250px;
+  }
+  .product_on_display_container{
+    display:none;
+  }
+  .product_on_display img{
+    display:none;
+    height:320px;
+  }*/
 }
 
-@media (min-width: 770px) and (max-width: 989px){
-  body{
-    /*background-color: skyblue;*/
-  }
-  .product_preview_img img{
-    height:72px;
-  }
-}
+
 
 @media (min-width: 990px) and (max-width: 1230px){
   body{
@@ -450,5 +486,8 @@
   }
   .product_preview_img img{
     height:92px;
+  }
+  .related_products_container{
+    display:block
   }
 }

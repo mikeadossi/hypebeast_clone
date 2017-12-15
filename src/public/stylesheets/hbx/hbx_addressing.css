@@ -247,3 +247,41 @@
   color:red;
   margin-bottom:10px;
 }
+
+@media only screen and (max-width: 922px){
+  body{
+    /*background-color: teal;*/
+  }
+  #step_one, #step_two, #step_three, .checkout_steps{
+    min-width: 200px;
+  }
+  .checkout_order_summary_container{
+    width: 96%;
+    padding: 9px;
+    background-color: #FAFAFA;
+    border: 1px solid gainsboro;
+    position:unset;
+    margin-left:unset;
+    margin-top:unset;
+  }
+  .contact_details_container{
+    width:unset;
+    display:unset;
+  }
+  .checkout_sub_content{
+    width:unset;
+  }
+  .delivery_left_container{
+    width: unset !important;
+    display: unset !important;
+  }
+}
+
+@media (min-width: 923px) and (max-width: 1230px){
+  body{
+    /*background-color:indianred;*/
+  }
+  .checkout_steps{
+    padding-right: 9%;
+  }
+}

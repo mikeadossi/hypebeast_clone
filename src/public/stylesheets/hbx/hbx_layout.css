@@ -147,7 +147,7 @@ ul{
   height: 25px;
   position: absolute;
   top: 13px;
-  cursor:pointer;
+  cursor:default;
 }
 
 .hamburger_mobile{
@@ -181,9 +181,11 @@ ul{
 }
 
 .hbx_search_mobile{
-  text-align:center;
+  text-align: center;
   padding: 10px 0 10px 0;
-  background-color:white;
+  background-color: white;
+  position: relative;
+  left: -19px;
 }
 
 .hbx_search_input_mobile::placeholder{
@@ -232,7 +234,7 @@ ul{
 
 .womens_mobile_link{
   background-color:#F0F0F0;
-  cursor:pointer;
+  cursor:default;
 }
 
 .hbx_drop_icon{
@@ -252,7 +254,6 @@ ul{
   height: 100vh;
   z-index: 20;
   position: fixed;
-  margin-top: -58px;;
   width: 100%;
   display:none;
 }
@@ -268,7 +269,7 @@ ul{
 .hbx_mobile_menu_content li:hover,
 .hbx_mobile_menu_social_media i:hover,
 .hbx_language li:hover{
-  cursor:pointer;
+  cursor:default;
   color:grey;
 }
 
@@ -499,7 +500,6 @@ ul{
 
 .nav_button_cover{
   position: relative;
-  /*background-color: #E9E9E9;*/
   top: -47px;
   width: 122px;
 }
@@ -621,6 +621,8 @@ input{
   }
   .right_nav_items{
     width:105px;
+    right: 19px;
+    top:2px;
   }
   .hbx_search{
     top:17px;
@@ -628,9 +630,6 @@ input{
   }
   .hbx_nav{
     padding: 12px 5px 6px 25px;
-  }
-  .right_nav_items{
-    top:2px;
   }
   .left_nav_items{
     text-align:center;
@@ -644,6 +643,12 @@ input{
     top: 19px;
     left: 13px;
     position: absolute;
+  }
+  .cart_dropdown{
+    display:none !important;
+  }
+  .nav_button_cover{
+    display:none !important;
   }
 }
 
@@ -659,6 +664,18 @@ input{
   }
   .shopping_bag_handle{
     left:141px;
+  }
+  .cart_dropdown{
+    left: -128px !important;
+  }
+  .nav_button_cover{
+    left: 99px;
+  }
+  #bag_button{
+    margin-left: -10px;
+  }
+  .shopping_bag_handle{
+    left: 131px;
   }
 }
 

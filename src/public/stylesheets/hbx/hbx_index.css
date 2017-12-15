@@ -17,8 +17,6 @@ a{
 }
 .lower_images{
   float: left;
-  /*padding-bottom: 20px;*/
-  /*background-color: blue;*/
   padding: 0 10px 20px 35px;
 }
 .hbx_mid_image, .hbx_low_image{
@@ -27,6 +25,7 @@ a{
 }
 .middle_image_subtitle, .lower_image_subtitle{
   position:relative;
+  text-align: center;
 }
 .image_title{
   font-weight: 700;
@@ -48,14 +47,13 @@ a{
 #lower_section_heading{
   text-align: center;
   line-height: 0.6;
-  /* padding-top: 20px; */
   float: left;
   padding-bottom: 15px;
-  /*background-color: red;*/
   width: 100%;
 }
 .image_subtitle, .lower_subtitle{
   color:#A39999;
+  line-height: 1.5;
 }
 .lower_subtitle{
   font-size:13px;
@@ -70,13 +68,57 @@ a{
   padding-bottom: 380px;
 }
 
+#mobile_options_container{
+  display:none;
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+}
+
+.left_mobile_options_container, .right_mobile_options_container{
+  width:48%
+}
+
+.hbx_mobile_options:hover{
+  color:grey;
+  cursor:default;
+}
+
+.hbx_mobile_options{
+  background-color: #F0F0F0;
+  color: black;
+  text-align: center;
+  padding: 16px;
+  margin: 10px 0 10px 10px;
+  font-size: 13px;
+}
+
+.new_arrivals_option:hover{
+  color:unset;
+}
+
+.new_arrivals_option{
+  background-color:black !important;
+  color:white !important;
+}
+
+.mobile_middle_image_subtitle{
+  display:none;
+}
 
 @media only screen and (max-width: 769px){
   body{
     /*background-color: pink;*/
   }
+  #mobile_options_container{
+    display:flex;
+    margin-left: -6px;
+  }
   .hbx_middle_images,  .hbx_lower_images{
     width:94%;
+  }
+  .lower_images{
+    padding:unset;
   }
   .tres_bien{
     position:unset;
@@ -87,7 +129,16 @@ a{
   .middle_images{
     padding-bottom: unset;
   }
+  .mid_banner_left, .mid_banner_right{
+    display:block;
+    width: 95%;
+    margin: auto;
+  }
+  .mobile_middle_image_subtitle{
+    display:block;
+  }
 }
+
 
 @media (min-width: 770px) and (max-width: 989px){
   body{
@@ -95,9 +146,6 @@ a{
   }
   .hbx_middle_images, .hbx_lower_images{
     width:30.33%;
-  }
-  .lower_images{
-    /*padding: 0 0px 350px 20px;*/
   }
 }
 
@@ -108,9 +156,6 @@ a{
   .hbx_middle_images, .hbx_lower_images{
     width:30.33%;
   }
-  .lower_images{
-    /*padding: 0 10px 350px 35px;*/
-  }
 }
 
 @media (min-width: 1231px) {
@@ -119,8 +164,5 @@ a{
   }
   .hbx_middle_images, .hbx_lower_images{
     width:31.33%;
-  }
-  .lower_images{
-    /*padding: 0 10px 430px 35px;*/
   }
 }

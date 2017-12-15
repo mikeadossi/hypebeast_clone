@@ -1,6 +1,7 @@
 /* global $, window, prev_position, position */
 /* exported decrementCount, incrementCount */
 $(".hbx_search").on("click", () => {
+  $(".hbx_nav").append($(".hbx_search_mobile"))
   $(".hbx_search_mobile").toggle();
 });
 
