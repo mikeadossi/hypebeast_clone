@@ -292,6 +292,15 @@
   padding: 10px 10px 10px 0;
 }
 
+.hypebeast_address div:first-child{
+  font-weight:600;
+}
+
+.hypebeast_address{
+  line-height: 1.9;
+  margin-bottom: 40px;
+}
+
 @media only screen and (max-width: 759px){
   body{
     /*background-color: pink;*/

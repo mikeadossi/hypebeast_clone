@@ -1,10 +1,10 @@
-/* global $, document, console, window, generateComments */
+/* global $, document window, generateComments */
 $(document).ready(function(){
   generateComments(
     $(".allCommentsWithoutParents").val(),
     $(".allCommentsWithParents").val()
   );
-  
+
   if($(".usernameVal").html()){
     $(".reply_button").remove();
   }

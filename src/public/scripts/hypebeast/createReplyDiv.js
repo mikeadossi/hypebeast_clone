@@ -51,8 +51,8 @@ let createReplyDiv = (
             `+user_id+`,
             `+comment_id+`,
             '`+user_name+`',
-            '`+user_avatar+`',
-            '`+user_avatar_background_color+`'
+            '`+$(".userAvatar").val()+`',
+            '`+$(".userAvatarBackgroundColor").val()+`'
           )">
             Replyyy
           </button>

@@ -1,9 +1,9 @@
 /* global console, purchased_at, shipped_at, address, item_quantity, item_cost,
 item_color, item_size, products_id, users_id, module */
 require('dotenv').config();
-const {db} = require("./connection.js");
+const {db} = require("../connection.js");
 const bcrypt = require("bcrypt");
-const {knex} = require("./connection.js");
+const {knex} = require("../connection.js");
 const {allProductSizesArr} = require("./products_data");
 const {allProductSizesString} = require("./products_data");
 const {allProductClothingCategoriesArr} = require("./products_data");
@@ -227,7 +227,10 @@ let queries = {
 
   createHBXLocalUser: function(email, password){
     this.createUser(email);
-    return bcrypt.hash( password, JSON.parse(process.env.SALTROUNDS) ).then(hash => {
+    return bcrypt.hash(
+      password,
+      JSON.parse(process.env.SALTROUNDS)
+    ).then(hash => {
       return db.none(`
         INSERT INTO local_users (email, password)
         VALUES ($1, $2)
@@ -270,8 +273,20 @@ let queries = {
         item_individual_price,
         item_brand,
         item_route)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-      [item_quantity, item_cost, item_color, item_size, products_id, users_id, item_category, item_image, item_name, item_individual_price, item_brand, item_route]);
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *
+      `,[
+        item_quantity,
+        item_cost,
+        item_color,
+        item_size,
+        products_id,
+        users_id,
+        item_category,
+        item_image,
+        item_name,
+        item_individual_price,
+        item_brand,
+        item_route]);
   },
 
   clearAllCartDataById: function(id){
@@ -290,8 +305,8 @@ let queries = {
         item_size,
         products_id,
         users_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-      [
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      `,[
         purchased_at,
         shipped_at,
         address,
@@ -305,7 +320,7 @@ let queries = {
   },
 
   clearAllOrdersDataById: function(id){
-    return db.none("DELETE FROM orders WHERE users_id = $1", [id]);
+    return db.none("DELETE FROM orders WHERE users_id = $1", id);
   },
 
   getCartById: function(id){
@@ -316,12 +331,18 @@ let queries = {
     return db.any(`
       SELECT category_type FROM categories
       JOIN products ON categories.id = products.category_id
-      WHERE product_name_route = $1`, [product_name]);
+      WHERE product_name_route = $1
+      `, [product_name]);
   },
 
   updateCartById: function(id, item_count, item_tot_cost){
-    return db.any(`UPDATE cart SET item_quantity = $2,
-      item_cost = $3 WHERE id = $1`,[id,item_count,item_tot_cost]);
+    return db.any(`
+      UPDATE cart
+      SET item_quantity = $2,
+      item_cost = $3
+      WHERE id = $1
+      RETURNING *
+      `,[id,item_count,item_tot_cost]);
   },
 
   editUserAddress: function(street, city, state, postcode, company, user_id){
@@ -331,7 +352,8 @@ let queries = {
       state = $3,
       postcode = $4,
       company = $5
-      VALUES ($1, $2, $3, $4, $5) WHERE id = $6`, [
+      VALUES ($1, $2, $3, $4, $5) WHERE id = $6
+      `, [
         street,
         city,
         state,
@@ -346,11 +368,12 @@ let queries = {
   },
 
   updateUserProfile: function(first_name, last_name, phone, email){
-    return db.oneOrNone(`UPDATE users SET first_name = $1,
+    return db.oneOrNone(`
+      UPDATE users SET first_name = $1,
       last_name = $2,
       phone_number = $3
-      WHERE email = $4`,
-      [first_name, last_name, phone, email]);
+      WHERE email = $4
+      `,[first_name, last_name, phone, email]);
   },
 
   updateUserAddress: function(street, city, state, postcode, company, id){
@@ -502,7 +525,6 @@ let queries = {
     return knexx;
 
   },
-
 
   removeCartItemByID: function(item_id){
     return db.none(`

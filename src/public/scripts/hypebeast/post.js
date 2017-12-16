@@ -13,6 +13,7 @@ const submitCommentToDB = (
   let route = window.location.href + "/add-comment-to-db";
   post_id = JSON.parse(post_id);
   user_id = JSON.parse(user_id);
+  $('.post_textarea').val("");
 
   fetch(route, {
     method: "POST",

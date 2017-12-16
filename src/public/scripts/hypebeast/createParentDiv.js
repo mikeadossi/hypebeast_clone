@@ -9,7 +9,7 @@ let createParentDiv = (
   user_avatar,
   user_avatar_background_color
 ) => {
-  
+
   return `
   <div id="post_comments_container_`+comment_id+`" class="post_comments_container">
     <div
@@ -49,8 +49,8 @@ let createParentDiv = (
             `+user_id+`,
             `+comment_id+`,
             '`+user_name+`',
-            '`+user_avatar+`',
-            '`+user_avatar_background_color+`'
+            '`+$(".userAvatar").val()+`',
+            '`+$(".userAvatarBackgroundColor").val()+`'
           )">
             Reply^^
           </button>

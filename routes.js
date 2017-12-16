@@ -2,15 +2,15 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const queries = require("./src/database/queries");
-const hbx_queries = require("./src/database/hbx_queries");
+const queries = require("./src/database/hypebeast/queries");
+const hbx_queries = require("./src/database/hbx/hbx_queries");
 const passport = require("./passport");
 const bcrypt = require("bcrypt");
-const {allProductSizesArr} = require("./src/database/products_data");
-const {allProductSizesSingleValueArr} = require("./src/database/products_data");
-const {allBrandNamesObj} = require("./src/database/products_data");
-const {allProductSizesString} = require("./src/database/products_data");
-const {allProductSizesObj} = require("./src/database/products_data");
+const {allProductSizesArr} = require("./src/database/hbx/products_data");
+const {allProductSizesSingleValueArr} = require("./src/database/hbx/products_data");
+const {allBrandNamesObj} = require("./src/database/hbx/products_data");
+const {allProductSizesString} = require("./src/database/hbx/products_data");
+const {allProductSizesObj} = require("./src/database/hbx/products_data");
 const {checkPasswordAndDeleteUser} = require("./src/database/util/checkPasswordAndDeleteUser");
 const {deleteUserUsingHashAndId} = require("./src/database/util/deleteUserUsingHashAndId");
 
@@ -57,24 +57,24 @@ router.get("/post/:id", (req, res) => {
       queries.getPostReplies(id)
     ]
   ).then( results => {
-      const post = results[0];
-      const all_comments = results[1];
-      const allCommentsWithoutParents = results[2];
-      const allCommentsWithParents = results[3];
+    const post = results[0];
+    const all_comments = results[1];
+    const allCommentsWithoutParents = results[2];
+    const allCommentsWithParents = results[3];
 
-      res.render("post", {
-        post: post,
-        all_comments: all_comments,
-        allCommentsWithParents: allCommentsWithParents,
-        allCommentsWithoutParents: allCommentsWithoutParents,
-        user: req.user
-       })
-    })
+    res.render("post", {
+      post: post,
+      all_comments: all_comments,
+      allCommentsWithParents: allCommentsWithParents,
+      allCommentsWithoutParents: allCommentsWithoutParents,
+      user: req.user
+    });
+  })
     .catch( err => {
       console.log("err: ", err);
       res.render("hbx_error", {user: req.user});
-    })
-})
+    });
+});
 
 router.get("/store", (req, res) => {
 
@@ -82,16 +82,16 @@ router.get("/store", (req, res) => {
     let user_id = req.user.id;
 
     hbx_queries.getCartById(user_id)
-    .then( cart => {
-      res.render("hbx_index", {
-        user: req.user,
-        cart: cart
-      });
-    })
-    .catch( err => {
-      console.log("err: ",err);
-      res.render("hbx_error", {user: req.user});
-    })
+      .then( cart => {
+        res.render("hbx_index", {
+          user: req.user,
+          cart: cart
+        });
+      })
+      .catch( err => {
+        console.log("err: ",err);
+        res.render("hbx_error", {user: req.user});
+      })
   } else {
     res.render("hbx_index", {
       user: req.user
@@ -107,22 +107,22 @@ router.get("/register/success", (req, res) => {
 router.get("/loggedIn", (req, res) => {
 
   if(req.user) {
-        res.render("index", { user: req.user })
-        .catch( err => {
-          console.log("err: ", err);
-          res.render("hbx_error", {user: req.user});
-        })
-    } else {
-      res.redirect("/error")
-    }
-})
+    res.render("index", { user: req.user });
+    // .catch( err => {
+    //   console.log("err: ", err);
+    //   res.render("hbx_error", {user: req.user});
+    // })
+  } else {
+    res.redirect("/error");
+  }
+});
 
 router.get("/account", (req, res) => {
 
   if(req.user){
     res.render("account", { user: req.user });
   } else {
-    res.render("error")
+    res.render("error");
   }
 })
 
@@ -754,12 +754,15 @@ router.post("/hbx_register", (req, res) => {
   }
 })
 
+
 router.get("/hbx_shopping_bag", (req, res) => {
   let conditional_promise;
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
+      // console.log('cart --------===> ',cart);
+      // console.log('req.user --------===> ',req.user);
       res.render("hbx_shopping_bag", {
         user: req.user,
         cart: cart
@@ -771,6 +774,7 @@ router.get("/hbx_shopping_bag", (req, res) => {
     })
 
 })
+
 
 router.get("/hbx_register/success", (req, res) => {
   let conditional_promise;
@@ -1026,16 +1030,20 @@ router.get("/get-cart-by-id", (req, res) => {
 })
 
 router.post("/update-bag", (req, res) => {
+  if(!req.user){
+    res.redirect("/hbx_error");
+  }
+
   let id = req.body.id;
   let item_count = req.body.item_count;
   let item_tot_cost = req.body.item_tot_cost;
 
-  hbx_queries.updateCartById(id, item_count, item_tot_cost)
-  .then((results) => {
-    // res.redirect('/hbx_shopping_bag')
-    return;
-  })
-  .catch(err => next(err))
+  return hbx_queries.updateCartById(id, item_count, item_tot_cost)
+    .then(() => {
+      res.send('success')
+    })
+    .catch(err => next(err));
+
 })
 
 router.post("/checkout/delivery_and_payment", (req, res) => {
@@ -1072,7 +1080,11 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
         console.log("not authorized!");
         res.render("hbx_error",{user:req.user})
       }
-      res.render("hbx_delivery_and_payment",{user:req.user, order_obj:order_obj, cart:cart})
+      res.render("hbx_delivery_and_payment", {
+        user: req.user,
+        order_obj: order_obj,
+        cart: cart
+      })
     })
     .catch( err => next(err))
 
@@ -1240,7 +1252,6 @@ router.delete("/remove-cart-item/:id", (req, res) => {
 
 
 router.post("/update-password-in-db", (req, res) => {
-  console.log("called route!");
   if(!req.user.password){
     res.redirect("/hbx_error")
   }

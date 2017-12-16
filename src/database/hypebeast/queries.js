@@ -1,6 +1,6 @@
 /* global module, console */
 require('dotenv').config();
-const {db} = require("./connection.js");
+const {db} = require("../connection.js");
 const bcrypt = require("bcrypt");
 const fs = require('fs');
 

@@ -914,7 +914,7 @@ textarea{
 .sticky_container img{
   width: 303px;
   padding-bottom:20px;
-  cursor:pointer;
+  cursor:default;
 }
 
 .sticky_ad_two{

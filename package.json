@@ -27,7 +27,7 @@
     "start": "node server.js",
     "drop:db": "dropdb hypebeast_clone_db",
     "create:db": "createdb hypebeast_clone_db;",
-    "schema:db": "psql hypebeast_clone_db < src/database/schema.sql & psql hypebeast_clone_db < src/database/hbx_schema.sql",
+    "schema:db": "psql hypebeast_clone_db < src/database/hypebeast/schema.sql & psql hypebeast_clone_db < src/database/hbx/hbx_schema.sql",
     "seed:db": "psql hypebeast_clone_db < src/database/seedFile.sql"
   },
   "devDependencies": {
