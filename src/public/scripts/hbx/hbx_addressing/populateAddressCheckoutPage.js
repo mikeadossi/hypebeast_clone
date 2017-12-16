@@ -1,5 +1,6 @@
 /* global $, window */
 /* exported populateAddressCheckoutPage */
+
 const populateAddressCheckoutPage = () => {
 
   if(!window.localStorage.hbxLocalCart){

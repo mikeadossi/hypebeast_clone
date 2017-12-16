@@ -53,7 +53,22 @@
 }
 
 .hbx_label{
-  text-align:left;
+  margin-top: 7px;
+  width: 142px;
+}
+
+.form_group{
+  display:flex !important;
+  margin-bottom: 10px;
+}
+
+.form_group select:focus{
+  outline:none;
+}
+
+.form_group select{
+  width:210%;
+  height:35px;
 }
 
 .hbx_error_msg{

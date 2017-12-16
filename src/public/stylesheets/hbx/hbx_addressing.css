@@ -140,15 +140,6 @@
   width:203% !important;
 }
 
-.form_group select:focus{
-  outline:none;
-}
-
-.form_group select{
-  width:210%;
-  height:35px;
-}
-
 .checkout_item_container{
   border-bottom:1px solid gainsboro;
   padding: 15px 3px 15px 3px;

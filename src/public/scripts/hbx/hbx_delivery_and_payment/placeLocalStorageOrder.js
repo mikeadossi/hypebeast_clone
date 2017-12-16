@@ -1,5 +1,6 @@
 /* global window, fetch, document, console, $, Headers */
 /* exported placeLocalStorageOrder */
+
 const placeLocalStorageOrder = () => {
   let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
   let order_obj_value = $(".record_obj").val();

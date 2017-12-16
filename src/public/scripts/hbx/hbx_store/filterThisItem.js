@@ -61,9 +61,3 @@ const filterThisItem = (element, brandName) => {
     .catch(err => console.log(err));
 
 };
-
-const clearAllFilters = () => {
-  let url = window.location.href;
-  url = url.split("/filter")[0];
-  document.location.href = url;
-};

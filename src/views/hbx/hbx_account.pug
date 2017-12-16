@@ -16,22 +16,22 @@ block content
           .hbx_edit_profile_header Edit Profile
           form(method="post" action="update-profile-in-db")
             .form_group
-              div.label
+              div.hbx_label
                 label.profile_label EMAIL
               div
-                input.profile_input.profile_email_input(name="email" type="email" value=user_data[0].email)
+                input.profile_input.profile_email_input(name="email" type="email" readonly="readonly" value=user_data[0].email)
             .form_group
-              div.label
+              div.hbx_label
                 label.profile_label FIRST NAME
               div
                 input.profile_input.profile_email_input(name="first_name" type="text" value=user_data[0].first_name)
             .form_group
-              div.label
+              div.hbx_label
                 label.profile_label LAST NAME
               div
                 input.profile_input.profile_email_input(name="last_name" type="text" value=user_data[0].last_name)
             .form_group
-              div.label
+              div.hbx_label
                 label.profile_label PHONE NUMBER
               div
                 input.profile_input.profile_email_input(name="phone" type="text" value=user_data[0].phone_number)
