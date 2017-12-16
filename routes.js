@@ -1243,11 +1243,12 @@ router.get("/brands/:brand/filter/*", (req, res) => {
 
 
 router.delete("/remove-cart-item/:id", (req, res) => {
-  hbx_queries.removeCartItemByID(req.params.id)
-  .then( () => {
-    return;
-  })
-  .catch( err => console.log(err))
+
+  return hbx_queries.removeCartItemByID(req.params.id)
+    .then( () => {
+      res.send('success')
+    })
+    .catch( err => console.log(err));
 })
 
 

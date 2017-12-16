@@ -324,7 +324,11 @@ let queries = {
   },
 
   getCartById: function(id){
-    return db.any("SELECT * FROM cart WHERE users_id = $1", id);
+    return db.any(`
+      SELECT * FROM cart
+      WHERE users_id = $1
+      ORDER BY id ASC
+      `, id);
   },
 
   getCategory: function(product_name){
