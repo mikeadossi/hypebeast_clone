@@ -158,7 +158,8 @@ button:focus{
 
 .article_container{
   max-width: 815px;
-  width:76%;
+  /*width:76%;*/
+  width:64%;
 }
 
 .article_container .category{
@@ -181,6 +182,7 @@ button:focus{
 .hypeRating img{
   height:20px;
   float:left;
+  margin-right: 5px;
 }
 
 .hypeRating img:nth-child(3n){
@@ -578,14 +580,6 @@ textarea{
   border-bottom: 3px solid black;
 }
 
-.magnifier{
-  display:inline-block;
-  font-size:1.2em;
-  width: 6%;
-  text-align: right;
-  cursor:pointer;
-}
-
 .magnifier img{
   height:25px;
 }
@@ -848,7 +842,7 @@ textarea{
   padding: 12px;
   margin: auto;
   min-width: 838px;
-  width: 91%;
+  width: 96%;
   text-align: center;
   color: grey;
   margin-top: -27px;
@@ -1020,7 +1014,20 @@ textarea{
   margin-top:-1px;
 }
 
+.magnifier_li{
+  border-bottom: transparent !important;
+  position: relative;
+  top: 8px;
+}
+
+.more_pointer{
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 523px){
+  body{
+    /*background-color: brown;*/
+  }
   .top_ten_title{
     top: -20px;
     left: 93px;
@@ -1029,6 +1036,11 @@ textarea{
   .top_ten_description_mobile{
     width:86%;
   }
+}
+
+.magnifier_li{
+  text-align: right;
+  padding-right: 0 !important;
 }
 
 @media only screen and (max-width: 759px){
@@ -1171,8 +1183,8 @@ textarea{
     padding-bottom:15px;
     border-bottom:1px solid gainsboro;
   }
-  .magnifier{
-    display:none;
+  .magnifier_li{
+    display:none !important;
   }
   .magnifierMobile{
     height:25px;
@@ -1195,9 +1207,24 @@ textarea{
   }
 }
 
-@media (min-width: 760px) and (max-width: 989px){
+@media (min-width: 760px) and (max-width: 979px){
   body{
     /*background-color: skyblue;*/
+  }
+  .top_ten_container{
+    display:none;
+  }
+  .top_ten_mobile_container{
+    display:block;
+  }
+  .top_ten_description_mobile{
+    width:100% !important;
+  }
+  .top_ten_title_mobile{
+    width:78% !important;
+  }
+  .top_ten_number div{
+    margin-top: -42px;
   }
   .top_ten_details{
     margin-left:148px;
@@ -1227,18 +1254,23 @@ textarea{
     padding-top:20px;
   }
   .article_container .post_image{
-    height: 265px;
+    height: 100%;
+  }
+  .post_image{
+    width: 100%;
   }
   .article_container{
-    width: 55%;
+    width: unset;
     min-width: unset;
   }
   .feed_header{
     margin-bottom: 25px;
   }
-  .nav, .banner_container, .content{
-    margin:auto;
-    width:723px;
+  .banner_article_title_container{
+    width:600px;
+  }
+  .banner_container{
+    margin: 0 55px 0 51px;
   }
   .article_info{
     display: block;
@@ -1301,21 +1333,110 @@ textarea{
   , .radioNavLink{
     display:none !important;
   }
-  .magnifier{
-    float:right;
-    margin-top: -33px;
+  .magnifier_li{
+    padding-left: 270px !important;
   }
   .magnifierMobile{
     display:none !important;
   }
+  .navAccountContainer{
+    padding-bottom: 15px;
+  }
+  .navBtnContainer{
+    text-align: left;
+  }
+  .sticky_container{
+    display:none;
+  }
+  .footer_text_links a{
+    display:none !important;
+  }
 }
 
-@media (min-width: 990px) and (max-width: 1230px){
+/* Portrait: iPhone 5 iPhone 6 iPhone 6 Plus Nexus 6P Nexus 5X Galaxy S5 iPad */
+@media (min-width: 980px) and (max-width: 989px){
+
+	body{
+    /*background-color:orange;*/
+  }
+
+  .top_ten_container{
+    display:none;
+  }
+  .top_ten_mobile_container{
+    display:block;
+  }
+  .top_ten_description_mobile{
+    top: -77px;
+    width: 100% !important;
+    margin-left: 15px;
+    line-height: 1.4;
+    font-size: 20px;
+  }
+  .top_ten_image img{
+    height:120px;
+  }
+  .top_ten_image{
+    width: 180px;
+  }
+  .top_ten_hype{
+    top:-10px;
+  }
+  .top_ten_number div{
+    margin-top: -47px;
+  }
+  .mobile_hype_img{
+    top: -7px;
+    position: relative;
+    margin-right: 5px;
+    margin-left: 15px;
+  }
+
+  .nav, .banner_container, .ontent{
+    margin:unset;
+    width:unset;
+  }
+
+  .editorialsNavLink{
+    display:none !important;
+  }
+
+  .main-nav ul li {
+    padding-right: 19px;
+  }
+
+  .magnifier_li{
+    padding: 10px 10px 10px 10px;
+  }
+
+  .article_info{
+    float: unset;
+    width: unset;
+    height:unset;
+  }
+
+  .search_nav_close{
+    margin-top: 26px;
+  }
+
+  .more_button{
+    display:none;
+  }
+
+}
+
+@media (min-width: 990px) and (max-width: 1019px){
   body{
-    /*background-color:indianred;*/
+    /*background-color:blue;*/
   }
   .banner_container{
-    margin-top:1px;
+    max-width:unset;
+    text-align:unset;
+    margin: 0px 55px 0 40px;
+  }
+  .index_banner_image{
+    max-width: unset;
+    margin-right: unset;
   }
   .top_ten_description{
     width: 87%;
@@ -1332,9 +1453,6 @@ textarea{
   }
   .top_ten_image{
     padding-left:25px;
-  }
-  .index_banner_image{
-    width:935px;
   }
   .top_stories{
     width:935px;
@@ -1364,9 +1482,8 @@ textarea{
   , .editorialsNavLink{
     display:none !important;
   }
-  .magnifier{
-    float:right;
-    margin-top: -33px;
+  .magnifier_li{
+    padding-left: 122px !important;
   }
   .magnifierMobile{
     display:none !important;
@@ -1380,13 +1497,180 @@ textarea{
   }
 }
 
-@media (min-width: 1231px) {
+/* Portrait: iPad pro, Landscape: iPad  */
+@media (min-width: 1020px) and (max-width: 1029px){
+
+	body{
+    /*background-color:teal;*/
+  }
+
+  .top_ten_description{
+    width: 87%;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-left: 14px;
+  }
+
+  .nav, .content{
+    margin: unset;
+    padding:13px;
+  }
+
+  .main-nav ul li, .storeNavLink, .main-nav ul li:first-child {
+    padding: 1.9%;
+  }
+
+  .banner_container{
+    margin-top: -10px;
+    padding: 0 13px 13px 13px;
+  }
+
+  .banner_article_title_container_side{
+    margin-top: -91px;
+  }
+
+  .banner_article_title_container{
+    margin-top:-116px
+  }
+
+  .banner_article_title_container_side
+  , .banner_article_title_container{
+    width:unset;
+    position: relative;
+    padding: 15px 15px 15px 20px;
+  }
+
+  .central_banner_image{
+    width:60%;
+    margin-right: 10px;
+  }
+
+  .index_banner_image{
+
+  }
+
+  .adjacent_banner_images{
+    width:40%;
+  }
+
+  .magnifier{
+    position: relative;
+    top: 10px;
+    width:unset;
+  }
+
+  .search_nav_close{
+    margin-top: 22px;
+  }
+
+  .top_ten_image .post_image {
+    height: 64px !important;
+  }
+
+  .article_container .post_image{
+    height: 190px;
+    padding-bottom: 85px;
+  }
+
+  .article_info{
+    float:right;
+  }
+
+}
+
+@media (min-width: 1030px) and (max-width: 1230px){
+  body{
+    /*background-color:indianred;*/
+  }
+  .banner_container{
+    width: 935px;
+    margin: auto;
+  }
+  .index_banner_image{
+    width:unset;
+  }
+  .banner_container{
+    margin-top:1px;
+  }
+  .top_ten_description{
+    width: 87%;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-left: 28px;
+  }
+  .top_ten_details{
+    margin-left: 158px;
+  }
+  .top_ten_image{
+    padding-left:25px;
+  }
+  .top_stories{
+    width:935px;
+    margin:auto;
+  }
+  .top_ten_container{
+    max-width:983px;
+  }
+  .article_container{
+    min-width:unset;
+    width: 615px;
+  }
+  .article_container .post_image{
+    height: 177px;
+    padding-bottom: 85px;
+  }
+  .socialMediaImages{
+    padding: 0 1px 0 2px;
+  }
+  .nav{
+    max-width: 935px;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .artsNavLink
+  , .designNavLink
+  , .editorialsNavLink{
+    display:none !important;
+  }
+  .magnifier_li{
+    width: 112px;
+  }
+  .magnifier{
+   font-size: unset;
+   width: unset;
+   text-align: unset;
+  }
+  .magnifierMobile{
+    display:none !important;
+  }
+  .more_button_mobile{
+    display:none;
+  }
+  .content{
+    max-width: 936px;
+    margin: auto;
+  }
+}
+
+@media (min-width: 1230px) {
   body{
     /*background-color:limegreen;*/
   }
   .nav{
     width: 1171px;
     margin: auto;
+  }
+  .magnifier_li{
+    width: 19px;
+    padding-left: 21px !important;
   }
   .post_container{
     width: 1171px;
@@ -1420,10 +1704,6 @@ textarea{
   }
   .top_ten_description{
     width:unset !important;
-  }
-  .magnifier{
-    float:right;
-    margin-top: -33px;
   }
   .more_button_mobile{
     display:none;

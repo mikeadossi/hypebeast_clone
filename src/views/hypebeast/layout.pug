@@ -202,8 +202,11 @@ html
                   .dropdown_text Explore and be inspired by the latest womens fashions and trends.
           
           li.videosNavLink.empty_link VIDEOS
-          li.radioNavLink.empty_link RADIOS
+          li.radioNavLink.empty_link RADIO
           a.storeNavLink(href="/store" target="_blank") STORE
+          li.magnifier_li
+            .magnifier
+              img(src="/images/hypebeast_images/general/search.png")
           .search_nav_container
             input.search_nav_input(placeholder="What are you looking for?")
             img.search_nav_glass(
@@ -221,10 +224,6 @@ html
               div.trending_topic lonzo ball
               div.trending_topic off white
                 
-              
-          
-        div.magnifier
-          img(src="/images/hypebeast_images/general/search.png")
       - if(user){
           .login_successful Login successful! 
       - }

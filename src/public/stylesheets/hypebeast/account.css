@@ -126,11 +126,6 @@
 }
 
 
-
-
-
-
-
 @media only screen and (max-width: 759px){
   body{
     /*background-color: pink;*/
@@ -178,13 +173,13 @@
     display:none;
   }
   .index_banner_image{
-    width:95%;
+    /*width:95%;*/
     max-width:unset;
     margin-right:unset;
   }
 }
 
-@media (min-width: 990px) and (max-width: 1230px){
+@media (min-width: 990px) and (max-width: 1019px){
   body{
     /*background-color:indianred;*/
   }
@@ -192,7 +187,24 @@
     display:none;
   }
   .index_banner_image{
-    width:95%;
+    width:935px;
+    /*width:95%;*/
+    max-width:unset;
+    margin-right:unset;
+    margin-top:1px;
+  }
+}
+
+@media (min-width: 1030px) and (max-width: 1230px){
+  body{
+    /*background-color:indianred;*/
+  }
+  .adjacent_banner_images{
+    display:none;
+  }
+  .index_banner_image{
+    width:935px;
+    /*width:95%;*/
     max-width:unset;
     margin-right:unset;
     margin-top:1px;
