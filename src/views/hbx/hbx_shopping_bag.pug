@@ -60,9 +60,9 @@ block content
                         .hbx_quantity_row
                           .hbx_quantity_control
                             //- .item_count_minus.cart_select_minus(onclick="operationGo(this,'-')") -
-                            .cart_select_minus(onclick="decrementCount(this,0), addToListOfEditedItems(this, 'decrement')") -
+                            .cart_select_minus(onclick="decrementCount(this,1), addToListOfEditedItems(this, 'decrement')") -
                             #cart_count !{cart[i].item_quantity}
-                            .cart_select_plus(onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')") +
+                            .cart_select_plus(onclick="incrementCount(this,5), addToListOfEditedItems(this, 'increment')") +
                             .hidden_cart_id !{cart[i].id}
                           .cart_remove_items(onclick="removeItemByID("+cart[i].id+")") REMOVE
                         .hbx_total_row 
@@ -120,9 +120,11 @@ block content
         - }
     -}
     
-    
+    script(src='https://code.jquery.com/jquery-2.2.1.js')
     script.
       let LIST_OF_EDITED_ITEMS = [];
+      $('#bag_button').css("display","none");
+      $('.language').css("padding-left","170px");
     
     
         

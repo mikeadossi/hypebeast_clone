@@ -24,6 +24,12 @@ const updateCartAndCountByID = (user_id) => {
 
       if(cartJSON.length === 1){
 
+        if(cartJSON[0].item_quantity === 1){
+          $(".dropdown_item_count")[0].innerHTML = "1 Item";
+        } else {
+          $(".dropdown_item_count")[0].innerHTML = cartJSON[0].item_quantity+" Items"
+        }
+
         $(".shopping_bag")[0].innerHTML = cartJSON[0].item_quantity;
         $(".shopping_bag_deux")[0].innerHTML = cartJSON[0].item_quantity;
         $(".cart_price")[0].innerHTML = cartJSON[0].item_cost + ".00";
@@ -35,13 +41,9 @@ const updateCartAndCountByID = (user_id) => {
         if($(".bag_subtotal")){
           $(".bag_subtotal")[0].innerHTML = cartJSON[0].item_cost;
         }
-        if(cartJSON[0].item_quantity > 1){
-          $(".dropdown_item_count")[0].innerHTML = cartJSON[0].item_quantity + " Items";
-          return;
-        }
-        $(".dropdown_item_count")[0].innerHTML = cartJSON[0].item_quantity + " Item";
 
       } else if (cartJSON.length > 1){
+
         let tot_cost = 0;
         let tot_quantity = 0;
 
@@ -50,11 +52,11 @@ const updateCartAndCountByID = (user_id) => {
           tot_quantity += cartJSON[i].item_quantity;
         }
 
+        $(".dropdown_item_count")[0].innerHTML = tot_quantity+" Items";
         $(".shopping_bag")[0].innerHTML = tot_quantity;
         $(".shopping_bag_deux")[0].innerHTML = tot_quantity;
         $(".cart_price")[0].innerHTML = tot_cost + ".00";
         $(".usd_cart_price")[0].innerHTML = tot_cost;
-        $(".dropdown_item_count")[0].innerHTML = tot_quantity + " Items";
 
         if($(".checkout_subtotal")){
           $(".checkout_subtotal")[0].innerHTML = tot_cost;

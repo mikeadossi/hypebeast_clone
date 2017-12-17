@@ -361,6 +361,10 @@ ul{
   z-index:20;
 }
 
+.price_decimal{
+  margin-left:-5px;
+}
+
 .items_in_bag{
   margin-top: -29px;
 }

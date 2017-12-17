@@ -3,7 +3,7 @@ extends hbx_layout
 block content
   
   .hbx_product_content
-    //- .hidden_user !{JSON.stringify(user)}
+    .hidden_user_obj.hidden_user !{JSON.stringify(user)}
     .hbx_store_header_container
       ul.hbx_header_left_links.hbx_product_header_links
         li 
@@ -45,7 +45,7 @@ block content
           .product_item_count_select_container
             .item_count_minus(onclick="decrementCount(this,1)") -
             .item_count_amt 1
-            .item_count_plus(onclick="incrementCount(this)") +
+            .item_count_plus(onclick="incrementCount(this,5)") +
         -if(!product_sizes_arr.length)
           .product_add_to_cart_button.proceed_to_bag_button(onclick="selectItemOrProceedToBag(this)")
             .select_size.proceed_now ADD TO BAG
@@ -153,7 +153,8 @@ block content
           
   script.
     let GLOBAL_PRODUCT = !{JSON.stringify(product_content[0])}
-    let GLOBAL_USER = JSON.parse(document.querySelector(".hidden_user").innerHTML);
+    let GLOBAL_USER = document.querySelector(".hidden_user_obj").innerHTML;
+    console.log('bro ...',GLOBAL_USER)
 
   
     

@@ -23,4 +23,6 @@ const decrementCount = (element, num_floor) => {
     number -= 1;
     container.children[1].innerHTML = number;
   }
+
+  return number;
 };

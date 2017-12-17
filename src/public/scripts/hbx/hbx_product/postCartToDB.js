@@ -7,10 +7,6 @@ const postCartToDB = (cartItemsObj) => {
   let url = window.location.href + "/add-to-cart";
 
   if(GLOBAL_USER){
-    // let product_image_first_child = cartItemsObj.product_image.firstChild;
-    // let product_image = product_image_first_child.getAttribute('src');
-
-    // let product_image = cartItemsObj.product_image;
 
     fetch(url, {
       method:"POST",

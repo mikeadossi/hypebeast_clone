@@ -41,7 +41,7 @@ const renderAllCartItemsInPage = (hbxLocalCart) => {
                 <div id="cart_count">
                   `+hbxLocalCart[i].item_quantity+`
                 </div>
-                <div class="cart_select_plus" onclick="incrementCount(this), addToListOfEditedItems(this, 'increment')">
+                <div class="cart_select_plus" onclick="incrementCount(this,5), addToListOfEditedItems(this, 'increment')">
                   +
                 </div>
                 <div class="hidden_cart_id">

@@ -44,17 +44,20 @@ const updateLocalStorageCart = () => {
             <div class="cart_product_container">
               <div class="cart_product_brand">`+hbxLocalCart[i].item_brand+`</div>
               <div class="cart_product_name">`+hbxLocalCart[i].item_name+`</div>
+              <div class="cart_cost_per_product hidden_user">`+hbxLocalCart[i].item_individual_price+`</div>
               <div class="cart_size">Size: `+hbxLocalCart[i].item_size+`</div>
               <div class="cart_notice">This item is excluded from promotions. </div>
               <div class="quantity_and_price_container">
                 <div class="quantity_and_price">
                   <div class="quantity">
                     <span class="qty"> Qty: </span>
-                    <span class="minus_item">-</span>
-                    <span class="item_count">
-                      `+hbxLocalCart[i].item_quantity+`
-                    </span>
-                    <span class="add_item">+</span>
+                    <span>
+                      <span class="minus_item" onclick="decrementCountInDropdown(this,1)">-</span>
+                      <span class="item_count">
+                        `+hbxLocalCart[i].item_quantity+`
+                      </span>
+                      <span class="add_item" onclick="incrementCountInDropdown(this,5)">+</span>
+                    <span>
                   </div>
                   <div class="dropdown_price">
                     <span>USD</span>

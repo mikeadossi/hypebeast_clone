@@ -1,7 +1,7 @@
 /* global fetch, $, console, Headers, updateCartAndCountByID */
 /* exported fetchRemoveCartItem */
 const fetchRemoveCartItem = (listOfEditedItems) => {
-  console.log('listOfEditedItems - ',listOfEditedItems);
+
   return fetch("/remove-cart-item/"+listOfEditedItems.id, {
     method:"DELETE",
     headers: new Headers({

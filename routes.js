@@ -1246,7 +1246,7 @@ router.delete("/remove-cart-item/:id", (req, res) => {
 
   return hbx_queries.removeCartItemByID(req.params.id)
     .then( () => {
-      res.send('success')
+      res.send("success");
     })
     .catch( err => console.log(err));
 })
@@ -1287,6 +1287,25 @@ router.post("/update-password-in-db", (req, res) => {
     })
 
 })
+
+router.post("/update-product-count", (req, res) => {
+  if(!req.user){
+    res.redirect("/hbx_error");
+  }
+
+  hbx_queries.updateCountOfItem(
+    req.body.item_name,
+    req.body.item_brand,
+    req.body.item_quantity,
+    req.body.item_cost
+  )
+    .then( () => {
+      res.send("success");
+    })
+    .catch( err => {
+      console.log(err);
+    });
+});
 
 
 

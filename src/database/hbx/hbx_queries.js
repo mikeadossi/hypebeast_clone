@@ -523,7 +523,10 @@ let queries = {
 
     if(knexPriceAscDesc.length){
       // always set sql result direction to last directional parameter passed in url
-      knexx = knexx.orderBy("product_price",priceAscDescObj[knexPriceAscDesc[knexPriceAscDesc.length-1]]);
+      knexx = knexx.orderBy(
+        "product_price",
+        priceAscDescObj[knexPriceAscDesc[knexPriceAscDesc.length-1]]
+      );
     }
 
     return knexx;
@@ -542,6 +545,16 @@ let queries = {
       DELETE FROM users
       WHERE id = $1 AND password = $2
       `, [id,hash]);
+  },
+
+  updateCountOfItem: function(item_name, item_brand, item_quantity, item_cost){
+    return db.none(`
+      UPDATE cart
+      SET item_quantity = $3,
+      item_cost = $4
+      WHERE item_name = $1
+      AND item_brand = $2
+    `, [item_name, item_brand, item_quantity, item_cost])
   }
 
 

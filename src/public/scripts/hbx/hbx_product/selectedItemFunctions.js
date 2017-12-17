@@ -44,6 +44,7 @@ const product_price = Number(product_usd[1]);
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 const addSelectedItemsToCart = () => {
+
   let href = window.location.href;
   let product_quantity = Number($(".item_count_amt")[0].innerHTML);
   let product_cost = product_price * product_quantity;

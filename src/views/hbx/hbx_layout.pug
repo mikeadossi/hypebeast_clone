@@ -104,19 +104,21 @@ html
                       .cart_product_container
                         .cart_product_brand !{cart[i].item_brand}
                         .cart_product_name !{cart[i].item_name}
+                        .cart_cost_per_product.hidden_userr !{cart[i].item_individual_price}
                         .cart_size Size: !{cart[i].item_size}
                         .cart_notice This item is excluded from promotions.
                         .quantity_and_price_container
                           .quantity_and_price
                             .quantity
                               span.qty Qty:
-                              span.minus_item -
-                              span.item_count !{cart[i].item_quantity}
-                              span.add_item +
+                              span
+                                span.minus_item(onclick="decrementCountInDropdown(this,1)") -
+                                span.item_count !{cart[i].item_quantity}
+                                span.add_item(onclick="incrementCountInDropdown(this,5)") +
                             .dropdown_price 
                               span USD
                               span.product_price !{cart[i].item_cost}
-                                span .00
+                              span.price_decimal .00
                     - }
                 .dropdown_order_total_container
                   .dropdown_order_total
@@ -219,6 +221,7 @@ html
     
     include hbx_footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
+    script(src='/scripts/hbx/hbx_omnipresent/getUserObject.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateCartAndCountByID.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageCart.js') 
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageBag.js')
@@ -233,8 +236,11 @@ html
     script(src='/scripts/hbx/hbx_shopping_bag/fetchRemoveCartItem.js')
     script(src='/scripts/hbx/hbx_shopping_bag/fetchUpdateBag.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateBag.js')
+    script(src='/scripts/hbx/hbx_omnipresent/updateCartDropDownPriceAndCount.js')
     script(src='/scripts/hbx/hbx_shopping_bag/incrementCount.js')
     script(src='/scripts/hbx/hbx_shopping_bag/decrementCount.js')
+    script(src='/scripts/hbx/hbx_omnipresent/incrementCountInDropdown.js')
+    script(src='/scripts/hbx/hbx_omnipresent/decrementCountInDropdown.js')
     script(src='/scripts/hbx/hbx_product/postCartToDB.js')
     script(src='/scripts/hbx/hbx_product/populateLocalStorage.js')
     script(src='/scripts/hbx/hbx_product/selectedItemFunctions.js')
@@ -244,7 +250,6 @@ html
     script(src='/scripts/hbx/hbx_order_history/closeOrderedItemModal.js')
     script(src='/scripts/hbx/hbx_order_history/renderViewsModal.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateBag.js')
-    script(src='/scripts/hbx/hbx_shopping_bag/updateCartAndCountByID.js')
     script(src='/scripts/hbx/hbx_shopping_bag/addToListOfEditedItems.js')
     script(src='/scripts/hbx/hbx_shopping_bag/removeItemByID.js')
     script(src='/scripts/hbx/hbx_store/products_data.js')
