@@ -104,7 +104,7 @@ html
                       .cart_product_container
                         .cart_product_brand !{cart[i].item_brand}
                         .cart_product_name !{cart[i].item_name}
-                        .cart_cost_per_product.hidden_userr !{cart[i].item_individual_price}
+                        .cart_cost_per_product.hidden_user !{cart[i].item_individual_price}
                         .cart_size Size: !{cart[i].item_size}
                         .cart_notice This item is excluded from promotions.
                         .quantity_and_price_container
@@ -140,6 +140,10 @@ html
         ul.language.nav_elements
           img.hbx_flag.empty_link(src="/images/hbx_images/general/usa_flag.png")
           span.hbx_nav_link.empty_link USD
+    - if(successful_login){
+      .hbx_successful_login_message 
+        span Successfully Logged In!
+    -}
     .hbx_search_mobile 
       input.hbx_search_input_mobile(placeholder="Search")
       button.hbx_search_button_mobile.empty_link Search
@@ -221,7 +225,7 @@ html
     
     include hbx_footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
-    script(src='/scripts/hbx/hbx_omnipresent/getUserObject.js')
+    script(src='/scripts/hbx/hbx_layout/getUserObject.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateCartAndCountByID.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageCart.js') 
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageBag.js')
@@ -230,17 +234,17 @@ html
     script(src='/scripts/hbx/hbx_shopping_bag/createShoppingCartRightColumn.js')
     script(src='/scripts/hbx/hbx_shopping_bag/populateShoppingBagPageWithLocalStorageContent.js')
     script(src='/scripts/hbx/hbx_addressing/populateAddressCheckoutPage.js')
-    script(src='/scripts/hbx/hbx_omnipresent/generalEventHandlers.js')
-    script(src='/scripts/hbx/hbx_omnipresent/documentReady.js')
+    script(src='/scripts/hbx/hbx_layout/generalEventHandlers.js')
+    script(src='/scripts/hbx/hbx_layout/documentReady.js')
     script(src='/scripts/hbx/hbx_shopping_bag/addToListOfEditedItems.js')
     script(src='/scripts/hbx/hbx_shopping_bag/fetchRemoveCartItem.js')
     script(src='/scripts/hbx/hbx_shopping_bag/fetchUpdateBag.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateBag.js')
-    script(src='/scripts/hbx/hbx_omnipresent/updateCartDropDownPriceAndCount.js')
+    script(src='/scripts/hbx/hbx_layout/updateCartDropDownPriceAndCount.js')
     script(src='/scripts/hbx/hbx_shopping_bag/incrementCount.js')
     script(src='/scripts/hbx/hbx_shopping_bag/decrementCount.js')
-    script(src='/scripts/hbx/hbx_omnipresent/incrementCountInDropdown.js')
-    script(src='/scripts/hbx/hbx_omnipresent/decrementCountInDropdown.js')
+    script(src='/scripts/hbx/hbx_layout/incrementCountInDropdown.js')
+    script(src='/scripts/hbx/hbx_layout/decrementCountInDropdown.js')
     script(src='/scripts/hbx/hbx_product/postCartToDB.js')
     script(src='/scripts/hbx/hbx_product/populateLocalStorage.js')
     script(src='/scripts/hbx/hbx_product/selectedItemFunctions.js')
@@ -256,5 +260,6 @@ html
     script(src='/scripts/hbx/hbx_store/filterThisItem.js')
     script(src='/scripts/hbx/hbx_store/clearAllFilters.js')
     script(src='/scripts/hbx/hbx_shopping_bag/removeItemByID.js')
+    script(src='/scripts/hbx/hbx_shopping_bag/removeLocalStorageItemAtIndex.js')
     script(src='/scripts/hbx/hbx_product/relatedProducts.js')
     script(src='/scripts/hbx/hbx_delivery_and_payment/placeLocalStorageOrder.js')

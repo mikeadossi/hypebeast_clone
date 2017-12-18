@@ -1,7 +1,14 @@
 /* global document, $, updateCartAndCountByID, updateLocalStorageCart, window,
-populateShoppingBagPageWithLocalStorageContent, populateAddressCheckoutPage */
+populateShoppingBagPageWithLocalStorageContent, populateAddressCheckoutPage, setTimeout */
 
 $(document).ready(function(){
+
+  if( $(".hbx_successful_login_message").text() ){
+    setTimeout(() => {
+      $(".hbx_successful_login_message").fadeOut( "slow" );
+    }, 2000);
+  }
+
   let user = $(".users_persistent_id").length;
   if(user){
     let user_id = $(".users_persistent_id")[0].innerHTML;

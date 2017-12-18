@@ -1,3 +1,25 @@
+.hidden_user{
+  color:indianred !important;
+  font-weight:600px !important;
+  font-size:20px !important;
+  display:none !important;
+}
+
+.hbx_successful_login_message{
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  text-align: center;
+  margin-left: auto;
+}
+
+.fa-times{
+  margin-left:5px;
+  cursor:pointer;
+}
+
 .hbx_nav{
   background-color:white;
   padding: 10px 5px 10px 25px;

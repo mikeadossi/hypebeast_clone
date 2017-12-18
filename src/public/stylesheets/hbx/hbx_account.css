@@ -1,5 +1,6 @@
 .hidden_user{
-  display:none;
+  /*display:none;*/
+  color:red;
 }
 
 .hbx_your_settings_content{

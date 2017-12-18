@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser');
 const routes = require('./routes.js');
 const flash = require('connect-flash');
 const passport = require('./passport');
@@ -14,6 +15,8 @@ app.use(flash());
 
 app.set('views', [__dirname + '/src/views/hypebeast', __dirname + '/src/views/hbx']);
 app.set('view engine', 'pug');
+
+app.use(cookieParser());
 
 app.use(cookieSession({
   name: 'session',

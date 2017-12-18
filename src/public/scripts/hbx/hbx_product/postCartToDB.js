@@ -20,7 +20,7 @@ const postCartToDB = (cartItemsObj) => {
         item_color: cartItemsObj.item_color,
         item_size: cartItemsObj.item_size,
         products_id: GLOBAL_PRODUCT.id,
-        users_id: GLOBAL_USER.id,
+        users_id: JSON.parse(GLOBAL_USER).id,
         item_category: cartItemsObj.item_category,
         item_image:cartItemsObj.item_image,
         item_name: cartItemsObj.item_name,
@@ -31,7 +31,7 @@ const postCartToDB = (cartItemsObj) => {
       credentials: "same-origin"
     })
       .then( () => {
-        updateCartAndCountByID(GLOBAL_USER.id);
+        updateCartAndCountByID( JSON.parse(GLOBAL_USER).id );
       })
       .catch(err => console.log(err));
   }

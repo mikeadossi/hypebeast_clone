@@ -12,11 +12,13 @@ block content
       .settings_controls
         .settings_close_account
           .edit_profile_header Close Account
-          p Once account is closed, you won't be able to login again, and all your forum posts will be marked as "Inactive".
+          p Once account is closed, you won't be able to login again and all your recorded forum entries will be lost.
           .form(method="post" action="")
-            .form_group
-              div.label
-                label.profile_label Current Password
-              div
-                input.profile_input.profile_close_account_input(name="" type="")
+            -if(user.password){
+              .form_group
+                div.label
+                  label.profile_label Current Password
+                div
+                  input.profile_input.profile_close_account_input(name="password" type="password")
+            -}
             input#close_account(type="submit" value="Close Account")

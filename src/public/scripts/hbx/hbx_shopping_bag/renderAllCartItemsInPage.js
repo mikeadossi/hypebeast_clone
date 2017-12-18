@@ -8,7 +8,7 @@ const renderAllCartItemsInPage = (hbxLocalCart) => {
     let item_total_cost = hbxLocalCart[i].item_individual_price * hbxLocalCart[i].item_quantity;
 
     $(".orderSummaryContent").append(`
-        <div class="hbx_product_row">
+        <div class="hbx_product_row hbx_local_storage_item_at_index_`+i+`">
           <div class="cart_product_img">
             <img src=`+hbxLocalCart[i].item_image+` alt="">
           </div>
@@ -30,8 +30,9 @@ const renderAllCartItemsInPage = (hbxLocalCart) => {
             <div class="hbx_price_row">
               <div class="cart_price">
                 USD
+                <span>`+hbxLocalCart[i].item_individual_price+`</span>
+                <span>.00</span>
               </div>
-              <span>`+hbxLocalCart[i].item_individual_price+`.00</span>
             </div>
             <div class="hbx_quantity_row">
               <div class="hbx_quantity_control">
@@ -45,16 +46,16 @@ const renderAllCartItemsInPage = (hbxLocalCart) => {
                   +
                 </div>
                 <div class="hidden_cart_id">
-                  `+hbxLocalCart[i].id+`
+                  `+hbxLocalCart[i].products_id+`
                 </div>
               </div>
-              <div class="cart_remove_items">
+              <div class="cart_remove_items" onclick="removeLocalStorageItemAtIndex(`+i+`)">
                 REMOVE
               </div>
             </div>
             <div class="hbx_total_row">
               <span class="hbx_total_usd">USD</span>
-              <span class="hbx_total_price">`+item_total_cost+`.00</span>
+              <span class="hbx_total_price hbx_local_storage_item_cost_at_index_`+i+`">`+item_total_cost+`.00</span>
             </div>
           </div>
         </div>

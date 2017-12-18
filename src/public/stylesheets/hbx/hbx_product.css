@@ -1,5 +1,6 @@
 .hidden_user, .hidden_category, .hidden_local_storage{
   display:none;
+  color:red;
 }
 
 .hbx_product_header_links{

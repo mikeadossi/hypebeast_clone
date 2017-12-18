@@ -70,7 +70,7 @@ const addSelectedItemsToCart = () => {
 
   currentSelectedSize ? itemsInCartObj.item_size = currentSelectedSize.replace(/\s/g, "") : itemsInCartObj.item_size = null;
 
-  if($(".hidden_user").text()){
+  if($(".hidden_user_obj").text()){
     // if user is logged in
     itemsInCartObj.user_id = GLOBAL_USER.id;
     postCartToDB(itemsInCartObj);

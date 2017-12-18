@@ -61,6 +61,8 @@ const populateShoppingBagView = () => {
           <div class="hbx_update_btn" onclick="updateLocalStorageBag()">
             UPDATE BAG
           </div>
+          <p class="no_edited_items">no edited items</p>
+          <p class="edit_successful">edit successful!</p>
         </div>
     `);
 }

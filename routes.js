@@ -23,18 +23,19 @@ router.get("/", (req, res, next) => {
       queries.getPosts(),
       queries.getTopTenByHypeCount()
     ]
-    ).then(results => {
+  ).then(results => {
 
     const post_titles = [];
     let title;
+    let title_length;
     for(let i = 0; i < results[1].length; i++){
       title = results[1][i].post_title_string;
-        title_length = title.split("").length;
-        if(title_length <= 88){
-          post_titles.push(title);
-        } else {
-          post_titles.push(title.substring(0,88) + "...")
-        }
+      title_length = title.split("").length;
+      if(title_length <= 88){
+        post_titles.push(title);
+      } else {
+        post_titles.push(title.substring(0,88) + "...");
+      }
     }
 
     res.render("index", {
@@ -42,9 +43,10 @@ router.get("/", (req, res, next) => {
       topTen: results[1],
       postTitles: post_titles,
       user: req.user
-    })
-  }).catch(err => next(err))
-})
+    });
+
+  }).catch(err => next(err));
+});
 
 router.get("/post/:id", (req, res) => {
   const id = req.params.id;
@@ -77,7 +79,8 @@ router.get("/post/:id", (req, res) => {
 });
 
 router.get("/store", (req, res) => {
-
+  console.log('Cookies: ',req.cookies);
+  console.log('Signed Cookies: ',req.signedCookies);
   if(req.user){
     let user_id = req.user.id;
 
@@ -579,18 +582,41 @@ router.get("/brands/:brand/:product", (req, res) => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
     })
-})
+});
 
 router.get("/hbx_login", (req, res) => {
-  res.render("hbx_login")
-})
+  res.render("hbx_login");
+});
 
-router.post('/hbx_login', passport.authenticate("local", {
-   successRedirect: "/store",
-   failureRedirect: "/hbx_login",
-   failureFlash: true
- })
+router.post("/hbx_login", passport.authenticate("local", {
+  successRedirect: "/store/succesful-login",
+  failureRedirect: "/hbx_login",
+  failureFlash: true
+})
 );
+
+router.get("/store/succesful-login", (req, res) => {
+
+  if(req.user){
+    let user_id = req.user.id;
+
+    hbx_queries.getCartById(user_id)
+      .then( cart => {
+        res.render("hbx_index", {
+          user: req.user,
+          cart: cart,
+          successful_login: true
+        });
+      })
+      .catch( err => {
+        console.log("err: ",err);
+        res.render("hbx_error", {user: req.user});
+      })
+  } else {
+    res.render("/hbx_error");
+  }
+
+})
 
 router.get("/hbx_account", (req, res) => {
 
@@ -816,7 +842,7 @@ router.get("/hbx/auth/google",
 
 router.get("/hbx/auth/google/callback",
   passport.authenticate("hbx-google", {
-    successRedirect: "/store",
+    successRedirect: "/store/succesful-login",
     failureRedirect: "/hbx_error",
     failureFlash: true
   })
@@ -984,34 +1010,34 @@ router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
   // fetch does not send that cookie automatically.
 
   if(!req.user){
-    res.status(401).json({status:"error",message:"user is not present on the request object"})
+    res.status(401).json({status:"error",message:"user is not present on the request object"});
   }
 
-  if(!req.body.product_quantity){
-    res.status(401).json({status:"error",message:"cart has no items"})
+  if(!req.body.item_quantity){
+    res.status(401).json({status:"error",message:"cart has no items"});
   }
 
   hbx_queries.addToCart(
-      req.body.item_quantity,
-      req.body.item_cost,
-      req.body.item_color,
-      req.body.item_size,
-      req.body.products_id,
-      req.user.id,
-      req.body.item_category,
-      req.body.item_image,
-      req.body.item_name,
-      req.body.item_individual_price,
-      req.body.item_brand,
-      req.body.item_route,
-      req.body.item_color_type
+    req.body.item_quantity,
+    req.body.item_cost,
+    req.body.item_color,
+    req.body.item_size,
+    req.body.products_id,
+    req.user.id,
+    req.body.item_category,
+    req.body.item_image,
+    req.body.item_name,
+    req.body.item_individual_price,
+    req.body.item_brand,
+    req.body.item_route,
+    req.body.item_color_type
     )
     .then((cart) => {
       res.json(cart)
     })
     .catch((error) => {
       res.status(401).json({status:"error",message:"item not added to database"})
-    })
+    });
 
 })
 

@@ -316,6 +316,18 @@
   font-size:12px;
 }
 
+.no_edited_items{
+  display:none;
+  text-align:right;
+  color:indianred;
+}
+
+.edit_successful{
+  display:none;
+  text-align:right;
+  color:seagreen;
+}
+
 @media only screen and (max-width: 989px){
   body{
     /*background-color: pink;*/

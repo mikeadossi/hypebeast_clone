@@ -99,8 +99,6 @@ let queries = {
         }
 
         let userImageBackgroundColor = getRandomColor();
-        console.log('userImageBackgroundColor --> ',userImageBackgroundColor);
-        console.log('typeof userImageBackgroundColor --> ',typeof userImageBackgroundColor);
 
         return db.any(`
           UPDATE users
