@@ -16,12 +16,6 @@ const addToListOfEditedItems = (element) => {
   editedItem.count = item_count;
   editedItem.tot_cost = item_tot_cost;
 
-  for(let i = 0; i < LIST_OF_EDITED_ITEMS.length; i++){
-    if(LIST_OF_EDITED_ITEMS[i].id === item_id){
-      LIST_OF_EDITED_ITEMS[i].count = item_count;
-      return;
-    }
-  }
   LIST_OF_EDITED_ITEMS.push(editedItem);
 
 };

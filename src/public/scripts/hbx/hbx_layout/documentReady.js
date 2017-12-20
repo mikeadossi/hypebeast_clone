@@ -1,5 +1,6 @@
 /* global document, $, updateCartAndCountByID, updateLocalStorageCart, window,
-populateShoppingBagPageWithLocalStorageContent, populateAddressCheckoutPage, setTimeout */
+populateShoppingBagPageWithLocalStorageContent, populateAddressCheckoutPage,
+setTimeout, checkForEmptyLocalStorageCart */
 
 $(document).ready(function(){
 
@@ -14,7 +15,7 @@ $(document).ready(function(){
     let user_id = $(".users_persistent_id")[0].innerHTML;
     updateCartAndCountByID(user_id);
   } else if(!user && window.localStorage.hbxLocalCart){
-    updateLocalStorageCart();
+    checkForEmptyLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
     populateAddressCheckoutPage();
   } else if(!user){

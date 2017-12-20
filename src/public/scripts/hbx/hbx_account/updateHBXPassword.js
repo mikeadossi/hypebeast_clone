@@ -1,12 +1,13 @@
 /* global $, fetch, Headers, console, alert */
 /* exported updateHBXPassword */
+
 const updateHBXPassword = (element) => {
   let user = $(".hiddenUserInput").val();
   let form = element.parentNode;
 
-  let currentPassword = form.childNodes[1].childNodes[1].childNodes[0].value;
-  let newPassword = form.childNodes[2].childNodes[1].childNodes[0].value;
-  let verifyPassword = form.childNodes[3].childNodes[1].childNodes[0].value;
+  let currentPassword = $(".profile_curr_password_input").val();
+  let newPassword = $(".profile_password_input").val();
+  let verifyPassword = $(".profile_verify_password_input").val();
 
   if(!currentPassword.length || !newPassword.length || !verifyPassword.length){
     $(".password_form_error_message").html("please fill all fields");
@@ -14,12 +15,16 @@ const updateHBXPassword = (element) => {
   }
 
   if(newPassword !== verifyPassword){
-    $(".password_form_error_message").html("new passwords do not match");
+    $(".password_form_error_message").html("New passwords do not match");
     $(".profile_curr_password_input").val("");
     $(".profile_verify_password_input").val("");
     $(".profile_password_input").val("");
+    setTimeout(() => {
+      $(".password_form_error_message").fadeOut( "slow" );
+    }, 5000);
     return;
   }
+
 
   fetch("/update-password-in-db", {
     method: "POST",
@@ -34,11 +39,28 @@ const updateHBXPassword = (element) => {
     }),
     credentials: "same-origin"
   })
-    .then(() => {
+    .then(msg => msg.json())
+    .then((msg) => {
+      console.log('msg: ',msg);
+
       $(".profile_curr_password_input").val("");
       $(".profile_verify_password_input").val("");
       $(".profile_password_input").val("");
-      alert("successful password edit.");
+      $(".password_form_success_message").html("");
+      $(".password_form_error_message").html("");
+      if(msg === "Successful password edit!"){
+        $(".password_form_success_message").html("");
+        $(".password_form_success_message").html(msg);
+        setTimeout(() => {
+          $(".password_form_success_message").fadeOut( "slow" );
+        }, 3000);
+      } else {
+        $(".password_form_error_message").html("")
+        $(".password_form_error_message").html(msg);
+        setTimeout(() => {
+          $(".password_form_error_message").fadeOut( "slow" );
+        }, 5000);
+      }
     })
     .catch(err => console.log(err));
 };

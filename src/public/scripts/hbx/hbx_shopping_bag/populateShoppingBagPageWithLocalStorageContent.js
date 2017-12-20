@@ -1,5 +1,5 @@
 /* global $, populateShoppingBagView, window, renderAllCartItemsInPage,
-createShoppingCartRightColumn */
+createShoppingCartRightColumn, displayBagIsCurrentlyEmpty */
 /* exported populateShoppingBagPageWithLocalStorageContent */
 
 const populateShoppingBagPageWithLocalStorageContent = () => {
@@ -9,6 +9,11 @@ const populateShoppingBagPageWithLocalStorageContent = () => {
   populateShoppingBagView();
 
   let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
+
+  if(!hbxLocalCart.length){
+    displayBagIsCurrentlyEmpty();
+    return;
+  }
 
   renderAllCartItemsInPage(hbxLocalCart);
 

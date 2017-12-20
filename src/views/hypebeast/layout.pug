@@ -110,8 +110,21 @@ html
             li.empty_link Entertainment
             li.empty_link Editorial
           ul.secondUl
-            li Account
-              img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
+            -if(user){
+              li.mobile_options 
+                a(href="/account") Account
+                img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
+              li.mobile_options
+                a(href="/logout") Log out
+                img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
+            -} else {
+              li.mobile_options
+                a(href="/login") Log In
+                img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
+              li.mobile_options
+                a(href="/register") Register
+                img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
+            -}
             li Language
               img.dropIcon(src="/images/hypebeast_images/general/dropIcon.png")
           ul.thirdUl

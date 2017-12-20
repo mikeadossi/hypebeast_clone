@@ -152,8 +152,17 @@
   font-size:13px;
 }
 
-.hbx_total_usd{
+.hbx_total_usd, .hbx_total_usd_mobile{
   padding-left: 20px;
+  padding-right: 5px;
+}
+
+.hbx_total_usd{
+  display:inline-block;
+}
+
+.hbx_total_usd_mobile{
+  display:none;
 }
 
 .hbx_update_btn:hover{
@@ -328,7 +337,82 @@
   color:seagreen;
 }
 
-@media only screen and (max-width: 989px){
+@media only screen and (max-width: 499px){
+  body{
+    /*background-color:teal;*/
+  }
+  .hbx_cart_flex_container{
+    display:unset;
+  }
+  .hbx_cart_left_column{
+    width:unset;
+  }
+  .hbx_cart_right_column{
+    width: 95%;
+    margin-left: unset;
+    margin: auto;
+    margin-top: 40px;
+  }
+  .hbx_update_btn{
+    margin-left:20px;
+  }
+  .hbx_cart_left_column{
+    padding: 26px;
+  }
+  .hbx_shopping_title{
+    margin-top: 60px;
+  }
+  .hbx_cart_left_column{
+    margin-top:50px;
+  }
+  .hbx_cart_header{
+    display:none;
+  }
+  .hbx_product_row{
+    display:unset;
+    margin-bottom: unset;
+    border-top: unset;
+  }
+  .cart_product_img{
+    width: 100px;
+    display: inline-flex;
+  }
+  .cart_product_details_container{
+    display: inline-block;
+    padding-left: unset;
+    width: unset;
+    position: relative;
+    top: -13px;
+  }
+  .cart_product_img img{
+    height:100px;
+  }
+  .hbx_right_rows{
+    margin-top: -24px;
+    margin-bottom: 20px;
+  }
+  .hbx_cart_left_column{
+    text-align: center;
+  }
+  .cart_product_brand, .cart_product_name, .cart_size, .cart_notice{
+    text-align: left;
+  }
+  .hbx_right_rows{
+    border-bottom: 1px solid gainsboro;
+    padding-bottom:20px;
+  }
+  .hbx_update_container{
+    border:unset;
+  }
+  .hbx_total_usd{
+    display:none;
+  }
+  .hbx_total_usd_mobile{
+    display:inline-block;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 989px){
   body{
     /*background-color: pink;*/
   }
@@ -349,5 +433,38 @@
   }
   .hbx_cart_left_column{
     padding: 26px;
+  }
+  .hbx_shopping_title{
+    margin-top: 60px;
+  }
+  .hbx_cart_left_column{
+    margin-top:50px;
+  }
+  .cart_notice{
+    display:none;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 989px){
+  body{
+    /*background-color: skyblue;*/
+  }
+  .hbx_shopping_title{
+    margin-top: 60px;
+  }
+  .hbx_cart_left_column{
+    margin-top:20px;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1230px){
+  body{
+    /*background-color:indianred;*/
+  }
+}
+
+@media (min-width: 1231px) {
+  body{
+    /*background-color:limegreen;*/
   }
 }

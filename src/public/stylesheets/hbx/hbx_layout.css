@@ -5,6 +5,20 @@
   display:none !important;
 }
 
+.mobile_options a{
+  font-weight: 600;
+  color:black;
+  text-decoration: none !important;
+}
+
+.mobile_options{
+  margin: 20px 0 20px 0;
+}
+
+.mobile_options a:hover{
+  color:grey;
+}
+
 .hbx_successful_login_message{
   background-color: black;
   color: white;
@@ -379,6 +393,7 @@ ul{
   padding: 14px;
   width: 337px;
   left: 40px;
+  /*display:block !important;*/
   display:none;
   z-index:20;
 }
@@ -568,7 +583,11 @@ ul{
   left:0;
   width:99%;
   height: 43px;
-  z-index:20;
+  z-index:200;
+}
+
+.left1px{
+  left:198px;
 }
 
 .hbxAccountDropDown{
@@ -602,11 +621,16 @@ ul{
   margin-top: -30px;
 }
 
-.new_arrivals_btn:hover{
+.no_items_in_local_bag{
+  text-align:center;
+  margin-top: -30px;
+}
+
+.new_arrivals_btn:hover, .new_arrivals_local_btn:hover{
   opacity:0.8;
 }
 
-.new_arrivals_btn{
+.new_arrivals_btn, .new_arrivals_local_btn{
   background-color:#026FBA;
   color:white;
   text-align:center;

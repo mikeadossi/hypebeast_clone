@@ -122,7 +122,14 @@ block content
             .product_image
               if(i == 0 || i % 2 == 0)
                 a.main_img !{ store_prod_images[i] }
-                .product_name !{ product[x].product_name }
+                -if( product[x].product_name.length < 38 ){ 
+                  .product_name !{ product[x].product_name } 
+                -} else {
+                  - let str = product[x].product_name
+                  - let substr = str.substring(0,38)
+                  - let product_name_shortened = substr+'...'
+                  .product_name !{product_name_shortened} 
+                -}
                 .product_price USD !{ product[x].product_price }.00
               else
                   a.hide_initially_img(href="/brands/"+brand[0].brand_name_link+"/"+product[x].product_name_route) !{ store_prod_images[i] }

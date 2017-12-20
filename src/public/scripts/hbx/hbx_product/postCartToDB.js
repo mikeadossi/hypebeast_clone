@@ -8,7 +8,7 @@ const postCartToDB = (cartItemsObj) => {
 
   if(GLOBAL_USER){
 
-    fetch(url, {
+    return fetch(url, {
       method:"POST",
       headers: new Headers({
         "Accept": "application/json",
@@ -31,9 +31,8 @@ const postCartToDB = (cartItemsObj) => {
       credentials: "same-origin"
     })
       .then( () => {
-        updateCartAndCountByID( JSON.parse(GLOBAL_USER).id );
+        return JSON.parse(GLOBAL_USER).id;
       })
-      .catch(err => console.log(err));
   }
 
 };

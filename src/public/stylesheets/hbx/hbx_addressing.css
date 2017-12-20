@@ -233,10 +233,17 @@
   width:100%;
 }
 
-.error_message{
+.password_form_error_message, .password_form_success_message{
   text-align:center;
-  color:red;
   margin-bottom:10px;
+}
+
+.password_form_error_message{
+  color:red;
+}
+
+.password_form_success_message{
+  color:green;
 }
 
 @media only screen and (max-width: 922px){

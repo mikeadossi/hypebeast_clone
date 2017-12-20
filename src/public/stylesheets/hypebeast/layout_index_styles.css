@@ -353,6 +353,10 @@ textarea{
   display:none;
 }
 
+.mobile-header-top-section{
+  position:fixed;
+}
+
 .mobileMenu{
   display:none;
   margin-top:52px;
@@ -362,7 +366,15 @@ textarea{
   width: 100%;
   z-index: 100;
   background-color: #F2F2F2;
-  color:black;
+  color: black;
+  position: fixed;
+  overflow-y: auto;
+  height: 100vh;
+  display:none;
+}
+
+.thirdUl{
+  margin-bottom: 100px;
 }
 
 .mobileMenu ul{
@@ -395,11 +407,21 @@ textarea{
   font-weight: bold;
 }
 
+.mobile_options a{
+  font-weight: 600;
+  color:black;
+  text-decoration: none !important;
+}
+
+.mobile_options{
+  margin: 20px 0 20px 0;
+}
+
 .firstUl li, .thirdUl li{
   cursor:pointer;
 }
 
-.firstUl li:hover, .thirdUl li:hover{
+.firstUl li:hover, .thirdUl li:hover, .mobile_options a:hover{
   color:steelblue;
 }
 
@@ -1045,7 +1067,7 @@ textarea{
 
 @media only screen and (max-width: 759px){
   body{
-    /*background-color: pink;*/
+    background-color: pink;
   }
   .storeNavLink{
     padding-bottom:16px;
@@ -1170,7 +1192,10 @@ textarea{
   }
   .main-nav ul {
     margin: 10px 0px 7px 10px;
-    min-width: 758px;
+    overflow: auto;
+    display: flex;
+    width: 100vw;
+    min-width: unset;
   }
   .main-nav ul li:hover{
     border-bottom: 3px solid white;

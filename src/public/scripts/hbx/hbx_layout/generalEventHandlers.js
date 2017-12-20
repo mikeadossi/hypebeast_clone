@@ -34,10 +34,11 @@ $("#bag_button").hover(
 
 $(window).scroll(function(){
   let sticky = $(".hbx_nav"),
-    scroll = $(window).scrollTop();
+    scroll = $(window).scrollTop(),
+    handle = $(".shopping_bag_handle");
 
-  if (scroll >= 10) sticky.addClass("fixed_top");
-  else sticky.removeClass("fixed_top");
+  if (scroll >= 10)sticky.addClass("fixed_top") && handle.addClass("left1px") && $(".hbx_shopping_title").css("display","none");
+  else sticky.removeClass("fixed_top") && handle.removeClass("left1px") && $(".hbx_shopping_title").css("display","block");
 });
 
 

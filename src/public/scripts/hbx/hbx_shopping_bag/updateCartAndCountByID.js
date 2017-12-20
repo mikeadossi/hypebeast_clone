@@ -3,7 +3,9 @@
 
 const updateCartAndCountByID = (user_id) => {
 
-  fetch("/get-cart-by-id", {
+  $(".dropdown_products_container").css("display","block");
+
+  return fetch("/get-cart-by-id", {
     method:"GET",
     headers: new Headers({
       "Accept": "application/json",
@@ -18,55 +20,8 @@ const updateCartAndCountByID = (user_id) => {
       return cart.json();
     })
     .then((cartJSON) => {
-
-      $(".shopping_bag")[0].innerHTML = 0;
-      $(".shopping_bag_deux")[0].innerHTML = 0;
-
-      if(cartJSON.length === 1){
-
-        if(cartJSON[0].item_quantity === 1){
-          $(".dropdown_item_count")[0].innerHTML = "1 Item";
-        } else {
-          $(".dropdown_item_count")[0].innerHTML = cartJSON[0].item_quantity+" Items"
-        }
-
-        $(".shopping_bag")[0].innerHTML = cartJSON[0].item_quantity;
-        $(".shopping_bag_deux")[0].innerHTML = cartJSON[0].item_quantity;
-        $(".cart_price")[0].innerHTML = cartJSON[0].item_cost + ".00";
-        $(".usd_cart_price")[0].innerHTML = cartJSON[0].item_cost;
-
-        if($(".checkout_subtotal")){
-          $(".checkout_subtotal")[0].innerHTML = cartJSON[0].item_cost;
-        }
-        if($(".bag_subtotal")){
-          $(".bag_subtotal")[0].innerHTML = cartJSON[0].item_cost;
-        }
-
-      } else if (cartJSON.length > 1){
-
-        let tot_cost = 0;
-        let tot_quantity = 0;
-
-        for(let i = 0; i < cartJSON.length; i++){
-          tot_cost += cartJSON[i].item_cost;
-          tot_quantity += cartJSON[i].item_quantity;
-        }
-
-        $(".dropdown_item_count")[0].innerHTML = tot_quantity+" Items";
-        $(".shopping_bag")[0].innerHTML = tot_quantity;
-        $(".shopping_bag_deux")[0].innerHTML = tot_quantity;
-        $(".cart_price")[0].innerHTML = tot_cost + ".00";
-        $(".usd_cart_price")[0].innerHTML = tot_cost;
-
-        if($(".checkout_subtotal")){
-          $(".checkout_subtotal")[0].innerHTML = tot_cost;
-        }
-
-        if($(".bag_subtotal")){
-          $(".bag_subtotal")[0].innerHTML = tot_cost;
-        }
-
-      }
+      
+      updateLocalStorageCart(cartJSON);
 
     })
     .catch(err => console.log(err));

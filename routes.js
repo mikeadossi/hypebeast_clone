@@ -79,8 +79,11 @@ router.get("/post/:id", (req, res) => {
 });
 
 router.get("/store", (req, res) => {
-  console.log('Cookies: ',req.cookies);
-  console.log('Signed Cookies: ',req.signedCookies);
+  // console.log('Cookies: ',req.cookies);
+  // console.log('Signed Cookies: ',req.signedCookies);
+  console.log('req.session => ',req.session);
+  console.log('req.session.passport: ',req.session.passport);
+  // console.log('req.user.id: ',req.user.id);
   if(req.user){
     let user_id = req.user.id;
 
@@ -155,7 +158,6 @@ router.get("/register", (req, res) => {
 })
 
 router.post("/register", (req, res) => {
-  console.log('\n registering user... \n');
 
   const isEmailTaken = (submitted_email, submitted_password) => {
     return queries.isEmailTaken(submitted_email)
@@ -170,7 +172,6 @@ router.post("/register", (req, res) => {
   const createNonOauthUser = (userEmailAndPassword) => {
     return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
       .then(() => {
-        console.log('done?');
         return res.status(200).redirect("/register/success")
       })
   }
@@ -1287,29 +1288,36 @@ router.post("/update-password-in-db", (req, res) => {
   let new_password = req.body.new_password;
   let user = JSON.parse(req.body.user);
 
-  queries.comparePassword(user.email, current_password)
-    .then( user => {
-      if(!user){
-        res.render("hbx_change_password",{message:"incorrect current password"})
+
+
+  const compareHashedPasswords = (new_password) => {
+    return bcrypt.hash( new_password, JSON.parse(process.env.SALTROUNDS) );
+  }
+
+  const updatePassword = (hash) => {
+    if(hash){
+      let userId = user.id;
+      return hbx_queries.updateUserPassword(hash, userId);
+    }
+  }
+
+  return queries.comparePassword(user.email, current_password)
+    .then( passwordsMatch => {
+      if(passwordsMatch){
+        return new_password;
       }
-      return user;
+      throw Error ("current password submitted is incorrect");
+      // res.send("current password submitted is incorrect!");
     })
-    .then( user => {
-      bcrypt.hash(new_password, process.env.
-        ROUNDS).then( hash => {
-        let userId = JSON.parse(req.body.user).id;
-        hbx_queries.updateUserPassword(hash, userId)
-          .then(() => {
-            return;
-          })
-          .catch((err) => console.log(err))
-      })
-      .then(() => console.log("success"))
-      .catch(err => console.log(err))
+    .then(compareHashedPasswords)
+    .then(updatePassword)
+    .then(() => {
+      console.log('success! password: ',new_password);
+      res.json("Successful password edit!");
     })
     .catch( err => {
       console.log(err);
-      res.render("hbx_error",{error_message:err})
+      res.json("Error. Try Again.");
     })
 
 })

@@ -24,3 +24,11 @@ Clone down the repo and navigate to the root directory of the project, when insi
   $ npm start
 ```
 Find the app running on http://localhost:3000
+
+
+
+
+
+
+
+//

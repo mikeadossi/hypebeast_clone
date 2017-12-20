@@ -10,6 +10,5 @@ const selectItemOrProceedToBag = (element) => {
     window.location = href;
     return;
   }
-
   addSelectedItemsToCart();
 };

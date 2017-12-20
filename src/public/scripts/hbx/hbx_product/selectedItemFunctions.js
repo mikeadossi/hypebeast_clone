@@ -1,5 +1,5 @@
 /* global $, window, GLOBAL_USER, GLOBAL_PRODUCT, postCartToDB,
-updateLocalStorageCart, populateLocalStorage */
+updateLocalStorageCart, populateLocalStorage, updateCartAndCountByID, console */
 /* exported selectPreferredSize, selectItemOrProceedToBag */
 
 
@@ -73,12 +73,18 @@ const addSelectedItemsToCart = () => {
   if($(".hidden_user_obj").text()){
     // if user is logged in
     itemsInCartObj.user_id = GLOBAL_USER.id;
-    postCartToDB(itemsInCartObj);
-    proceedToBag();
+    postCartToDB(itemsInCartObj)
+      .then(updateCartAndCountByID)
+      .then(() => proceedToBag())
+      .catch( err => console.log(err) );
+
   } else {
     // if user is not registered but populating cart
     populateLocalStorage(itemsInCartObj);
-    updateLocalStorageCart();
+    let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
+    console.log('-------> ',hbxLocalCart);
+    console.log('============>',hbxLocalCart.length);
+    updateLocalStorageCart(hbxLocalCart);
     proceedToBag();
   }
 };
@@ -88,6 +94,11 @@ const addSelectedItemsToCart = () => {
 
 const proceedToBag = () => {
   $(".product_add_to_cart_button").css("background-color","#5DB75C");
-  $(".product_add_to_cart_button")[0].innerHTML = "PROCEED TO BAG";
-  $(".proceed_to_bag_button")[0].innerHTML = "PROCEED TO BAG";
+
+  if($(".product_add_to_cart_button").length){
+    $(".product_add_to_cart_button")[0].innerHTML = "PROCEED TO BAG";
+  }
+  if($(".proceed_to_cart_button").length){
+    $(".proceed_to_cart_button")[0].innerHTML = "PROCEED TO BAG";
+  }
 };

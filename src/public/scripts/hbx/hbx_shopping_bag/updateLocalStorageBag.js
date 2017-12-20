@@ -12,9 +12,11 @@ const updateLocalStorageBag = () => {
     return;
   }
 
+
   let itemsToBeDeleted = [];
 
   let hbxLocalCartLength = hbxLocalCart.length;
+
   for(let i = 0; i < hbxLocalCartLength; i++){
     for(let x = 0; x < LIST_OF_EDITED_ITEMS.length; x++){
       if(hbxLocalCart[i].products_id === LIST_OF_EDITED_ITEMS[x].id){
@@ -25,19 +27,24 @@ const updateLocalStorageBag = () => {
       $(".hbx_local_storage_item_cost_at_index_"+i).html(hbxLocalCart[i].item_cost+".00");
 
       if(hbxLocalCart[i].item_quantity === 0){
-        console.log('>>> hbxLocalCart['+i+']: ',hbxLocalCart[i]);
+        console.log('spliced: ',i);
         hbxLocalCart.splice(i,1);
-        hbxLocalCartLength--;
         $(".hbx_local_storage_item_at_index_"+i).css("display","none");
+        hbxLocalCartLength--;
       }
     }
-  }
+  };
 
   window.localStorage.setItem( "hbxLocalCart", JSON.stringify(hbxLocalCart) );
 
-  $(".edit_successful").css("display","block");
-  setTimeout(() => {
-    $(".edit_successful").fadeOut( "slow" );
-  }, 3000);
+  if(!hbxLocalCart.length){
+    displayBagIsCurrentlyEmpty();
+  } else {
+    $(".edit_successful").css("display","block");
+    setTimeout(() => {
+      $(".edit_successful").fadeOut( "slow" );
+    }, 3000);
+  }
+
 
 };
