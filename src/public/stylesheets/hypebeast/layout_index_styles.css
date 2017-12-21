@@ -888,6 +888,10 @@ textarea{
   top: -3px;
 }
 
+.fa-chevron-down{
+  margin-left: 5px;
+}
+
 .top_ten_mobile_container{
   display:none;
 }
@@ -1065,9 +1069,14 @@ textarea{
   padding-right: 0 !important;
 }
 
+
+
 @media only screen and (max-width: 759px){
   body{
-    background-color: pink;
+    /*background-color: pink;*/
+  }
+  .more_button, .more_button_mobile{
+    width:91%;
   }
   .storeNavLink{
     padding-bottom:16px;

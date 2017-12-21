@@ -36,7 +36,7 @@ const submitCommentToDB = (
 
       let append_to_container = $(".posts_comments_main_container");
 
-      insertNewComment(
+      insertNewParentComment(
         append_to_container,
         user_name,
         user_comment,
@@ -61,6 +61,8 @@ const submitReply = (
   user_avatar,
   user_avatar_background_color
 ) => {
+
+  console.log('reply submitted?')
 
   let user_comment = element.parentNode.parentNode.children[1].value;
   if(!user_comment){ return; }
@@ -147,9 +149,9 @@ const submitReply = (
     .catch(err => console.log(err));
 };
 
-const insertNewComment = (
-  container,
-  username,
+const insertNewParentComment = (
+  element,
+  user_name,
   comment,
   post_id,
   user_id,
@@ -158,7 +160,8 @@ const insertNewComment = (
   user_avatar_background_color
 ) => {
 
-  container.prepend(`
+
+  element.prepend(`
     <div class="new_comment_container reply_comment_container">
       <div
         class="commenter_avatar"
@@ -171,7 +174,7 @@ const insertNewComment = (
         <div class="reply_commenter_content commenter_content_`+comment_id+` ">
           <div class="comment_username_container">
             <span class="commenter_name">
-              `+username+`
+              `+user_name+`
             </span>
             <span class="reply_dot_seperator">.</span>
             <span class="comment_time">an hour ago</span>
@@ -196,9 +199,9 @@ const insertNewComment = (
               `+post_id+`,
               `+user_id+`,
               `+comment_id+`,
-              'dunnoo',
-              `+$(".userAvatar").val()+`,
-              `+$(".userAvatarBackgroundColor").val()+`
+              '`+user_name+`',
+              '`+$(".userAvatar").val()+`',
+              '`+$(".userAvatarBackgroundColor").val()+`'
             )">
               Reply*
             </button>
@@ -223,6 +226,11 @@ const writeReply = (
   user_avatar,
   user_avatar_background_color
 ) => {
+
+  console.log('>>> called!');
+  console.log('element: ',element);
+
+  $(".write_reply_comment").css("display","none");
   let whereToAppend = $(element).closest(".post_comment");
 
   whereToAppend.append(`

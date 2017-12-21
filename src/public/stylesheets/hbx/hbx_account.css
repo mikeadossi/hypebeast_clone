@@ -193,3 +193,14 @@ button{
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 759px){
+  body{
+    /*background-color: pink;*/
+  }
+
+  .hbx_ordered_item_modal{
+    margin-left:1%;
+    width:86%;
+  }
+}

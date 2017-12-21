@@ -156,3 +156,24 @@
   width: 100%;
   padding: 10px 43.5% 10px 43.5%;
 }
+
+@media only screen and (max-width: 759px){
+  body{
+    background-color:pink;
+  }
+
+  .login_content{
+    width: unset;
+    padding: 40px;
+    background-color: unset;
+  }
+
+  .successful_register_message{
+    width: unset;
+    background-color: unset;
+  }
+
+  .your_settings_content{
+    padding-left:unset !important;
+  }
+}
