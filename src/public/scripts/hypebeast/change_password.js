@@ -1,5 +1,6 @@
 /* global $, console, alert, Headers, fetch */
 /* exported updatePassword */
+
 const updatePassword = (element) => {
   let user = $(".hiddenUserInput").val();
   let form = element.parentNode;

@@ -1,3 +1,4 @@
+/* global $ */
 /* exported populateDropDownWithLocalStorageItems */
 
 const populateDropDownWithLocalStorageItems = (cart) => {
@@ -69,4 +70,4 @@ const populateDropDownWithLocalStorageItems = (cart) => {
       </div>
   `);
 
-}
+};

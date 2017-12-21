@@ -10,7 +10,6 @@
 .checkout_steps{
   display:inline-block;
   margin:1px;
-  /*padding-right:15%;*/
   border-bottom:3px solid black;
   padding-bottom:7px;
 }
@@ -123,7 +122,6 @@
 
 .checkout_textarea{
   width:98%;
-  /*height:190px;*/
 }
 
 .contact_billing input{

@@ -1,6 +1,7 @@
 /* exported allProductSizesArr, allProductSizesString,
 allProductSizesSingleValueArr, allProductSizesObj,
 allProductClothingCategoriesArr, allProductColorsArr, allBrandNamesObj */
+
 const allProductSizesArr = [
   "small_count",
   "medium_count",

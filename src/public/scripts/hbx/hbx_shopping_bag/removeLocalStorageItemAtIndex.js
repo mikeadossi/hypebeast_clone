@@ -1,5 +1,5 @@
 /* global window, confirm, document */
-/* exported removeLocalItemAtIndex */
+/* exported removeLocalStorageItemAtIndex */
 
 const removeLocalStorageItemAtIndex = (index) => {
   let url = window.location.href;

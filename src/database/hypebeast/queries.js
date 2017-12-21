@@ -1,8 +1,9 @@
-/* global module, console */
-require('dotenv').config();
+/* global module, console, process */
+
+require("dotenv").config();
 const {db} = require("../connection.js");
 const bcrypt = require("bcrypt");
-const fs = require('fs');
+const fs = require("fs");
 
 
 let queries = {
@@ -79,24 +80,24 @@ let queries = {
           `,[email, hash]);
       })
       .then( user_email => {
-        let email = user_email[0].email
+        let email = user_email[0].email;
 
-        let pathToAvatarDirectory = './src/public/images/hypebeast_images/avatars/png';
+        let pathToAvatarDirectory = "./src/public/images/hypebeast_images/avatars/png";
         let avatarImagesArray = [];
         fs.readdirSync(pathToAvatarDirectory).forEach(fileName => {
-          avatarImagesArray.push(fileName)
-        })
-        let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0
-        let userImage = '/images/hypebeast_images/avatars/png/' + avatarImagesArray[randomIndex];
+          avatarImagesArray.push(fileName);
+        });
+        let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0;
+        let userImage = "/images/hypebeast_images/avatars/png/" + avatarImagesArray[randomIndex];
 
         const getRandomColor = () => {
-          var letters = '0123456789ABCDEF';
-          var color = '#';
+          var letters = "0123456789ABCDEF";
+          var color = "#";
           for (var i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
           }
           return color;
-        }
+        };
 
         let userImageBackgroundColor = getRandomColor();
 
@@ -106,7 +107,7 @@ let queries = {
           user_avatar_background_color = $2
           WHERE email = $3
         `,[userImage, userImageBackgroundColor, email]
-        )
+        );
       });
   },
 

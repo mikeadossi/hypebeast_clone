@@ -6,13 +6,15 @@ $(".hbx_search").on("click", () => {
 });
 
 $(".hamburger_mobile").on("click", () => {
-  $(".hbx_mobile_menu_background").css("display","block");
-  // $('.hbx_scrollable_container').toggle( "slide" );
+  $(".hbx_mobile_menu_background").toggle("slide");
 });
 
-$(".hbx_mobile_menu_background").on("click", () => {
-  $(".hbx_mobile_menu_background").css("display","none");
-  // $('.hbx_scrollable_container').toggle( "slide" );
+$(".hbx_outer_mobile_menu").on("click", () => {
+  $(".hbx_mobile_menu_background").toggle("slide");
+});
+
+$(".mobile_option_brands").on("click", () => {
+  $(".brands_dropdown").toggle("show");
 });
 
 $( window ).resize(function() {

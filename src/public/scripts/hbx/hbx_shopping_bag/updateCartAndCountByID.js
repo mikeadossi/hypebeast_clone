@@ -1,4 +1,4 @@
-/* global fetch, Headers, $, console */
+/* global fetch, Headers, $, console, updateLocalStorageCart */
 /* exported updateCartAndCountByID */
 
 const updateCartAndCountByID = (user_id) => {
@@ -20,7 +20,7 @@ const updateCartAndCountByID = (user_id) => {
       return cart.json();
     })
     .then((cartJSON) => {
-      
+
       updateLocalStorageCart(cartJSON);
 
     })

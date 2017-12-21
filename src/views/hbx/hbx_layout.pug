@@ -111,8 +111,21 @@ html
             li New Arrivals 
               img.hbx_drop_icon(src="/images/hbx_images/general/dropIcon.png")
             hr
-            li Brands
+            li.mobile_option_brands Brands
               img.hbx_drop_icon(src="/images/hbx_images/general/dropIcon.png")
+              ul.brands_dropdown
+                li 
+                  a(href="/brands/11-by-boris-bidjan-saberi") 11 By Boris Bidjan Saberi
+                li 
+                  a(href="/brands/adidas-originals") Adidas Originals
+                li 
+                  a(href="/brands/denim-by-vanquish-fragment") Denim By Vanquish & Fragment
+                li 
+                  a(href="/brands/mastermind-world") Mastermind World
+                li 
+                  a(href="/brands/tres-bien") Très Bien
+                li 
+                  a(href="/brands/undercover") Undercover
             hr
             li Clothing
               img.hbx_drop_icon(src="/images/hbx_images/general/dropIcon.png")
@@ -170,19 +183,8 @@ html
             i.fa.fa-lg.fa-facebook
             i.fa.fa-lg.fa-instagram
             i.fa.fa-lg.fa-twitter
-              
-    //- .hbx_nav.hbx_nav_scroll
-    //-   img.hamburger_mobile(src="/images/hbx_images/general/hamburger.png")
-    //-   .left_nav_items
-    //-     a(href="/store")
-    //-       img.hbx_title(src="/images/hbx_images/general/hbx_logo.png")
-    //-     ul.hbx_links_container.nav_elements
-    //-       a(href="/store").nav_menswear.hbx_nav_link.nav_elements MEN
-    //-       li.nav_womenswear.hbx_nav_link.nav_elements WOMEN 
-    //-       li.nav_archives.hbx_nav_link.nav_elements ARCHIVES
-    //-       li.nav_sale.hbx_nav_link.nav_elements SALE 
-    //-       li.nav_journal.hbx_nav_link.nav_elements JOURNAL   
-    
+        .hbx_outer_mobile_menu
+
       
     
     
@@ -190,7 +192,6 @@ html
     
     include hbx_footer
     script(src='https://code.jquery.com/jquery-2.2.1.js')
-    script(src='/scripts/hbx/hbx_layout/getUserObject.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateCartAndCountByID.js')
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageCart.js') 
     script(src='/scripts/hbx/hbx_shopping_bag/updateLocalStorageBag.js')

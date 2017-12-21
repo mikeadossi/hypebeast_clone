@@ -16,7 +16,7 @@ const populateShoppingBagView = () => {
               </li>
             </ul>
           </div>
-          <div class="hbx_shoppig_title">
+          <div class="hbx_shopping_title">
             Shopping Bag
           </div>
           <div class="product_footer_details_contact hbx_shopping_contact">
@@ -65,4 +65,4 @@ const populateShoppingBagView = () => {
           <p class="edit_successful">edit successful!</p>
         </div>
     `);
-}
+};

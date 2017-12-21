@@ -23,7 +23,7 @@ block content
     
     .hbx_sorting_button_container
       .hbx_sorting_button
-        select.form-control(onchange="filterThisItem(this, '"+brand[0].brand_name+"')")
+        select.form-control(onchange="filterThisItem(this)")
           - if(selected_items_array && selected_items_array.indexOf('newest_first') > -1){
               option(value='newest_first' ) NEWEST FIRST
           - } else {
@@ -58,9 +58,9 @@ block content
               ul
                 li
                   - if( selected_items_array && selected_items_array.indexOf(categories_arr[i]) > -1 ){
-                    input(type="checkbox" checked="checked" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                    input(type="checkbox" checked="checked" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this)" )
                   -} else {
-                    input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                    input(type="checkbox" id="sidebar_filter_"+categories_arr[i] value=categories_arr[i] onclick="filterThisItem(this)" )
                   -}
                   label.sidebar_label(for="sidebar_filter_"+categories_arr[i]) !{categories_arr[i]}
             - }
@@ -71,9 +71,9 @@ block content
             li
             - for(let i = 0; i < product_sizes_arr.length; i++){
                 -if(selected_sizes_array && selected_sizes_array.indexOf(product_sizes_arr[i]) > -1){
-                  li.size_div_checked( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
+                  li.size_div_checked( onclick="filterThisItem(this)" ) !{product_sizes_arr[i]}
                 - } else {
-                  li.size_div( onclick="filterThisItem(this, '"+brand[0].brand_name+"')" ) !{product_sizes_arr[i]}
+                  li.size_div( onclick="filterThisItem(this)" ) !{product_sizes_arr[i]}
                 - }
             - }
         .hbx_sidebar_link_container.hbx_color_links
@@ -82,7 +82,7 @@ block content
             - for(let i = 0; i < colors_arr.length; i++){
               ul
                 li
-                  input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                  input(type="checkbox" id="sidebar_filter_"+colors_arr[i] value=colors_arr[i] onclick="filterThisItem(this)" )
                   label.sidebar_label(for="sidebar_filter_"+colors_arr[i]) !{colors_arr[i]}
             - }
         .hbx_sidebar_link_container.hbx_price_links
@@ -92,7 +92,7 @@ block content
               - for(let i = 0; i < price_range_arr.length - 1; i += 2){
                   ul
                     li
-                      input(type="checkbox" id="sidebar_filter_"+price_range_arr[i] value=price_range_arr[i]+" - "+price_range_arr[i+1] onclick="filterThisItem(this, '"+brand[0].brand_name+"')" )
+                      input(type="checkbox" id="sidebar_filter_"+price_range_arr[i] value=price_range_arr[i]+" - "+price_range_arr[i+1] onclick="filterThisItem(this)" )
                       label.sidebar_label(for="sidebar_filter_"+price_range_arr[i]) USD !{price_range_arr[i]}.00 - USD !{price_range_arr[i+1]}.00
               - }
         .hbx_sidebar_link_container

@@ -1,5 +1,6 @@
 /* global $ */
 /* exported createParentDiv */
+
 let createParentDiv = (
   user_name,
   comment,

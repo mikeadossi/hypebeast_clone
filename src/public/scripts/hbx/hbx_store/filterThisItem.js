@@ -1,7 +1,8 @@
 /* global window, document, console, allProductSizesSingleValueArr,
 allProductSizesObj, fetch, Headers  */
 /* exported filterThisItem, clearAllFilters */
-const filterThisItem = (element, brandName) => {
+
+const filterThisItem = (element) => {
   const uiCategories = allProductSizesSingleValueArr;
 
   const dbCategories = allProductSizesObj;
@@ -10,7 +11,7 @@ const filterThisItem = (element, brandName) => {
 
   if(!element.value){
     filterParameter = element.innerHTML;
-    uiCategories.indexOf(filterParameter) > -1 ? filterParameter = dbCategories[filterParameter] : filterParameter = filterParameter;
+    uiCategories.indexOf(filterParameter) > -1 ? filterParameter = dbCategories[filterParameter] : filterParameter;
   } else {
     filterParameter = element.value.replace(/ /g,"");
   }

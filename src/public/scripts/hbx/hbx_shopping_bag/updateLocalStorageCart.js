@@ -3,7 +3,7 @@
 
 const updateLocalStorageCart = (cart) => {
 
-  if(cart.length < 1){ return; };
+  if(cart.length < 1){ return; }
 
   let totalNumOfItems = 0;
   let itemDetail;
@@ -27,7 +27,7 @@ const updateLocalStorageCart = (cart) => {
 
   $(".localStorageContent").append(`
     <div class="items_in_bag">
-      <span class="dropdown_item_count">`+totalNumOfItems+` `+itemDetail+` in Bag!</span>
+      <span class="dropdown_item_count">`+totalNumOfItems+" "+itemDetail+` in Bag!</span>
     </div>
     <div class="dropdown_notice_top">
       Please note: Item(s) is not reserved until checkout is completed.
@@ -35,6 +35,6 @@ const updateLocalStorageCart = (cart) => {
     <div class="cart_dropdown_product_container"></div>
   `);
 
-    populateDropDownWithLocalStorageItems(cart);
+  populateDropDownWithLocalStorageItems(cart);
 
 };

@@ -1,3 +1,4 @@
+/* global $ */
 /* exported createShoppingCartRightColumn */
 
 const createShoppingCartRightColumn = (bag_subtotal) => {
@@ -73,4 +74,4 @@ const createShoppingCartRightColumn = (bag_subtotal) => {
           *All tax & duties will be covered by us. If you are charged any duty/tax fees for your order, please send us a copy of the invoice so we can settle the charges.
         </div>
     `);
-}
+};

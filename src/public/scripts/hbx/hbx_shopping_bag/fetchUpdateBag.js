@@ -17,7 +17,7 @@ const fetchUpdateBag = (obj) => {
     credentials: "same-origin"
   })
     .then((response) => {
-      console.log(response)
+      console.log(response);
     })
     .catch(err => console.log(err));
 

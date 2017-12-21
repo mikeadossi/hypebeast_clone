@@ -1,4 +1,0 @@
-/* global */
-/* exported */
-
-const getUserObject = () => {}

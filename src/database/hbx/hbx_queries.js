@@ -1,6 +1,6 @@
 /* global console, purchased_at, shipped_at, address, item_quantity, item_cost,
-item_color, item_size, products_id, users_id, module */
-require('dotenv').config();
+item_color, item_size, products_id, users_id, module, process */
+require("dotenv").config();
 const {db} = require("../connection.js");
 const bcrypt = require("bcrypt");
 const {knex} = require("../connection.js");
@@ -554,7 +554,7 @@ let queries = {
       item_cost = $4
       WHERE item_name = $1
       AND item_brand = $2
-    `, [item_name, item_brand, item_quantity, item_cost])
+    `, [item_name, item_brand, item_quantity, item_cost]);
   }
 
 

@@ -1,4 +1,5 @@
 /* global $, document window, generateComments */
+
 $(document).ready(function(){
   generateComments(
     $(".allCommentsWithoutParents").val(),
@@ -145,17 +146,3 @@ $(document).scroll(function() {
     $(".returnToTop").fadeOut();
   }
 });
-
-
-
-// $(window).scroll(function(e){
-//   const top = $(this).scrollTop();
-//   if (top > 1510){
-//     $('.sticky_ad_one').css({'position':'fixed', 'top':'10px'});
-//   }
-//   if (top > 2000 )
-//   {
-//     $('.sticky_ad_one').css({'position':'unset'});
-//   }
-//
-// });

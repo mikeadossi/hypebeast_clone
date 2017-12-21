@@ -11,10 +11,6 @@
   text-decoration: none !important;
 }
 
-.mobile_options{
-  margin: 20px 0 20px 0;
-}
-
 .mobile_options a:hover{
   color:grey;
 }
@@ -298,7 +294,7 @@ ul{
   font-size:13px;
   background-color: #F0F0F0;
   height: 100px;
-  width: 260px;
+  min-width: 260px;
   position: absolute;
 }
 
@@ -393,7 +389,6 @@ ul{
   padding: 14px;
   width: 337px;
   left: 40px;
-  /*display:block !important;*/
   display:none;
   z-index:20;
 }
@@ -648,6 +643,28 @@ ul{
 input{
   border-radius:0 !important;
 }
+
+.hbx_outer_mobile_menu{
+  font-size: 13px;
+  background-color: transparent;
+  height: 100vh;
+  margin-left:322px;
+}
+
+.mobile_option_brands{
+  font-weight:600;
+  cursor:pointer;
+}
+
+.brands_dropdown a:hover{
+  color:grey;
+}
+
+.brands_dropdown{
+  display:none;
+  font-weight: 300;
+}
+
 
 
 

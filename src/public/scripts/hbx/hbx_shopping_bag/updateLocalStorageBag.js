@@ -1,4 +1,4 @@
-/* global window, LIST_OF_EDITED_ITEMS, $, setTimeout */
+/* global window, LIST_OF_EDITED_ITEMS, $, setTimeout, displayBagIsCurrentlyEmpty */
 /* exported updateLocalStorageBag */
 
 const updateLocalStorageBag = () => {
@@ -12,9 +12,6 @@ const updateLocalStorageBag = () => {
     return;
   }
 
-
-  let itemsToBeDeleted = [];
-
   let hbxLocalCartLength = hbxLocalCart.length;
 
   for(let i = 0; i < hbxLocalCartLength; i++){
@@ -27,13 +24,12 @@ const updateLocalStorageBag = () => {
       $(".hbx_local_storage_item_cost_at_index_"+i).html(hbxLocalCart[i].item_cost+".00");
 
       if(hbxLocalCart[i].item_quantity === 0){
-        console.log('spliced: ',i);
         hbxLocalCart.splice(i,1);
         $(".hbx_local_storage_item_at_index_"+i).css("display","none");
         hbxLocalCartLength--;
       }
     }
-  };
+  }
 
   window.localStorage.setItem( "hbxLocalCart", JSON.stringify(hbxLocalCart) );
 

@@ -1,5 +1,6 @@
 /* global $, fetch, Headers, console, window */
 /* exported submitCommentToDB, submitReply, writeReply, closeReply */
+
 const submitCommentToDB = (
   element,
   post_id,
@@ -13,7 +14,7 @@ const submitCommentToDB = (
   let route = window.location.href + "/add-comment-to-db";
   post_id = JSON.parse(post_id);
   user_id = JSON.parse(user_id);
-  $('.post_textarea').val("");
+  $(".post_textarea").val("");
 
   fetch(route, {
     method: "POST",
@@ -64,10 +65,8 @@ const submitReply = (
 
 
   let user_comment = element.parentNode.parentNode.children[1].value;
-  if(!user_comment){ return; } else{   console.log('reply submitted?')
-    console.log('user_comment: ',user_comment); }
+  if(!user_comment){ return; }
   let whereToAppend = $(element).closest(".post_comment");
-  console.log('whereToAppend: ',whereToAppend);
 
 
   $(".reply_comment_container").remove();
@@ -164,9 +163,6 @@ const insertNewParentComment = (
   user_avatar_background_color
 ) => {
 
-  console.log('user_name: ',user_name);
-  console.log('typeof user_name: ',typeof user_name);
-
 
   element.prepend(`
     <div class="new_comment_container">
@@ -231,9 +227,6 @@ const writeReply = (
   user_avatar,
   user_avatar_background_color
 ) => {
-
-  console.log('>>> called!');
-  console.log('element: ',element);
 
   $(".write_reply_comment").css("display","none");
   let whereToAppend = $(element).closest(".post_comment");

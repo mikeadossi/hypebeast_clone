@@ -1,5 +1,4 @@
-/* global window, GLOBAL_USER, fetch, Headers, GLOBAL_PRODUCT,
-updateCartAndCountByID, console */
+/* global window, GLOBAL_USER, fetch, Headers, GLOBAL_PRODUCT */
 /* exported postCartToDB */
 
 const postCartToDB = (cartItemsObj) => {
@@ -32,7 +31,7 @@ const postCartToDB = (cartItemsObj) => {
     })
       .then( () => {
         return JSON.parse(GLOBAL_USER).id;
-      })
+      });
   }
 
 };

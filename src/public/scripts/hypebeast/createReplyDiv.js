@@ -1,5 +1,6 @@
 /* global $ */
 /* exported createReplyDiv */
+
 let createReplyDiv = (
   user_name,
   replyTo,

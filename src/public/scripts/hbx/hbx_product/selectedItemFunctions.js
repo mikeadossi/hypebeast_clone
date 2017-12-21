@@ -1,6 +1,7 @@
 /* global $, window, GLOBAL_USER, GLOBAL_PRODUCT, postCartToDB,
 updateLocalStorageCart, populateLocalStorage, updateCartAndCountByID, console */
-/* exported selectPreferredSize, selectItemOrProceedToBag */
+/* exported selectPreferredSize, selectItemOrProceedToBag,
+addSelectedItemsToCart */
 
 
 let currentSelectedSize;
@@ -81,9 +82,8 @@ const addSelectedItemsToCart = () => {
   } else {
     // if user is not registered but populating cart
     populateLocalStorage(itemsInCartObj);
+
     let hbxLocalCart = JSON.parse(window.localStorage.hbxLocalCart);
-    console.log('-------> ',hbxLocalCart);
-    console.log('============>',hbxLocalCart.length);
     updateLocalStorageCart(hbxLocalCart);
     proceedToBag();
   }

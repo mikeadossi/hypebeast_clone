@@ -1,10 +1,8 @@
-/* global $, fetch, Headers, console, alert */
+/* global $, fetch, Headers, console, setTimeout */
 /* exported updateHBXPassword */
 
-const updateHBXPassword = (element) => {
+const updateHBXPassword = () => {
   let user = $(".hiddenUserInput").val();
-  let form = element.parentNode;
-
   let currentPassword = $(".profile_curr_password_input").val();
   let newPassword = $(".profile_password_input").val();
   let verifyPassword = $(".profile_verify_password_input").val();
@@ -41,8 +39,6 @@ const updateHBXPassword = (element) => {
   })
     .then(msg => msg.json())
     .then((msg) => {
-      console.log('msg: ',msg);
-
       $(".profile_curr_password_input").val("");
       $(".profile_verify_password_input").val("");
       $(".profile_password_input").val("");
@@ -55,7 +51,7 @@ const updateHBXPassword = (element) => {
           $(".password_form_success_message").fadeOut( "slow" );
         }, 3000);
       } else {
-        $(".password_form_error_message").html("")
+        $(".password_form_error_message").html("");
         $(".password_form_error_message").html(msg);
         setTimeout(() => {
           $(".password_form_error_message").fadeOut( "slow" );

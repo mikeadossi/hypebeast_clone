@@ -1,5 +1,6 @@
 /* global $, createParentDiv, createReplyDiv,  */
 /* exported generateComments */
+
 const generateComments = (allParentCommentsString, allRepliesString) => {
 
   let allParentComments = JSON.parse(allParentCommentsString);
@@ -36,7 +37,7 @@ const generateComments = (allParentCommentsString, allRepliesString) => {
 
   for(let x = 0; x < allReplies.length; x++){
     if(parentCommentsObj[allReplies[x].parent_comment_id] === undefined){
-      replyTo = repliesObj[allReplies[x].parent_comment_id].user_name
+      replyTo = repliesObj[allReplies[x].parent_comment_id].user_name;
     } else {
       replyTo = parentCommentsObj[allReplies[x].parent_comment_id].user_name;
     }

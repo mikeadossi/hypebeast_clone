@@ -373,7 +373,6 @@
     width: 100vw;
   }
   .new_comment_container{
-    /*margin-left: 9px;*/
     margin-left: -46px;
   }
   .directed_at_username, .commenter_name{

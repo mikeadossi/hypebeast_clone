@@ -158,7 +158,6 @@ button:focus{
 
 .article_container{
   max-width: 815px;
-  /*width:76%;*/
   width:64%;
 }
 
@@ -1752,7 +1751,6 @@ textarea{
   .content{
     margin: auto;
     margin-top: 16px;
-    /*margin-bottom: 16px;*/
   }
   .post_content_border{
     margin-top:unset;

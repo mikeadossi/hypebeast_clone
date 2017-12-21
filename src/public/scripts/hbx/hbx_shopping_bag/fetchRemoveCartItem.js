@@ -1,5 +1,6 @@
-/* global fetch, $, console, Headers, updateCartAndCountByID */
+/* global fetch, console, Headers */
 /* exported fetchRemoveCartItem */
+
 const fetchRemoveCartItem = (listOfEditedItems) => {
 
   return fetch("/remove-cart-item/"+listOfEditedItems.id, {
@@ -14,10 +15,8 @@ const fetchRemoveCartItem = (listOfEditedItems) => {
     credentials: "same-origin"
   })
     .then(() => {
-      // let user_id = $(".users_persistent_id")[0].innerHTML;
-      // updateCartAndCountByID(user_id);
-      console.log('removed cart item!');
+      console.log("removed cart item!");
     })
     .catch(err => console.log(err));
 
-}
+};

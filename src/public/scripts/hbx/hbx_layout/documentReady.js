@@ -1,4 +1,4 @@
-/* global document, $, updateCartAndCountByID, updateLocalStorageCart, window,
+/* global document, $, updateCartAndCountByID, window,
 populateShoppingBagPageWithLocalStorageContent, populateAddressCheckoutPage,
 setTimeout, checkForEmptyLocalStorageCart */
 
