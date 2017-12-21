@@ -306,88 +306,106 @@
 }
 
 @media only screen and (max-width: 759px){
-  body{
-    /*background-color: pink;*/
-  }
   .post_content{
     display: block;
     padding-left: 0;
     margin-left: 20px;
     margin-right: 20px;
   }
+
   .post_ad_container{
     display:unset;
     height: 520px;
   }
+
   .hypebae_post_ad{
     width: 90%;
     padding: 30px 15px 15px 15px;
   }
+
   .hypebae_post_ad, .post_advert{
     height:unset !important;
   }
+
   .post_ad_description{
     margin-bottom: 20px;
   }
+
   .post_ad_description img {
     height: 20px;
     padding: 10px;
     margin-top: -20px;
     padding: 6px 22px 22px 22px;
   }
+
   .post_ad_description p {
     font-size: 20px;
     font-weight: 600;
     padding: 10px 22px 22px 22px;
     margin-top: -10px;
   }
+
   .post_advert{
     width: 100%;
     text-align: center;
   }
+
   .blog_text_content img{
     width: 100%;
   }
+
   iframe{
     width:100%;
   }
+
   .post_ad_description{
     margin-top: 61px;
   }
+
   .commenter_avatar_image{
     width: 46px;
   }
+
   .share_reply_button, .comment_time, .reply_dot_seperator{
     display:none;
   }
+
   .new_comment_container, .write_reply_comment{
     margin-left: -43px;
   }
+
   .generated_comment_container{
     margin: 10px 0px 7px 10px;
     overflow: overlay;
     width:89vw;
     min-width: unset;
   }
+
   .post_comments_container{
     width: 100vw;
   }
+
   .new_comment_container{
     margin-left: -46px;
   }
+
   .directed_at_username, .commenter_name{
     font-size: 12px;
   }
+
   .directed_at{
     height:11px;
   }
+
   .post_conversation{
     display:none;
   }
+
   .post_content_border{
     margin:unset;
     margin-top:-5px;
   }
+
   .storeNavLink:hover{
     color:grey;
     border-bottom:3px solid white;
@@ -395,59 +413,64 @@
 }
 
 @media (min-width: 760px) and (max-width: 989px){
-  body{
-    /*background-color: skyblue;*/
-  }
   .blog_text_content{
     text-align:center;
   }
+
   .post_page_sticky_container{
     display:none;
   }
+
   .post_content{
     width: 723px;
     margin: auto;
     display: block;
     padding-left: 0;
   }
+
   .post_ad_container{
     display:unset;
     height: 520px;
   }
+
   .hypebae_post_ad{
     width:700px;
   }
+
   .hypebae_post_ad, .post_advert{
     height:unset !important;
   }
+
   .post_ad_description{
     margin-bottom: 20px;
   }
+
   .post_content_border{
     margin-top: 1px;
   }
 }
 
 @media (min-width: 990px) and (max-width: 1230px){
-  body{
-    /*background-color:indianred;*/
-  }
   .blog_text_content{
     text-align:center;
   }
+
   .post_page_sticky_container{
     display:none;
   }
+
   .post_content{
     width: 935px;
     margin: auto;
     display: block;
     padding-left: 0;
   }
+
   .post_ad_container{
     padding-top: 20px;
     border-top: 1px solid gainsboro;
   }
+
   .hypebae_post_ad{
     border-top:unset;
     padding-top:unset;
@@ -455,16 +478,15 @@
 }
 
 @media (min-width: 1231px) {
-  body{
-    /*background-color:limegreen;*/
-  }
   .post_content{
     margin:unset;
   }
+
   .post_ad_container{
     padding-top: 20px;
     border-top: 1px solid gainsboro;
   }
+
   .hypebae_post_ad{
     border-top:unset;
     padding-top:unset;

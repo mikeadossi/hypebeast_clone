@@ -192,9 +192,6 @@ button{
 }
 
 @media only screen and (max-width: 449px){
-  body{
-    /*background-color: teal;*/
-  }
 
   .settings_edit_password{
     overflow: auto;
@@ -208,9 +205,6 @@ button{
 }
 
 @media (min-width: 450px) and (max-width: 759px){
-  body{
-    /*background-color: pink;*/
-  }
 
   .hbx_ordered_item_modal{
     margin-left:1%;
@@ -220,13 +214,9 @@ button{
   .profile_input{
     width:180px;
   }
-
 }
 
 @media (min-width: 760px){
-  body{
-    /*background-color: indianred;*/
-  }
 
   .hbx_settings_controls{
     max-width:60%;

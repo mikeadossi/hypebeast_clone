@@ -666,12 +666,7 @@ input{
 }
 
 
-
-
 @media only screen and (max-width: 769px){
-  body{
-    /*background-color: pink;*/
-  }
   .nav_help,
   .language,
   .nav_journal,
@@ -680,30 +675,38 @@ input{
   .cart span{
     display:none;
   }
+
   .shopping_bag_handle, .shopping_bag{
     display:block;
   }
+
   .shopping_bag_handle{
     left:74px;
   }
+
   .right_nav_items{
     width:105px;
     right: 19px;
     top:2px;
   }
+
   .hbx_search{
     top:17px;
     right:50px;
   }
+
   .hbx_nav{
     padding: 12px 5px 6px 25px;
   }
+
   .left_nav_items{
     text-align:center;
   }
+
   .hbx_title{
     height:36px;
   }
+
   .hamburger_mobile{
     display: block;
     height: 20px;
@@ -711,49 +714,42 @@ input{
     left: 13px;
     position: absolute;
   }
+
   .cart_dropdown{
     display:none !important;
   }
+
   .nav_button_cover{
     display:none !important;
   }
 }
 
 @media (min-width: 770px) and (max-width: 989px){
-  body{
-    /*background-color: skyblue;*/
-  }
   .nav_help, .language, .nav_journal{
     display:none;
   }
+
   .right_nav_items{
     width: 266px;
   }
+
   .shopping_bag_handle{
     left:141px;
   }
+
   .cart_dropdown{
     left: -128px !important;
   }
+
   .nav_button_cover{
     left: 99px;
   }
+
   #bag_button{
     margin-left: -10px;
   }
+
   .shopping_bag_handle{
     left: 131px;
-  }
-}
-
-@media (min-width: 990px) and (max-width: 1230px){
-  body{
-    /*background-color:indianred;*/
-  }
-}
-
-@media (min-width: 1231px) {
-  body{
-    /*background-color:limegreen;*/
   }
 }

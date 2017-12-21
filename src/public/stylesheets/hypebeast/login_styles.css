@@ -40,17 +40,21 @@
 .log_in_input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #99999F;
 }
+
 .log_in_input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
    color:    #99999F;
    opacity:  1;
 }
+
 .log_in_input::-moz-placeholder { /* Mozilla Firefox 19+ */
    color:    #99999F;
    opacity:  1;
 }
+
 .log_in_input:-ms-input-placeholder { /* Internet Explorer 10-11 */
    color:    #99999F;
 }
+
 .log_in_input::-ms-input-placeholder { /* Microsoft Edge */
    color:    #99999F;
 }
@@ -158,10 +162,6 @@
 }
 
 @media only screen and (max-width: 759px){
-  body{
-    /*background-color:pink;*/
-  }
-
   .login_content{
     width: unset;
     padding: 40px;

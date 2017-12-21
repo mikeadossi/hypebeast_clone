@@ -114,10 +114,6 @@ router.get("/loggedIn", (req, res) => {
 
   if(req.user) {
     res.render("index", { user: req.user });
-    // .catch( err => {
-    //   console.log("err: ", err);
-    //   res.render("hbx_error", {user: req.user});
-    // })
   } else {
     res.redirect("/error");
   }
@@ -247,7 +243,7 @@ router.post("/post/post_comment/:id", (req, res) => {
   try{
     queries.storeComment(user_comment, user_id, article_id, user_name)
     .then(() => {
-      res.status(200).redirect(/post/+article_id)
+      res.status(200).redirect(/post/+article_id);
     })
   }catch(e){
     console.log(e);
@@ -261,21 +257,21 @@ router.post("/add-new-username-to-db", (req, res) => {
     return queries.isUsernameAvailable(username)
       .then( userPresent => {
         if(!userPresent){
-          throw Error ("user email already taken")
+          throw Error ("user email already taken");
         }
         return {username: username, email: email};
       })
-      .catch( err => console.log(err) )
-  }
+      .catch( err => console.log(err) );
+  };
 
   const addNewUsernameToDB = (userObj) => {
 
     return queries.addNewUsernameToDB(userObj.username, userObj.email)
       .then( user => {
-        return user
+        return user;
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
 
   isUsernameAvailable(req.body.username, req.body.email)
     .then(addNewUsernameToDB)
@@ -297,7 +293,7 @@ router.post("/post/:post_id/add-comment-to-db", (req, res) => {
     req.body.user_avatar_background_color
   )
     .then( comment => res.json(comment) )
-    .catch( err => console.log(err))
+    .catch( err => console.log(err));
 });
 
 
@@ -312,7 +308,7 @@ router.post("/post/:post_id/add-reply-to-db/:comment_id", (req, res) => {
     req.body.user_avatar_background_color
   )
     .then( comment => res.json(comment) )
-    .catch( err => console.log(err))
+    .catch( err => console.log(err));
 });
 
 
@@ -358,12 +354,12 @@ router.get("/brands/:brand", (req, res) => {
 
       categories_arr = categories_arr.filter(
         (item,pos) => {
-          return categories_arr.indexOf(item) == pos
+          return categories_arr.indexOf(item) == pos;
         });
 
       colors_arr = colors_arr.filter(
         (item,pos) => {
-          return colors_arr.indexOf(item) == pos
+          return colors_arr.indexOf(item) == pos;
         });
 
       let product_images;
@@ -381,7 +377,8 @@ router.get("/brands/:brand", (req, res) => {
       let sizes_longform_arr = allProductSizesArr;
 
       let product_sizes_arr = [];
-      let p = 0; for(key in product_sizes){p++}
+      let p = 0;
+      for(key in product_sizes){p++}
       let numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
@@ -406,8 +403,8 @@ router.get("/brands/:brand", (req, res) => {
     })
     .catch( err => {
       console.log("err: ", err);
-    })
-})
+    });
+});
 
 
 router.get("/brands/:brand/:product", (req, res) => {
@@ -430,12 +427,12 @@ router.get("/brands/:brand/:product", (req, res) => {
       let product_sizes = results[1];
       let product_colors = results[2];
       let all_hbx_products = results[3];
-      let product_category = results[4]
+      let product_category = results[4];
       let cart = results[5];
 
       let brandNameObj = allBrandNamesObj;
 
-      let product_images_arr = product_content[0].product_images.split(",")
+      let product_images_arr = product_content[0].product_images.split(",");
 
       let sizes_shortform_arr = allProductSizesSingleValueArr;
 
@@ -453,10 +450,9 @@ router.get("/brands/:brand/:product", (req, res) => {
       const related_products_arr = [];
       const product_name = product_content[0].product_name_route;
       let hbx_product_brand;
-      let hbx_product_name;
       let hbx_product_obj;
       let first_image;
-      let ex = 0
+      let ex = 0;
       for(key in all_hbx_products){
         hbx_product_brand = Object.values(all_hbx_products[key]);
         hbx_product_obj = {};
@@ -470,7 +466,7 @@ router.get("/brands/:brand/:product", (req, res) => {
         if( hbx_product_obj.name !== product_name ){
           related_products_arr.push(hbx_product_obj);
         }
-      }
+      };
 
 
 
@@ -489,7 +485,7 @@ router.get("/brands/:brand/:product", (req, res) => {
           && related_products_arr[q].category == category_id
           && !(related_products_arr[q].images.includes(product))){
 
-          product_obj = {}
+          product_obj = {};
 
           our_product_name = related_products_arr[q].images;
           our_product_name = our_product_name.split(",");
@@ -499,9 +495,9 @@ router.get("/brands/:brand/:product", (req, res) => {
           our_product_name = our_product_name.split("_");
           our_product_name = our_product_name[0];
 
-          product_obj.brand = related_products_arr[q].brand
-          product_obj.image = related_products_arr[q].images
-          product_obj.product_name = our_product_name
+          product_obj.brand = related_products_arr[q].brand;
+          product_obj.image = related_products_arr[q].images;
+          product_obj.product_name = our_product_name;
 
           this_brand_images_arr.push(product_obj);
           related_products_arr[q] = null;
@@ -516,11 +512,10 @@ router.get("/brands/:brand/:product", (req, res) => {
           && related_products_arr[i] !== undefined
           && related_products_arr[i].images.includes(brand_name_string)){
 
-          product_obj = {}
+          product_obj = {};
 
           if(related_products_arr[i].images.includes(product)){
-
-            related_products_arr[i].images = null
+            related_products_arr[i].images = null;
           } else {
             our_product_name = related_products_arr[i].images;
             our_product_name = our_product_name.split(",");
@@ -530,9 +525,9 @@ router.get("/brands/:brand/:product", (req, res) => {
             our_product_name = our_product_name.split("_");
             our_product_name = our_product_name[0];
 
-            product_obj.brand = related_products_arr[i].brand
-            product_obj.image = related_products_arr[i].images
-            product_obj.product_name = our_product_name
+            product_obj.brand = related_products_arr[i].brand;
+            product_obj.image = related_products_arr[i].images;
+            product_obj.product_name = our_product_name;
 
             this_brand_images_arr.push(product_obj);
             related_products_arr.splice(i,1,null);
@@ -547,7 +542,7 @@ router.get("/brands/:brand/:product", (req, res) => {
 
         if(related_products_arr[j] !== null && related_products_arr[j].images !== null){
 
-          product_obj = {}
+          product_obj = {};
 
           our_product_name = related_products_arr[j].images;
           our_product_name = our_product_name.split(",");
@@ -557,9 +552,9 @@ router.get("/brands/:brand/:product", (req, res) => {
           our_product_name = our_product_name.split("_");
           our_product_name = our_product_name[0];
 
-          product_obj.brand = related_products_arr[j].brand
-          product_obj.image = related_products_arr[j].images
-          product_obj.product_name = our_product_name
+          product_obj.brand = related_products_arr[j].brand;
+          product_obj.image = related_products_arr[j].images;
+          product_obj.product_name = our_product_name;
 
           this_brand_images_arr.push(product_obj);
 
@@ -577,12 +572,12 @@ router.get("/brands/:brand/:product", (req, res) => {
         user: req.user,
         cart: cart || null,
         product_category: product_category
-      })
+      });
     })
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 });
 
 router.get("/hbx_login", (req, res) => {
@@ -612,12 +607,12 @@ router.get("/store/succesful-login", (req, res) => {
       .catch( err => {
         console.log("err: ",err);
         res.render("hbx_error", {user: req.user});
-      })
+      });
   } else {
     res.render("/hbx_error");
   }
 
-})
+});
 
 router.get("/hbx_account", (req, res) => {
 
@@ -641,8 +636,8 @@ router.get("/hbx_account", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error");
-    })
-})
+    });
+});
 
 router.get("/hbx_account/password", (req, res) => {
 
@@ -666,10 +661,8 @@ router.get("/hbx_account/password", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
-
-
-})
+    });
+});
 
 router.get("/hbx_account/address_info", (req, res) => {
 
@@ -693,9 +686,8 @@ router.get("/hbx_account/address_info", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
-
-})
+    });
+});
 
 router.get("/hbx_account/orders", (req, res) => {
   if(!req.user){
@@ -706,21 +698,21 @@ router.get("/hbx_account/orders", (req, res) => {
     hbx_queries.getPreviousOrdersByID(req.user.id),
     hbx_queries.getCartById(req.user.id)
   ])
-  .then( (results) => {
-    let orders = results[0];
-    let purchased_product_details_array = [];
-    for(let i = 0; i < orders.length; i++){
-      purchased_product_details_array.push(JSON.parse(orders[0].purchased_product_details_array)[0]);
-    }
-    res.render("hbx_orders", {
-      user: req.user,
-      orders: orders,
-      purchased_product_details_array: purchased_product_details_array,
-      cart: results[1]
+    .then( (results) => {
+      let orders = results[0];
+      let purchased_product_details_array = [];
+      for(let i = 0; i < orders.length; i++){
+        purchased_product_details_array.push(JSON.parse(orders[0].purchased_product_details_array)[0]);
+      }
+      res.render("hbx_orders", {
+        user: req.user,
+        orders: orders,
+        purchased_product_details_array: purchased_product_details_array,
+        cart: results[1]
+      });
     })
-  })
-  .catch(err => console.log(err))
-})
+    .catch(err => console.log(err));
+});
 
 router.get("/hbx_account/close-account", (req, res) => {
   let conditional_promise;

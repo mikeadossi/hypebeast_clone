@@ -185,12 +185,10 @@ hr{
 }
 
 @media only screen and (max-width: 769px){
-  body{
-    /*background-color: pink;*/
-  }
   .hbx_download_container{
     display:block;
   }
+
   .hbx_download_container{
     width:283px;
     display:block;
@@ -200,45 +198,36 @@ hr{
     padding-top:24px;
     padding-bottom:25px;
   }
+
   .hbx_subscribe_container{
     right:0px;
   }
+
   hr{
     display:none;
   }
+
   .footer_links, .right_side_footer{
     display:none !important;
   }
+
   .footer_copyright{
     padding-top:unset;
     line-height: 1.4;
     padding-left:0;
   }
+
   .terms, .privacy_policy{
     display:none;
   }
+
   .arrow_down{
     display:none;
   }
 }
 
 @media (min-width: 770px) and (max-width: 989px){
-  body{
-    /*background-color: skyblue;*/
-  }
   .right_side_footer{
     display:block;
-  }
-}
-
-@media (min-width: 990px) and (max-width: 1230px){
-  body{
-    /*background-color:indianred;*/
-  }
-}
-
-@media (min-width: 1231px) {
-  body{
-    /*background-color:limegreen;*/
   }
 }

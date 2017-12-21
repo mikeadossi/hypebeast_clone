@@ -220,13 +220,16 @@
     width: 95%;
     margin: auto;
   }
+  
   .login_select_container, .login_main_container{
     width: unset;
   }
+
   .hbx_login_social{
     width:95%;
     margin-bottom:10px;
   }
+
   .hbx_hr{
     display:block;
   }
