@@ -62,11 +62,13 @@ const submitReply = (
   user_avatar_background_color
 ) => {
 
-  console.log('reply submitted?')
 
   let user_comment = element.parentNode.parentNode.children[1].value;
-  if(!user_comment){ return; }
+  if(!user_comment){ return; } else{   console.log('reply submitted?')
+    console.log('user_comment: ',user_comment); }
   let whereToAppend = $(element).closest(".post_comment");
+  console.log('whereToAppend: ',whereToAppend);
+
 
   $(".reply_comment_container").remove();
 
@@ -104,7 +106,7 @@ const submitReply = (
             <div class="reply_commenter_content commenter_content_`+comment_id+` ">
               <div class="comment_username_container">
                 <span class="commenter_name">
-                  `+user_name+` :P
+                  `+user_name+`
                 </span>
                 <span>
                   <img class="directed_at" src="/images/hypebeast_images/general/directed_at.png" />
@@ -116,9 +118,11 @@ const submitReply = (
                 <span class="comment_time">an hour ago</span>
               </div>
             </div>
-            <p class="post_replies_main_container_1">
-              `+user_comment+`
-            </p>
+            <div class="commenter_input_container">
+              <p class="comment_text">
+                `+user_comment+`
+              </p>
+            </div>
             <div class="req.params.comment_id">
               <span class="fa fa-angle-up"></span>
               <span class="reply_seperator"></span>
@@ -160,9 +164,12 @@ const insertNewParentComment = (
   user_avatar_background_color
 ) => {
 
+  console.log('user_name: ',user_name);
+  console.log('typeof user_name: ',typeof user_name);
+
 
   element.prepend(`
-    <div class="new_comment_container reply_comment_container">
+    <div class="new_comment_container">
       <div
         class="commenter_avatar"
         style="background-color:`+user_avatar_background_color+`;"
@@ -185,9 +192,7 @@ const insertNewParentComment = (
             </p>
           </div>
         </div>
-        <p class="post_replies_main_container_1">
-        </p>
-        <div class="comment_reply_container">
+        <div class="comment_reply_container post_replies_main_container_`+post_id+`">
           <span class="fa fa-angle-up"></span>
           <span class="reply_seperator"></span>
           <span class="fa fa-angle-down"></span>
@@ -276,8 +281,6 @@ const writeReply = (
         <div>
           <span class="close_reply_button" onclick="closeReply(this)">Close</span>
         </div>
-        <p class="post_replies_main_container_1">
-        </p>
     </div>
     `);
 

@@ -159,7 +159,7 @@
 
 @media only screen and (max-width: 759px){
   body{
-    background-color:pink;
+    /*background-color:pink;*/
   }
 
   .login_content{

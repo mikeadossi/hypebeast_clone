@@ -301,6 +301,10 @@
   margin-bottom: 40px;
 }
 
+.post_content_border{
+  border-top: 1px solid gainsboro;
+}
+
 @media only screen and (max-width: 759px){
   body{
     /*background-color: pink;*/
@@ -359,6 +363,36 @@
   .new_comment_container, .write_reply_comment{
     margin-left: -43px;
   }
+  .generated_comment_container{
+    margin: 10px 0px 7px 10px;
+    overflow: overlay;
+    width:89vw;
+    min-width: unset;
+  }
+  .post_comments_container{
+    width: 100vw;
+  }
+  .new_comment_container{
+    /*margin-left: 9px;*/
+    margin-left: -46px;
+  }
+  .directed_at_username, .commenter_name{
+    font-size: 12px;
+  }
+  .directed_at{
+    height:11px;
+  }
+  .post_conversation{
+    display:none;
+  }
+  .post_content_border{
+    margin:unset;
+    margin-top:-5px;
+  }
+  .storeNavLink:hover{
+    color:grey;
+    border-bottom:3px solid white;
+  }
 }
 
 @media (min-width: 760px) and (max-width: 989px){
@@ -389,6 +423,9 @@
   }
   .post_ad_description{
     margin-bottom: 20px;
+  }
+  .post_content_border{
+    margin-top: 1px;
   }
 }
 

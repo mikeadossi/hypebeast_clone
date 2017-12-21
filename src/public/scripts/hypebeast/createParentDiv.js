@@ -34,9 +34,7 @@ let createParentDiv = (
           </p>
         </div>
       </div>
-      <p class="post_replies_main_container_1">
-      </p>
-      <div class="comment_reply_container">
+      <div class="comment_reply_container post_replies_main_container_`+post_id+`">
         <span class="fa fa-angle-up"></span>
         <span class="reply_seperator"></span>
         <span class="fa fa-angle-down"></span>

@@ -935,6 +935,7 @@ textarea{
   width: 303px;
   padding-bottom:20px;
   cursor:default;
+  margin-top: 20px;
 }
 
 .sticky_ad_two{
@@ -1391,7 +1392,7 @@ textarea{
 @media (min-width: 980px) and (max-width: 989px){
 
 	body{
-    /*background-color:orange;*/
+    /*background-color:yellow;*/
   }
 
   .top_ten_container{
@@ -1455,6 +1456,10 @@ textarea{
 
   .more_button{
     display:none;
+  }
+
+  .post_content_border{
+    margin-top:unset;
   }
 
 }
@@ -1528,6 +1533,10 @@ textarea{
   .content{
     max-width: 936px;
     margin: auto;
+    margin-top: 30px;
+  }
+  .post_content_border{
+    margin-top:unset;
   }
 }
 
@@ -1614,6 +1623,16 @@ textarea{
     float:right;
   }
 
+  .content{
+    max-width: 936px;
+    margin: auto;
+    margin-top: 30px;
+  }
+
+  .post_content_border{
+    margin-top:unset;
+  }
+
 }
 
 @media (min-width: 1030px) and (max-width: 1230px){
@@ -1691,6 +1710,10 @@ textarea{
   .content{
     max-width: 936px;
     margin: auto;
+    margin-top: 30px;
+  }
+  .post_content_border{
+    margin-top:unset;
   }
 }
 
@@ -1729,6 +1752,11 @@ textarea{
   .content{
     margin: auto;
     margin-top: 16px;
+    /*margin-bottom: 16px;*/
+  }
+  .post_content_border{
+    margin-top:unset;
+    margin-bottom:16px;
   }
   .index_banner_image{
     width:1171px;

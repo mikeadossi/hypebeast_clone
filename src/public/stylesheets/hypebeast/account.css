@@ -7,7 +7,7 @@
   height:100vh;
   display:flex;
   flex-wrap:wrap;
-  padding-left:5%;
+  padding-left:5% !important;
   min-height: 400px;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .settings_close_account p{
-  width:600px;
+  /*width:600px;*/
   font-size:14px;
   margin-top: 0;
 }

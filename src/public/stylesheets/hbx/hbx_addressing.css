@@ -10,7 +10,7 @@
 .checkout_steps{
   display:inline-block;
   margin:1px;
-  padding-right:15%;
+  /*padding-right:15%;*/
   border-bottom:3px solid black;
   padding-bottom:7px;
 }
@@ -280,6 +280,7 @@
     /*background-color:indianred;*/
   }
   .checkout_steps{
-    padding-right: 9%;
+    padding-right: 4%;
+    padding-left: 4%;
   }
 }

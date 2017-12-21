@@ -4,20 +4,17 @@
 }
 
 .hbx_your_settings_content{
-  height:100vh;
   display:flex;
   flex-wrap:wrap;
   padding-left:5%;
   min-height: 600px;
+  margin-bottom:60px;
 }
 
 .hbx_settings_nav, .hbx_settings_controls{
   display:inline-block;
   padding-top:30px;
-}
-
-.hbx_settings_controls{
-  max-width:60%;
+  margin-bottom: 60px;
 }
 
 .hbx_settings_nav_link:hover{
@@ -194,7 +191,23 @@ button{
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 759px){
+@media only screen and (max-width: 449px){
+  body{
+    /*background-color: teal;*/
+  }
+
+  .settings_edit_password{
+    overflow: auto;
+    width: 91vw;
+    background-color: green;
+  }
+
+  .profile_input{
+    width:180px;
+  }
+}
+
+@media (min-width: 450px) and (max-width: 759px){
   body{
     /*background-color: pink;*/
   }
@@ -202,5 +215,20 @@ button{
   .hbx_ordered_item_modal{
     margin-left:1%;
     width:86%;
+  }
+
+  .profile_input{
+    width:180px;
+  }
+
+}
+
+@media (min-width: 760px){
+  body{
+    /*background-color: indianred;*/
+  }
+
+  .hbx_settings_controls{
+    max-width:60%;
   }
 }
