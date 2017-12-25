@@ -12,8 +12,8 @@ $(document).ready(function(){
 
   let user = $(".users_persistent_id").length;
   if(user){
-    // let user_id = $(".users_persistent_id")[0].innerHTML;
-    updateCartAndCountByID();
+    let user_id = $(".users_persistent_id")[0].innerHTML;
+    updateCartAndCountByID(user_id);
   } else if(!user && window.localStorage.hbxLocalCart){
     checkForEmptyLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();

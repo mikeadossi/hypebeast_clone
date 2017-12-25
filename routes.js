@@ -89,9 +89,8 @@ router.get("/store", (req, res) => {
 
   // console.log('req.user.id: ',req.user.id);
   if(req.user){
-    let user_id = req.session.passport.user || req.user.id || "";
 
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getCartById(req.user.id)
       .then( cart => {
         res.render("hbx_index", {
           user: req.user,
@@ -133,9 +132,8 @@ router.get("/account", (req, res) => {
 })
 
 router.get("/account/password", (req, res) => {
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  hbx_queries.getCartById(user_id)
+  hbx_queries.getCartById(req.user.id)
     .then( cart => {
       res.render("change_password", {
         user: req.user,
@@ -242,11 +240,10 @@ router.get("/error", (req, res) => {
 router.post("/post/post_comment/:id", (req, res) => {
   const user_comment = req.body.user_comment;
   const article_id = req.params.id;
-  const user_id = req.session.passport.user || req.user.id || "";
   const user_name = req.user.username;
 
   try{
-    queries.storeComment(user_comment, user_id, article_id, user_name)
+    queries.storeComment(user_comment, req.user.id, article_id, user_name)
     .then(() => {
       res.status(200).redirect(/post/+article_id);
     })
@@ -322,9 +319,8 @@ router.post("/post/:post_id/add-reply-to-db/:comment_id", (req, res) => {
 router.get("/brands/:brand", (req, res) => {
 
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id;
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   let brand = req.params.brand;
 
@@ -417,9 +413,8 @@ router.get("/brands/:brand/:product", (req, res) => {
   let brand = req.params.brand;
   let product = req.params.product;
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id;
 
-  req.user ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     hbx_queries.getProductContent(brand,product),
@@ -576,7 +571,7 @@ router.get("/brands/:brand/:product", (req, res) => {
         product_sizes_arr: product_sizes_arr,
         product_colors_arr: product_colors_arr,
         this_brand_images_arr: this_brand_images_arr,
-        user: true,
+        user: req.user,
         cart: cart || null,
         product_category: product_category
       });
@@ -600,11 +595,9 @@ router.post("/hbx_login", passport.authenticate("local", {
 
 router.get("/store/succesful-login", (req, res) => {
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
   if(user_id){
 
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getCartById(req.user.id)
       .then( cart => {
         res.render("hbx_index", {
           user: req.user,
@@ -624,16 +617,14 @@ router.get("/store/succesful-login", (req, res) => {
 
 router.get("/hbx_account", (req, res) => {
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
-  if(!user_id){
-    res.redirect("error");
+  if(!req.user){
+    res.redirect("/hbx_error");
   }
 
 
   Promise.all([
-    hbx_queries.getUserByID(user_id),
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
   ])
     .then( results => {
       let user_data = results[0];
@@ -652,16 +643,13 @@ router.get("/hbx_account", (req, res) => {
 
 router.get("/hbx_account/password", (req, res) => {
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
-  if(!user_id){
+  if(!req.user){
     res.redirect("error");
   }
 
-
   Promise.all([
-    hbx_queries.getUserByID(user_id),
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
   ])
     .then( results => {
       let user_data = results[0];
@@ -680,15 +668,13 @@ router.get("/hbx_account/password", (req, res) => {
 
 router.get("/hbx_account/address_info", (req, res) => {
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
-  if(!user_id){
+  if(!req.user){
     res.redirect("error");
   }
 
   Promise.all([
-    hbx_queries.getUserByID(user_id),
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getUserByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
   ])
     .then( results => {
       let user_data = results[0];
@@ -706,15 +692,14 @@ router.get("/hbx_account/address_info", (req, res) => {
 });
 
 router.get("/hbx_account/orders", (req, res) => {
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  if(!user_id){
+  if(!req.user){
     res.redirect("error");
   }
 
   Promise.all([
-    hbx_queries.getPreviousOrdersByID(user_id),
-    hbx_queries.getCartById(user_id)
+    hbx_queries.getPreviousOrdersByID(req.user.id),
+    hbx_queries.getCartById(req.user.id)
   ])
     .then( (results) => {
       let orders = results[0];
@@ -735,9 +720,7 @@ router.get("/hbx_account/orders", (req, res) => {
 router.get("/hbx_account/close-account", (req, res) => {
   let conditional_promise;
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -797,8 +780,8 @@ router.post("/hbx_register", (req, res) => {
 
 router.get("/hbx_shopping_bag", (req, res) => {
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -821,9 +804,8 @@ router.get("/hbx_register/success", (req, res) => {
   // cart = JSON.parse(cart);
   console.log('req.user - ',req.user);
   console.log('req.user.id - ',req.user.id);
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -866,9 +848,8 @@ router.get("/hbx/auth/google/callback",
 
 router.get("/hbx/auth/error", (req, res) => {
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -885,9 +866,8 @@ router.get("/hbx/auth/error", (req, res) => {
 
 router.get("/hbx_error", (req, res) => {
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -910,10 +890,9 @@ router.get("/checkout/addressing", (req, res) => {
 
   let conditional_promise;
   let conditional_promise2;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
-  user_id ? conditional_promise2 = hbx_queries.getUserByID(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise2 = hbx_queries.getUserByID(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     conditional_promise,
@@ -1036,7 +1015,6 @@ router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
     res.status(401).json({status:"error",message:"cart has no items"});
   }
 
-  let user_id = req.session.passport.user || req.user.id || "";
 
   hbx_queries.addToCart(
     req.body.item_quantity,
@@ -1050,7 +1028,7 @@ router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
     req.body.item_individual_price,
     req.body.item_brand,
     req.body.item_route,
-    user_id
+    req.user.id
     )
     .then((cart) => {
       res.json(cart)
@@ -1063,7 +1041,7 @@ router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
 
 router.get("/get-cart-by-id", (req, res) => {
 
-  let user_id = req.session.passport.user || req.user.id || "";
+  let user_id = req.headers.user_id;
 
   try{
     hbx_queries.getCartById(user_id)
@@ -1111,16 +1089,14 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
   order_obj.company_name = req.body.company_name;
   order_obj.order_notes = req.body.order_notes;
 
-  let user_id = req.session.passport.user || req.user.id || "";
-
   if(req.user){
-    order_obj.users_id = user_id;
+    order_obj.users_id = req.user.id;
   } else {
     res.render("hbx_delivery_and_payment",{order_obj:order_obj})
   }
 
   let conditional_promise;
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   conditional_promise
     .then( cart => {
@@ -1140,13 +1116,12 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
 
 router.post("/update-profile-in-db", (req, res) => {
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.updateUserProfile(req.body.first_name, req.body.last_name, req.body.phone, req.body.email) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.updateUserProfile(req.body.first_name, req.body.last_name, req.body.phone, req.body.email) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     conditional_promise,
-    hbx_queries.getUserByID(user_id)
+    hbx_queries.getUserByID(req.user.id)
   ])
   .then( results => {
     let user_data = results[1];
@@ -1162,21 +1137,19 @@ router.post("/update-profile-in-db", (req, res) => {
 router.post("/update-address-in-db/:id", (req, res) => {
   // let user_id = req.params.id;
 
-  console.log('req.params.id: ',req.params.id, 'req.session.passport.user: ',req.session.passport.user);
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.updateUserAddress(
+  req.user ? conditional_promise = hbx_queries.updateUserAddress(
     req.body.street,
     req.body.city,
     req.body.state,
     req.body.postcode,
     req.body.company,
-    user_id) : conditional_promise = Promise.resolve(undefined)
+    req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     conditional_promise,
-    hbx_queries.getUserByID(user_id)
+    hbx_queries.getUserByID(req.user.id)
   ])
   .then( results => {
     let user_data = results[1][0];
@@ -1204,9 +1177,8 @@ router.get("/brands/:brand/filter/*", (req, res) => {
   params_array = no_duplicates(params_array);
 
   let conditional_promise;
-  let user_id = req.session.passport.user || req.user.id || "";
 
-  user_id ? conditional_promise = hbx_queries.getCartById(user_id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 
   Promise.all([
     hbx_queries.filterSortDB(brand_name, params_array),

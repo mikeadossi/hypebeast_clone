@@ -1,7 +1,7 @@
 /* global fetch, Headers, $, console, updateLocalStorageCart */
 /* exported updateCartAndCountByID */
 
-const updateCartAndCountByID = () => {
+const updateCartAndCountByID = (user_id) => {
 
   $(".dropdown_products_container").css("display","block");
 
@@ -9,7 +9,8 @@ const updateCartAndCountByID = () => {
     method:"GET",
     headers: new Headers({
       "Accept": "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "user_id": user_id
     }),
     mode: "cors",
     credentials: "same-origin",
@@ -19,7 +20,6 @@ const updateCartAndCountByID = () => {
       return cart.json();
     })
     .then((cartJSON) => {
-
       updateLocalStorageCart(cartJSON);
 
     })

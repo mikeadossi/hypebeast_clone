@@ -26,7 +26,6 @@ const populateAddressCheckoutPage = () => {
             <div class="checkout_steps" id="step_one">
               <span class="checkout_step_number">1</span>
               <span class="checkout_title">CONTACT & ADDRESSES</span>
-              <span class="checkout_edit">Edit</span>
             </div>
             <div class="checkout_steps" id="step_two">
               <span class="checkout_step_number">2</span>

@@ -1,4 +1,4 @@
-/* global window, fetch, Headers, GLOBAL_PRODUCT */
+/* global window, GLOBAL_USER, fetch, Headers, GLOBAL_PRODUCT */
 /* exported postCartToDB */
 
 const postCartToDB = (cartItemsObj) => {
@@ -27,7 +27,7 @@ const postCartToDB = (cartItemsObj) => {
     credentials: "same-origin"
   })
     .then( () => {
-      return;
+      return JSON.parse(GLOBAL_USER).id;
     });
 
 };
