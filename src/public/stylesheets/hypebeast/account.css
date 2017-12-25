@@ -194,7 +194,7 @@
   }
 }
 
-@media (min-width: 1030px) and (max-width: 1230px){
+@media (min-width: 1030px) and (max-width: 1229px){
   .adjacent_banner_images{
     display:none;
   }
@@ -204,5 +204,12 @@
     max-width:unset;
     margin-right:unset;
     margin-top:1px;
+  }
+}
+
+@media (min-width: 1230px){
+  .post_content_border{
+    width: 1171px;
+    margin: auto;
   }
 }

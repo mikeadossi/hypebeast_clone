@@ -59,7 +59,6 @@ html
         img.hbx_search(src="/images/hbx_images/general/search.png")
         ul.register.nav_elements
           - if(user){
-              .hidden_user !{JSON.stringify(user)}
               .nav_login.nav_elements
                 button.hbx_nav_link.hbx_account_button ACCOUNT
                   .hbxAccountMenu
@@ -94,7 +93,7 @@ html
         ul.language.nav_elements
           img.hbx_flag.empty_link(src="/images/hbx_images/general/usa_flag.png")
           span.hbx_nav_link.empty_link USD
-    - if(successful_login){
+    - if(justLoggedIn){
       .hbx_successful_login_message 
         span Successfully Logged In!
     -}

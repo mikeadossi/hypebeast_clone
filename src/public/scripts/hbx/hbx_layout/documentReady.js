@@ -12,8 +12,8 @@ $(document).ready(function(){
 
   let user = $(".users_persistent_id").length;
   if(user){
-    let user_id = $(".users_persistent_id")[0].innerHTML;
-    updateCartAndCountByID(user_id);
+    // let user_id = $(".users_persistent_id")[0].innerHTML;
+    updateCartAndCountByID();
   } else if(!user && window.localStorage.hbxLocalCart){
     checkForEmptyLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
@@ -23,5 +23,8 @@ $(document).ready(function(){
     $(".shopping_bag_deux")[0].innerHTML = 0;
     populateAddressCheckoutPage();
   }
+
+  // let cookies = cookies.get();
+  // console.log('cookies: ',cookies);
 
 });

@@ -1,4 +1,4 @@
-/* global $, window, GLOBAL_USER, GLOBAL_PRODUCT, postCartToDB,
+/* global $, window, GLOBAL_PRODUCT, postCartToDB,
 updateLocalStorageCart, populateLocalStorage, updateCartAndCountByID, console */
 /* exported selectPreferredSize, selectItemOrProceedToBag,
 addSelectedItemsToCart */
@@ -73,7 +73,6 @@ const addSelectedItemsToCart = () => {
 
   if($(".hidden_user_obj").text()){
     // if user is logged in
-    itemsInCartObj.user_id = GLOBAL_USER.id;
     postCartToDB(itemsInCartObj)
       .then(updateCartAndCountByID)
       .then(() => proceedToBag())

@@ -251,13 +251,13 @@ let queries = {
     item_color,
     item_size,
     products_id,
-    users_id,
     item_category,
     item_image,
     item_name,
     item_individual_price,
     item_brand,
-    item_route){
+    item_route,
+    users_id){
 
     return db.any(
       `INSERT INTO cart (
@@ -266,13 +266,13 @@ let queries = {
         item_color,
         item_size,
         products_id,
-        users_id,
         item_category,
         item_image,
         item_name,
         item_individual_price,
         item_brand,
-        item_route)
+        item_route,
+        users_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *
       `,[
         item_quantity,
@@ -280,13 +280,13 @@ let queries = {
         item_color,
         item_size,
         products_id,
-        users_id,
         item_category,
         item_image,
         item_name,
         item_individual_price,
         item_brand,
-        item_route]);
+        item_route,
+        users_id]);
   },
 
   clearAllCartDataById: function(id){
