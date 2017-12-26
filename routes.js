@@ -88,6 +88,8 @@ router.get("/store", (req, res) => {
   // console.log('req.user -> ',req.user);
 
   // console.log('req.user.id: ',req.user.id);
+  console.log('req.cookies: ',req.cookies);
+  
   if(req.user){
 
     hbx_queries.getCartById(req.user.id)
@@ -831,9 +833,9 @@ router.get("/hbx_shopping_bag", (req, res) => {
     .catch( err => {
       console.log("err: ",err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 
-})
+});
 
 
 router.get("/hbx_register/success", (req, res) => {
@@ -856,9 +858,9 @@ router.get("/hbx_register/success", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 
-})
+});
 
 router.get("/hbx/auth/facebook",
   passport.authenticate("hbx-facebook", {
