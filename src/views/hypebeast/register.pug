@@ -17,6 +17,10 @@ block content
             span Login with Google
       p Sign up with your email address
       
+      -if(errorMsg){
+        .registerErrorMessage !{errorMsg}
+      -}
+      
       form(action="register" method="post")
         div.label
           label Email/Username

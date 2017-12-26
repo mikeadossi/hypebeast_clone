@@ -161,6 +161,11 @@
   padding: 10px 43.5% 10px 43.5%;
 }
 
+.registerErrorMessage{
+  padding-bottom:20px;
+  color:red;
+}
+
 @media only screen and (max-width: 759px){
   .login_content{
     width: unset;

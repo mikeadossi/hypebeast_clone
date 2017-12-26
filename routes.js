@@ -161,7 +161,8 @@ router.post("/register", (req, res) => {
     return queries.isEmailTaken(submitted_email)
       .then(user => {
         if(user){
-          throw Error ("user email already taken")
+          errorMsg = "user email already taken";
+          throw Error ("user email already taken");
         }
         return {email: submitted_email, password: submitted_password}
       })
@@ -177,8 +178,7 @@ router.post("/register", (req, res) => {
   isEmailTaken(req.body.email, req.body.password)
     .then(createNonOauthUser)
     .catch( err => {
-      console.log(err);
-      res.render("hbx_error", {user: req.user});
+      res.render("register", {user: req.user, errorMsg: err});
     })
 
 })
@@ -213,8 +213,32 @@ router.get("/auth/google/callback",
  (req, res, next) => {
     res.redirect("/");
   }
-
 );
+
+
+
+
+
+
+
+
+// router.get("/set-avatar", (req, res) => {
+//
+//   return queries.setAvatar(req.session.passport.user)
+//     .then( () => {
+//       console.log("avatar set!");
+//       res.redirect("/");
+//     })
+//     .catch( err => console.log(err));
+//
+// });
+
+
+
+
+
+
+
 
 router.get("/auth/facebook",
   passport.authenticate("facebook", {
@@ -751,31 +775,45 @@ router.delete("/hbx_account/close-account", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
-})
+    });
+});
 
 
 router.get("/hbx_register", (req, res) => {
   if(req.user){
-    res.redirect("/hbx_error")
+    res.redirect("/hbx_error");
   }
 
-  res.render("hbx_register")
-})
+  res.render("hbx_register");
+});
 
 router.post("/hbx_register", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
 
-  try{
-    queries.createNonOauthUser(email, password)
-    .then(() => {
-      res.status(200).redirect("/hbx_register/success")
-    })
-  }catch(err){
-    console.log(err);
+  const isEmailTaken = (submitted_email, submitted_password) => {
+    return queries.isEmailTaken(submitted_email)
+      .then(user => {
+        if(user){
+          errorMsg = "user email already taken";
+          throw Error ("user email already taken");
+        }
+        return {email: submitted_email, password: submitted_password}
+      })
   }
-})
+
+  const createNonOauthUser = (userEmailAndPassword) => {
+    return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
+      .then(() => {
+        return res.status(200).redirect("/hbx_register/success")
+      })
+  }
+
+  isEmailTaken(req.body.email, req.body.password)
+    .then(createNonOauthUser)
+    .catch( err => {
+      res.render("hbx_register", {user: req.user, errorMsg: err});
+    })
+
+});
 
 
 router.get("/hbx_shopping_bag", (req, res) => {
@@ -802,8 +840,9 @@ router.get("/hbx_register/success", (req, res) => {
   let conditional_promise;
   // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
   // cart = JSON.parse(cart);
-  console.log('req.user - ',req.user);
-  console.log('req.user.id - ',req.user.id);
+
+  // console.log('req.user - ',req.user);
+  // console.log('req.user.id - ',req.user.id);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
 

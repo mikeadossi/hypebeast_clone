@@ -487,6 +487,9 @@
     display:none;
     height:320px;
   }
+  .wishlist_container{
+    display:none;
+  }
 }
 
 @media (min-width: 990px) and (max-width: 1230px){

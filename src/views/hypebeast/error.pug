@@ -3,4 +3,9 @@ extends layout
 block content
   
   .error_content
-    h1 Page not found
+    -if(errorMsg){
+      h1 !{errorMsg}
+    -} else {
+      h1 Page not found
+    -}
+    

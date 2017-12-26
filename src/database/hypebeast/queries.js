@@ -76,45 +76,44 @@ let queries = {
         return db.any(
           `INSERT INTO users (email, password)
           VALUES ($1, $2)
-          RETURNING users.email
+          RETURNING id
           `,[email, hash]);
       })
-      .then( user_email => {
-        let email = user_email[0].email;
+      .then( user_id => {
 
-        let pathToAvatarDirectory = "./src/public/images/hypebeast_images/avatars/png";
-        let avatarImagesArray = [];
-        fs.readdirSync(pathToAvatarDirectory).forEach(fileName => {
-          avatarImagesArray.push(fileName);
-        });
-        let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0;
-        let userImage = "/images/hypebeast_images/avatars/png/" + avatarImagesArray[randomIndex];
+        let id = user_id[0].id;
+        return this.setAvatar(id);
 
-        const getRandomColor = () => {
-          var letters = "0123456789ABCDEF";
-          var color = "#";
-          for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-          return color;
-        };
-
-        let userImageBackgroundColor = getRandomColor();
-
-        return db.any(`
-          UPDATE users
-          SET user_avatar = $1,
-          user_avatar_background_color = $2
-          WHERE email = $3
-        `,[userImage, userImageBackgroundColor, email]
-        );
       });
   },
 
   createUser: function(email) {
-    return db.oneOrNone(
-      "INSERT INTO users (email) VALUES ($1) RETURNING *",
-      [email]);
+
+    let pathToAvatarDirectory = "./src/public/images/hypebeast_images/avatars/png";
+    let avatarImagesArray = [];
+    fs.readdirSync(pathToAvatarDirectory).forEach(fileName => {
+      avatarImagesArray.push(fileName);
+    });
+    let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0;
+    let userImage = "/images/hypebeast_images/avatars/png/" + avatarImagesArray[randomIndex];
+
+    const getRandomColor = () => {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    };
+
+    let userImageBackgroundColor = getRandomColor();
+
+    return db.oneOrNone(`
+      INSERT INTO users (email, user_avatar, user_avatar_background_color)
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `,[email, userImage, userImageBackgroundColor]
+    );
   },
 
   find: function(email, password) {
@@ -224,6 +223,37 @@ let queries = {
       VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
     `,[newComment, parentCommentId, post_id, user_id, user_name, user_avatar, user_avatar_background_color]);
+  },
+
+  setAvatar: function(id) {
+
+    let pathToAvatarDirectory = "./src/public/images/hypebeast_images/avatars/png";
+    let avatarImagesArray = [];
+    fs.readdirSync(pathToAvatarDirectory).forEach(fileName => {
+      avatarImagesArray.push(fileName);
+    });
+    let randomIndex = Math.floor(Math.random() * (avatarImagesArray.length - 0)) + 0;
+    let userImage = "/images/hypebeast_images/avatars/png/" + avatarImagesArray[randomIndex];
+
+    const getRandomColor = () => {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    };
+
+    let userImageBackgroundColor = getRandomColor();
+
+    return db.any(`
+      UPDATE users
+      SET user_avatar = $1,
+      user_avatar_background_color = $2
+      WHERE id = $3
+    `,[userImage, userImageBackgroundColor, id]
+    );
+
   }
 
 };

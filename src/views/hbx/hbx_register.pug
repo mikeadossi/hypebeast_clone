@@ -25,6 +25,11 @@ block content
       .login_or or
       .login_second_div
         p.login_instructions Sign in with your email address username
+        
+        -if(errorMsg){
+          .registerErrorMessage !{errorMsg}
+        -}
+        
         form.hbx_form(method='post' action="hbx_register")
           div.label
             label EMAIL / USERNAME
