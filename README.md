@@ -8,4 +8,5 @@ All HBX and Hypebeast intellectual property is owned by 101 Media Lab Limited.
 ## Deployed
 
 Find HYPEBEAST running on https://hypebeast-clone.herokuapp.com/
+
 Find HBX running on https://hypebeast-clone.herokuapp.com/store

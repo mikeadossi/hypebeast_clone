@@ -11,8 +11,7 @@ const {allProductSizesSingleValueArr} = require("./src/database/hbx/products_dat
 const {allBrandNamesObj} = require("./src/database/hbx/products_data");
 const {allProductSizesString} = require("./src/database/hbx/products_data");
 const {allProductSizesObj} = require("./src/database/hbx/products_data");
-const {checkPasswordAndDeleteUser} = require("./src/database/util/checkPasswordAndDeleteUser");
-const {deleteUserUsingHashAndId} = require("./src/database/util/deleteUserUsingHashAndId");
+const {comparePasswordAndDeleteUser} = require("./src/database/util/comparePasswordAndDeleteUser");
 
 /************************** Hypebeast (below) *******************************/
 
@@ -89,7 +88,7 @@ router.get("/store", (req, res) => {
 
   // console.log('req.user.id: ',req.user.id);
   console.log('req.cookies: ',req.cookies);
-  
+
   if(req.user){
 
     hbx_queries.getCartById(req.user.id)
@@ -145,13 +144,80 @@ router.get("/account/password", (req, res) => {
     .catch( err => {
       console.log("err: ",err);
       res.render("hbx_error", {user: req.user});
+      return;
     })
 
 })
 
 router.get("/account/close-account", (req, res) => {
   res.render("close_account", { user: req.user });
+  return;
 })
+
+
+router.post("/account/close-account", (req, res) => {
+  if(!req.user){
+    res.redirect("/error");
+    return;
+  }
+
+  if(!req.body.user_password){
+    console.log('no password...');
+    return queries.deleteUserById(req.body.user_id)
+      .then( () => {
+        req.session.destroy(function (err) {
+            if (!err) {
+                res.clearCookie('connect.sid', {path: '/'});
+                res.redirect("/");
+                return;
+                // req.logout();
+                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+            } else {
+                // handle error case...
+                console.log('err ---> ',err);
+            }
+
+        });
+      } )
+      .catch( err => {
+        res.render("error", {user: req.user, errorMsg: err});
+        return;
+      });
+
+  } else {
+    console.log('found password...');
+    comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
+      .then(() => {
+        console.log('\n after compare method \n');
+        req.session.destroy(function (err) {
+            if (!err) {
+              console.log('no error');
+              res.clearCookie('connect.sid', {path: '/'});
+              console.log('1. clear cookie');
+              req.logout();
+              console.log('2. logout');
+              res.redirect("/");
+              console.log('3. redirect');
+              // return;
+              res.end();
+              console.log('4. end!');
+                // req.logout();
+                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+            } else {
+                // handle error case...
+                console.log('err! ---> ',err);
+            }
+
+        });
+      })
+      .catch( err => {
+        console.log('catch err : ',err);
+        res.render("close_account", {user: req.user, errorMsg: err});
+      });
+  }
+
+});
+
 
 router.get("/register", (req, res) => {
   res.render("register")
@@ -163,7 +229,6 @@ router.post("/register", (req, res) => {
     return queries.isEmailTaken(submitted_email)
       .then(user => {
         if(user){
-          errorMsg = "user email already taken";
           throw Error ("user email already taken");
         }
         return {email: submitted_email, password: submitted_password}
@@ -200,8 +265,50 @@ router.post("/login", passport.authenticate("local", {
 
 
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
+  // console.log('req.session.destroy -> ',req.session.destroy);
+  // console.log(req,'\n <------ req');
+  // console.log('\n res.cookie',res.cookie,'\n');
+  console.log('req.session ----> ',req.session);
+  console.log('req.session.destroy ---->> ',req.session.destroy);
+  // req.session.destroy();
+  // req.logout();
+  //
+  // res.status(200).clearCookie("connect.sid", {path: "/"});
+
+
+  // req.logout();
+  // req.session.destroy(function (err) {
+  //   if (!err) {
+  //       res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+  //   } else {
+  //       // handle error case...
+  //   }
+  //
+  // });
+
+  // req.logout();
+  req.session.destroy(function (err) {
+      if (!err) {
+          res.clearCookie('connect.sid', {path: '/'});
+          req.logout();
+          res.redirect("/");
+          // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+      } else {
+          // handle error case...
+      }
+
+  });
+
+
+
+
+  // res.status(200).clearCookie('session', {path: '/'}).json({status: "Success"});
+
+  // req.session.destroy((err) => {
+  //   if(!err){
+  //     res.status(200).clearCookie('session.sig', {path: '/'}).json({status: "Success"});
+  //   }
+  // });
 })
 
 router.get("/auth/google",
@@ -759,26 +866,81 @@ router.get("/hbx_account/close-account", (req, res) => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
     })
-})
+});
 
 
-router.delete("/hbx_account/close-account", (req, res) => {
+
+
+
+
+
+
+
+
+
+router.post("/hbx_account/close-account", (req, res, next) => {
+
   if(!req.user){
     res.redirect("/hbx-error");
   }
 
-  checkPasswordAndDeleteUser(
-    req.body.user_password,
-    JSON.parse(process.env.SALTROUNDS),
-    req.body.user_id
-  )
-    .then(deleteUserUsingHashAndId)
-    .then(response => res.json(response))
-    .catch( err => {
-      console.log(err);
-      res.render("hbx_error", {user: req.user});
-    });
+  if(!req.body.user_password){
+
+    return queries.deleteUserById(req.body.user_id)
+      .then( () => {
+        req.session.destroy(function (err) {
+            if (!err) {
+                res.clearCookie('connect.sid', {path: '/'});
+                // req.logout();
+                res.redirect("/");
+                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+            } else {
+                // handle error case...
+            }
+
+        });
+        // res.send("deleted")
+      } )
+      .catch( err => {
+        console.log('err ----- ',err);
+        res.render("hbx_error", { errorMsg: err});
+      });
+
+  } else {
+    console.log('comparing passwords.');
+    comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
+      .then( () => {
+        console.log('\n -------------->>> ok \n');
+        req.session.destroy(function (err) {
+            if (!err) {
+                res.clearCookie('connect.sid', {path: '/'});
+                // req.logout();
+                res.redirect("/");
+                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+            } else {
+              console.log('\n --------> else condition \n');
+                // handle error case...
+            }
+
+        });
+      })
+      .catch( err => {
+        console.log('inside error: ',err);
+        res.render("hbx_close_account", {user: req.user, errorMsg: err});
+      });
+  }
+
 });
+
+
+
+
+
+
+
+
+
+
 
 
 router.get("/hbx_register", (req, res) => {

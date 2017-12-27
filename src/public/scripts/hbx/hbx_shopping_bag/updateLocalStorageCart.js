@@ -27,7 +27,7 @@ const updateLocalStorageCart = (cart) => {
 
   $(".localStorageContent").append(`
     <div class="items_in_bag">
-      <span class="dropdown_item_count">`+totalNumOfItems+" "+itemDetail+` in Bag!</span>
+      <span class="dropdown_item_count">`+totalNumOfItems+" "+itemDetail+` in Bag</span>
     </div>
     <div class="dropdown_notice_top">
       Please note: Item(s) is not reserved until checkout is completed.

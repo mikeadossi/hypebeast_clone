@@ -191,6 +191,11 @@ button{
   margin-bottom: 10px;
 }
 
+#close_account_error_message{
+  color:red;
+  padding-bottom:20px;
+}
+
 @media only screen and (max-width: 449px){
   .settings_edit_password{
     overflow: auto;

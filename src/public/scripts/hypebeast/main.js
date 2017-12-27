@@ -11,6 +11,14 @@ $(document).ready(function(){
   if($(".usernameVal").html()){
     $(".reply_button").remove();
   }
+
+  // let date = new Date();
+  // date.setTime(date.getTime()+(1*1000)); // cookie expires in one second
+  // console.log('date.toGMTString(): ',date.toGMTString());
+  // document.cookie = "name=session; expires="+date.toGMTString()+"; path=/";
+  // document.cookie = "name=session.sig; expires="+date.toGMTString()+"; path=/";
+
+
 });
 
 let top_ten_secret = $(".top_ten_secret").text();

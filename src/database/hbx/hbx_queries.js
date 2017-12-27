@@ -540,11 +540,28 @@ let queries = {
       `, item_id);
   },
 
-  closeHBXAccount: function(id,hash){
+  getUserPassword: function(id){
+    return db.one(`SELECT password FROM users WHERE id = $1`,id)
+  },
+
+  closeHBXAccount: function(id, hash){
     return db.none(`
       DELETE FROM users
       WHERE id = $1 AND password = $2
-      `, [id,hash]);
+      `, [id, hash]);
+  },
+
+  closeAccountById: function(id){
+    return db.none(`
+      DELETE FROM users WHERE id = $1
+    `,id)
+  },
+
+  getAccountByHashedPassword: function(id, hash){
+    return db.any( `
+      SELECT * FROM users
+      WHERE id = $1 AND password = $2
+    `, [id, hash]);
   },
 
   updateCountOfItem: function(item_name, item_brand, item_quantity, item_cost){
@@ -555,6 +572,10 @@ let queries = {
       WHERE item_name = $1
       AND item_brand = $2
     `, [item_name, item_brand, item_quantity, item_cost]);
+  },
+
+  deleteUserById: function(id) {
+    return db.none("DELETE FROM users WHERE id = $1", [id]);
   }
 
 

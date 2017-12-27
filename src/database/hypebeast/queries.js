@@ -254,6 +254,10 @@ let queries = {
     `,[userImage, userImageBackgroundColor, id]
     );
 
+  },
+
+  deleteUserById: function(id) {
+    return db.none("DELETE FROM users WHERE id = $1", [id]);
   }
 
 };
