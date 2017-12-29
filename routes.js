@@ -1,4 +1,4 @@
-/* global console */
+/* global console, module */
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
@@ -9,7 +9,6 @@ const bcrypt = require("bcrypt");
 const {allProductSizesArr} = require("./src/database/hbx/products_data");
 const {allProductSizesSingleValueArr} = require("./src/database/hbx/products_data");
 const {allBrandNamesObj} = require("./src/database/hbx/products_data");
-const {allProductSizesString} = require("./src/database/hbx/products_data");
 const {allProductSizesObj} = require("./src/database/hbx/products_data");
 const {comparePasswordAndDeleteUser} = require("./src/database/util/comparePasswordAndDeleteUser");
 
@@ -101,18 +100,18 @@ router.get("/store", (req, res) => {
       .catch( err => {
         console.log("err: ",err);
         res.render("hbx_error", {user: req.user});
-      })
+      });
   } else {
     res.render("hbx_index", {
       user: req.user
     });
   }
 
-})
+});
 
 router.get("/register/success", (req, res) => {
   res.render("successful_register", { user: req.user });
-})
+});
 
 router.get("/loggedIn", (req, res) => {
 
@@ -130,7 +129,7 @@ router.get("/account", (req, res) => {
   } else {
     res.render("error");
   }
-})
+});
 
 router.get("/account/password", (req, res) => {
 
@@ -145,14 +144,14 @@ router.get("/account/password", (req, res) => {
       console.log("err: ",err);
       res.render("hbx_error", {user: req.user});
       return;
-    })
+    });
 
-})
+});
 
 router.get("/account/close-account", (req, res) => {
   res.render("close_account", { user: req.user });
   return;
-})
+});
 
 
 router.post("/account/close-account", (req, res) => {
@@ -162,56 +161,56 @@ router.post("/account/close-account", (req, res) => {
   }
 
   if(!req.body.user_password){
-    console.log('no password...');
+    console.log("no password...");
     return queries.deleteUserById(req.body.user_id)
       .then( () => {
         req.session.destroy(function (err) {
-            if (!err) {
-                res.clearCookie('connect.sid', {path: '/'});
-                res.redirect("/");
-                return;
-                // req.logout();
-                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
-            } else {
-                // handle error case...
-                console.log('err ---> ',err);
-            }
+          if (!err) {
+            res.clearCookie("connect.sid", {path: "/"});
+            res.redirect("/");
+            return;
+            // req.logout();
+            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
+          } else {
+            // handle error case...
+            console.log("err ---> ",err);
+          }
 
         });
-      } )
+      })
       .catch( err => {
         res.render("error", {user: req.user, errorMsg: err});
         return;
       });
 
   } else {
-    console.log('found password...');
+    console.log("found password...");
     comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
       .then(() => {
-        console.log('\n after compare method \n');
+        console.log("\n after compare method \n");
         req.session.destroy(function (err) {
-            if (!err) {
-              console.log('no error');
-              res.clearCookie('connect.sid', {path: '/'});
-              console.log('1. clear cookie');
-              req.logout();
-              console.log('2. logout');
-              res.redirect("/");
-              console.log('3. redirect');
-              // return;
-              res.end();
-              console.log('4. end!');
-                // req.logout();
-                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
-            } else {
-                // handle error case...
-                console.log('err! ---> ',err);
-            }
+          if (!err) {
+            console.log("no error");
+            res.clearCookie("connect.sid", {path: "/"});
+            console.log("1. clear cookie");
+            req.logout();
+            console.log("2. logout");
+            res.redirect("/");
+            console.log("3. redirect");
+            // return;
+            res.end();
+            console.log("4. end!");
+            // req.logout();
+            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
+          } else {
+            // handle error case...
+            console.log("err! ---> ",err);
+          }
 
         });
       })
       .catch( err => {
-        console.log('catch err : ',err);
+        console.log("catch err : ",err);
         res.render("close_account", {user: req.user, errorMsg: err});
       });
   }
@@ -220,8 +219,8 @@ router.post("/account/close-account", (req, res) => {
 
 
 router.get("/register", (req, res) => {
-  res.render("register")
-})
+  res.render("register");
+});
 
 router.post("/register", (req, res) => {
 
@@ -231,45 +230,45 @@ router.post("/register", (req, res) => {
         if(user){
           throw Error ("user email already taken");
         }
-        return {email: submitted_email, password: submitted_password}
-      })
-  }
+        return {email: submitted_email, password: submitted_password};
+      });
+  };
 
   const createNonOauthUser = (userEmailAndPassword) => {
     return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
       .then(() => {
-        return res.status(200).redirect("/register/success")
-      })
-  }
+        return res.status(200).redirect("/register/success");
+      });
+  };
 
   isEmailTaken(req.body.email, req.body.password)
     .then(createNonOauthUser)
     .catch( err => {
       res.render("register", {user: req.user, errorMsg: err});
-    })
+    });
 
-})
+});
 
 router.get("/login", (req, res) => {
 
   res.render("login", {
     user: req.user
-   })
-})
+  });
+});
 
 router.post("/login", passport.authenticate("local", {
-   successRedirect: "/",
-   failureRedirect: "/login",
-   failureFlash: true
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true
 }));
 
 
 router.get("/logout", (req, res) => {
-  // console.log('req.session.destroy -> ',req.session.destroy);
-  // console.log(req,'\n <------ req');
+  // console.log("req.session.destroy -> ",req.session.destroy);
+  // console.log(req,"\n <------ req');
   // console.log('\n res.cookie',res.cookie,'\n');
-  console.log('req.session ----> ',req.session);
-  console.log('req.session.destroy ---->> ',req.session.destroy);
+  console.log("req.session ----> ",req.session);
+  console.log("req.session.destroy ---->> ",req.session.destroy);
   // req.session.destroy();
   // req.logout();
   //
@@ -288,14 +287,14 @@ router.get("/logout", (req, res) => {
 
   // req.logout();
   req.session.destroy(function (err) {
-      if (!err) {
-          res.clearCookie('connect.sid', {path: '/'});
-          req.logout();
-          res.redirect("/");
-          // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
-      } else {
-          // handle error case...
-      }
+    if (!err) {
+      res.clearCookie("connect.sid", {path: "/"});
+      req.logout();
+      res.redirect("/");
+      // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+    } else {
+      // handle error case...
+    }
 
   });
 
@@ -309,7 +308,7 @@ router.get("/logout", (req, res) => {
   //     res.status(200).clearCookie('session.sig', {path: '/'}).json({status: "Success"});
   //   }
   // });
-})
+});
 
 router.get("/auth/google",
   passport.authenticate("google", { scope: ["profile","email"] })
@@ -319,35 +318,10 @@ router.get("/auth/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/error"
   }),
- (req, res, next) => {
+  (req, res) => {
     res.redirect("/");
   }
 );
-
-
-
-
-
-
-
-
-// router.get("/set-avatar", (req, res) => {
-//
-//   return queries.setAvatar(req.session.passport.user)
-//     .then( () => {
-//       console.log("avatar set!");
-//       res.redirect("/");
-//     })
-//     .catch( err => console.log(err));
-//
-// });
-
-
-
-
-
-
-
 
 router.get("/auth/facebook",
   passport.authenticate("facebook", {
@@ -357,7 +331,7 @@ router.get("/auth/facebook",
 
 router.get("/auth/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/error" }),
- (req, res) => {
+  (req, res) => {
     res.redirect("/");
   }
 );
@@ -377,9 +351,9 @@ router.post("/post/post_comment/:id", (req, res) => {
 
   try{
     queries.storeComment(user_comment, req.user.id, article_id, user_name)
-    .then(() => {
-      res.status(200).redirect(/post/+article_id);
-    })
+      .then(() => {
+        res.status(200).redirect(/post/+article_id);
+      })
   }catch(e){
     console.log(e);
   }
@@ -410,10 +384,10 @@ router.post("/add-new-username-to-db", (req, res) => {
 
   isUsernameAvailable(req.body.username, req.body.email)
     .then(addNewUsernameToDB)
-    .then( user => {
+    .then( () => {
       res.redirect("/account");
     })
-    .catch( err => console.log(err))
+    .catch( err => console.log(err));
 
 });
 
@@ -453,7 +427,7 @@ router.get("/brands/:brand", (req, res) => {
 
   let conditional_promise;
 
-  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined);
 
   let brand = req.params.brand;
 
@@ -513,7 +487,7 @@ router.get("/brands/:brand", (req, res) => {
 
       let product_sizes_arr = [];
       let p = 0;
-      for(key in product_sizes){p++}
+      for(key in product_sizes){p++};
       let numOfProds = p;
       for(let j = 0; j < numOfProds; j++){
         for(let i = 0; i < 19; i++){
@@ -534,7 +508,7 @@ router.get("/brands/:brand", (req, res) => {
         product_sizes_arr: product_sizes_arr,
         user: req.user,
         cart: cart
-      })
+      });
     })
     .catch( err => {
       console.log("err: ", err);
@@ -547,7 +521,7 @@ router.get("/brands/:brand/:product", (req, res) => {
   let product = req.params.product;
   let conditional_promise;
 
-  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
+  req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined);
 
   Promise.all([
     hbx_queries.getProductContent(brand,product),
@@ -587,7 +561,6 @@ router.get("/brands/:brand/:product", (req, res) => {
       let hbx_product_brand;
       let hbx_product_obj;
       let first_image;
-      let ex = 0;
       for(key in all_hbx_products){
         hbx_product_brand = Object.values(all_hbx_products[key]);
         hbx_product_obj = {};
@@ -601,7 +574,7 @@ router.get("/brands/:brand/:product", (req, res) => {
         if( hbx_product_obj.name !== product_name ){
           related_products_arr.push(hbx_product_obj);
         }
-      };
+      }
 
 
 
@@ -865,20 +838,10 @@ router.get("/hbx_account/close-account", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 });
 
-
-
-
-
-
-
-
-
-
-
-router.post("/hbx_account/close-account", (req, res, next) => {
+router.post("/hbx_account/close-account", (req, res) => {
 
   if(!req.user){
     res.redirect("/hbx-error");
@@ -889,58 +852,44 @@ router.post("/hbx_account/close-account", (req, res, next) => {
     return queries.deleteUserById(req.body.user_id)
       .then( () => {
         req.session.destroy(function (err) {
-            if (!err) {
-                res.clearCookie('connect.sid', {path: '/'});
-                // req.logout();
-                res.redirect("/");
-                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
-            } else {
-                // handle error case...
-            }
-
+          if (!err) {
+            res.clearCookie("connect.sid", {path: "/"});
+            res.redirect("/");
+          } else {
+            // handle error case...
+          }
         });
-        // res.send("deleted")
-      } )
+      })
       .catch( err => {
-        console.log('err ----- ',err);
+        console.log("err ----- ",err);
         res.render("hbx_error", { errorMsg: err});
       });
 
   } else {
-    console.log('comparing passwords.');
+    console.log("comparing passwords.");
     comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
       .then( () => {
-        console.log('\n -------------->>> ok \n');
+        console.log("\n -------------->>> ok \n");
         req.session.destroy(function (err) {
-            if (!err) {
-                res.clearCookie('connect.sid', {path: '/'});
-                // req.logout();
-                res.redirect("/");
-                // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
-            } else {
-              console.log('\n --------> else condition \n');
-                // handle error case...
-            }
+          if (!err) {
+            res.clearCookie("connect.sid", {path: "/"});
+            // req.logout();
+            res.redirect("/");
+            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
+          } else {
+            console.log("\n --------> else condition \n");
+            // handle error case...
+          }
 
         });
       })
       .catch( err => {
-        console.log('inside error: ',err);
+        console.log("inside error: ",err);
         res.render("hbx_close_account", {user: req.user, errorMsg: err});
       });
   }
 
 });
-
-
-
-
-
-
-
-
-
-
 
 
 router.get("/hbx_register", (req, res) => {
@@ -957,25 +906,24 @@ router.post("/hbx_register", (req, res) => {
     return queries.isEmailTaken(submitted_email)
       .then(user => {
         if(user){
-          errorMsg = "user email already taken";
           throw Error ("user email already taken");
         }
-        return {email: submitted_email, password: submitted_password}
+        return {email: submitted_email, password: submitted_password};
       })
-  }
+  };
 
   const createNonOauthUser = (userEmailAndPassword) => {
     return queries.createNonOauthUser(userEmailAndPassword.email, userEmailAndPassword.password)
       .then(() => {
-        return res.status(200).redirect("/hbx_register/success")
-      })
-  }
+        return res.status(200).redirect("/hbx_register/success");
+      });
+  };
 
   isEmailTaken(req.body.email, req.body.password)
     .then(createNonOauthUser)
     .catch( err => {
       res.render("hbx_register", {user: req.user, errorMsg: err});
-    })
+    });
 
 });
 
@@ -990,7 +938,7 @@ router.get("/hbx_shopping_bag", (req, res) => {
       res.render("hbx_shopping_bag", {
         user: req.user,
         cart: cart
-      })
+      });
     })
     .catch( err => {
       console.log("err: ",err);
@@ -1002,10 +950,10 @@ router.get("/hbx_shopping_bag", (req, res) => {
 
 router.get("/hbx_register/success", (req, res) => {
   let conditional_promise;
-  // let cart = cookieLib.parse(req.headers.cookie).userCart || '[]';
+  // let cart = cookieLib.parse(req.headers.cookie).userCart || "[]";
   // cart = JSON.parse(cart);
 
-  // console.log('req.user - ',req.user);
+  // console.log("req.user - ",req.user);
   // console.log('req.user.id - ',req.user.id);
 
   req.user ? conditional_promise = hbx_queries.getCartById(req.user.id) : conditional_promise = Promise.resolve(undefined)
@@ -1064,7 +1012,7 @@ router.get("/hbx/auth/error", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 });
 
 router.get("/hbx_error", (req, res) => {
@@ -1081,13 +1029,13 @@ router.get("/hbx_error", (req, res) => {
     })
     .catch( err => {
       console.log(err);
-    })
+    });
 });
 
 router.get("/hbx_logout", (req, res) => {
   req.logout();
   res.redirect("/store");
-})
+});
 
 router.get("/checkout/addressing", (req, res) => {
 
@@ -1106,9 +1054,9 @@ router.get("/checkout/addressing", (req, res) => {
       let user_data = results[1];
 
       if(req.user && !cart.length){
-        res.render("hbx_error",{user:req.user, cart:cart})
+        res.render("hbx_error",{user:req.user, cart:cart});
       } else if(!req.user){
-        res.render("hbx_addressing")
+        res.render("hbx_addressing");
       }
 
       res.render("hbx_addressing", {
@@ -1120,13 +1068,13 @@ router.get("/checkout/addressing", (req, res) => {
     .catch( err => {
       console.log(err);
       res.render("hbx_error", {user: req.user});
-    })
+    });
 
-})
+});
 
 router.get("/checkout/complete", (req, res, next) => {
   res.render("hbx_order_complete");
-})
+});
 
 router.post("/checkout/complete", (req, res, next) => {
 
@@ -1141,8 +1089,8 @@ router.post("/checkout/complete", (req, res, next) => {
     : cart = req.body.users_cart;
 
   let order_obj = JSON.parse(req.body.order_obj_value);
-  order_obj.phone = JSON.parse(order_obj.phone)
-  order_obj.postcode = JSON.parse(order_obj.postcode)
+  order_obj.phone = JSON.parse(order_obj.phone);
+  order_obj.postcode = JSON.parse(order_obj.postcode);
   let purchasedProductDetailsArray = [];
   let tot_cost = 0;
 
@@ -1190,21 +1138,21 @@ router.post("/checkout/complete", (req, res, next) => {
     ),
     conditional_promise
   ])
-  .then( results => {
-    if(req.user){
-      res.render("hbx_order_complete", {
-        user: req.user
-      });
-    };
+    .then( results => {
+      if(req.user){
+        res.render("hbx_order_complete", {
+          user: req.user
+        });
+      }
 
-    res.render("hbx_order_complete");
-  })
-  .catch( err => {
-    console.log(err);
-    res.render("hbx_error", {user: req.user});
-  })
+      res.render("hbx_order_complete");
+    })
+    .catch( err => {
+      console.log(err);
+      res.render("hbx_error", {user: req.user});
+    });
 
-})
+});
 
 router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
   // passport writes an endpoint that handles auth., and passes a cookie for your sessions on requests.
@@ -1232,15 +1180,15 @@ router.post("/brands/:brand/:product/add-to-cart", (req, res) => {
     req.body.item_brand,
     req.body.item_route,
     req.user.id
-    )
+  )
     .then((cart) => {
-      res.json(cart)
+      res.json(cart);
     })
     .catch((error) => {
-      res.status(401).json({status:"error",message:"item not added to database"})
+      res.status(401).json({status:"error",message:"item not added to database"});
     });
 
-})
+});
 
 router.get("/get-cart-by-id", (req, res) => {
 
@@ -1248,15 +1196,15 @@ router.get("/get-cart-by-id", (req, res) => {
 
   try{
     hbx_queries.getCartById(user_id)
-    .then((cart) => {
-      res.json(cart);
-    })
+      .then((cart) => {
+        res.json(cart);
+      })
   }catch(error){
-    res.status(401).json({status:"error",message:"cart db retrieval failed" + error.toString()})
+    res.status(401).json({status:"error",message:"cart db retrieval failed" + error.toString()});
   }
-})
+});
 
-router.post("/update-bag", (req, res) => {
+router.post("/update-bag", (req, res, next) => {
   if(!req.user){
     res.redirect("/hbx_error");
   }
@@ -1267,15 +1215,15 @@ router.post("/update-bag", (req, res) => {
 
   return hbx_queries.updateCartById(id, item_count, item_tot_cost)
     .then(() => {
-      res.send('success')
+      res.send("success");
     })
     .catch(err => next(err));
 
-})
+});
 
-router.post("/checkout/delivery_and_payment", (req, res) => {
+router.post("/checkout/delivery_and_payment", (req, res, next) => {
   if(req.body.order_email !== req.body.confirm_order_email){
-    res.render("hbx_addressing",{error_message:"emails do not match"})
+    res.render("hbx_addressing",{error_message:"emails do not match"});
   }
 
   let order_obj = new Object();
@@ -1286,7 +1234,7 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
   order_obj.order_email = req.body.order_email[0];
   order_obj.street = req.body.street;
   order_obj.city = req.body.city;
-  order_obj.postcode = req.body.postcode
+  order_obj.postcode = req.body.postcode;
   order_obj.state = req.body.state;
   order_obj.country = req.body.country;
   order_obj.company_name = req.body.company_name;
@@ -1295,7 +1243,7 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
   if(req.user){
     order_obj.users_id = req.user.id;
   } else {
-    res.render("hbx_delivery_and_payment",{order_obj:order_obj})
+    res.render("hbx_delivery_and_payment",{order_obj:order_obj});
   }
 
   let conditional_promise;
@@ -1305,17 +1253,17 @@ router.post("/checkout/delivery_and_payment", (req, res) => {
     .then( cart => {
       if(!cart.length){
         console.log("not authorized!");
-        res.render("hbx_error",{user:req.user})
+        res.render("hbx_error",{user:req.user});
       }
       res.render("hbx_delivery_and_payment", {
         user: req.user,
         order_obj: order_obj,
         cart: cart
-      })
+      });
     })
-    .catch( err => next(err))
+    .catch( err => next(err));
 
-})
+});
 
 router.post("/update-profile-in-db", (req, res) => {
   let conditional_promise;
@@ -1326,16 +1274,16 @@ router.post("/update-profile-in-db", (req, res) => {
     conditional_promise,
     hbx_queries.getUserByID(req.user.id)
   ])
-  .then( results => {
-    let user_data = results[1];
+    .then( results => {
+      let user_data = results[1];
 
-    res.redirect("/hbx_account")
-  })
-  .catch( err => {
-    console.log(err);
-    res.render("hbx_error",{error_message:err})
-  })
-})
+      res.redirect("/hbx_account");
+    })
+    .catch( err => {
+      console.log(err);
+      res.render("hbx_error",{error_message:err});
+    });
+});
 
 router.post("/update-address-in-db/:id", (req, res) => {
   // let user_id = req.params.id;
@@ -1354,16 +1302,16 @@ router.post("/update-address-in-db/:id", (req, res) => {
     conditional_promise,
     hbx_queries.getUserByID(req.user.id)
   ])
-  .then( results => {
-    let user_data = results[1][0];
+    .then( results => {
+      let user_data = results[1][0];
 
-    res.redirect("/hbx_account/address_info")
-  })
-  .catch( err => {
-    console.log(err);
-    res.render("hbx_error",{error_message:err})
-  })
-})
+      res.redirect("/hbx_account/address_info");
+    })
+    .catch( err => {
+      console.log(err);
+      res.render("hbx_error",{error_message:err});
+    });
+});
 
 router.get("/brands/:brand/filter/*", (req, res) => {
 
@@ -1373,9 +1321,9 @@ router.get("/brands/:brand/filter/*", (req, res) => {
   const no_duplicates = (array) => {
     let seen = {};
     return array.filter( item => {
-        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
-  }
+  };
 
   params_array = no_duplicates(params_array);
 
@@ -1393,90 +1341,90 @@ router.get("/brands/:brand/filter/*", (req, res) => {
     hbx_queries.getBrandDetails(brand_name),
     hbx_queries.getInventory(brand_name)
   ])
-  .then( results => {
+    .then( results => {
 
-    let sorted_products = results[0];
-    let cart = results[1];
-    let categories = results[2];
-    let colors = results[3];
-    let ranges = results[4];
-    let product_sizes = results[5];
-    let brand = results[6];
-    let inventory = results[7];
+      let sorted_products = results[0];
+      let cart = results[1];
+      let categories = results[2];
+      let colors = results[3];
+      let ranges = results[4];
+      let product_sizes = results[5];
+      let brand = results[6];
+      let inventory = results[7];
 
-    let categories_arr = [];
-    for(let i = 0; i < categories.length; i++){
-      categories_arr.push(categories[i].category_type);
-    }
+      let categories_arr = [];
+      for(let i = 0; i < categories.length; i++){
+        categories_arr.push(categories[i].category_type);
+      }
 
-    let colors_arr = [];
-    for(let i = 0; i < colors.length; i++){
-      colors_arr.push(colors[i].color);
-    }
+      let colors_arr = [];
+      for(let i = 0; i < colors.length; i++){
+        colors_arr.push(colors[i].color);
+      }
 
-    categories_arr = categories_arr.filter(
-      (item,pos) => {
-        return categories_arr.indexOf(item) == pos
-      });
+      categories_arr = categories_arr.filter(
+        (item,pos) => {
+          return categories_arr.indexOf(item) == pos;
+        });
 
-    colors_arr = colors_arr.filter(
-      (item,pos) => {
-        return colors_arr.indexOf(item) == pos
-      });
+      colors_arr = colors_arr.filter(
+        (item,pos) => {
+          return colors_arr.indexOf(item) == pos;
+        });
 
-    let product_images;
-    let store_prod_images = [];
+      let product_images;
+      let store_prod_images = [];
 
-    for(let i = 0; i < sorted_products.length; i++){
-      product_images = sorted_products[i].product_images.replace(/[']+/g, "");
-      product_images = product_images.split(",");
-      store_prod_images.push(product_images[0]);
-      store_prod_images.push(product_images[1]);
-    }
+      for(let i = 0; i < sorted_products.length; i++){
+        product_images = sorted_products[i].product_images.replace(/[']+/g, "");
+        product_images = product_images.split(",");
+        store_prod_images.push(product_images[0]);
+        store_prod_images.push(product_images[1]);
+      }
 
-    let size_arr = allProductSizesSingleValueArr;
+      let size_arr = allProductSizesSingleValueArr;
 
-    let brand_names = allProductSizesArr;
+      let brand_names = allProductSizesArr;
 
-    let product_sizes_arr = [];
-    let p = 0; for(key in product_sizes){p++}
-    let numOfProds = p;
-    for(let j = 0; j < numOfProds; j++){
-      for(let i = 0; i < 19; i++){
-        if(product_sizes[j][brand_names[i]]
+      let product_sizes_arr = [];
+      let p = 0; for(key in product_sizes){p++}
+      let numOfProds = p;
+      for(let j = 0; j < numOfProds; j++){
+        for(let i = 0; i < 19; i++){
+          if(product_sizes[j][brand_names[i]]
           && !(product_sizes_arr.indexOf(size_arr[i]) > -1) ){
-          product_sizes_arr.push( size_arr[i] );
+            product_sizes_arr.push( size_arr[i] );
+          }
         }
       }
-    }
 
-    let selected_sizes_array = [];
-    const getKeyByValue = (object, value) => {
-      return Object.keys(object).find(key => object[key] === value);
-    }
+      let selected_sizes_array = [];
+      const getKeyByValue = (object, value) => {
+        return Object.keys(object).find(key => object[key] === value);
+      };
 
-    params_array.forEach((val) => {
-      if(getKeyByValue(allProductSizesObj, val)){
-        selected_sizes_array.push(getKeyByValue(allProductSizesObj, val));
-      }
+      params_array.forEach((val) => {
+        if(getKeyByValue(allProductSizesObj, val)){
+          selected_sizes_array.push(getKeyByValue(allProductSizesObj, val));
+        }
+      });
+
+      res.render("hbx_store",{
+        brand: brand,
+        product: sorted_products,
+        user: req.user,
+        cart: cart,
+        categories_arr: categories_arr,
+        colors_arr: colors_arr,
+        store_prod_images: store_prod_images,
+        price_range_arr: ranges,
+        product_sizes_arr: product_sizes_arr,
+        selected_items_array: params_array,
+        selected_sizes_array: selected_sizes_array
+      });
     })
-
-    res.render("hbx_store",{
-      brand: brand,
-      product: sorted_products,
-      user: req.user,
-      cart: cart,
-      categories_arr: categories_arr,
-      colors_arr: colors_arr,
-      store_prod_images: store_prod_images,
-      price_range_arr: ranges,
-      product_sizes_arr: product_sizes_arr,
-      selected_items_array: params_array,
-      selected_sizes_array: selected_sizes_array
-    })
-  })
-  .catch( err => console.log(err))
-})
+    .catch( err => console.log(err));
+});
 
 
 router.delete("/remove-cart-item/:id", (req, res) => {
@@ -1486,12 +1434,12 @@ router.delete("/remove-cart-item/:id", (req, res) => {
       res.send("success");
     })
     .catch( err => console.log(err));
-})
+});
 
 
 router.post("/update-password-in-db", (req, res) => {
   if(!req.user.password){
-    res.redirect("/hbx_error")
+    res.redirect("/hbx_error");
   }
 
   let current_password = req.body.current_password;
@@ -1502,14 +1450,14 @@ router.post("/update-password-in-db", (req, res) => {
 
   const compareHashedPasswords = (new_password) => {
     return bcrypt.hash( new_password, JSON.parse(process.env.SALTROUNDS) );
-  }
+  };
 
   const updatePassword = (hash) => {
     if(hash){
       let userId = user.id;
       return hbx_queries.updateUserPassword(hash, userId);
     }
-  }
+  };
 
   return queries.comparePassword(user.email, current_password)
     .then( passwordsMatch => {
@@ -1522,15 +1470,15 @@ router.post("/update-password-in-db", (req, res) => {
     .then(compareHashedPasswords)
     .then(updatePassword)
     .then(() => {
-      console.log('success! password: ',new_password);
+      console.log("success! password: ",new_password);
       res.json("Successful password edit!");
     })
     .catch( err => {
       console.log(err);
       res.json("Error. Try Again.");
-    })
+    });
 
-})
+});
 
 router.post("/update-product-count", (req, res) => {
   if(!req.user){

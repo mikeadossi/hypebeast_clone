@@ -42,11 +42,6 @@ const closeAccount = () => {
         let localStorage = window.localStorage;
         localStorage.clear();
         document.location.href = url + "/logout";
-
-        // let date = new Date();
-        // date.setTime(date.getTime()+(1*1000)); // cookie expires in one second
-        // document.cookie = "username=session; expires="+date.toGMTString()+"; path=/";
-        // document.cookie = "username=session.sig; expires="+date.toGMTString()+"; path=/";
       })
       .catch(err => console.log(err));
 
