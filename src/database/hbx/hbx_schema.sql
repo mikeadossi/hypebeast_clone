@@ -94,7 +94,7 @@ CREATE TABLE orders (
   company_name VARCHAR,
   order_notes VARCHAR,
   payment_type VARCHAR,
-  users_id INTEGER REFERENCES users(id),
+  users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   shipping_cost INTEGER
 );
 
@@ -108,7 +108,7 @@ CREATE TABLE cart (
   item_size VARCHAR,
   item_category VARCHAR,
   products_id INTEGER REFERENCES products(id),
-  users_id INTEGER REFERENCES users(id),
+  users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   item_name VARCHAR,
   item_brand VARCHAR,
   item_route VARCHAR
