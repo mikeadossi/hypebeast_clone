@@ -83,3 +83,7 @@
 .place_order_button{
   width:90%;
 }
+
+.hidden_order_content{
+  display:none;
+}

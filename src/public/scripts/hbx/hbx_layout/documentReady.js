@@ -4,16 +4,16 @@ setTimeout, checkForEmptyLocalStorageCart */
 
 $(document).ready(function(){
 
-  if( $(".hbx_successful_login_message").text() ){
-    setTimeout(() => {
-      $(".hbx_successful_login_message").fadeOut( "slow" );
-    }, 2000);
-  }
-
   if($(".hbx_layout_user_present").html()){
     if(!document.cookie){
       let user_id = $(".hbx_layout_user_present").html();
       document.cookie = "userCookie="+user_id+"; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+
+      $(".hbx_successful_login_message").css("display","block");
+
+      setTimeout(() => {
+        $(".hbx_successful_login_message").fadeOut( "slow" );
+      }, 2000);
     }
   }
 

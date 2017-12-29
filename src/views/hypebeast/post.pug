@@ -72,13 +72,13 @@ block content
           
           .posts_comments_main_container
             
-          input.hidden_user.allCommentsWithoutParents(value=allCommentsWithoutParents readonly='readonly')
-          input.hidden_user.allCommentsWithParents(value=allCommentsWithParents readonly='readonly')
-          input.hidden_user.allComments(value=all_comments readonly='readonly')
+          input.hidden_post_comments.allCommentsWithoutParents(value=allCommentsWithoutParents readonly='readonly')
+          input.hidden_post_comments.allCommentsWithParents(value=allCommentsWithParents readonly='readonly')
+          input.hidden_post_comments.allComments(value=all_comments readonly='readonly')
           -if(user){
-            input.hidden_user.usernameVal(value=user.username || user.email readonly='readonly')
-            input.hidden_user.userAvatar(value=user.user_avatar readonly='readonly')
-            input.hidden_user.userAvatarBackgroundColor(value=user.user_avatar_background_color readonly='readonly')
+            input.hidden_post_user.usernameVal(value=user.username || user.email readonly='readonly')
+            input.hidden_post_user.userAvatar(value=user.user_avatar readonly='readonly')
+            input.hidden_post_user.userAvatarBackgroundColor(value=user.user_avatar_background_color readonly='readonly')
           -}
           .generated_comment_container
     

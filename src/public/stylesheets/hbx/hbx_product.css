@@ -1,8 +1,3 @@
-.hidden_user, .hidden_category, .hidden_local_storage{
-  display:none;
-  color:red;
-}
-
 .hbx_product_header_links{
   margin-bottom:30px;
 }
@@ -414,6 +409,10 @@
 .proceed_to_bag_button{
   background-color:#006FB9;
   cursor:pointer !important;
+}
+
+.hidden_category{
+  display:none;
 }
 
 

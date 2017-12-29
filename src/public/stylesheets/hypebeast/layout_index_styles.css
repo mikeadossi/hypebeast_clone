@@ -103,8 +103,11 @@ button:focus{
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~ userlogin ~~~~~~~~~~~~~~~~~~~~~~~ */
-.login_successful{
+.successful_login_message{
   display:none;
+}
+
+.successful_login_message{
   background-color: #DFF0D7;
   padding: 15px 0 15px 20px;
   margin: 0 0 20px 0;
@@ -112,6 +115,7 @@ button:focus{
   color: #3A773A;
   font-size: 13px;
 }
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 .wide_ad_container{

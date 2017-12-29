@@ -1,11 +1,8 @@
-.hidden_user{
-  color:indianred !important;
-  font-weight:600px !important;
-  font-size:20px !important;
-  display:none !important;
+.hbx_layout_user_present{
+  display:none;
 }
 
-.hbx_layout_user_present{
+.hbx_successful_login_message{
   display:none;
 }
 

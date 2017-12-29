@@ -103,11 +103,6 @@
   width:100%;
 }
 
-.hidden_user{
-  display:none;
-  color:red
-}
-
 .account_avatar_image img{
   height:50px;
 }
