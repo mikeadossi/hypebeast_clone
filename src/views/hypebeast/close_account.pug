@@ -12,15 +12,16 @@ block content
       .settings_controls
         .settings_close_account
           .edit_profile_header Close Account
-          .error_message#close_account_error_message
+          .error_message#close_account_error_message.error_message !{error_message}
           p Once account is closed, you won't be able to login again and all your recorded forum entries will be lost.
           .hidden_user#hiddenUserId !{user.id}
-          #form
+          form#form(method="POST" action="/account/close-account")
+            input.hidden_user#hiddenUserId(name="user_id" type="number" value=user.id)
             -if(user.password){
               .form_group
                 div.label
                   label.profile_label Current Password
                 div
-                  input.profile_input.profile_close_account_input(name="password" type="password")
+                  input.profile_input.profile_close_account_input(name="user_password" type="password")
             -}
-            button#close_account(onclick="closeAccount()") CLOSE ACCOUNT
+            input#close_account(type="submit" value="CLOSE ACCOUNT")

@@ -17,8 +17,8 @@ block content
             span Login with Google
       p Sign up with your email address
       
-      -if(errorMsg){
-        .registerErrorMessage !{errorMsg}
+      -if(error_message){
+        .registerErrorMessage !{error_message}
       -}
       
       form(action="register" method="post")

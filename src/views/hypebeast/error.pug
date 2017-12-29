@@ -3,8 +3,8 @@ extends layout
 block content
   
   .error_content
-    -if(errorMsg){
-      h1 !{errorMsg}
+    -if(error_message){
+      h1 !{error_message}
     -} else {
       h1 Page not found
     -}

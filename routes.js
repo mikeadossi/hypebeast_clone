@@ -86,7 +86,7 @@ router.get("/store", (req, res) => {
   // console.log('req.user -> ',req.user);
 
   // console.log('req.user.id: ',req.user.id);
-  console.log('req.cookies: ',req.cookies);
+  // console.log('req.cookies: ',req.cookies);
 
   if(req.user){
 
@@ -157,61 +157,40 @@ router.get("/account/close-account", (req, res) => {
 router.post("/account/close-account", (req, res) => {
   if(!req.user){
     res.redirect("/error");
-    return;
   }
 
   if(!req.body.user_password){
-    console.log("no password...");
+
     return queries.deleteUserById(req.body.user_id)
       .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
             res.clearCookie("connect.sid", {path: "/"});
             res.redirect("/");
-            return;
-            // req.logout();
-            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
           } else {
             // handle error case...
-            console.log("err ---> ",err);
           }
-
         });
       })
       .catch( err => {
-        res.render("error", {user: req.user, errorMsg: err});
-        return;
+        res.render("error", { error_message: err});
       });
 
   } else {
-    console.log("found password...");
     comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
-      .then(() => {
-        console.log("\n after compare method \n");
+      .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
-            console.log("no error");
             res.clearCookie("connect.sid", {path: "/"});
-            console.log("1. clear cookie");
-            req.logout();
-            console.log("2. logout");
             res.redirect("/");
-            console.log("3. redirect");
-            // return;
-            res.end();
-            console.log("4. end!");
-            // req.logout();
-            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
           } else {
             // handle error case...
-            console.log("err! ---> ",err);
           }
 
         });
       })
       .catch( err => {
-        console.log("catch err : ",err);
-        res.render("close_account", {user: req.user, errorMsg: err});
+        res.render("close_account", {user: req.user, error_message: err});
       });
   }
 
@@ -244,7 +223,7 @@ router.post("/register", (req, res) => {
   isEmailTaken(req.body.email, req.body.password)
     .then(createNonOauthUser)
     .catch( err => {
-      res.render("register", {user: req.user, errorMsg: err});
+      res.render("register", {user: req.user, error_message: err});
     });
 
 });
@@ -861,31 +840,24 @@ router.post("/hbx_account/close-account", (req, res) => {
         });
       })
       .catch( err => {
-        console.log("err ----- ",err);
-        res.render("hbx_error", { errorMsg: err});
+        res.render("hbx_error", { error_message: err});
       });
 
   } else {
-    console.log("comparing passwords.");
     comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
       .then( () => {
-        console.log("\n -------------->>> ok \n");
         req.session.destroy(function (err) {
           if (!err) {
             res.clearCookie("connect.sid", {path: "/"});
-            // req.logout();
-            res.redirect("/");
-            // res.status(200).clearCookie("connect.sid", {path: "/"}).json({status: "Success"});
+            res.redirect("/store");
           } else {
-            console.log("\n --------> else condition \n");
             // handle error case...
           }
 
         });
       })
       .catch( err => {
-        console.log("inside error: ",err);
-        res.render("hbx_close_account", {user: req.user, errorMsg: err});
+        res.render("hbx_close_account", {user: req.user, error_message: err});
       });
   }
 
@@ -922,7 +894,7 @@ router.post("/hbx_register", (req, res) => {
   isEmailTaken(req.body.email, req.body.password)
     .then(createNonOauthUser)
     .catch( err => {
-      res.render("hbx_register", {user: req.user, errorMsg: err});
+      res.render("hbx_register", {user: req.user, error_message: err});
     });
 
 });

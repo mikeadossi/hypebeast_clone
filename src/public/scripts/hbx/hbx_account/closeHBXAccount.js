@@ -23,7 +23,7 @@ const closeHBXAccount = () => {
     }
 
     fetch("/hbx_account/close-account", {
-      method:"DELETE",
+      method:"POST",
       headers: new Headers({
         "Accept": "application/json",
         "Content-Type": "application/json",

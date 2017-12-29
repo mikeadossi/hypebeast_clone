@@ -26,8 +26,8 @@ block content
       .login_second_div
         p.login_instructions Sign in with your email address username
         
-        -if(errorMsg){
-          .registerErrorMessage !{errorMsg}
+        -if(error_message){
+          .registerErrorMessage !{error_message}
         -}
         
         form.hbx_form(method='post' action="hbx_register")

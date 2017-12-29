@@ -15,8 +15,7 @@ block content
       .hbx_settings_controls
         .settings_edit_password
           .hbx_edit_profile_header Close Account
-          .error_message#close_account_error_message
-          .errorMsg !{errorMsg}
+          .error_message#close_account_error_message.error_message !{error_message}
           .hbx_close_account_warning Once account is closed, you won't be able to login again and all your recorded forum entries will be lost.
           form#form(method="POST" action="/hbx_account/close-account")
             input.hidden_user#hiddenUserId(name="user_id" type="number" value=user.id)
@@ -24,5 +23,4 @@ block content
               label.close_account_password_label CURRENT PASSWORD
               input(name="user_password" type="password").close_account_password_input
             -}
-            input.closeAccountBtn(type="submit" value="CLOSE ACCOUNT!!!")
-            //- button.closeAccountBtn(onclick="closeHBXAccount()") CLOSE ACCOUNT 
+            input.closeAccountBtn(type="submit" value="CLOSE ACCOUNT")
