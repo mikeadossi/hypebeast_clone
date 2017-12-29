@@ -14,9 +14,7 @@ block content
           .edit_profile_header Close Account
           .error_message#close_account_error_message.error_message !{error_message}
           p Once account is closed, you won't be able to login again and all your recorded forum entries will be lost.
-          .hidden_user#hiddenUserId !{user.id}
           form#form(method="POST" action="/account/close-account")
-            input.hidden_user#hiddenUserId(name="user_id" type="number" value=user.id)
             -if(user.password){
               .form_group
                 div.label

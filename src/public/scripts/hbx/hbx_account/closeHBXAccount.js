@@ -5,7 +5,7 @@ console */
 const closeHBXAccount = () => {
 
   let formChildNodeLength = document.getElementById("form").childNodes.length;
-  let userId = $("#hiddenUserId").html();
+  let userId = document.cookie.split("userCookie=")[1];
 
   if(confirm("Are you sure you want to close your account?")){
 

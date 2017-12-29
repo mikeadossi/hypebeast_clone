@@ -1,7 +1,10 @@
-/* global fetch, Headers, $, console, updateLocalStorageCart */
+/* global fetch, Headers, $, console, updateLocalStorageCart, document */
 /* exported updateCartAndCountByID */
 
-const updateCartAndCountByID = (user_id) => {
+const updateCartAndCountByID = () => {
+  let user_id = document.cookie.split("userCookie=")[1];
+
+  if(!user_id){ return; }
 
   $(".dropdown_products_container").css("display","block");
 

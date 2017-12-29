@@ -12,12 +12,12 @@ $(document).ready(function(){
     $(".reply_button").remove();
   }
 
-  // let date = new Date();
-  // date.setTime(date.getTime()+(1*1000)); // cookie expires in one second
-  // console.log('date.toGMTString(): ',date.toGMTString());
-  // document.cookie = "name=session; expires="+date.toGMTString()+"; path=/";
-  // document.cookie = "name=session.sig; expires="+date.toGMTString()+"; path=/";
-
+  if($(".layout_user_present").html()){
+    if(!document.cookie){
+      let user_id = $(".layout_user_present").html();
+      document.cookie = "userCookie="+user_id+"; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    }
+  }
 
 });
 

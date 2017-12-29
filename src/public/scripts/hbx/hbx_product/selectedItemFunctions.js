@@ -1,4 +1,4 @@
-/* global $, window, GLOBAL_PRODUCT, postCartToDB,
+/* global $, window, GLOBAL_PRODUCT, postCartToDB, document,
 updateLocalStorageCart, populateLocalStorage, updateCartAndCountByID, console */
 /* exported selectPreferredSize, selectItemOrProceedToBag,
 addSelectedItemsToCart */
@@ -71,7 +71,9 @@ const addSelectedItemsToCart = () => {
 
   currentSelectedSize ? itemsInCartObj.item_size = currentSelectedSize.replace(/\s/g, "") : itemsInCartObj.item_size = null;
 
-  if($(".hidden_user_obj").text()){
+  let userPresent = document.cookie.split("userCookie=")[1];
+
+  if(userPresent){
     // if user is logged in
     postCartToDB(itemsInCartObj)
       .then(updateCartAndCountByID)

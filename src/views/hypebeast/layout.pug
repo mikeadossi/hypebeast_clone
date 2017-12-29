@@ -64,8 +64,10 @@ html
             .navAccountContainer
               - if(user && user.username){
                 input.username_div(value=user.username)
+                .layout_user_present.hidden_user !{JSON.stringify(user.id)}
               - } else if(user){
                 input.username_div(value=user.email)
+                .layout_user_present.hidden_user !{JSON.stringify(user.id)}
               - }
               
               img.avatar_img.empty_link(

@@ -160,12 +160,12 @@ router.post("/account/close-account", (req, res) => {
   }
 
   if(!req.body.user_password){
-
-    return queries.deleteUserById(req.body.user_id)
+    return queries.deleteUserById(req.user.id)
       .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
             res.clearCookie("connect.sid", {path: "/"});
+            res.clearCookie("userCookie", {path: "/"});
             res.redirect("/");
           } else {
             // handle error case...
@@ -177,11 +177,13 @@ router.post("/account/close-account", (req, res) => {
       });
 
   } else {
-    comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
+
+    comparePasswordAndDeleteUser(req.user.id, req.body.user_password)
       .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
             res.clearCookie("connect.sid", {path: "/"});
+            res.clearCookie("userCookie", {path: "/"});
             res.redirect("/");
           } else {
             // handle error case...
@@ -246,8 +248,10 @@ router.get("/logout", (req, res) => {
   // console.log("req.session.destroy -> ",req.session.destroy);
   // console.log(req,"\n <------ req');
   // console.log('\n res.cookie',res.cookie,'\n');
-  console.log("req.session ----> ",req.session);
-  console.log("req.session.destroy ---->> ",req.session.destroy);
+
+  // console.log("req.session ----> ",req.session);
+  // console.log("req.session.destroy ---->> ",req.session.destroy);
+
   // req.session.destroy();
   // req.logout();
   //
@@ -268,6 +272,7 @@ router.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
     if (!err) {
       res.clearCookie("connect.sid", {path: "/"});
+      res.clearCookie("userCookie", {path: "/"});
       req.logout();
       res.redirect("/");
       // res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
@@ -828,7 +833,7 @@ router.post("/hbx_account/close-account", (req, res) => {
 
   if(!req.body.user_password){
 
-    return queries.deleteUserById(req.body.user_id)
+    return queries.deleteUserById(req.user.id)
       .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
@@ -844,7 +849,8 @@ router.post("/hbx_account/close-account", (req, res) => {
       });
 
   } else {
-    comparePasswordAndDeleteUser(req.body.user_id, req.body.user_password)
+
+    comparePasswordAndDeleteUser(req.user.id, req.body.user_password)
       .then( () => {
         req.session.destroy(function (err) {
           if (!err) {
