@@ -51,9 +51,7 @@ html
           li.nav_sale.hbx_nav_link.nav_elements.empty_link SALE 
           li.nav_journal.hbx_nav_link.nav_elements.empty_link JOURNAL
           - if(user){
-              li.nav_journal.hbx_nav_link.nav_elements.hidden_user TESTING, USER.ID:
-              span.users_persistent_id.hidden_user !{JSON.stringify(user.id)}
-              span.users_persistent_id.hidden_user !{ Boolean(user.password) }
+              .hbx_layout_user_present !{JSON.stringify(user.id)}
           - }
       .right_nav_items
         img.hbx_search(src="/images/hbx_images/general/search.png")

@@ -19,7 +19,7 @@ const populateDropDownWithLocalStorageItems = (cart) => {
           <div class="cart_product_container">
             <div class="cart_product_brand">`+cart[i].item_brand+`</div>
             <div class="cart_product_name">`+cart[i].item_name+`</div>
-            <div class="cart_cost_per_product hidden_user">`+cart[i].item_individual_price+`</div>
+            <div class="cart_cost_per_product hidden_individual_price">`+cart[i].item_individual_price+`</div>
             <div class="cart_size">Size: `+cart[i].item_size+`</div>
             <div class="cart_notice">This item is excluded from promotions. </div>
             <div class="quantity_and_price_container">

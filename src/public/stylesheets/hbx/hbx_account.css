@@ -3,6 +3,10 @@
   color:red;
 }
 
+.hidden_individual_price{
+  display:none;
+}
+
 .hbx_your_settings_content{
   display:flex;
   flex-wrap:wrap;

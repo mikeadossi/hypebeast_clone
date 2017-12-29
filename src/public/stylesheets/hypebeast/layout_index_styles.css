@@ -12,6 +12,10 @@ html, body{
   border-radius:0;
 }
 
+.layout_user_present{
+  display:none;
+}
+
 .username_div{
   display: inline-block;
   padding-right: 10px;

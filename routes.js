@@ -1011,8 +1011,19 @@ router.get("/hbx_error", (req, res) => {
 });
 
 router.get("/hbx_logout", (req, res) => {
-  req.logout();
-  res.redirect("/store");
+
+  req.session.destroy(function (err) {
+    if (!err) {
+      res.clearCookie("connect.sid", {path: "/"});
+      res.clearCookie("userCookie", {path: "/"});
+      req.logout();
+      res.redirect("/store");
+    } else {
+      // handle error case...
+    }
+
+  });
+
 });
 
 router.get("/checkout/addressing", (req, res) => {
@@ -1422,22 +1433,20 @@ router.post("/update-password-in-db", (req, res) => {
 
   let current_password = req.body.current_password;
   let new_password = req.body.new_password;
-  let user = JSON.parse(req.body.user);
-
-
 
   const compareHashedPasswords = (new_password) => {
     return bcrypt.hash( new_password, JSON.parse(process.env.SALTROUNDS) );
   };
 
   const updatePassword = (hash) => {
-    if(hash){
-      let userId = user.id;
-      return hbx_queries.updateUserPassword(hash, userId);
+    if(!hash){
+      return;
+    } else {
+      return hbx_queries.updateUserPassword(hash, req.user.id);
     }
   };
 
-  return queries.comparePassword(user.email, current_password)
+  return queries.comparePasswordWithID(req.user.id, current_password)
     .then( passwordsMatch => {
       if(passwordsMatch){
         return new_password;
@@ -1448,7 +1457,6 @@ router.post("/update-password-in-db", (req, res) => {
     .then(compareHashedPasswords)
     .then(updatePassword)
     .then(() => {
-      console.log("success! password: ",new_password);
       res.json("Successful password edit!");
     })
     .catch( err => {
@@ -1457,6 +1465,7 @@ router.post("/update-password-in-db", (req, res) => {
     });
 
 });
+
 
 router.post("/update-product-count", (req, res) => {
   if(!req.user){

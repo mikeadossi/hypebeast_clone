@@ -15,6 +15,13 @@ let queries = {
       });
   },
 
+  comparePasswordWithID : function(id, password) {
+    return this.findById(id)
+      .then(user => {
+        return bcrypt.compare(password, user[0].password);
+      });
+  },
+
   getPosts: function() {
     return db.any("SELECT * FROM posts"); // returns a promise, because pgp
   },

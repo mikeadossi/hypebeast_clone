@@ -2,7 +2,6 @@
 /* exported updatePassword */
 
 const updatePassword = (element) => {
-  let user = $(".hiddenUserInput").val();
   let form = element.parentNode;
 
   let currentPassword = form.childNodes[1].childNodes[1].childNodes[0].value;
@@ -30,12 +29,12 @@ const updatePassword = (element) => {
     }),
     body: JSON.stringify({
       current_password: currentPassword,
-      new_password: newPassword,
-      user: user
+      new_password: newPassword
     }),
     credentials: "same-origin"
   })
     .then(() => {
+      // $(".password_form_error_message").css("display","none");
       $(".profile_curr_password_input").val("");
       $(".profile_verify_password_input").val("");
       $(".profile_password_input").val("");

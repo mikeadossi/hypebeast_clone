@@ -10,21 +10,26 @@ $(document).ready(function(){
     }, 2000);
   }
 
-  let user = $(".users_persistent_id").length;
-  if(user){
-    let user_id = $(".users_persistent_id")[0].innerHTML;
+  if($(".hbx_layout_user_present").html()){
+    if(!document.cookie){
+      let user_id = $(".hbx_layout_user_present").html();
+      document.cookie = "userCookie="+user_id+"; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    }
+  }
+
+  let user_id = document.cookie.split("userCookie=")[1];
+
+  if(user_id){
     updateCartAndCountByID(user_id);
-  } else if(!user && window.localStorage.hbxLocalCart){
+  } else if(!user_id && window.localStorage.hbxLocalCart){
     checkForEmptyLocalStorageCart();
     populateShoppingBagPageWithLocalStorageContent();
     populateAddressCheckoutPage();
-  } else if(!user){
+  } else if(!user_id){
     $(".shopping_bag")[0].innerHTML = 0;
     $(".shopping_bag_deux")[0].innerHTML = 0;
     populateAddressCheckoutPage();
   }
 
-  // let cookies = cookies.get();
-  // console.log('cookies: ',cookies);
 
 });

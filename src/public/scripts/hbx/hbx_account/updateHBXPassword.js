@@ -2,7 +2,7 @@
 /* exported updateHBXPassword */
 
 const updateHBXPassword = () => {
-  let user = $(".hiddenUserInput").val();
+  console.log('updating hbx password!');
   let currentPassword = $(".profile_curr_password_input").val();
   let newPassword = $(".profile_password_input").val();
   let verifyPassword = $(".profile_verify_password_input").val();
@@ -32,12 +32,13 @@ const updateHBXPassword = () => {
     }),
     body: JSON.stringify({
       current_password: currentPassword,
-      new_password: newPassword,
-      user: user
+      new_password: newPassword
     }),
     credentials: "same-origin"
   })
-    .then(msg => msg.json())
+    .then(msg => {
+      return msg.json();
+    })
     .then((msg) => {
       $(".profile_curr_password_input").val("");
       $(".profile_verify_password_input").val("");

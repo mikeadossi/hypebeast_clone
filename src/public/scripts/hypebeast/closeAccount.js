@@ -5,11 +5,7 @@ console */
 const closeAccount = () => {
 
   let formChildNodeLength = document.getElementById("form").childNodes.length;
-  // let userId = $("#hiddenUserId").html();
   let userId = document.cookie.split("userCookie=")[1];
-  console.log('document.cookie.split("userCookie=") -> ',document.cookie.split("userCookie="));
-  console.log('userId --==----> ',userId);
-  console.log('typeof userId --==----> ',typeof userId);
 
   if(confirm("Are you sure you want to close your account?")){
 
