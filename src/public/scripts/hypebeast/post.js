@@ -268,7 +268,7 @@ const writeReply = (
                   '`+replyTo+`',
                   '`+user_avatar+`',
                   '`+user_avatar_background_color+`'
-                )" >post as `+user_name+`!!!</button>
+                )" >post as `+user_name+`</button>
             </div>
           </div>
         <div>

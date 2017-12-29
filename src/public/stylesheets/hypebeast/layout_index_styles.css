@@ -223,13 +223,13 @@ textarea{
 }
 
 .socialMediaContainer{
-  width: 21%;
+  width: 23%;
   display: inline-block;
 }
 
 .socialMediaImages{
   padding: 0 3px 0 5px;
-  height: 21px;
+  height: 20px;
   cursor:pointer;
 }
 
@@ -306,7 +306,7 @@ textarea{
 
 .navTitle{
   display: inline-block;
-  width: 50%;
+  width: 56%;
   text-align: center;
   font-size: 2em;
   text-decoration:none;
@@ -317,7 +317,7 @@ textarea{
 
 .navBtnContainer{
   display:inline-block;
-  width:29%;
+  width:21%;
   text-align:right;
 }
 
@@ -1287,6 +1287,9 @@ textarea{
 }
 
 @media (min-width: 760px) and (max-width: 979px){
+  .navBtnContainer{
+    width:unset;
+  }
   .top_ten_container{
     display:none;
   }
@@ -1426,7 +1429,7 @@ textarea{
   }
 
   .socialMediaContainer{
-    width:31%;
+    width:30%;
   }
 
   .socialMediaImages{

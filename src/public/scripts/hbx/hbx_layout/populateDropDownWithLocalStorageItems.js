@@ -63,7 +63,7 @@ const populateDropDownWithLocalStorageItems = (cart) => {
       </div>
       <div class="dropdown_button_container">
         <a class="view_bag" href="/hbx_shopping_bag">VIEW BAG</a>
-        <a class="checkout_now" href="/checkout/addressing">CHECKOUT NOW//</a>
+        <a class="checkout_now" href="/checkout/addressing">CHECKOUT NOW</a>
       </div>
       <div class="dropdown_notice dropdown_last_notice">
         Have a Promotional Code or Gift Card? Add it in the Bag.
