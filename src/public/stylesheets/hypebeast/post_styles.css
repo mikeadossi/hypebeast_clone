@@ -214,6 +214,10 @@
   border-radius: 7px;
 }
 
+.blog_text_content{
+  padding-bottom: 30px;
+}
+
 .blog_text_content p{
   font-size:17px;
   line-height:29px;

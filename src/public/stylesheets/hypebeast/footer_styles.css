@@ -21,8 +21,7 @@
 }
 
 .footer_subscribe_container{
-  margin-right:13%;
-  max-width: 354px;
+  margin-right:2%;
 }
 
 .footer_container button:hover{
@@ -45,7 +44,8 @@
   padding: 10px 0px 7px 10px;
   border: 1px solid grey;
   color:white;
-  width: 50%;
+  width: 62%;
+  max-width: 230px;
 }
 
 .footer_subscribe_container li:first-child{
