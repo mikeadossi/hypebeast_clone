@@ -37,6 +37,9 @@
     "eslint-plugin-import": "^2.7.0",
     "nodemon": "*"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "author": "Mike Adossi",
   "license": "MIT"
 }
