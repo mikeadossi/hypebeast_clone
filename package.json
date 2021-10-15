@@ -4,6 +4,7 @@
   "description": "A clone of the Hypebeast website built on Node, Postgresql and the Pug template engine.",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -11,6 +12,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.6",
     "knex": "^0.14.2",
+    "node-gyp": "^8.2.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
@@ -18,6 +20,7 @@
     "pg-promise": "^6.5.1",
     "pug": "^2.0.0-rc.3",
     "querystring": "^0.2.0",
+    "rebuild": "^0.1.2",
     "url": "^0.11.0"
   },
   "scripts": {

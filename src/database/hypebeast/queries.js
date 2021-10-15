@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 const {db} = require("../connection.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const fs = require("fs");
 
 

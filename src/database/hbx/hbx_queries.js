@@ -2,7 +2,7 @@
 item_color, item_size, products_id, users_id, module, process */
 require("dotenv").config();
 const {db} = require("../connection.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const {knex} = require("../connection.js");
 const {allProductSizesArr} = require("./products_data");
 const {allProductSizesString} = require("./products_data");

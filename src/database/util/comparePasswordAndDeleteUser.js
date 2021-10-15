@@ -1,7 +1,7 @@
 /* global module */
 
 const hbx_queries = require("../hbx/hbx_queries");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const comparePasswordAndDeleteUser = (user_id, submittedPassword) => {
 
